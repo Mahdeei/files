@@ -102,43 +102,22 @@ class _KarAmouziListListState extends State<KarAmouziListList> {
                               )),
                               new Container(
                                   margin: const EdgeInsets.only(right: 2.0),
-                                  decoration: BoxDecoration(
-                                      color: Color(0xffD2FAFB),
-                                      shape: BoxShape.rectangle,
-                                      borderRadius: BorderRadius.circular(15.0)),
+                                  decoration: boxDecorationKaramouziScrenn(),
                                   child: new Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 3.0, vertical: 1.0),
-                                    child: new Text(
-                                      'ux',
-                                      style: new TextStyle(
-                                        color: Color(0xff2c003e),
-                                        fontSize: 11.0,
-                                      ),
-                                    ),
+                                    padding: const EdgeInsets.symmetric(horizontal: 3.0, vertical: 1.0),
+                                    child: textKarAmouzziScreen(),
                                   )),
                             ],
                           ),
                         new Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0,
-                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
                             child: new Row(
                               children: <Widget>[
-                                new Icon(
-                                  Icons.location_city,
-                                  size: 8.0,
-                                  color: Color(0xff2C003E),
-                                ),
-                                new SizedBox(
-                                  width: 1.0,
-                                ),
-                                new Text(
-                                  'مشهد،وکیل آباد 56 ، مجتمع احسان',
-                                  style: TextStyle(fontSize: 8.0),
-                                ),
+                                iconKarAmouziScreen(),
+                                new SizedBox(width: 1.0),
+                                texKarAmouziScreen()
                               ],
-                            )),
+                        )),
                       ],
                     ))
                   ],

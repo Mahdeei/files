@@ -76,9 +76,6 @@ class _AgahPageState extends State<AgahPage> {
                         ObjectTag(tags: 'ui',),
                       ],
                     ))
-
-
-
               ],
             )
         ))));
@@ -87,7 +84,7 @@ class _AgahPageState extends State<AgahPage> {
 
 
 
-class HeadersItems extends StatelessWidget {
+class HeadersItemsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var phonesize = MediaQuery.of(context).size;
@@ -188,17 +185,6 @@ class Line extends StatelessWidget {
 
 
 
-//class ObjectTag extends StatelessWidget {
-//  @override
-//  Widget build(BuildContext context) {
-//    return new Container(
-//      decoration: BoxDecoration(color: Color(0xff2D0827),
-//          borderRadius: BorderRadius.all(Radius.circular(30.0))),
-//      child: new Padding(padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 3.0),
-//        child: new Text('dfbihjdkiub',style: TextStyle(color: Colors.white),),),
-//    );
-//  }
-//}
 
 
 class ObjectTag extends StatelessWidget {
@@ -209,7 +195,6 @@ class ObjectTag extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Container(
       height: 20.0,
-
         decoration: BoxDecoration(
             color: Color(0xff2D0827),
             shape: BoxShape.rectangle,
