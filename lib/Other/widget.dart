@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:stubbbb/AgahiPage/AddPostAgahi.dart';
 import 'package:stubbbb/AgahiPage/AgahPage.dart';
 import 'package:stubbbb/AgahiPage/AgahiPages.dart';
 import 'package:stubbbb/KarAmouziPage/KarAmouziPage.dart';
 import 'package:stubbbb/StudentPage/ProfilesPage.dart';
 import 'R.dart';
+import 'package:animations/animations.dart';
+
 
 
 
@@ -493,6 +496,40 @@ AppBar appBarKaramouziScreen(){
   );
 }
 
+AppBar appBarAgahiScreen(){
+  return AppBar(
+      actions: <Widget>[
+        new Padding(
+            padding: const EdgeInsets.only(left: 5.0),
+            child: new IconButton(
+                icon: Icon(
+                  Icons.filter_list,
+                  color: Color(0xff2C003E),
+                ),
+                onPressed: () {}))
+      ],
+      backgroundColor: Colors.white,
+      bottom: TabBar(
+        tabs: [
+          Tab(
+              icon: new Text(
+                'پروژه ها',
+                style: TextStyle(color: Colors.black),
+              )),
+          Tab(
+              icon: new Text(
+                'فروش کتاب',
+                style: TextStyle(color: Colors.black),
+              )),
+          Tab(
+              icon: new Text(
+                'کارفرکا',
+                style: TextStyle(color: Colors.black),
+              )),
+        ],
+      ));
+}
+
 class SearchProfilePage extends StatefulWidget {
   @override
   _SearchProfilePageState createState() => _SearchProfilePageState();
@@ -713,9 +750,6 @@ Row rowKaramouziScreenThree(){
 }
 
 
-Row rowKaramouziScreen(){
-  return
-}
 
 Padding paddingOneKaramouziScreen(){
   return new Padding(padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 10.0),
@@ -1293,6 +1327,27 @@ FloatingActionButton floatingKaramouziScreen(){
     child: new Icon(
       Icons.add,
       color: Colors.white,
+    ),
+  );
+}
+
+FloatingActionButton floatingActionButtonAgahiScreen(context){
+  return new FloatingActionButton(
+    onPressed: () {
+      print('Pressed');
+    },
+    backgroundColor: R.color.banafshmain,
+    child: OpenContainer(
+      transitionDuration: Duration(milliseconds: 500),
+      closedBuilder: (ctx, action) => new Container(
+        color: R.color.banafshmain,
+        width: MediaQuery.of(context).size.width,
+        child: new Icon(
+          Icons.add,
+          color: R.color.red,
+        ),
+      ),
+      openBuilder: (ctx, action) => AddPostAgahi(),
     ),
   );
 }

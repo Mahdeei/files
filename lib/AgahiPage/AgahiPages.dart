@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stubbbb/AgahiPage/AddPostAgahi.dart';
-import 'package:stubbbb/Other/R.dart';
 import 'package:stubbbb/Other/widget.dart';
-import 'package:animations/animations.dart';
 import 'AgahPage.dart';
 
 class AgahiPages extends StatefulWidget {
@@ -19,60 +16,10 @@ class _AgahiPagesState extends State<AgahiPages> {
               child: new DefaultTabController(
                   length: 3,
                   child: new Scaffold(
-                    floatingActionButton: new FloatingActionButton(
-                      onPressed: () {
-                        print('Pressed');
-                      },
-                      backgroundColor: R.color.banafshmain,
-                      child: OpenContainer(
-                        transitionDuration: Duration(milliseconds: 500),
-                        closedBuilder: (ctx, action) => new Container(
-                          color: R.color.banafshmain,
-//                        height: MediaQuery.of(context).size.height,
-                          width: MediaQuery.of(context).size.width,
-                          child: new Icon(
-                            Icons.add,
-                            color: R.color.red,
-                          ),
-                        ),
-                        openBuilder: (ctx, action) => AddPostAgahi(),
-                      ),
-                    ),
-
+                    floatingActionButton: floatingActionButtonAgahiScreen(context),
                     backgroundColor: Color(0xfff2f3f8),
                     drawer: DrawerLists(),
-                    appBar: AppBar(
-                        actions: <Widget>[
-                          new Padding(
-                              padding: const EdgeInsets.only(left: 5.0),
-                              child: new IconButton(
-                                  icon: Icon(
-                                    Icons.filter_list,
-                                    color: Color(0xff2C003E),
-                                  ),
-                                  onPressed: () {}))
-                        ],
-                        backgroundColor: Colors.white,
-                        bottom: TabBar(
-                          tabs: [
-                            Tab(
-                                icon: new Text(
-                              'پروژه ها',
-                              style: TextStyle(color: Colors.black),
-                            )),
-                            Tab(
-                                icon: new Text(
-                              'فروش کتاب',
-                              style: TextStyle(color: Colors.black),
-                            )),
-                            Tab(
-                                icon: new Text(
-                              'کارفرکا',
-                              style: TextStyle(color: Colors.black),
-                            )),
-                          ],
-                        )),
-
+                    appBar: appBarAgahiScreen(),
                     body: TabBarView(
                       children: [
                         ProjectList(),
@@ -80,8 +27,7 @@ class _AgahiPagesState extends State<AgahiPages> {
                         Icon(Icons.directions_bike),
                       ],
                     ),
-//        body: ListView.builder(itemBuilder: null),
-                  ))),
+            ))),
         );
   }
 }

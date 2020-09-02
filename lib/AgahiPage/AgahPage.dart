@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'AddPostAgahi.dart';
+
 
 class AgahPage extends StatefulWidget {
   @override

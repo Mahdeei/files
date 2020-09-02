@@ -15,8 +15,7 @@ class _KarAmouziPageState extends State<KarAmouziPage> {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-        theme: ThemeData(
-            primaryIconTheme: IconThemeData(color: Color(0xff2C003E))),
+        theme: ThemeData(primaryIconTheme: IconThemeData(color: R.color.banafshmain)),
         debugShowCheckedModeBanner: false,
         home: new Directionality(
             textDirection: TextDirection.rtl,
