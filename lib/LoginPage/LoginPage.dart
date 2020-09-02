@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stubbbb/Other/widget.dart';
-import 'package:stubbbb/mahde/home.dart';
+import 'file:///D:/proflutter/stubbbb/lib/home.dart';
 import 'package:dio/dio.dart';
 import 'dart:convert';
 import 'dart:io';

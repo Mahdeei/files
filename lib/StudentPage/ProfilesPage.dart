@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stubbbb/Other/R.dart';
-import 'package:stubbbb/Other/profileModels.dart';
+import 'file:///D:/proflutter/stubbbb/lib/Models/profileModels.dart';
 import 'package:stubbbb/Other/widget.dart';
 import 'package:stubbbb/http/profiles.dart';
 

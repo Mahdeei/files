@@ -1,7 +1,7 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:stubbbb/Other/widget.dart';
-import 'package:stubbbb/mahde/home.dart';
+import 'file:///D:/proflutter/stubbbb/lib/home.dart';
 
 class SplashScreen extends StatefulWidget {
   @override

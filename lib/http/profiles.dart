@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'file:///D:/proflutter/stubbbb/lib/Other/profileModels.dart';
+import 'package:stubbbb/Models/profileModels.dart';
 
 class ProfileHttp {
   static Future<Map> getData() async {

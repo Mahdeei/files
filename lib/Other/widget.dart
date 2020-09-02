@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stubbbb/AgahiPage/AgahPage.dart';
 import 'package:stubbbb/AgahiPage/AgahiPages.dart';
 import 'package:stubbbb/KarAmouziPage/KarAmouziPage.dart';
 import 'package:stubbbb/StudentPage/ProfilesPage.dart';
@@ -87,6 +88,40 @@ BoxDecoration decorationWelcomePage(){
   );
 }
 
+BoxDecoration decorationKaramouziScreen(){
+  return BoxDecoration(
+      boxShadow: [
+        BoxShadow(
+            color: Colors.black54,
+            offset: Offset(0.0, 1.0),
+            blurRadius: 5.0)
+      ],
+      color: Colors.white,
+      borderRadius: BorderRadius.only(
+        bottomRight: Radius.circular(65.0),
+        topRight: Radius.circular(65.0),
+        topLeft: Radius.circular(15.0),
+        bottomLeft: Radius.circular(15.0),
+      ));
+}
+
+BoxDecoration boxDecorationKaramouziScreen(){
+  return BoxDecoration(
+      borderRadius: BorderRadius.only(
+          topRight: Radius.circular(65.0),
+          bottomRight: Radius.circular(65.0)),
+      image: DecorationImage(
+          fit: BoxFit.cover,
+          image: AssetImage('assets/image/download.jfif')));
+}
+
+BoxDecoration boxDecorationKaramouziScrenn(){
+  return BoxDecoration(
+      color: Color(0xffD2FAFB),
+      shape: BoxShape.rectangle,
+      borderRadius: BorderRadius.circular(15.0));
+}
+
 
 InputDecoration inputDecorationLoginPage(String labelText,IconData icon){
   return InputDecoration(
@@ -103,6 +138,76 @@ InputDecoration inputDecorationLoginPage(String labelText,IconData icon){
           borderSide:
           BorderSide(color: Colors.white)));
 }
+
+Text textKarAmoziScreen(){
+  return new Text(
+    'ui',
+    style: new TextStyle(
+      color: Color(0xff2c003e),
+      fontSize: 11.0,
+    ),
+  );
+}
+
+Text textKarAmouziScreen(){
+  return new Text(
+    'گرافیک',
+    style: new TextStyle(
+      color: Color(0xff2c003e),
+      fontSize: 11.0,
+    ),
+  );
+}
+
+Text textoneKaramouziScreen(){
+  return new Text(
+    'برنامه نویس اپلیکیشن',
+    style: TextStyle(
+        fontSize: 16.0, fontWeight: FontWeight.bold),
+    maxLines: 1,
+    overflow: TextOverflow.ellipsis,
+  );
+}
+
+Text textTwoKaramouziScreen(){
+    return new Text(
+        'تعدادی دانشجوی کامپیوتر جهت کاراموزی نیازمندیم ...',
+        maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      );
+}
+
+Text textthreeKaramouziScreen(){
+  return new Text(
+    'شرکت ایران سرور',
+    overflow: TextOverflow.ellipsis,
+    maxLines: 1,
+    style: TextStyle(
+      fontSize: 12.0,
+    ),
+  );
+}
+
+Text textfourKaramouziScreen(){
+  return new Text(
+    '|',
+    style: TextStyle(
+        fontSize: 18.0, fontWeight: FontWeight.bold),
+  );
+}
+
+Text textfiveKaramouziScreen(){
+  return new Text(
+    'ار اموزی منجر به استخدام',
+        overflow: TextOverflow.ellipsis,
+      maxLines: 1,
+      style: TextStyle(
+      fontSize: 12.0,
+      ),
+    );
+}
+
+
 
 Text textSignUp(){
   return new Text('خوش اومدی',
@@ -269,6 +374,18 @@ CircleAvatar circleSignUp(){
   );
 }
 
+CircleAvatar circleAvatarKaramouziScreen(){
+  return new CircleAvatar(
+    maxRadius: 9.0,
+    child: new Icon(
+      Icons.arrow_forward_ios,
+      color: Colors.white,
+      size: 9.0,
+    ),
+    backgroundColor: Color(0xff2C003E),
+  );
+}
+
 AppBar appBarHomePage() {
   return new AppBar(actions: <Widget>[
     new IconButton(
@@ -334,6 +451,21 @@ AppBar appBarProfilePage(){
   );
 }
 
+AppBar appBarKaramouziScreen(){
+  return AppBar(
+    actions: <Widget>[
+      new Padding(
+          padding: const EdgeInsets.only(left: 5.0),
+          child: new IconButton(
+              icon: Icon(
+                Icons.filter_list,
+                color: Color(0xff2C003E),
+              ),
+              onPressed: () {}))
+    ],
+    backgroundColor: Colors.white,
+  );
+}
 
 class SearchProfilePage extends StatefulWidget {
   @override
@@ -744,4 +876,176 @@ class ClippLogin extends CustomClipper<Path> {
     // TODO: implement shouldReclip
     throw false;
   }
+}
+
+class bodyMessage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new ListView.builder(
+        itemCount: 20,
+        itemBuilder: (BuildContext context, int index) => new Column(
+          children: <Widget>[
+            new GestureDetector(
+              child: new Container(
+                width: MediaQuery.of(context).size.width,
+                child: new ListTile(
+                  title: new Text('Omeadr'),
+                  subtitle: new Text(
+                    'سلام',
+                    style: TextStyle(fontSize: 16.0),
+
+                  ),
+                  trailing: new Text(
+                    '8.14 ب.ظ',
+                    style: TextStyle(fontSize: 11.0),
+                  ),
+                  leading: new CircleAvatar(
+                    backgroundImage: AssetImage(
+                      'assets/image/dev.jpg',
+                    ),
+                    maxRadius: 30.0,
+                  ),
+                ),
+              ),
+              onTap: () {
+                print('pressed chat ');
+              },
+            ),
+            Line(),
+          ],
+        ));
+  }
+}
+
+
+
+class bodyRequest extends StatelessWidget {
+  var phoneSize;
+  bodyRequest({this.phoneSize});
+
+
+  @override
+  Widget build(BuildContext context) {
+    return new ListView.builder(
+        padding: const EdgeInsets.only(top: 5.0),
+        itemCount: 20,
+        itemBuilder: (BuildContext context, int index) => new Column(
+          children: <Widget>[
+            new GestureDetector(
+              child: new Container(
+                margin: const EdgeInsets.only(top: 5.0),
+                width: phoneSize.width,
+                child: new Column(
+                  children: <Widget>[
+                    new Row(
+                      children: <Widget>[
+                        new Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                            height: phoneSize.height * 0.10,
+                            width: phoneSize.width * 0.19,
+                            decoration: decorationImageHomePage()
+                        ),
+                        new Column(
+                          crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                          children: <Widget>[
+                            new Text('Omeadr'),
+                            new Row(
+                              children: <Widget>[
+                                new SizedBox(
+                                  width: 250.0,
+                                  child: new Text(
+                                    'سلام،حدود 5سال سابقه برنامه نویسی اپلیکیشن دارمو می تونم در این زمینه با شما همکاری کنم و به خو',
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                ButtonMore(),
+                              ],
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                    new Row(
+                      mainAxisAlignment:
+                      MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        new Padding(
+                          padding: const EdgeInsets.only(right: 80.0),
+                          child: new Text(
+                            '8.14 ب.ظ',
+                            style: TextStyle(fontSize: 8.0),
+                          ),
+                        ),
+                        new Padding(
+                          padding: const EdgeInsets.only(left: 27.0),
+                          child: new Row(
+                            children: <Widget>[
+                              new Text(
+                                'khorasan,mashhad',
+                                style: TextStyle(fontSize: 8.0),
+                              ),
+                              new Icon(
+                                Icons.location_on,
+                                size: 10.0,
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Line()
+          ],
+        ));
+  }
+}
+
+
+
+class ButtonMore extends StatefulWidget {
+  @override
+  _ButtonMoreState createState() => _ButtonMoreState();
+}
+
+class _ButtonMoreState extends State<ButtonMore> {
+  @override
+  Widget build(BuildContext context) {
+    return PopupMenuButton<String>(
+        onSelected: choiceAction,
+        itemBuilder: (BuildContext context) {
+          return Constants.textMorebutton
+              .map((String text) =>
+              PopupMenuItem<String>(value: text, child: Text(text)))
+              .toList();
+        });
+  }
+}
+
+void choiceAction(String choice) {
+  if (choice == 'ایجاد درخواست') {
+    print('Press 1');
+  } else if (choice == 'پیام') {
+    print('Press 2');
+  } else if (choice == 'ذخیره') {
+    print('Press 3');
+  }
+}
+
+
+FloatingActionButton floatingKaramouziScreen(){
+  return new FloatingActionButton(
+    onPressed: () {
+      print('Pressed');
+    },
+    backgroundColor: R.color.banafshmain,
+    child: new Icon(
+      Icons.add,
+      color: Colors.white,
+    ),
+  );
 }

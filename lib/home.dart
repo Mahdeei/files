@@ -35,9 +35,7 @@ class _HomePageState extends State<HomePage> {
     return new Scaffold(
       bottomNavigationBar: FFNavigationBar(
         theme: FFNavigationBarTheme(
-//          itemWidth: 50.0,
           barBackgroundColor: Colors.white,
-//          selectedItemBorderColor: R.color.banafshKamRang,
           selectedItemBackgroundColor: R.color.red,
           selectedItemIconColor: Colors.white,
           selectedItemLabelColor: R.color.banafshtire,
@@ -68,10 +66,3 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-// void goToStu() {
-//   BuildContext context;
-//   Navigator.push(
-//     context,
-//     MaterialPageRoute(builder: (context) => ProfilesPages()),
-//   );
-// }

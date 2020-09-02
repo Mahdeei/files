@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:stubbbb/Component/textformfield.dart';
 import 'package:stubbbb/Other/R.dart';
 import 'package:stubbbb/Other/widget.dart';
-import 'package:stubbbb/mahde/home.dart';
+import 'file:///D:/proflutter/stubbbb/lib/home.dart';
 import 'package:http/http.dart' as http;
 import 'ValidatePhonenumber.dart';
 
