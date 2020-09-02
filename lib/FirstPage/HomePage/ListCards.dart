@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:stubbbb/CardPages/AgahiPages.dart';
+import 'package:stubbbb/AgahiPage/AgahiPages.dart';
 import 'package:stubbbb/Other/widget.dart';
-import '../../CardPages/AgahiPages.dart';
-import '../../CardPages/KarAmouziPage.dart';
-import '../../CardPages/ProfilesPage.dart';
+import '../../KarAmouziPage/KarAmouziPage.dart';
+import '../../StudentPage/ProfilesPage.dart';
 import '../../Other/R.dart';
 
 class ListCards extends StatefulWidget {
@@ -66,7 +65,9 @@ class _ListCardsState extends State<ListCards> {
   }
 
   void goToProjects() {
-    Navigator.push(context,MaterialPageRoute(builder: (context) => AgahiPages()));
+    Navigator.push(context,MaterialPageRoute(builder: (context){
+      return AgahiPages();
+    }));
   }
 
   void goToKarAmouozi() {

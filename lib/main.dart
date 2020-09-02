@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stubbbb/WelcomePage.dart';
+import 'file:///D:/proflutter/stubbbb/lib/LoginPage/WelcomePage.dart';
 import 'LoginPage/SignUp.dart';
 import 'LoginPage/SplashScreen.dart';
 

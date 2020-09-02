@@ -1,14 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:stubbbb/CardPages/AgahiPages.dart';
 import 'package:stubbbb/FirstPage/HomePage/HomePage.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
-import 'package:stubbbb/CardPages/KarAmouziPage.dart';
 import 'package:stubbbb/FirstPage/MessagePage/MessagePage.dart';
 import 'package:stubbbb/FirstPage/RequestPage/RequestPage.dart';
 import 'package:stubbbb/Other/R.dart';
-import '../CArdPages/ProfilesPage.dart';
 
 
 
