@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'AgahPage.dart';
+import '../AgahiPage/AgahPage.dart';
 
 class KaPage extends StatefulWidget {
   @override
