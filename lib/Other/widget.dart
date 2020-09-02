@@ -78,6 +78,14 @@ BoxDecoration decorationSignUp(){
           )));
 }
 
+BoxDecoration decorationWelcomePage(){
+  return new BoxDecoration(
+      image: DecorationImage(
+          image: AssetImage('assets/image/back.jpg'),
+          fit: BoxFit.cover
+      )
+  );
+}
 
 
 InputDecoration inputDecorationLoginPage(String labelText,IconData icon){
@@ -103,6 +111,25 @@ Text textSignUp(){
           fontWeight: FontWeight.bold,
           color: Colors.white));
 }
+
+Text textWelcomePage(){
+  return new Text('Stub',
+    style: TextStyle(
+        color: Colors.white,
+        fontSize: 38,
+        fontWeight: FontWeight.bold,
+        fontStyle: FontStyle.italic),);
+}
+
+Text textWelcomePagehint(String text,double fontsize,FontWeight fontWeight){
+  return new Text(text,
+    style: TextStyle(
+      color: Colors.white,
+      fontSize: fontsize,
+      fontWeight: fontWeight,
+      fontStyle: FontStyle.normal),);
+}
+
 
 Text textSignUpS(){
   return new Text(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stubbbb/Other/widget.dart';
 import 'LoginPage.dart';
 
 
@@ -20,39 +21,25 @@ class _WelcomePageState extends State<WelcomePage> {
               body: new Container(
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
-                decoration: new BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/image/back.jpg'),
-                        fit: BoxFit.cover
-                    )
-                ),
+                decoration: decorationWelcomePage(),
                 child: new Column(
                   children: <Widget>[
-                    new SizedBox(
-                      height: MediaQuery.of(context).size.height*0.08,
-                    ),
-                    new Align(alignment: Alignment.centerRight,
-                        child:new Padding(padding: const EdgeInsets.only(right: 20),
-                            child: new Text('Stub',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 38,
-                                fontWeight: FontWeight.bold,
-                                fontStyle: FontStyle.italic),))),
-                    new Align(alignment: Alignment.centerRight,
-                        child:new Padding(padding: const EdgeInsets.only(right: 10),
-                            child: new Text('یاد بگیر که',style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 28,
-                                fontWeight: FontWeight.normal,
-                                fontStyle: FontStyle.normal),))),
+                    new SizedBox(height: MediaQuery.of(context).size.height*0.08),
+                    new Align(
+                        alignment: Alignment.centerRight,
+                        child:new Padding(
+                            padding: const EdgeInsets.only(right: 20),
+                            child: textWelcomePage()
+                    )),
+                    new Align(
+                        alignment: Alignment.centerRight,
+                        child:new Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: textWelcomePagehint('یاد بگیر که',28.0,FontWeight.normal)
+                    )),
                     new Align(alignment: Alignment.centerRight,
                         child:new Padding(padding: const EdgeInsets.only(right: 30),
-                            child: new Text('موفق باشی ..',style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 35,
-                                fontWeight: FontWeight.bold,
-                                fontStyle: FontStyle.normal),))),
+                            child: textWelcomePagehint('موفق باشی ..',35.0,FontWeight.bold))),
                     new SizedBox(
                       height: MediaQuery.of(context).size.height*0.58,
                     ),

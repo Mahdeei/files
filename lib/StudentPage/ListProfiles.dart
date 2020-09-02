@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'file:///D:/proflutter/stubbbb/lib/Other/profileModels.dart';
+import 'package:stubbbb/Other/profileModels.dart';
 import '../CardPages/ProPage.dart';
 
 class ListProfiles extends StatefulWidget {
