@@ -6,7 +6,7 @@ import 'package:stubbbb/Models/profileModels.dart';
 class ProfileHttp {
   static Future<Map> getData() async {
     List<Models> profiles = [];
-    var response = await http.get('http://192.168.1.3/Stub/userGetData.php');
+    var response = await http.get('http://192.168.1.6/Stub/userGetData.php');
 
     var responseBody = json.decode(response.body);
     responseBody.forEach((item) {

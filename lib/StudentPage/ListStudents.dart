@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'file:///D:/proflutter/stubbbb/lib/Models/profileModels.dart';
-import '../CardPages/ProPage.dart';
+import 'package:stubbbb/Models/profileModels.dart';
+import '../ProfilePage/ProPage.dart';
 
 class ListProfiles extends StatefulWidget {
   final Models model;
@@ -60,10 +60,6 @@ class _ListProfilesState extends State<ListProfiles> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-//                  crossAxisAlignment: CrossAxisAlignment.start,
-//                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-
-//                      alignment: Alignment.topRight,
                             new Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
@@ -103,7 +99,6 @@ class _ListProfilesState extends State<ListProfiles> {
                                     ))
                               ],
                             ),
-
                             new Align(
                               alignment: Alignment.centerLeft,
                               child: new Padding(

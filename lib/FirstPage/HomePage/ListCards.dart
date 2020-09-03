@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stubbbb/AgahiPage/AgahiPages.dart';
 import 'package:stubbbb/Other/widget.dart';
 import '../../KarAmouziPage/KarAmouziPage.dart';
-import '../../StudentPage/ProfilesPage.dart';
+import '../../StudentPage/StudentScreen.dart';
 import '../../Other/R.dart';
 
 class ListCards extends StatefulWidget {

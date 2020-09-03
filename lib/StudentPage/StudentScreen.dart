@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:stubbbb/Models/profileModels.dart';
 import 'package:stubbbb/Other/R.dart';
-import 'file:///D:/proflutter/stubbbb/lib/Models/profileModels.dart';
 import 'package:stubbbb/Other/widget.dart';
-import 'package:stubbbb/StudentPage/ListProfiles.dart';
 import 'package:stubbbb/http/profiles.dart';
+import 'ListStudents.dart';
+
+
 
 class ProfilesPages extends StatefulWidget {
+
   @override
   _ProfilesPagesState createState() => _ProfilesPagesState();
 }
 
 class _ProfilesPagesState extends State<ProfilesPages> {
+
   ScrollController scrollController = ScrollController();
   List<Models> _profiles = [];
   bool isLoading = false;
-
   int i = 10;
   List<Models> models;
-  Map body;
+  Map body=new Map();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -34,16 +38,15 @@ class _ProfilesPagesState extends State<ProfilesPages> {
 
   _getProfiles() async {
     var response = await ProfileHttp.getData();
-    // print(response);
     setState(() {
       _profiles.addAll(response['profiles']);
     });
-    // print('_profiles');
-     setState(() {
-        isLoading = true;
-      });
+    setState(() {
+      isLoading = true;
+    });
     print(_profiles);
   }
+
   // addModel() async {
   //   await Future.delayed(Duration(milliseconds: 5000));
   //   setState(() {
@@ -61,11 +64,8 @@ class _ProfilesPagesState extends State<ProfilesPages> {
 
   @override
   Widget build(BuildContext context) {
-    // var phonesize = MediaQuery.of(context).size;
-    // int currentindexhozouri = 0;
     return new MaterialApp(
-        theme: ThemeData(
-            primaryIconTheme: IconThemeData(color: R.color.banafshmain)),
+        theme: ThemeData(primaryIconTheme: IconThemeData(color: R.color.banafshmain)),
         debugShowCheckedModeBanner: false,
         home: new SafeArea(
           top: true,
@@ -74,23 +74,12 @@ class _ProfilesPagesState extends State<ProfilesPages> {
             textDirection: TextDirection.rtl,
             child: new Scaffold(
                 drawer: DrawerLists(),
-                appBar: new AppBar(
-//            title: this.cusSearchBar,
-                  title: TextfieldSearch(),
-                  backgroundColor: Colors.white,
-                  elevation: 5.0,
-                  bottomOpacity: 25.0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(
-                      bottom: Radius.circular(30),
-                    ),
-                  ),
-                ),
+                appBar: appBarProfilePage(),
                 body: isLoading
                     ? new ListView.builder(
                         itemCount: _profiles.length,
                         itemBuilder: (BuildContext context, int index) =>
-                            ListProfiles(model: _profiles[index]),
+                            ListProfiles(model: _profiles[index],),
                       )
                     : new Center(
                         child: new CircularProgressIndicator(),
@@ -99,6 +88,7 @@ class _ProfilesPagesState extends State<ProfilesPages> {
         ));
   }
 }
+
 
 class TextfieldSearch extends StatefulWidget {
   @override
@@ -130,13 +120,11 @@ class _TextfieldSearchState extends State<TextfieldSearch> {
         new Expanded(
           child: new TextField(
             decoration: InputDecoration(
-//          border: InputBorder.none,
               contentPadding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 10.0),
               suffixIcon: new Icon(
                 Icons.search,
                 color: Color(0xff2c003e),
               ),
-//            labelText: "جستجو ...",
               enabledBorder: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.0)),
                 borderSide: const BorderSide(
@@ -163,7 +151,7 @@ class _TextfieldSearchState extends State<TextfieldSearch> {
             showModalBottomSheet(
                 context: context,
                 builder: (builder) => Container(
-                        child: new Column(
+                    child: new Column(
                       children: <Widget>[
                         new Container(
                           color: R.color.red,
@@ -261,3 +249,4 @@ class _TextfieldSearchState extends State<TextfieldSearch> {
     );
   }
 }
+

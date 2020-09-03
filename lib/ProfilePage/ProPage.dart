@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stubbbb/Other/R.dart';
-import '../AgahiPage/AgahPage.dart';
+import 'package:stubbbb/Other/widget.dart';
 
 
 class ProPage extends StatefulWidget {
@@ -12,15 +12,60 @@ class ProPage extends StatefulWidget {
 
 
 class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
+
   final bodyGlobalKey = GlobalKey();
   final List<Widget> myTabs = [
     Tab(text: 'مشخصات'),
     Tab(text: 'نظرات'),
     Tab(text: 'نمونه کارها',)
   ];
-  TabController _tabController;
-  ScrollController _scrollController;
 
+
+
+
+  TabController _tabController;
+  ScrollController _scrollController = new ScrollController();
+
+
+
+
+  _smoothScrollToTop() {
+    _scrollController.animateTo(
+      0,
+      duration: Duration(microseconds: 300),
+      curve: Curves.ease,
+    );
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return new Column(
+      children: <Widget>[
+        new Container(
+          child: new TabBar(
+              controller: _tabController,
+              indicatorColor: R.color.banafshtire,
+              labelStyle: TextStyle(color: R.color.backGround1),
+              unselectedLabelColor: R.color.banafshKamRang,
+              labelColor: R.color.banafshtire,
+              unselectedLabelStyle: TextStyle(color: Colors.white),
+              tabs: <Widget>[
+                new Tab(text: 'مشحصات',),
+                new Tab(text: 'نمونه کارها',),
+                new Tab(text: 'نظرات',),
+              ]),),
+        new Container(
+          height: MediaQuery.of(context).size.height,
+          child: new TabBarView(
+              controller: _tabController,
+              children: [
+                ListOne(),
+                ListTwo(),
+                ListImages()
+              ]),)
+      ],);
+  }
   Widget _head() {
     return new Stack(
       children: <Widget>[
@@ -208,100 +253,6 @@ class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
       ],
     );
   }
-
-
-  @override
-  void initState() {
-    _scrollController = ScrollController();
-    _tabController = TabController(length: 3, vsync: this);
-    _tabController.addListener(_smoothScrollToTop);
-
-    super.initState();
-  }
-
-  void dispose() {
-    _tabController.dispose();
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  _smoothScrollToTop() {
-    _scrollController.animateTo(
-      0,
-      duration: Duration(microseconds: 300),
-      curve: Curves.ease,
-    );
-  }
-
-
-  @override
-  Widget build(BuildContext context) {
-    return new Column(
-      children: <Widget>[
-        new Container(
-          child: new TabBar(
-              controller: _tabController,
-              indicatorColor: R.color.banafshtire,
-              labelStyle: TextStyle(color: R.color.backGround1),
-              unselectedLabelColor: R.color.banafshKamRang,
-              labelColor: R.color.banafshtire,
-              unselectedLabelStyle: TextStyle(color: Colors.white),
-              tabs: <Widget>[
-                new Tab(text: 'مشحصات',),
-                new Tab(text: 'نمونه کارها',),
-                new Tab(text: 'نظرات',),
-
-              ]),),
-        new Container(
-          height: MediaQuery
-              .of(context)
-              .size
-              .height,
-          child: new TabBarView(
-              controller: _tabController,
-              children: [
-                ListOne(),
-                ListTwo(),
-                ListImages()
-              ]),)
-      ],);
-
-
-//  @override
-//  Widget build(BuildContext context) {
-//    return new Directionality(textDirection: TextDirection.rtl,
-//        child: new SafeArea(top: true,
-//            bottom: true,
-//            child: Scaffold(
-//          body: NestedScrollView(floatHeaderSlivers: true,
-//            controller: _scrollController,
-//            headerSliverBuilder: (context, value) {
-//              return [
-//                SliverToBoxAdapter(child: _head()),
-//                SliverToBoxAdapter(
-//                  child: TabBar(
-//                    indicatorColor: R.color.banafshtire,
-//                    labelStyle: TextStyle(color: R.color.backGround1),
-//                    unselectedLabelColor: R.color.banafshKamRang,
-//                    labelColor: R.color.banafshtire,
-//                    unselectedLabelStyle: TextStyle(color: Colors.white),
-//                    controller: _tabController,
-//                    // isScrollable: true,
-//                    tabs: myTabs,
-//                  ),
-//                ),
-//              ];
-//            },
-//            body: Container(
-//              child: TabBarView(
-//                controller: _tabController,
-//                children: [ListOne(), ListTwo(),ListImages()],
-//              ),
-//            ),
-//          ),
-//        )));
-//  }
-  }
 }
 
 class ListOne extends StatefulWidget {
@@ -314,7 +265,6 @@ class _ListOneState extends State<ListOne> {
   Widget build(BuildContext context) {
     return new Padding(padding: const EdgeInsets.only(top: 0),
     child: new ListView(
-      // crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         new Padding(
           padding: const EdgeInsets.only(right: 7.0, top: 18.0),
@@ -325,27 +275,16 @@ class _ListOneState extends State<ListOne> {
           ),
         ),
         new Padding(
-            padding:
-            const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+            padding:EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
             child: new Wrap(
               runSpacing: 8.0,
               spacing: 7.0,
               children: <Widget>[
-                ObjectTag(
-                  tags: 'رنامه نویسی موبایل',
-                ),
-                ObjectTag(
-                  tags: 'ui',
-                ),
-                ObjectTag(
-                  tags: 'ux',
-                ),
-                ObjectTag(
-                  tags: 'رنامه',
-                ),
-                ObjectTag(
-                  tags: 'back end',
-                ),
+                ObjectTag(tags: 'رنامه نویسی موبایل'),
+                ObjectTag(tags: 'ui'),
+                ObjectTag(tags: 'ux'),
+                ObjectTag(tags: 'رنامه'),
+                ObjectTag(tags: 'back end'),
               ],
             )),
       ],
@@ -431,25 +370,6 @@ class _ListTwoState extends State<ListTwo> {
 
 
 
-class ObjectTag extends StatelessWidget {
-  final String tags;
-
-  const ObjectTag({this.tags});
-  @override
-  Widget build(BuildContext context) {
-    return new Container(
-        height: 20.0,
-
-        decoration: BoxDecoration(
-            color: Color(0xff2D0827),
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(15.0)),
-        child:new Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 6.0,vertical: 3.0),
-          child: new Text(tags,style: new TextStyle(color: Colors.white,fontSize: 10.0,),),
-        ));
-  }
-}
 class ListImages extends StatefulWidget {
   @override
   _ListImagesState createState() => _ListImagesState();

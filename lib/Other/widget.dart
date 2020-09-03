@@ -3,7 +3,7 @@ import 'package:stubbbb/AgahiPage/AddPostAgahi.dart';
 import 'package:stubbbb/AgahiPage/AgahPage.dart';
 import 'package:stubbbb/AgahiPage/AgahiPages.dart';
 import 'package:stubbbb/KarAmouziPage/KarAmouziPage.dart';
-import 'package:stubbbb/StudentPage/ProfilesPage.dart';
+import 'package:stubbbb/StudentPage/StudentScreen.dart';
 import 'R.dart';
 import 'package:animations/animations.dart';
 
@@ -528,6 +528,20 @@ AppBar appBarAgahiScreen(){
               )),
         ],
       ));
+}
+
+AppBar appBarProfileScreen(){
+  return new AppBar(
+    title: TextfieldSearch(),
+    backgroundColor: Colors.white,
+    elevation: 5.0,
+    bottomOpacity: 25.0,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(
+        bottom: Radius.circular(30),
+      ),
+    ),
+  );
 }
 
 class SearchProfilePage extends StatefulWidget {
@@ -1306,6 +1320,28 @@ class _ButtonMoreState extends State<ButtonMore> {
         });
   }
 }
+
+
+class ObjectTag extends StatelessWidget {
+  final String tags;
+
+  const ObjectTag({this.tags});
+  @override
+  Widget build(BuildContext context) {
+    return new Container(
+        height: 20.0,
+
+        decoration: BoxDecoration(
+            color: Color(0xff2D0827),
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(15.0)),
+        child:new Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 6.0,vertical: 3.0),
+          child: new Text(tags,style: new TextStyle(color: Colors.white,fontSize: 10.0,),),
+        ));
+  }
+}
+
 
 void choiceAction(String choice) {
   if (choice == 'ایجاد درخواست') {
