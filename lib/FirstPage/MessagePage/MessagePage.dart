@@ -5,6 +5,10 @@ import 'package:stubbbb/Other/widget.dart';
 class MyMessagePage extends StatelessWidget {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
+  MyMessagePage({this.data});
+  Map data;
+
+
   @override
   Widget build(BuildContext context) {
     return new Directionality(

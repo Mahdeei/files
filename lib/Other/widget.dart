@@ -3,6 +3,8 @@ import 'package:stubbbb/AgahiPage/AddPostAgahi.dart';
 import 'package:stubbbb/AgahiPage/AgahPage.dart';
 import 'package:stubbbb/AgahiPage/AgahiPages.dart';
 import 'package:stubbbb/KarAmouziPage/KarAmouziPage.dart';
+import 'package:stubbbb/Models/Profile.dart';
+import 'package:stubbbb/Models/profileModels.dart';
 import 'package:stubbbb/ProfilePage/MyProfilePage.dart';
 import 'package:stubbbb/StudentPage/StudentScreen.dart';
 import 'R.dart';
@@ -960,6 +962,9 @@ class DrawerLists extends StatelessWidget {
 
 
 class Headers extends StatelessWidget {
+
+  Profile profile;
+  Headers({this.profile});
   var username;
   @override
   Widget build(BuildContext context) {

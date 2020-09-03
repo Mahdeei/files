@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:stubbbb/Component/textformfield.dart';
+import 'package:stubbbb/Models/Profile.dart';
+import 'package:stubbbb/Models/profileModels.dart';
 import 'package:stubbbb/Other/widget.dart';
 import 'file:///D:/proflutter/stubbbb/lib/home.dart';
 import 'package:http/http.dart' as http;
@@ -15,6 +17,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+
   var url = "http://192.168.1.6/Stub/Login.php";
   final _formKeyLog = GlobalKey<FormState>();
   String _username;
@@ -22,6 +25,8 @@ class _SignInState extends State<SignIn> {
   Color _color = Colors.white;
   bool error = true;
   Map boody;
+  Profile profile ;
+
   void usernameOnSaved(String value) {
     _username = value;
   }
@@ -30,13 +35,25 @@ class _SignInState extends State<SignIn> {
     _password = value;
   }
 
+
+
   recieveData() async {
     setState(() async{
       boody = await signIn();
       if (await boody['status'] == 'succes') {
+        profile =new Profile(
+            id: boody['id'],
+            image: boody['image'],
+            moarefinameh: boody['moarefinameh'],
+            name: boody['name'],
+            phonenumber: boody['phonenumber'],
+            title: boody['title'],
+            type: boody['type'],
+            username: boody['username']
+        );
         Navigator.of(context).pushReplacement(new MaterialPageRoute(
             builder: (context) =>
-            new HomePage()));
+            new HomePage(profile: profile,)));
         if (error == false) {
           setState(() {
             error = true;
@@ -119,7 +136,6 @@ class _SignInState extends State<SignIn> {
                                   onTap: () async {
                                     _formKeyLog.currentState.save();
                                     recieveData();
-
                                   },
                                   child: new Padding(
                                     padding: const EdgeInsets.only(left: 30),

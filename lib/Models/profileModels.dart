@@ -1,4 +1,10 @@
+import 'package:flutter/material.dart';
+
 class User {
+
+
+
+  // User({this.id, this.username, this.name, this.phonenumber, this.moarefinameh,this.image, this.type, this.title, this.password, this.apiToken});
 
   var id;
   var username;

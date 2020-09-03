@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:stubbbb/Other/widget.dart';
+import 'package:stubbbb/ProfilePage/MyProfilePage.dart';
 
 class MyRequestPage extends StatefulWidget {
+  MyRequestPage({this.data});
+  Map data;
   @override
   _MyRequestPageState createState() => _MyRequestPageState();
 }
