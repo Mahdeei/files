@@ -16,10 +16,10 @@ class ProfilesPages extends StatefulWidget {
 class _ProfilesPagesState extends State<ProfilesPages> {
 
   ScrollController scrollController = ScrollController();
-  List<Models> _profiles = [];
+  List<User> _profiles = [];
   bool isLoading = false;
   int i = 10;
-  List<Models> models;
+  List<User> models;
   Map body=new Map();
 
   @override

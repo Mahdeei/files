@@ -14,7 +14,7 @@ class MyHomePage extends StatelessWidget {
     return new Directionality(
         textDirection: TextDirection.rtl,
         child: Scaffold(
-          appBar: appBarHomePage(),
+          appBar: appBarHomePage(context),
           drawer: DrawerLists(),
           drawerEnableOpenDragGesture: true,
           backgroundColor: R.color.backGround1,

@@ -3,7 +3,7 @@ import 'package:stubbbb/Models/profileModels.dart';
 import '../ProfilePage/ProPage.dart';
 
 class ListProfiles extends StatefulWidget {
-  final Models model;
+  final User model;
   ListProfiles({this.model});
   final controller = new PageController();
   @override

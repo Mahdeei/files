@@ -1,4 +1,5 @@
-class Models {
+class User {
+
   var id;
   var username;
   var name;
@@ -10,7 +11,8 @@ class Models {
   var password;
   var apiToken;
 
-  Models.fromjson(Map<String, dynamic> parsedJson) {
+
+  User.fromjson(Map<String, dynamic> parsedJson) {
     id = parsedJson['id'];
     type = parsedJson['type'];
     username = parsedJson['username'];

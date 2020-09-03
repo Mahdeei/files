@@ -16,7 +16,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  var url = "http://192.168.56.1//Stub/SignUp.php";
+  var url = "http://192.168.1.6//Stub/SignUp.php";
   final _formKey = GlobalKey<FormState>();
   bool onpresscode = true;
   TextEditingController _controller = new TextEditingController();
@@ -73,7 +73,7 @@ class _SignUpState extends State<SignUp> {
                                     padding: const EdgeInsets.symmetric(horizontal: 35),
                                     child: new Column(
                                       children: <Widget>[
-                                        InputTextForm(
+                                        InputTextForm(obscure: false,
                                           onSaved: userOnsaved,
                                           color: Colors.white,
                                           lableColor: Colors.white,
@@ -100,7 +100,7 @@ class _SignUpState extends State<SignUp> {
                                                 return 'not true';
                                               }
                                             }),
-                                        InputTextForm(
+                                        InputTextForm(obscure: false,
                                             onSaved: nameOnsaved,
                                             color: Colors.white,
                                             lableColor: Colors.white,

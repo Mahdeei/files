@@ -13,7 +13,7 @@ class ValidatePhoneNumber extends StatefulWidget {
 }
 
 class _ValidatePhoneNumberState extends State<ValidatePhoneNumber> {
-  final String url = "http://192.168.56.1/Stub/ValidatePhone.php";
+  final String url = "http://192.168.1.6/Stub/ValidatePhone.php";
   bool onpresscode = true;
   bool _validatephone = true;
   bool _validateCode = true;

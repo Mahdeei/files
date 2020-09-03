@@ -13,25 +13,7 @@ class MyApp extends StatelessWidget {
       home: new SafeArea(
           top: true,
           bottom: true,
-          child: new Directionality(textDirection: TextDirection.rtl, child: new WelcomePage())),
+          child: new Directionality(textDirection: TextDirection.rtl, child: new SplashScreen())),
     );
-
-//        initialRoute: '/SplashScreen',
-//        routes: {
-//          '/HomePage': (context) => new SafeArea(
-//              top: true,
-//              bottom: true,
-//              child: new Directionality(
-//                  textDirection: TextDirection.rtl, child: HomePage())),
-//          '/signup': (context) => new Directionality(
-//                textDirection: TextDirection.rtl,
-//                child: new SignUp(),
-//              ),
-//          '/SplashScreen': (context) => new Directionality(
-//              textDirection: TextDirection.rtl, child: new SplashScreen())
-//        },
-//        debugShowCheckedModeBanner: false,
-//        home: new Directionality(
-//            textDirection: TextDirection.rtl, child: new SplashScreen()));
   }
 }

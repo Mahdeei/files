@@ -3,6 +3,7 @@ import 'package:stubbbb/AgahiPage/AddPostAgahi.dart';
 import 'package:stubbbb/AgahiPage/AgahPage.dart';
 import 'package:stubbbb/AgahiPage/AgahiPages.dart';
 import 'package:stubbbb/KarAmouziPage/KarAmouziPage.dart';
+import 'package:stubbbb/ProfilePage/MyProfilePage.dart';
 import 'package:stubbbb/StudentPage/StudentScreen.dart';
 import 'R.dart';
 import 'package:animations/animations.dart';
@@ -415,15 +416,16 @@ CircleAvatar circleAvatarKaramouziScreen(){
   );
 }
 
-AppBar appBarHomePage() {
+AppBar appBarHomePage(BuildContext context) {
   return new AppBar(actions: <Widget>[
     new IconButton(
-        icon: Icon(
-          Icons.person,
-          color: Colors.white,
-          size: 28,
+        icon: IconButton(
+          icon: Icon(Icons.person,color: Colors.white,size: 28,)
         ),
-        onPressed: () {})
+        onPressed: () {
+          Navigator.push(context, new MaterialPageRoute(builder: (context)=> new MyProfilePage()));
+        }
+        )
   ], elevation: 0.0, backgroundColor: R.color.banafshmain);
 }
 
