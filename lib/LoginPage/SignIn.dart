@@ -1,10 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:stubbbb/Component/textformfield.dart';
+import 'package:stubbbb/FirstPage/HomePage/HomeScreen.dart';
 import 'package:stubbbb/Models/Profile.dart';
-import 'package:stubbbb/Models/profileModels.dart';
 import 'package:stubbbb/Other/widget.dart';
-import 'file:///D:/proflutter/stubbbb/lib/home.dart';
 import 'package:http/http.dart' as http;
 import 'ValidatePhonenumber.dart';
 
@@ -18,7 +17,7 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
 
-  var url = "http://192.168.1.6/Stub/Login.php";
+  var url = "http://192.168.1.5/Stub/Login.php";
   final _formKeyLog = GlobalKey<FormState>();
   String _username;
   String _password;

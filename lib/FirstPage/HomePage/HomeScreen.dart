@@ -5,14 +5,16 @@ import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:stubbbb/FirstPage/MessagePage/MessagePage.dart';
 import 'package:stubbbb/FirstPage/RequestPage/RequestPage.dart';
 import 'package:stubbbb/Models/Profile.dart';
-import 'package:stubbbb/Other/R.dart';
-import 'FirstPage/HomePage/ListCards.dart';
-import 'Other/widget.dart';
+import '../../Other/R.dart';
+import 'HomePage.dart';
+import 'ListCards.dart';
+import '../../Other/widget.dart';
 
 
 
 class HomePage extends StatefulWidget {
-  Profile profile=new Profile();
+
+  Profile profile;
   HomePage({this.profile});
 
   @override
@@ -22,11 +24,14 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
 
+  Profile profile = new Profile();
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     setState(() {
+      profile = widget.profile;
     });
   }
 
@@ -82,7 +87,13 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: listwidget[currentindex],
+      body: currentindex==1
+          ? MyHomePage(profile: profile,)
+          : currentindex==0
+            ? MyRequestPage()
+            : MyMessagePage()
+
+      ,
     );
   }
 
@@ -95,30 +106,5 @@ class _HomePageState extends State<HomePage> {
 
 
 
-class MyHomePage extends StatelessWidget {
-
-  var body;
-
-  MyHomePage({this.body});
-
-
-  @override
-  Widget build(BuildContext context) {
-    return new Directionality(
-        textDirection: TextDirection.rtl,
-        child: Scaffold(
-          appBar: appBarHomePage(context),
-          drawer: DrawerLists(),
-          drawerEnableOpenDragGesture: true,
-          backgroundColor: R.color.backGround1,
-          body: new Column(
-            children: <Widget>[
-              Headers(),
-              ListCards(),
-            ],
-          ),
-        ));
-  }
-}
 
 

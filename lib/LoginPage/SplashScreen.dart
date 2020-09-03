@@ -2,7 +2,6 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:stubbbb/LoginPage/SignIn.dart';
 import 'package:stubbbb/Other/widget.dart';
-import 'file:///D:/proflutter/stubbbb/lib/home.dart';
 
 class SplashScreen extends StatefulWidget {
   @override

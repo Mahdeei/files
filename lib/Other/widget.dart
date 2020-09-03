@@ -5,7 +5,8 @@ import 'package:stubbbb/AgahiPage/AgahiPages.dart';
 import 'package:stubbbb/KarAmouziPage/KarAmouziPage.dart';
 import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Models/profileModels.dart';
-import 'package:stubbbb/ProfilePage/MyProfilePage.dart';
+import 'package:stubbbb/ProfilePage/MyProfileScreen.dart';
+import 'package:stubbbb/ProfilePage/MyProfileUserNormalScreen.dart';
 import 'package:stubbbb/StudentPage/StudentScreen.dart';
 import 'R.dart';
 import 'package:animations/animations.dart';
@@ -418,16 +419,38 @@ CircleAvatar circleAvatarKaramouziScreen(){
   );
 }
 
-AppBar appBarHomePage(BuildContext context) {
+AppBar appBarHomePage(BuildContext context,Profile profile) {
+
   return new AppBar(actions: <Widget>[
-    new IconButton(
-        icon: IconButton(
-          icon: Icon(Icons.person,color: Colors.white,size: 28,)
-        ),
-        onPressed: () {
-          Navigator.push(context, new MaterialPageRoute(builder: (context)=> new MyProfilePage()));
-        }
-        )
+    new Padding(
+      padding: EdgeInsets.only(left: 15.0),
+      child: new Stack(
+        children: [
+          new IconButton(
+              icon: IconButton(
+                  icon: Icon(Icons.person,color: Colors.white,size: 28,)
+              ),
+              onPressed: () {
+                Navigator.push(context, new MaterialPageRoute(builder: (context)=>
+                profile.type=="2"
+                    ? new MyProfileUserNormalScreen(profile: profile)
+                    : new MyProfileStudentScreen(profile: profile)
+                ));
+              }
+          ),
+          new Positioned(
+            right: 10.0,
+            top: 35.0,
+            child: new CircleAvatar(
+            minRadius: 5.0,
+            backgroundColor: Colors.red,
+          ),)
+
+
+
+        ],
+      )
+      )
   ], elevation: 0.0, backgroundColor: R.color.banafshmain);
 }
 
@@ -990,7 +1013,7 @@ class Headers extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        new Text('سید امید روینده',style: styleHomePage()),
+                        new Text(profile.name,style: styleHomePage()),
                       ],
                     )
                 )

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class InputTextForm extends StatelessWidget {
   final String lable;
-  // final IconData iconData;
   var validate;
   final obscure;
   final controller;
@@ -10,10 +9,8 @@ class InputTextForm extends StatelessWidget {
   final Color textColor;
   final lableColor;
   final onSaved;
-  // final String hint;
   InputTextForm({
     this.lable,
-    // this.iconData,
     this.validate,
     this.obscure,
     this.controller,

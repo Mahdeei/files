@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stubbbb/Other/widget.dart';
-import 'package:stubbbb/ProfilePage/MyProfilePage.dart';
+import 'package:stubbbb/ProfilePage/MyProfileScreen.dart';
 
 class MyRequestPage extends StatefulWidget {
   MyRequestPage({this.data});
