@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:stubbbb/Models/AgahiModel.dart';
 import 'package:stubbbb/Other/widget.dart';
+import 'package:stubbbb/http/httpAdvertisings.dart';
 import 'AgahPage.dart';
 
 class AgahiPages extends StatefulWidget {
@@ -8,6 +10,33 @@ class AgahiPages extends StatefulWidget {
 }
 
 class _AgahiPagesState extends State<AgahiPages> {
+
+  List<Advertising> advertisings = [];
+  bool isLoading = false;
+  int i = 10;
+  List<Advertising> models;
+  Map body=new Map();
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    _getAdvertisings();
+  }
+
+  _getAdvertisings() async {
+    var response = await HttpAdvertisings.getData();
+    setState(() {
+      advertisings.addAll(response['advertisings']);
+    });
+    setState(() {
+      isLoading = true;
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return new Directionality(
@@ -22,7 +51,7 @@ class _AgahiPagesState extends State<AgahiPages> {
                     appBar: appBarAgahiScreen(),
                     body: TabBarView(
                       children: [
-                        ProjectList(),
+                        ProjectList(advertisings: advertisings,),
                         Icon(Icons.directions_transit),
                         Icon(Icons.directions_bike),
                       ],
@@ -33,6 +62,8 @@ class _AgahiPagesState extends State<AgahiPages> {
 }
 
 class ProjectList extends StatefulWidget {
+  List<Advertising> advertisings = [];
+  ProjectList({this.advertisings});
   @override
   _ProjectListState createState() => _ProjectListState();
 }
@@ -42,7 +73,7 @@ class _ProjectListState extends State<ProjectList> {
   Widget build(BuildContext context) {
     var phonesize = MediaQuery.of(context).size;
     return new ListView.builder(
-        itemCount: 20,
+        itemCount: widget.advertisings.length,
         itemBuilder: (BuildContext context, int index) => new GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -89,7 +120,7 @@ class _ProjectListState extends State<ProjectList> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         new Text(
-                          'طراحی سایت',
+                          widget.advertisings[index].title,
                           style: TextStyle(
                               fontSize: 20.0, fontWeight: FontWeight.bold),
                         ),

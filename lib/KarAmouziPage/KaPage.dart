@@ -23,8 +23,20 @@ class _KaPageState extends State<KaPage> {
                   new Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      rowOneKaramouziScreen(),
-                      rowTwoKaramouziScreen(),
+
+                     new Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                          new Icon(Icons.timer,color: Colors.black54,size: 20.0,),
+                          new SizedBox(width: 3.0,),
+                          new Padding(
+                            padding: const EdgeInsets.only(top: 3.0),
+                            child: new Text('4 ساعت در روز',style: TextStyle(color: Colors.black54,fontSize: 15.0))
+                      )
+                      ],
+                      ),
+
+                      // rowTwoKaramouziScreen(),
                     ],
                   ),
                   paddingOneKaramouziScreen(),

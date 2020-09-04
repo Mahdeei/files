@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:stubbbb/AgahiPage/Send_Req.dart';
 import 'AddPostAgahi.dart';
 
 
@@ -9,9 +9,13 @@ class AgahPage extends StatefulWidget {
 }
 
 class _AgahPageState extends State<AgahPage> {
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
-    // var phonesize = MediaQuery.of(context).size;
     return new MaterialApp(
         debugShowCheckedModeBanner: false,
         home: new Directionality(
@@ -132,28 +136,31 @@ class HeadersItemsPage extends StatelessWidget {
                   new Align(alignment: Alignment.bottomCenter,
                     child: new Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        new GestureDetector(
-                          child: Icon(Icons.playlist_add_check,color: Colors.white,size: 28.0,),
-                        ),
+                        // new GestureDetector(
+                        //   child: Icon(Icons.playlist_add_check,color: Colors.white,size: 28.0,),
+                        // ),
+                        // new GestureDetector(
+                        //   child: new Container(decoration: BoxDecoration(color: Colors.white,
+                        //       borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                        //     width: phonesize.width*0.17,
+                        //     child: new Text('پیام',
+                        //       style:TextStyle(
+                        //           color: Color(0xff2D0827),fontWeight: FontWeight.bold,fontSize: 14.0),
+                        //       textAlign: TextAlign.center,),
+                        //   ),
+                        // ),
                         new GestureDetector(
                           child: new Container(decoration: BoxDecoration(color: Colors.white,
                               borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                            width: phonesize.width*0.17,
-                            child: new Text('پیام',
-                              style:TextStyle(
-                                  color: Color(0xff2D0827),fontWeight: FontWeight.bold,fontSize: 14.0),
-                              textAlign: TextAlign.center,),
-                          ),
-                        ),
-                        new GestureDetector(
-                          child: new Container(decoration: BoxDecoration(color: Colors.white,
-                              borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                            width: phonesize.width*0.17,
+                            width: phonesize.width*0.34,
                             child: new Text('شروع کار',
                               style:TextStyle(
                                   color: Color(0xff2D0827),fontWeight: FontWeight.bold,fontSize: 14.0),
                               textAlign: TextAlign.center,),
                           ),
+                          onTap: (){
+                            Navigator.of(context).push(new MaterialPageRoute(builder: (ctx) => new SendReq()));
+                          },
                         ),
                         new GestureDetector(
                           child: Icon(Icons.bookmark_border,color: Colors.white,),

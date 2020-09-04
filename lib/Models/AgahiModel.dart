@@ -1,8 +1,7 @@
+
 class Advertising{
-
-
   var id;
-  var userid;
+  var user_id;
   var title;
   var description;
   var date;
@@ -12,10 +11,9 @@ class Advertising{
   var location;
 
 
-
-  Advertising.fromjson(Map<String, dynamic> parsedJson) {
+  Advertising.fromJson(Map<String, dynamic> parsedJson) {
     id = parsedJson['id'];
-    userid = parsedJson['userid'];
+    user_id = parsedJson['user_id'];
     title = parsedJson['title'];
     description = parsedJson['description'];
     date = parsedJson['date'];
