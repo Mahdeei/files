@@ -1,28 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:stubbbb/AgahiPage/Send_Req.dart';
+import 'package:stubbbb/Models/AgahiModel.dart';
+import 'package:stubbbb/Models/Profile.dart';
 import 'AddPostAgahi.dart';
 
 
-class AgahPage extends StatefulWidget {
+class AdvertisingScreen extends StatefulWidget {
+  Advertising advertising;
+  Profile profile;
+  AdvertisingScreen({this.profile,this.advertising});
+
   @override
-  _AgahPageState createState() => _AgahPageState();
+  _AdvertisingScreenState createState() => _AdvertisingScreenState();
 }
 
-class _AgahPageState extends State<AgahPage> {
-
-
-
-
+class _AdvertisingScreenState extends State<AdvertisingScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return new MaterialApp(
         debugShowCheckedModeBanner: false,
         home: new Directionality(
             textDirection: TextDirection.rtl, child: new SafeArea(top: true,child: new Scaffold(
             body: ListView(
               children: <Widget>[
-                HeadersItems(),
+                HeadersItems(advertising: widget.advertising,profile: widget.profile,),
                 new Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     new Row(

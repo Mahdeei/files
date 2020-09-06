@@ -44,7 +44,6 @@ class _ProfilesPagesState extends State<ProfilesPages> {
     setState(() {
       isLoading = true;
     });
-    print(_profiles);
   }
 
   // addModel() async {

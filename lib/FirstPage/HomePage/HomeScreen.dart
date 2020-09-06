@@ -7,8 +7,6 @@ import 'package:stubbbb/FirstPage/RequestPage/RequestPage.dart';
 import 'package:stubbbb/Models/Profile.dart';
 import '../../Other/R.dart';
 import 'HomePage.dart';
-import 'ListCards.dart';
-import '../../Other/widget.dart';
 
 
 
@@ -24,7 +22,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
 
-  Profile profile = new Profile();
+  Profile profile;
 
   @override
   void initState() {
@@ -32,6 +30,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     setState(() {
       profile = widget.profile;
+      // print(profile.username);
     });
   }
 
@@ -50,11 +49,6 @@ class _HomePageState extends State<HomePage> {
   }
 
 
-
-  void function(){
-
-  }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +84,7 @@ class _HomePageState extends State<HomePage> {
       body: currentindex==1
           ? MyHomePage(profile: profile,)
           : currentindex==0
-            ? MyRequestPage()
+            ? MyRequestPage(profile: this.profile,)
             : MyMessagePage()
 
       ,

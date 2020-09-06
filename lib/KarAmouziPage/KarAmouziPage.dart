@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Other/R.dart';
 import 'package:stubbbb/Other/widget.dart';
 import 'KaPage.dart';
@@ -7,6 +8,9 @@ import 'KaPage.dart';
 
 
 class KarAmouziPage extends StatefulWidget {
+  Profile profile;
+  KarAmouziPage({this.profile});
+
   @override
   _KarAmouziPageState createState() => _KarAmouziPageState();
 }

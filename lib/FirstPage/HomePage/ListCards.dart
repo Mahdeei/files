@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:stubbbb/AgahiPage/AgahiPages.dart';
+import 'package:stubbbb/AgahiPage/AdvertisingsPage.dart';
+import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Other/widget.dart';
 import '../../KarAmouziPage/KarAmouziPage.dart';
 import '../../StudentPage/StudentScreen.dart';
 import '../../Other/R.dart';
 
 class ListCards extends StatefulWidget {
-  
+  Profile profile;
+  ListCards({this.profile});
+
   @override
   _ListCardsState createState() => _ListCardsState();
 }
@@ -17,7 +20,6 @@ class _ListCardsState extends State<ListCards> {
   void initState() {
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,7 @@ class _ListCardsState extends State<ListCards> {
                 model: new ModelMenu(R.titr.daneshjo, R.images.daneshjoHa, R.color.red),
                 phoneSize: phoneSize,
                 listener: goToStu,
+
               ),
               new MenuItemWidget(
                 model: new ModelMenu(R.titr.aagahi, R.images.projects, R.color.banafshmain),
@@ -65,13 +68,14 @@ class _ListCardsState extends State<ListCards> {
   }
 
   void goToProjects() {
+
     Navigator.push(context,MaterialPageRoute(builder: (context){
-      return AgahiPages();
+      return AdvertisingsPage(profile: widget.profile);
     }));
   }
 
   void goToKarAmouozi() {
-    Navigator.push(context,MaterialPageRoute(builder: (context) => KarAmouziPage()));
+    Navigator.push(context,MaterialPageRoute(builder: (context) => KarAmouziPage(profile: widget.profile,)));
   }
 }
 

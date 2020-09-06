@@ -1,15 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:stubbbb/Models/Profile.dart';
+import 'package:stubbbb/Models/Request.dart';
 import 'package:stubbbb/Other/widget.dart';
-import 'package:stubbbb/ProfilePage/MyProfileScreen.dart';
+import 'package:stubbbb/http/httpRequest.dart';
+
 
 class MyRequestPage extends StatefulWidget {
-  MyRequestPage({this.data});
+
+  Profile profile;
+  MyRequestPage({this.data,this.profile});
   Map data;
   @override
   _MyRequestPageState createState() => _MyRequestPageState();
 }
 
 class _MyRequestPageState extends State<MyRequestPage> {
+
+  bool isLoading = false;
+  List<Request> requests =[];
+  List usernames=[];
+
+  @override
+  void initState() {
+    super.initState();
+    _getRequest();
+  }
+
+
+  _getRequest() async {
+
+    usernames= await RequestHttp.getUsernames(widget.profile.id);
+    var response = await RequestHttp.getData(widget.profile.id);
+    setState(() {
+      requests.addAll(response['requests']);
+      isLoading = true;
+      print(requests.toList().toString());
+    });
+
+  }
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -24,8 +52,13 @@ class _MyRequestPageState extends State<MyRequestPage> {
           drawerEnableOpenDragGesture: true,
           drawer: DrawerLists(),
           appBar: appBarMessagePage(_scaffoldKey),
-          body: bodyRequest(phoneSize: phoneSize),
-        ));
+          body: isLoading
+              ? bodyRequest(phoneSize: phoneSize,requests: requests,usernames: usernames,)
+              : new Center(
+            child: new CircularProgressIndicator(),
+          )),
+
+        );
   }
 }
 

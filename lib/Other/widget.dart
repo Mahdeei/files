@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:stubbbb/AgahiPage/AddPostAgahi.dart';
+import 'package:stubbbb/AgahiPage/AdvertisingsPage.dart';
 import 'package:stubbbb/AgahiPage/AgahPage.dart';
-import 'package:stubbbb/AgahiPage/AgahiPages.dart';
 import 'package:stubbbb/KarAmouziPage/KarAmouziPage.dart';
 import 'package:stubbbb/Models/Profile.dart';
-import 'package:stubbbb/Models/profileModels.dart';
+import 'package:stubbbb/Models/Request.dart';
 import 'package:stubbbb/ProfilePage/MyProfileScreen.dart';
 import 'package:stubbbb/ProfilePage/MyProfileUserNormalScreen.dart';
 import 'package:stubbbb/StudentPage/StudentScreen.dart';
@@ -920,7 +920,7 @@ class DrawerLists extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => AgahiPages(),
+                builder: (context) => AdvertisingsPage(),
               ));
         },
         title: Text('آگهیا'),
@@ -1154,93 +1154,109 @@ class bodyMessage extends StatelessWidget {
   }
 }
 
+class bodyRequest extends StatefulWidget {
 
-
-class bodyRequest extends StatelessWidget {
+  Profile profile;
   var phoneSize;
-  bodyRequest({this.phoneSize});
+  List<Request> requests;
+  List usernames;
+  bodyRequest({this.phoneSize,this.profile,this.requests,this.usernames});
 
+  @override
+  _bodyRequestState createState() => _bodyRequestState();
+}
+
+class _bodyRequestState extends State<bodyRequest> {
 
   @override
   Widget build(BuildContext context) {
-    return new ListView.builder(
-        padding: const EdgeInsets.only(top: 5.0),
-        itemCount: 20,
-        itemBuilder: (BuildContext context, int index) => new Column(
-          children: <Widget>[
-            new GestureDetector(
-              child: new Container(
-                margin: const EdgeInsets.only(top: 5.0),
-                width: phoneSize.width,
-                child: new Column(
-                  children: <Widget>[
-                    new Row(
-                      children: <Widget>[
-                        new Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 8.0),
-                            height: phoneSize.height * 0.10,
-                            width: phoneSize.width * 0.19,
-                            decoration: decorationImageHomePage()
-                        ),
-                        new Column(
-                          crossAxisAlignment:
-                          CrossAxisAlignment.start,
-                          children: <Widget>[
-                            new Text('Omeadr'),
-                            new Row(
-                              children: <Widget>[
-                                new SizedBox(
-                                  width: 250.0,
-                                  child: new Text(
-                                    'سلام،حدود 5سال سابقه برنامه نویسی اپلیکیشن دارمو می تونم در این زمینه با شما همکاری کنم و به خو',
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                                ButtonMore(),
-                              ],
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                    new Row(
-                      mainAxisAlignment:
-                      MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        new Padding(
-                          padding: const EdgeInsets.only(right: 80.0),
-                          child: new Text(
-                            '8.14 ب.ظ',
-                            style: TextStyle(fontSize: 8.0),
+    return widget.requests.length==0
+        ? new Center(
+                  child: new Text(
+                'در حال حاضر هیچ درخواستی برای شما وجود ندارد (:',
+                style: TextStyle(color: Colors.black),
+              ))
+        : new ListView.builder(
+            padding: const EdgeInsets.only(top: 5.0),
+            itemCount: widget.requests.length,
+          itemBuilder: (BuildContext context, int index) =>
+           new Column(
+            children: <Widget>[
+              new GestureDetector(
+                child: new Container(
+                  margin: const EdgeInsets.only(top: 5.0),
+                  width: widget.phoneSize.width,
+                  child: new Column(
+                    children: <Widget>[
+                      new Row(
+                        children: <Widget>[
+                          new Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                              height: widget.phoneSize.height * 0.10,
+                              width: widget.phoneSize.width * 0.19,
+                              decoration: decorationImageHomePage()
                           ),
-                        ),
-                        new Padding(
-                          padding: const EdgeInsets.only(left: 27.0),
-                          child: new Row(
+                          new Column(
+                            crossAxisAlignment:
+                            CrossAxisAlignment.start,
                             children: <Widget>[
-                              new Text(
-                                'khorasan,mashhad',
-                                style: TextStyle(fontSize: 8.0),
-                              ),
-                              new Icon(
-                                Icons.location_on,
-                                size: 10.0,
+                              new Text(widget.usernames[index]),
+                              new Row(
+                                children: <Widget>[
+                                  new SizedBox(
+                                    width: 250.0,
+                                    child: new Text(
+                                      widget.requests[index].req_text,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  ButtonMore(),
+                                ],
                               )
                             ],
                           ),
-                        )
-                      ],
-                    )
-                  ],
+                        ],
+                      ),
+                      new Row(
+                        mainAxisAlignment:
+                        MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          new Padding(
+                            padding: const EdgeInsets.only(right: 80.0),
+                            child: new Text(
+                              '8.14 ب.ظ',
+                              style: TextStyle(fontSize: 8.0),
+                            ),
+                          ),
+                          new Padding(
+                            padding: const EdgeInsets.only(left: 27.0),
+                            child: new Row(
+                              children: <Widget>[
+                                new Text(
+                                  'khorasan,mashhad',
+                                  style: TextStyle(fontSize: 8.0),
+                                ),
+                                new Icon(
+                                  Icons.location_on,
+                                  size: 10.0,
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Line()
-          ],
-        ));
+              Line()
+            ],
+          )
+    );
   }
 }
+
 
 
 

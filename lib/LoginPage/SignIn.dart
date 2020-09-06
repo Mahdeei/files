@@ -17,7 +17,7 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
 
-  var url = "http://192.168.1.5/Stub/Login.php";
+  var url = "http://192.168.1.9/Stub/Login.php";
   final _formKeyLog = GlobalKey<FormState>();
   String _username;
   String _password;
@@ -43,9 +43,9 @@ class _SignInState extends State<SignIn> {
         profile =new Profile(
             id: boody['id'],
             image: boody['image'],
-            moarefinameh: boody['moarefinameh'],
+            moarefiNameh: boody['moarefinameh'],
             name: boody['name'],
-            phonenumber: boody['phonenumber'],
+            phoneNumber: boody['phonenumber'],
             title: boody['title'],
             type: boody['type'],
             username: boody['username']
