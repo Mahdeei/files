@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stubbbb/AgahiPage/AddPostAgahi.dart';
 import 'package:stubbbb/AgahiPage/AdvertisingsPage.dart';
 import 'package:stubbbb/AgahiPage/AgahPage.dart';
+import 'package:stubbbb/FirstPage/RequestPage/MyRequests.dart';
 import 'package:stubbbb/KarAmouziPage/KarAmouziPage.dart';
 import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Models/Request.dart';
@@ -1183,6 +1184,9 @@ class _bodyRequestState extends State<bodyRequest> {
            new Column(
             children: <Widget>[
               new GestureDetector(
+                onTap: (){
+                  Navigator.of(context).push(new MaterialPageRoute(builder: (ctx) => new MyRequests(userName:widget.usernames[index],date: widget.requests[index].date,text: widget.requests[index].req_text)));
+                },
                 child: new Container(
                   margin: const EdgeInsets.only(top: 5.0),
                   width: widget.phoneSize.width,
@@ -1225,7 +1229,7 @@ class _bodyRequestState extends State<bodyRequest> {
                           new Padding(
                             padding: const EdgeInsets.only(right: 80.0),
                             child: new Text(
-                              '8.14 ب.ظ',
+                              widget.requests[index].date,
                               style: TextStyle(fontSize: 8.0),
                             ),
                           ),
