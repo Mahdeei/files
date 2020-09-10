@@ -4,7 +4,7 @@ import 'package:stubbbb/Models/AgahiModel.dart';
 
 
 class HttpAdvertisings {
-  static var url = 'http://192.168.1.9/Stub/Advertising.php';
+  static var url = 'http://192.168.43.228/Stub/Advertising.php';
 
 
   static Future<Map> getData() async {

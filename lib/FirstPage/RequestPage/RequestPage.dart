@@ -34,7 +34,6 @@ class _MyRequestPageState extends State<MyRequestPage> {
     setState(() {
       requests.addAll(response['requests']);
       isLoading = true;
-      print(requests.toList().toString());
     });
 
   }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stubbbb/AgahiPage/AddPostAgahi.dart';
 import 'package:stubbbb/AgahiPage/AdvertisingsPage.dart';
 import 'package:stubbbb/AgahiPage/AgahPage.dart';
 import 'package:stubbbb/FirstPage/RequestPage/MyRequests.dart';
 import 'package:stubbbb/KarAmouziPage/KarAmouziPage.dart';
+import 'package:stubbbb/LoginPage/SignIn.dart';
 import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Models/Request.dart';
 import 'package:stubbbb/ProfilePage/MyProfileScreen.dart';
@@ -952,7 +954,15 @@ class DrawerLists extends StatelessWidget {
       ),
       ListTile(
         leading: new Icon(Icons.exit_to_app),
-        onTap: () {},
+        onTap: () async{
+          SharedPreferences perfs = await SharedPreferences.getInstance();
+          await perfs.remove('user_apiToken');
+          await perfs.remove('user_username');
+          await perfs.remove('user_password');
+          Navigator.of(context).pushReplacement(
+            new MaterialPageRoute(builder: (context)=>new SignIn())
+          );
+        },
         title: Text('خروج'),
         trailing: Icon(Icons.arrow_forward),
       ),
@@ -1009,15 +1019,14 @@ class Headers extends StatelessWidget {
                     decoration: decorationImageHomePage()
                 ),
                 new SizedBox(width: 10.0),
-                new Positioned(
-                    child: new Column(
+                    new Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         new Text(profile.name,style: styleHomePage()),
                       ],
                     )
-                )
+
               ],
             ),
           )
