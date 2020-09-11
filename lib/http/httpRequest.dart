@@ -6,7 +6,7 @@ import 'package:stubbbb/Models/Request.dart';
 class RequestHttp {
 
   static Future<List> getUsernames(id) async {
-    String url='http://192.168.43.159/Stub/getUsernameReq.php';
+    String url='http://192.168.43.228/Stub/getUsernameReq.php';
     var response = await http.post(url,body: {"user_id": id});
 
     var responseBody = json.decode(response.body);
@@ -15,7 +15,7 @@ class RequestHttp {
   }
 
   static Future<Map> getData(id) async {
-    String url='http://192.168.43.159/Stub/getRequests.php';
+    String url='http://192.168.43.228/Stub/getRequests.php';
     List<Request> requests=[];
     var response = await http.post(url,body: {"user_id": id});
 

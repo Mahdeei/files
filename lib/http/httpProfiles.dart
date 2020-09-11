@@ -6,7 +6,7 @@ class ProfileHttp {
   static Future<Map> getData(Map body) async {
 
     List<User> profiles = [];
-    var response = await http.post('http://192.168.43.159/Stub/userGetData.php',body: body);
+    var response = await http.post('http://192.168.43.228/Stub/userGetData.php',body: body);
 
     var responseBody = json.decode(response.body);
 

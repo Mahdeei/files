@@ -1,22 +1,22 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:stubbbb/Models/AgahiModel.dart';
+import 'package:stubbbb/Models/InterShip.dart';
 
 
-class HttpAdvertisings {
+class HttpInterships{
   static var url = 'http://192.168.43.228/Stub/Advertising.php';
 
 
   static Future<Map> getData() async {
-    List<Advertising> advertisings = [];
+    List<InterShip> interships = [];
     var response = await http.get(url);
 
     var responseBody = json.decode(response.body);
     responseBody.forEach((item) {
-      advertisings.add(Advertising.fromJson(item));
+      interships.add(InterShip.fromjson(item));
     });
     return {
-      'advertisings' : advertisings
+      'interships' : interships
     };
   }
 }

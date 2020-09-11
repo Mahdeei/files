@@ -1,4 +1,3 @@
-
 class Advertising{
   var id;
   var user_id;

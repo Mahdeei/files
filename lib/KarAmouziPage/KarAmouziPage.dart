@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:stubbbb/Models/InterShip.dart';
 import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Other/R.dart';
 import 'package:stubbbb/Other/widget.dart';
+import 'package:stubbbb/http/httpInterships.dart';
 import 'KaPage.dart';
 
 
@@ -43,6 +45,27 @@ class KarAmouziListList extends StatefulWidget {
 }
 
 class _KarAmouziListListState extends State<KarAmouziListList> {
+
+  List<InterShip> interShips = [];
+  bool isLoading = false;
+  Map body=new Map();
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getInterships();
+  }
+
+  _getInterships() async {
+    var response = await HttpInterships.getData();
+    setState(() {
+      interShips.addAll(response['advertisings']);
+      isLoading = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var phonesize = MediaQuery.of(context).size;

@@ -954,31 +954,32 @@ class DrawerLists extends StatelessWidget {
       // ),
       ListTile(
         leading: new Icon(Icons.exit_to_app),
-        onTap: () {
-          showDialog(context: context,builder: (context)=>  new AlertDialog(
-            title: new Text("آیا برای خروج از حساب کاربری مطمعن هستید"),
-            // actions: [
-            //   new FlatButton(
-            //     child: new Text("بله"),
-            //     onPressed: (){
-            //
-            //     },
-            //   ),
-            //   new FlatButton(
-            //     child: new Text("خیر"),
-            //     onPressed: (){
-            //
-            //     },
-            //   )
-            // ],
-          ),
-          );          // SharedPreferences perfs = await SharedPreferences.getInstance();
-          // await perfs.remove('user_apiToken');
-          // await perfs.remove('user_username');
-          // await perfs.remove('user_password');
-          // Navigator.of(context).pushReplacement(
-          //   new MaterialPageRoute(builder: (context)=>new SignIn())
+        onTap: () async{
+          // showDialog(context: context,builder: (context)=>  new AlertDialog(
+          //   title: new Text("آیا برای خروج از حساب کاربری مطمعن هستید"),
+          //   // actions: [
+          //   //   new FlatButton(
+          //   //     child: new Text("بله"),
+          //   //     onPressed: (){
+          //   //
+          //   //     },
+          //   //   ),
+          //   //   new FlatButton(
+          //   //     child: new Text("خیر"),
+          //   //     onPressed: (){
+          //   //
+          //   //     },
+          //   //   )
+          //   // ],
+          // ),
           // );
+          SharedPreferences perfs = await SharedPreferences.getInstance();
+          await perfs.remove('user_apiToken');
+          await perfs.remove('user_username');
+          await perfs.remove('user_password');
+          Navigator.of(context).pushReplacement(
+            new MaterialPageRoute(builder: (context)=>new SignIn())
+          );
         },
         title: Text('خروج'),
         trailing: Icon(Icons.arrow_forward),
