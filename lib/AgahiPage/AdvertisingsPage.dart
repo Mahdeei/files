@@ -18,7 +18,6 @@ class _AdvertisingsPageState extends State<AdvertisingsPage> {
   List<Advertising> advertisings = [];
   bool isLoading = false;
   int i = 10;
-  List<Advertising> models;
   Map body=new Map();
 
 

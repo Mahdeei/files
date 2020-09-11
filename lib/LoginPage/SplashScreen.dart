@@ -75,13 +75,13 @@ class _SplashScreenState extends State<SplashScreen> {
         connectivityResult == ConnectivityResult.wifi;
   }
   checkLogin() async{
-
     SharedPreferences perfs = await SharedPreferences.getInstance();
     String apiToken =  perfs.getString('user_apiToken');
     String username =  perfs.getString('user_username');
     String password =  perfs.getString('user_password');
 
     if(apiToken != null){
+
       if(await AuthenticateService.checkLog(apiToken)){
 
         boody = await AuthenticateService.signIn({"username":username,"password":password});

@@ -63,40 +63,40 @@ class _ListProfilesState extends State<ListProfiles> {
                             new Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                new Container(
-                                    decoration: BoxDecoration(
-                                        color: Color(0xffD2FAFB),
-                                        shape: BoxShape.rectangle,
-                                        borderRadius:
-                                            BorderRadius.circular(15.0)),
-                                    child: new Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 3.0, vertical: 1.0),
-                                      child: new Text(
-                                        'ml,,,,,',
-                                        style: new TextStyle(
-                                          color: Color(0xff2c003e),
-                                          fontSize: 10.0,
-                                        ),
-                                      ),
-                                    )),
-                                new Container(
-                                    decoration: BoxDecoration(
-                                        color: Color(0xffD2FAFB),
-                                        shape: BoxShape.rectangle,
-                                        borderRadius:
-                                            BorderRadius.circular(15.0)),
-                                    child: new Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 3.0, vertical: 1.0),
-                                      child: new Text(
-                                        'برنامه نویسی موبایل',
-                                        style: new TextStyle(
-                                          color: Color(0xff2c003e),
-                                          fontSize: 10.0,
-                                        ),
-                                      ),
-                                    ))
+                                // new Container(
+                                //     decoration: BoxDecoration(
+                                //         color: Color(0xffD2FAFB),
+                                //         shape: BoxShape.rectangle,
+                                //         borderRadius:
+                                //             BorderRadius.circular(15.0)),
+                                //     child: new Padding(
+                                //       padding: const EdgeInsets.symmetric(
+                                //           horizontal: 3.0, vertical: 1.0),
+                                //       child: new Text(
+                                //         'ml,,,,,',
+                                //         style: new TextStyle(
+                                //           color: Color(0xff2c003e),
+                                //           fontSize: 10.0,
+                                //         ),
+                                //       ),
+                                //     )),
+                                // new Container(
+                                //     decoration: BoxDecoration(
+                                //         color: Color(0xffD2FAFB),
+                                //         shape: BoxShape.rectangle,
+                                //         borderRadius:
+                                //             BorderRadius.circular(15.0)),
+                                //     child: new Padding(
+                                //       padding: const EdgeInsets.symmetric(
+                                //           horizontal: 3.0, vertical: 1.0),
+                                //       child: new Text(
+                                //         'برنامه نویسی موبایل',
+                                //         style: new TextStyle(
+                                //           color: Color(0xff2c003e),
+                                //           fontSize: 10.0,
+                                //         ),
+                                //       ),
+                                //     ))
                               ],
                             ),
                             new Align(

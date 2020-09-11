@@ -946,22 +946,39 @@ class DrawerLists extends StatelessWidget {
         title: Text('دانشجوی حرفه ای'),
         trailing: Icon(Icons.arrow_forward),
       ),
-      ListTile(
-        leading: new Icon(Icons.settings),
-        onTap: () {},
-        title: Text('تنظیمات'),
-        trailing: Icon(Icons.arrow_forward),
-      ),
+      // ListTile(
+      //   leading: new Icon(Icons.settings),
+      //   onTap: () {},
+      //   title: Text('تنظیمات'),
+      //   trailing: Icon(Icons.arrow_forward),
+      // ),
       ListTile(
         leading: new Icon(Icons.exit_to_app),
-        onTap: () async{
-          SharedPreferences perfs = await SharedPreferences.getInstance();
-          await perfs.remove('user_apiToken');
-          await perfs.remove('user_username');
-          await perfs.remove('user_password');
-          Navigator.of(context).pushReplacement(
-            new MaterialPageRoute(builder: (context)=>new SignIn())
-          );
+        onTap: () {
+          showDialog(context: context,builder: (context)=>  new AlertDialog(
+            title: new Text("آیا برای خروج از حساب کاربری مطمعن هستید"),
+            // actions: [
+            //   new FlatButton(
+            //     child: new Text("بله"),
+            //     onPressed: (){
+            //
+            //     },
+            //   ),
+            //   new FlatButton(
+            //     child: new Text("خیر"),
+            //     onPressed: (){
+            //
+            //     },
+            //   )
+            // ],
+          ),
+          );          // SharedPreferences perfs = await SharedPreferences.getInstance();
+          // await perfs.remove('user_apiToken');
+          // await perfs.remove('user_username');
+          // await perfs.remove('user_password');
+          // Navigator.of(context).pushReplacement(
+          //   new MaterialPageRoute(builder: (context)=>new SignIn())
+          // );
         },
         title: Text('خروج'),
         trailing: Icon(Icons.arrow_forward),
@@ -1238,8 +1255,8 @@ class _bodyRequestState extends State<bodyRequest> {
                           new Padding(
                             padding: const EdgeInsets.only(right: 80.0),
                             child: new Text(
-                              widget.requests[index].date,
-                              style: TextStyle(fontSize: 8.0),
+                              widget.requests[index].date.substring(11,19),
+                              style: TextStyle(fontSize: 12.0),
                             ),
                           ),
                           new Padding(

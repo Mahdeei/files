@@ -19,7 +19,8 @@ class _MyRequestsState extends State<MyRequests> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: new AppBar(
-          title: new Text("omead"),
+          backgroundColor: R.color.banafshmain,
+          title: new Text(widget.userName),
           actions: [
             new Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -46,34 +47,36 @@ class _MyRequestsState extends State<MyRequests> {
               children: [
                   new Expanded(
                     child: new Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 20),
                       child: new ListView(
                         children: [
                           new Container(
                             margin: const EdgeInsets.only(bottom: 50.0),
                             padding: const EdgeInsets.symmetric(horizontal: 2.0,vertical: 2.0),
                             decoration: BoxDecoration(
-                                color: Colors.grey[100]
+                                color: Colors.transparent
                             ),
-                            child: new Text("widget.textflkmaskdfmjsadiofjioasjdfijlisadjflasdlfjiasjdifjiosajfiojasldjfklasfjioasjifjiosajfsajf",maxLines: 10,),
+                            child: new Text(widget.text,maxLines: 10,style: TextStyle(fontSize: 20.0),),
                           ),
                           new SizedBox(height: 10.0,),
                           accept
                               ? new Container()
                               : new Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   new MaterialButton(
                                       color: Colors.green,
-                                      child: new Text("تایید در خواست"),
+                                      child: new Text("تایید در خواست",style: TextStyle(fontSize: 15.0),),
                                       onPressed: (){
                                         setState(() {
                                           accept = true;
                                         });
                                         print("Pressed confirm");
                                       }),
+                                  new SizedBox(width: 10.0,),
                                   new MaterialButton(
                                       color: Colors.red,
-                                      child: new Text("رد درخواست"),
+                                      child: new Text("رد درخواست",style: TextStyle(fontSize: 15.0),),
                                       onPressed: (){
                                         setState(() {
                                           accept = true;
@@ -90,7 +93,6 @@ class _MyRequestsState extends State<MyRequests> {
             )
           ],
         ),
-
       ),
     );
   }

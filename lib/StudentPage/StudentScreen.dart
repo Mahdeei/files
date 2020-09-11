@@ -3,68 +3,92 @@ import 'package:stubbbb/Models/profileModels.dart';
 import 'package:stubbbb/Other/R.dart';
 import 'package:stubbbb/Other/widget.dart';
 import 'package:stubbbb/http/httpProfiles.dart';
+import 'package:stubbbb/http/maxID.dart';
 import 'ListStudents.dart';
 
-
-
 class ProfilesPages extends StatefulWidget {
-
   @override
   _ProfilesPagesState createState() => _ProfilesPagesState();
 }
 
 class _ProfilesPagesState extends State<ProfilesPages> {
-
   ScrollController scrollController = ScrollController();
   List<User> _profiles = [];
   bool isLoading = false;
-  int i = 10;
+  bool onRefresh = false;
   List<User> models;
-  Map body=new Map();
+  Map body = new Map();
+  int firstid, lastid;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    // scrollController.addListener(() {
-    //   double maxscrol = scrollController.position.maxScrollExtent;
-    //   double currscrol = scrollController.position.pixels;
-    // if (maxscrol - currscrol >= 200) {
-    //   // addModel();
-    // }
-    _getProfiles();
-    
+    getId();
+    scrollController.addListener(() {
+      double maxscrol = scrollController.position.maxScrollExtent;
+      double currscrol = scrollController.position.pixels;
+      if (maxscrol - currscrol >= 200) {
+        if (firstid > 0) {
+          getDataAgain();
+        }
+      }
+    });
+  }
+
+  getId() async {
+    lastid = await ReceiveMaxid.getId();
+    setState(() {
+      if(onRefresh) _profiles.clear();
+      firstid = lastid - 10;
+    });
+
+   await _getProfiles();
+  }
+
+  getDataAgain() async {
+    setState(() {
+      if (firstid > 10) {
+        firstid = firstid - 10;
+        lastid = lastid - 10;
+      } else if (firstid == 10) {
+        firstid = firstid - 9;
+        lastid = lastid - 10;
+      } else if (true) {
+        firstid -= (firstid + 1);
+        if (lastid > 10) {
+          lastid = lastid - 10;
+        }
+      }
+    });
+   await _getProfiles();
   }
 
   _getProfiles() async {
-    var response = await ProfileHttp.getData();
+    var response =
+        await ProfileHttp.getData({'firstid': '$firstid', 'lastid': '$lastid'});
     setState(() {
-      _profiles.addAll(response['profiles']);
+
+        _profiles.addAll(response['profiles']);
     });
     setState(() {
       isLoading = true;
     });
   }
 
-  // addModel() async {
-  //   await Future.delayed(Duration(milliseconds: 5000));
-  //   setState(() {
-  //     refreshList();
-  //   });
-  // }
-
-  // Future<Null> refreshList() async {
-  //   await Future.delayed(Duration(milliseconds: 50));
-  //   setState(() {
-  //     models.add(new Models(username: 'sd $i', educational: 'ssssssssss$i'));
-  //   });
-  //   return null;
-  // }
+  Future<Null> refreshList() async{
+      setState(() {
+        onRefresh=true;
+      });
+      await getId();
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-        theme: ThemeData(primaryIconTheme: IconThemeData(color: R.color.banafshmain)),
+        theme: ThemeData(
+            primaryIconTheme: IconThemeData(color: R.color.banafshmain)),
         debugShowCheckedModeBanner: false,
         home: new SafeArea(
           top: true,
@@ -75,11 +99,19 @@ class _ProfilesPagesState extends State<ProfilesPages> {
                 drawer: DrawerLists(),
                 appBar: appBarProfilePage(),
                 body: isLoading
-                    ? new ListView.builder(
-                        itemCount: _profiles.length,
-                        itemBuilder: (BuildContext context, int index) =>
-                            ListProfiles(model: _profiles[index],),
-                      )
+                    ? RefreshIndicator(
+                        child: new Padding(
+                          padding: const EdgeInsets.only(top: 10.0),
+                          child: new ListView.builder(
+                            controller: scrollController,
+                            itemCount: _profiles.length,
+                            itemBuilder: (BuildContext context, int index) =>
+                                ListProfiles(
+                              model: _profiles[index],
+                            ),
+                          ),
+                        ),
+                        onRefresh: refreshList)
                     : new Center(
                         child: new CircularProgressIndicator(),
                       )),
@@ -87,7 +119,6 @@ class _ProfilesPagesState extends State<ProfilesPages> {
         ));
   }
 }
-
 
 class TextfieldSearch extends StatefulWidget {
   @override
@@ -136,7 +167,6 @@ class _TextfieldSearchState extends State<TextfieldSearch> {
               ),
               fillColor: Color(0xffF2F3F8),
               hintText: hintText,
-
               filled: true,
             ),
           ),
@@ -150,7 +180,7 @@ class _TextfieldSearchState extends State<TextfieldSearch> {
             showModalBottomSheet(
                 context: context,
                 builder: (builder) => Container(
-                    child: new Column(
+                        child: new Column(
                       children: <Widget>[
                         new Container(
                           color: R.color.red,
@@ -248,4 +278,3 @@ class _TextfieldSearchState extends State<TextfieldSearch> {
     );
   }
 }
-

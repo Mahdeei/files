@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:stubbbb/AgahiPage/AgahPage.dart';
 import 'package:stubbbb/Other/widget.dart';
 
 class MyMessagePage extends StatelessWidget {
@@ -18,7 +17,16 @@ class MyMessagePage extends StatelessWidget {
           drawer: DrawerLists(),
           drawerEnableOpenDragGesture: true,
           appBar: appBarMessagePage(_scaffoldKey),
-          body: bodyMessage()
+          body: /*bodyMessage()*/
+          Center(child: new Container(
+            child: new Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                new Text('نسخه فعلی ازمایشی است',style: TextStyle(fontSize: 20.0),),
+                new Text('این قسمت در نسخه اصلی تکمیل می شود',style: TextStyle(fontSize: 20.0),),
+              ],
+            )
+          ))
         ));
   }
 }

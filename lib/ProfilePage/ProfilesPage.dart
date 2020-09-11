@@ -3,7 +3,8 @@
 // import 'package:stubbbb/Other/R.dart';
 // import 'package:stubbbb/Other/widget.dart';
 // import 'package:stubbbb/StudentPage/ListStudents.dart';
-// import 'package:stubbbb/http/profiles.dart';
+// import 'package:stubbbb/http/httpProfiles.dart';
+// import 'package:stubbbb/http/maxID.dart';
 //
 //
 // class ProfilesPages extends StatefulWidget {
@@ -14,28 +15,44 @@
 // class _ProfilesPagesState extends State<ProfilesPages> {
 //
 //   ScrollController scrollController = ScrollController();
-//   List<Models> _profiles = [];
+//   List<User> _profiles = [];
 //   bool isLoading = false;
 //   int i = 10;
-//   List<Models> models;
+//   List<User> models;
 //   Map body=new Map();
+//   int firstid,lastid;
 //
 //   @override
 //   void initState() {
 //     // TODO: implement initState
 //     super.initState();
-//     // scrollController.addListener(() {
-//     //   double maxscrol = scrollController.position.maxScrollExtent;
-//     //   double currscrol = scrollController.position.pixels;
-//     // if (maxscrol - currscrol >= 200) {
-//     //   // addModel();
-//     // }
+//     getId();
+//     scrollController.addListener(() {
+//       double maxscrol = scrollController.position.maxScrollExtent;
+//       double currscrol = scrollController.position.pixels;
+//     if (maxscrol - currscrol >= 200) {
+//       getDataAgain();
+//     }});
 //     _getProfiles();
 //
 //   }
+//    getId() async {
+//     lastid = await ReceiveMaxid.getId();
+//     setState(() {
+//       firstid = lastid-10;
+//     });
+//   }
+//   getDataAgain(){
+//     setState(() {
+//       firstid=firstid-10;
+//       lastid=lastid-10;
+//     });
+//   }
+//
+//
 //
 //   _getProfiles() async {
-//     var response = await ProfileHttp.getData();
+//     var response = await ProfileHttp.getData({'firstid':firstid,'lastid':lastid});
 //     setState(() {
 //       _profiles.addAll(response['profiles']);
 //     });
@@ -45,20 +62,7 @@
 //     print(_profiles);
 //   }
 //
-//   // addModel() async {
-//   //   await Future.delayed(Duration(milliseconds: 5000));
-//   //   setState(() {
-//   //     refreshList();
-//   //   });
-//   // }
 //
-//   // Future<Null> refreshList() async {
-//   //   await Future.delayed(Duration(milliseconds: 50));
-//   //   setState(() {
-//   //     models.add(new Models(username: 'sd $i', educational: 'ssssssssss$i'));
-//   //   });
-//   //   return null;
-//   // }
 //
 //   @override
 //   Widget build(BuildContext context) {
@@ -85,5 +89,6 @@
 //           ),
 //         ));
 //   }
+//
 // }
 //
