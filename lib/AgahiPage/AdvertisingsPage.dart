@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:stubbbb/Models/AgahiModel.dart';
 import 'package:stubbbb/Models/Profile.dart';
+import 'package:stubbbb/Other/R.dart';
 import 'package:stubbbb/Other/widget.dart';
 import 'package:stubbbb/http/httpAdvertisings.dart';
 import 'package:stubbbb/http/maxID.dart';
+import 'AddPostAgahi.dart';
 import 'AgahPage.dart';
+import 'package:animations/animations.dart';
 
 class AdvertisingsPage extends StatefulWidget {
   Profile profile;
@@ -38,7 +41,24 @@ class _AdvertisingsPageState extends State<AdvertisingsPage> with SingleTickerPr
           textDirection: TextDirection.rtl,
           child: new SafeArea(
               child: new Scaffold(
-                    floatingActionButton: floatingActionButtonAgahiScreen(context),
+                    floatingActionButton: new FloatingActionButton(
+                      onPressed: () {
+                        print('Pressed');
+                      },
+                      backgroundColor: R.color.banafshmain,
+                      child: OpenContainer(
+                        transitionDuration: Duration(milliseconds: 500),
+                        closedBuilder: (ctx, action) => new Container(
+                          color: R.color.banafshmain,
+                          width: MediaQuery.of(context).size.width,
+                          child: new Icon(
+                            Icons.add,
+                            color: R.color.red,
+                          ),
+                        ),
+                        openBuilder: (ctx, action) => AddPostAgahi(profile: widget.profile,),
+                      ),
+                    ),
                     backgroundColor: Color(0xfff2f3f8),
                     drawer: DrawerLists(),
                     // appBar: /*appBarAgahiScreen()*/ new AppBar(
@@ -195,6 +215,8 @@ class _ProjectsListState extends State<ProjectsList> {
                             children: <Widget>[
                               new Text(
                                 advertisings[index].title,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                     fontSize: 20.0, fontWeight: FontWeight.bold),
                               ),
