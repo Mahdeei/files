@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:stubbbb/KarAmouziPage/AddIntern.dart';
 import 'package:stubbbb/Models/InterShip.dart';
 import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Other/R.dart';
 import 'package:stubbbb/Other/widget.dart';
+import 'package:stubbbb/http/AddIntern.dart';
 import 'package:stubbbb/http/httpInterships.dart';
 import 'package:stubbbb/http/maxID.dart';
 import 'KaPage.dart';
@@ -28,7 +30,16 @@ class _KarAmouziPageState extends State<KarAmouziPage> {
             textDirection: TextDirection.rtl,
             child: new SafeArea(
               child: new Scaffold(
-                floatingActionButton: floatingKaramouziScreen(),
+                floatingActionButton: new FloatingActionButton(
+                  onPressed: () {
+                    Navigator.of(context).push(new MaterialPageRoute(builder: (ctx)=> AddInternPost(profile: widget.profile,)));
+                  },
+                  backgroundColor: R.color.banafshmain,
+                  child: new Icon(
+                    Icons.add,
+                    color: Colors.white,
+                  ),
+                ),
                 backgroundColor: Color(0xfff2f3f8),
                 drawer: DrawerLists(),
                 appBar: appBarKaramouziScreen(),
@@ -74,8 +85,14 @@ class _KarAmouziListListState extends State<KarAmouziListList> {
     lastid = await ReceiveMaxid.getInterID();
     setState(() {
       if(onRefresh) interShips.clear();
-      firstid = lastid - 10;
+      if(lastid<10){
+        firstid = 1;
+      }else{
+        firstid = lastid - 10;
+      }
+
     });
+
 
     await _getInterships();
   }
@@ -106,7 +123,6 @@ class _KarAmouziListListState extends State<KarAmouziListList> {
       interShips.addAll(response['interships']);
       isLoading = true;
     });
-    // print(interShips[0].title);
   }
 
   Future<Null> refreshList() async{

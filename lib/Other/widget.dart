@@ -959,6 +959,17 @@ class DrawerLists extends StatelessWidget {
         title: Text('دانشجوی حرفه ای'),
         trailing: Icon(Icons.arrow_forward),
       ),
+      ListTile(
+        leading: new Icon(Icons.local_phone),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MyProfileStudentScreen()),
+          );
+        },
+        title: Text('پشتیبانی'),
+        trailing: Icon(Icons.arrow_forward),
+      ),
       // ListTile(
       //   leading: new Icon(Icons.settings),
       //   onTap: () {},
@@ -1449,18 +1460,9 @@ void choiceAction(String choice) {
 }
 
 
-FloatingActionButton floatingKaramouziScreen(){
-  return new FloatingActionButton(
-    onPressed: () {
-      print('Pressed');
-    },
-    backgroundColor: R.color.banafshmain,
-    child: new Icon(
-      Icons.add,
-      color: Colors.white,
-    ),
-  );
-}
+// FloatingActionButton floatingKaramouziScreen(){
+//   return ;
+// }
 
 FloatingActionButton floatingActionButtonAgahiScreen(context){
   return new FloatingActionButton(

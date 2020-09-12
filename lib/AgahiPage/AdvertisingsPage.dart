@@ -7,7 +7,6 @@ import 'package:stubbbb/http/httpAdvertisings.dart';
 import 'package:stubbbb/http/maxID.dart';
 import 'AddPostAgahi.dart';
 import 'AgahPage.dart';
-import 'package:animations/animations.dart';
 
 class AdvertisingsPage extends StatefulWidget {
   Profile profile;
@@ -43,35 +42,37 @@ class _AdvertisingsPageState extends State<AdvertisingsPage> with SingleTickerPr
               child: new Scaffold(
                     floatingActionButton: new FloatingActionButton(
                       onPressed: () {
-                        print('Pressed');
+                        Navigator.of(context).push(new MaterialPageRoute(builder: (ctx)=> AddPostAgahi(profile: widget.profile,)));
                       },
+                      child: new Icon(Icons.add),
                       backgroundColor: R.color.banafshmain,
-                      child: OpenContainer(
-                        transitionDuration: Duration(milliseconds: 500),
-                        closedBuilder: (ctx, action) => new Container(
-                          color: R.color.banafshmain,
-                          width: MediaQuery.of(context).size.width,
-                          child: new Icon(
-                            Icons.add,
-                            color: R.color.red,
-                          ),
-                        ),
-                        openBuilder: (ctx, action) => AddPostAgahi(profile: widget.profile,),
-                      ),
+                      // child: OpenContainer(
+                      //   transitionDuration: Duration(milliseconds: 500),
+                      //   closedBuilder: (ctx, action) => new Container(
+                      //     color: R.color.banafshmain,
+                      //     width: MediaQuery.of(context).size.width,
+                      //     child: new Icon(
+                      //       Icons.add,
+                      //       color: R.color.red,
+                      //     ),
+                      //   ),
+                      //   openBuilder: (ctx, action) => AddPostAgahi(profile: widget.profile,),
+                      // ),
                     ),
                     backgroundColor: Color(0xfff2f3f8),
                     drawer: DrawerLists(),
-                    // appBar: /*appBarAgahiScreen()*/ new AppBar(
-                    //   bottom: new TabBar(
-                    //     controller: tabController,
-                    //     tabs: [
-                    //       Tab(child: new Icon(Icons.ac_unit),),
-                    //       Tab(child: new Icon(Icons.access_alarm),),
-                    //       Tab(child: new Icon(Icons.ac_unit),),
-                    //     ],
-                    //
-                    //   ),
-                    // ),
+                    appBar:/* appBarAgahiScreen(),*/ new AppBar(
+                      bottom: new TabBar(
+
+                        controller: tabController,
+                        tabs: [
+                          Tab(child: new Icon(Icons.ac_unit),),
+                          Tab(child: new Icon(Icons.access_alarm),),
+                          Tab(child: new Icon(Icons.ac_unit),),
+                        ],
+
+                      ),
+                    ),
 
                     body:ProjectsList(profile: widget.profile,)
             )));
