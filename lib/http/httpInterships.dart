@@ -4,12 +4,12 @@ import 'package:stubbbb/Models/InterShip.dart';
 
 
 class HttpInterships{
-  static var url = 'http://192.168.43.228/Stub/Advertising.php';
+  static var url = 'http://192.168.1.4/Stub/getInterships.php';
 
 
-  static Future<Map> getData() async {
+  static Future<Map> getData(Map body) async {
     List<InterShip> interships = [];
-    var response = await http.get(url);
+    var response = await http.post(url,body: body);
 
     var responseBody = json.decode(response.body);
     responseBody.forEach((item) {

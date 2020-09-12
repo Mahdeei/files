@@ -12,6 +12,7 @@ class User {
   var title;
   var password;
   var apiToken;
+  var address;
 
 
   User.fromjson(Map<String, dynamic> parsedJson) {
@@ -22,9 +23,10 @@ class User {
     phonenumber = parsedJson['phonenumber'];
     image = parsedJson['image'];
     password = parsedJson['password'];
-    moarefinameh = parsedJson['moarefinameh'];
+    moarefinameh = parsedJson['moarefiName'];
     title = parsedJson['title'];
     apiToken = parsedJson['apiToken'];
+    address = parsedJson['address'];
   }
 
 }

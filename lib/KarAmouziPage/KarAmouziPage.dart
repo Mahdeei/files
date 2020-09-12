@@ -4,6 +4,7 @@ import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Other/R.dart';
 import 'package:stubbbb/Other/widget.dart';
 import 'package:stubbbb/http/httpInterships.dart';
+import 'package:stubbbb/http/maxID.dart';
 import 'KaPage.dart';
 
 
@@ -49,106 +50,182 @@ class _KarAmouziListListState extends State<KarAmouziListList> {
   List<InterShip> interShips = [];
   bool isLoading = false;
   Map body=new Map();
+  ScrollController scrollController = ScrollController();
+  bool onRefresh = false;
+  int firstid, lastid;
 
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _getInterships();
+    getId();
+    scrollController.addListener(() {
+      double maxscrol = scrollController.position.maxScrollExtent;
+      double currscrol = scrollController.position.pixels;
+      if (maxscrol - currscrol >= 200) {
+        if (firstid > 0) {
+          getDataAgain();
+        }
+      }
+    });
+  }
+  getId() async {
+    lastid = await ReceiveMaxid.getInterID();
+    setState(() {
+      if(onRefresh) interShips.clear();
+      firstid = lastid - 10;
+    });
+
+    await _getInterships();
   }
 
-  _getInterships() async {
-    var response = await HttpInterships.getData();
+  getDataAgain() async {
     setState(() {
-      interShips.addAll(response['advertisings']);
+      if (firstid > 10) {
+        firstid = firstid - 10;
+        lastid = lastid - 10;
+      } else if (firstid == 10) {
+        firstid = firstid - 9;
+        lastid = lastid - 10;
+      } else if (true) {
+        firstid -= (firstid + 1);
+        if (lastid > 10) {
+          lastid = lastid - 10;
+        }
+      }
+    });
+    await _getInterships();
+  }
+
+
+
+  _getInterships() async {
+    var response = await HttpInterships.getData({'firstid': '$firstid', 'lastid': '$lastid'});
+    setState(() {
+      interShips.addAll(response['interships']);
       isLoading = true;
     });
+    // print(interShips[0].title);
+  }
+
+  Future<Null> refreshList() async{
+    setState(() {
+      onRefresh=true;
+    });
+    await getId();
+    return null;
   }
 
   @override
   Widget build(BuildContext context) {
     var phonesize = MediaQuery.of(context).size;
-    return new ListView.builder(
-        itemCount: 20,
-        itemBuilder: (BuildContext context, int index) => new GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => KaPage()),
-                );
-              },
-              child: new Container(
-                margin: const EdgeInsets.only(right: 6.0, bottom: 5.0, top: 10.0, left: 9.0),
-                height: phonesize.height * 0.15,
-                decoration: decorationKaramouziScreen(),
-                child: new Row(
-                  children: <Widget>[
-                    new Container(
-                      margin: const EdgeInsets.only(right: 4.0,left: 3.0),
-                      height: phonesize.height * 0.14,
-                      width: phonesize.width * 0.32,
-                      decoration: boxDecorationKaramouziScreen(),
-                    ),
-                    new Expanded(
-                        child: new Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          textoneKaramouziScreen(),
-                          textTwoKaramouziScreen(),
-                          new Row(
-                            children: <Widget>[
-                              new Padding(
-                                padding: const EdgeInsets.only(right: 5.0),
-                                child: textthreeKaramouziScreen()
-                              ),
-                              textfourKaramouziScreen(),
-                              textfiveKaramouziScreen(),
-                              new Padding(
-                                padding:const EdgeInsets.only(left: 5.0, right: 20.0),
-                                child: circleAvatarKaramouziScreen()
-                              )
-                          ],
-                          ),
-                          new Row(
-                            children: <Widget>[
-                              new Container(
-                                  margin: const EdgeInsets.only(right: 10.0),
-                                  decoration: boxDecorationKaramouziScrenn(),
-                                  child: new Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 3.0, vertical: 1.0),
-                                    child: textKarAmouziScreen()
-                                  )),
-                              new Container(
-                                  margin: const EdgeInsets.only(right: 2.0),
-                                  decoration: boxDecorationKaramouziScrenn(),
-                                  child: new Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 3.0, vertical: 1.0),
-                                    child: textKarAmoziScreen(),
-                              )),
-                              new Container(
-                                  margin: const EdgeInsets.only(right: 2.0),
-                                  decoration: boxDecorationKaramouziScrenn(),
-                                  child: new Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 3.0, vertical: 1.0),
-                                    child: textKarAmouzziScreen(),
-                                  )),
-                            ],
-                          ),
-                        new Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: new Row(
+    return isLoading
+        ? RefreshIndicator(
+            onRefresh: refreshList,
+            child: new ListView.builder(
+                controller: scrollController,
+                itemCount: interShips.length,
+                itemBuilder: (BuildContext context, int index) => new GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => KaPage()),
+                    );
+                  },
+                  child: new Container(
+                    margin: const EdgeInsets.only(right: 6.0, bottom: 5.0, top: 10.0, left: 9.0),
+                    height: phonesize.height * 0.13,
+                    decoration: decorationKaramouziScreen(),
+                    child: new Row(
+                      children: <Widget>[
+                        new Container(
+                          margin: const EdgeInsets.only(right: 4.0,left: 3.0),
+                          height: phonesize.height * 0.12,
+                          width: phonesize.width * 0.30,
+                          decoration: boxDecorationKaramouziScreen(),
+                        ),
+                        new Expanded(
+                            child: new Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                iconKarAmouziScreen(),
-                                new SizedBox(width: 1.0),
-                                texKarAmouziScreen()
+                                new Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    textoneKaramouziScreen(interShips[index].title),
+                                    Container(
+                                        margin: EdgeInsets.only(right: 5.0),
+                                        width: MediaQuery.of(context).size.width*0.6,
+                                        child: textTwoKaramouziScreen(interShips[index].description)),
+                                    new Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        new Row(
+                                          children: [
+                                            new Padding(
+                                                padding: const EdgeInsets.only(right: 5.0),
+                                                child: Container(
+                                                    width: MediaQuery.of(context).size.width*0.19,
+                                                    child: textthreeKaramouziScreen(interShips[index].company)
+                                                )
+                                            ),
+                                            textlineBetween(),
+                                            Container(
+                                                margin: EdgeInsets.only(right: 3.0),
+                                                width: MediaQuery.of(context).size.width *0.25,
+                                                child: textType(interShips[index].type)),
+                                          ],
+                                        ),
+                                        new Padding(
+                                            padding:const EdgeInsets.only(left: 5.0,),
+                                            child: circleAvatarKaramouziScreen()
+                                        )
+                                      ],
+                                    ),
+                                    // new Row(
+                                    //   children: <Widget>[
+                                    //     new Container(
+                                    //         margin: const EdgeInsets.only(right: 10.0),
+                                    //         decoration: boxDecorationKaramouziScrenn(),
+                                    //         child: new Padding(
+                                    //           padding: const EdgeInsets.symmetric(horizontal: 3.0, vertical: 1.0),
+                                    //           child: textKarAmouziScreen()
+                                    //         )),
+                                    //     new Container(
+                                    //         margin: const EdgeInsets.only(right: 2.0),
+                                    //         decoration: boxDecorationKaramouziScrenn(),
+                                    //         child: new Padding(
+                                    //           padding: const EdgeInsets.symmetric(horizontal: 3.0, vertical: 1.0),
+                                    //           child: textKarAmoziScreen(),
+                                    //     )),
+                                    //     new Container(
+                                    //         margin: const EdgeInsets.only(right: 2.0),
+                                    //         decoration: boxDecorationKaramouziScrenn(),
+                                    //         child: new Padding(
+                                    //           padding: const EdgeInsets.symmetric(horizontal: 3.0, vertical: 1.0),
+                                    //           child: textKarAmouzziScreen(),
+                                    //         )),
+                                    //   ],
+                                    // ),
+                                  ],
+                                ),
+                                new Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 4.0),
+                                    child: new Row(
+                                      children: <Widget>[
+                                        iconKarAmouziScreen(),
+                                        new SizedBox(width: 1.0),
+                                        texKarAmouziScreen()
+                                      ],
+                                    )),
                               ],
-                        )),
+                            ))
                       ],
-                    ))
-                  ],
-                ),
-              ),
-            ));
+                    ),
+                  ),
+                )),
+          )
+        : Center(child: CircularProgressIndicator());
   }
 }

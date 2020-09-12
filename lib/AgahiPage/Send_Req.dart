@@ -16,7 +16,7 @@ class SendReq extends StatefulWidget {
 }
 
 class _SendReqState extends State<SendReq> {
-  String url = "http://192.168.43.228/Stub/SendRequest.php";
+  String url = "http://192.168.1.4/Stub/SendRequest.php";
   bool seccesSend=false;
   String req_text;
 

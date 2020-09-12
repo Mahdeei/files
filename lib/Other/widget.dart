@@ -195,9 +195,9 @@ Text textKarAmouziScreen(){
   );
 }
 
-Text textoneKaramouziScreen(){
+Text textoneKaramouziScreen(String title){
   return new Text(
-    'برنامه نویس اپلیکیشن',
+    title,
     style: TextStyle(
         fontSize: 16.0, fontWeight: FontWeight.bold),
     maxLines: 1,
@@ -205,17 +205,17 @@ Text textoneKaramouziScreen(){
   );
 }
 
-Text textTwoKaramouziScreen(){
+Text textTwoKaramouziScreen(String description){
     return new Text(
-        'تعدادی دانشجوی کامپیوتر جهت کاراموزی نیازمندیم ...',
+      description,
         maxLines: 1,
       overflow: TextOverflow.ellipsis,
       );
 }
 
-Text textthreeKaramouziScreen(){
+Text textthreeKaramouziScreen(String company){
   return new Text(
-    'شرکت ایران سرور',
+    company,
     overflow: TextOverflow.ellipsis,
     maxLines: 1,
     style: TextStyle(
@@ -224,7 +224,7 @@ Text textthreeKaramouziScreen(){
   );
 }
 
-Text textfourKaramouziScreen(){
+Text textlineBetween(){
   return new Text(
     '|',
     style: TextStyle(
@@ -232,9 +232,17 @@ Text textfourKaramouziScreen(){
   );
 }
 
-Text textfiveKaramouziScreen(){
+Text textType(String type){
+  String modeltype;
+  if(type=="1"){
+    modeltype="کار آموزی";
+  }else if(type=="2"){
+    modeltype="کار آموزی منجر به استخدام";
+  }else if(type=="3"){
+    modeltype="استخدام";
+  }
   return new Text(
-    'ار اموزی منجر به استخدام',
+    modeltype,
         overflow: TextOverflow.ellipsis,
       maxLines: 1,
       style: TextStyle(
@@ -470,19 +478,19 @@ AppBar appBarMessagePage(_scaffoldKey) {
     ),
     //            title: this.cusSearchBar,
     actions: <Widget>[
-      new Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          new Padding(
-              padding: const EdgeInsets.only(left: 5.0),
-              child: new IconButton(
-                  icon: Icon(
-                    Icons.filter_list,
-                    color: R.color.banafshmain,
-                  ),
-                  onPressed: () {})),
-        ],
-      )
+      // new Row(
+      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //   children: <Widget>[
+      //     new Padding(
+      //         padding: const EdgeInsets.only(left: 5.0),
+      //         child: new IconButton(
+      //             icon: Icon(
+      //               Icons.filter_list,
+      //               color: R.color.banafshmain,
+      //             ),
+      //             onPressed: () {})),
+      //   ],
+      // )
     ],
     backgroundColor: Colors.white,
     elevation: 5.0,
@@ -901,7 +909,12 @@ class DrawerLists extends StatelessWidget {
     List<ListTile> listdrawer = [
       ListTile(
         leading: new Icon(Icons.person),
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MyProfileStudentScreen()),
+          );
+        },
         title: Text('پروفایل'),
         trailing: Icon(Icons.arrow_forward),
       ),
@@ -955,31 +968,34 @@ class DrawerLists extends StatelessWidget {
       ListTile(
         leading: new Icon(Icons.exit_to_app),
         onTap: () async{
-          // showDialog(context: context,builder: (context)=>  new AlertDialog(
-          //   title: new Text("آیا برای خروج از حساب کاربری مطمعن هستید"),
-          //   // actions: [
-          //   //   new FlatButton(
-          //   //     child: new Text("بله"),
-          //   //     onPressed: (){
-          //   //
-          //   //     },
-          //   //   ),
-          //   //   new FlatButton(
-          //   //     child: new Text("خیر"),
-          //   //     onPressed: (){
-          //   //
-          //   //     },
-          //   //   )
-          //   // ],
-          // ),
-          // );
-          SharedPreferences perfs = await SharedPreferences.getInstance();
-          await perfs.remove('user_apiToken');
-          await perfs.remove('user_username');
-          await perfs.remove('user_password');
-          Navigator.of(context).pushReplacement(
-            new MaterialPageRoute(builder: (context)=>new SignIn())
+          showDialog(context: context,builder: (context)=>  Directionality(
+            textDirection: TextDirection.rtl,
+            child: new AlertDialog(
+              title: new Text("آیا برای خروج از حساب کاربری مطمئن هستید ؟ ",style: TextStyle(fontSize: 16.0),),
+              actions: [
+                new FlatButton(
+                  child: new Text("خیر"),
+                  onPressed: (){
+                    Navigator.of(context).pop(false);
+                  },
+                ),
+                new FlatButton(
+                  child: new Text("بله"),
+                  onPressed: ()async{
+                    SharedPreferences perfs = await SharedPreferences.getInstance();
+                    await perfs.remove('user_apiToken');
+                    await perfs.remove('user_username');
+                    await perfs.remove('user_password');
+                    Navigator.of(context).pushReplacement(
+                        new MaterialPageRoute(builder: (context)=>new SignIn())
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
           );
+
         },
         title: Text('خروج'),
         trailing: Icon(Icons.arrow_forward),
@@ -988,7 +1004,6 @@ class DrawerLists extends StatelessWidget {
     return Drawer(
 
       child: new ListView(
-//          padding: EdgeInsets.zero,
         children: <Widget>[
           new Container(
             color: Colors.white,
@@ -1000,7 +1015,7 @@ class DrawerLists extends StatelessWidget {
           new Column(
             children: <Widget>[
               new Column(
-                children: new List.generate(7, (int index) {
+                children: new List.generate(listdrawer.length, (int index) {
                   return listdrawer[index];
                 }),
               )
@@ -1256,7 +1271,7 @@ class _bodyRequestState extends State<bodyRequest> {
                           new Padding(
                             padding: const EdgeInsets.only(right: 80.0),
                             child: new Text(
-                              widget.requests[index].date.substring(11,19),
+                              widget.requests[index].date,
                               style: TextStyle(fontSize: 12.0),
                             ),
                           ),
@@ -1387,14 +1402,17 @@ class ButtonMore extends StatefulWidget {
 class _ButtonMoreState extends State<ButtonMore> {
   @override
   Widget build(BuildContext context) {
-    return PopupMenuButton<String>(
-        onSelected: choiceAction,
-        itemBuilder: (BuildContext context) {
-          return Constants.textMorebutton
-              .map((String text) =>
-              PopupMenuItem<String>(value: text, child: Text(text)))
-              .toList();
-        });
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: PopupMenuButton<String>(
+          onSelected: choiceAction,
+          itemBuilder: (BuildContext context) {
+            return Constants.textMorebutton
+                .map((String text) =>
+                PopupMenuItem<String>(value: text, child: Text(text)))
+                .toList();
+          }),
+    );
   }
 }
 

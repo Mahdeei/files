@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stubbbb/AgahiPage/AdvertisingsPage.dart';
 import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Other/widget.dart';
+import 'package:stubbbb/StudentPerfect/StudentPerfectScreen.dart';
 import '../../KarAmouziPage/KarAmouziPage.dart';
 import '../../StudentPage/StudentScreen.dart';
 import '../../Other/R.dart';
@@ -54,7 +55,7 @@ class _ListCardsState extends State<ListCards> {
               new MenuItemWidget(
                 model: new ModelMenu(R.titr.daneshjoyehefei , R.images.daneshjoyeHerfei , R.color.red),
                 phoneSize: phoneSize,
-                listener: goToStu,
+                listener: goToStudentPerfectScreen,
               ),
             ],
           )
@@ -77,6 +78,12 @@ class _ListCardsState extends State<ListCards> {
   void goToKarAmouozi() {
     Navigator.push(context,MaterialPageRoute(builder: (context) => KarAmouziPage(profile: widget.profile,)));
   }
+
+  void goToStudentPerfectScreen(){
+    Navigator.push(context,MaterialPageRoute(builder: (context) => StudentPerfectScreen()));
+  }
+
+
 }
 
 

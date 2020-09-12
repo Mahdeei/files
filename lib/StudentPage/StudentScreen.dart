@@ -28,7 +28,7 @@ class _ProfilesPagesState extends State<ProfilesPages> {
     scrollController.addListener(() {
       double maxscrol = scrollController.position.maxScrollExtent;
       double currscrol = scrollController.position.pixels;
-      if (maxscrol - currscrol >= 200) {
+      if (maxscrol - currscrol >= 100) {
         if (firstid > 0) {
           getDataAgain();
         }
@@ -68,7 +68,6 @@ class _ProfilesPagesState extends State<ProfilesPages> {
     var response =
         await ProfileHttp.getData({'firstid': '$firstid', 'lastid': '$lastid'});
     setState(() {
-
         _profiles.addAll(response['profiles']);
     });
     setState(() {
@@ -106,12 +105,11 @@ class _ProfilesPagesState extends State<ProfilesPages> {
                             controller: scrollController,
                             itemCount: _profiles.length,
                             itemBuilder: (BuildContext context, int index) =>
-                                ListProfiles(
-                              model: _profiles[index],
-                            ),
+                                ListProfiles(model: _profiles[index]),
                           ),
                         ),
-                        onRefresh: refreshList)
+                        onRefresh: refreshList
+                )
                     : new Center(
                         child: new CircularProgressIndicator(),
                       )),

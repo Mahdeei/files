@@ -25,7 +25,8 @@ class _AdvertisingScreenState extends State<AdvertisingScreen> {
             textDirection: TextDirection.rtl, child: new SafeArea(top: true,child: new Scaffold(
             body: ListView(
               children: <Widget>[
-                HeadersItems(advertising: widget.advertising,profile: widget.profile,),
+                HeadersItemsPage(),
+                // HeadersItems(advertising: widget.advertising,profile: widget.profile,),
                 new Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     new Row(
@@ -94,6 +95,9 @@ class _AdvertisingScreenState extends State<AdvertisingScreen> {
 
 
 class HeadersItemsPage extends StatelessWidget {
+  Advertising advertising;
+  Profile profile;
+  HeadersItemsPage({this.profile,this.advertising});
   @override
   Widget build(BuildContext context) {
     var phonesize = MediaQuery.of(context).size;
