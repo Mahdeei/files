@@ -96,74 +96,85 @@ class _SignInState extends State<SignIn> {
                             padding: const EdgeInsets.only(right: 10.0),
                             child: textSignIn()),
                         new SizedBox(height: phonesize.height * 0.20),
-                        new Form(
-                          key: _formKeyLog,
-                          child: new Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 35),
-                              child: new Column(
-                                children: <Widget>[
-                                  InputTextForm(
-                                    onSaved: usernameOnSaved,
-                                    lableColor: Colors.black,
-                                    color: Colors.black,
-                                    textColor: Colors.black,
-                                    lable: 'نام کاربری',
-                                    obscure: false,
-                                  ),
-                                  InputTextForm(
-                                    onSaved: passwordOnSaved,
-                                    lableColor: Colors.black,
-                                    color: Colors.black,
-                                    textColor: Colors.black,
-                                    lable: 'کلمه عبور',
-                                    obscure: true,
-                                  ),
-                                  error
-                                      ? Container()
-                                      : containerError()
-                                ],
-                              )),
-                        ),
-                        new SizedBox(height: phonesize.height * 0.09),
-                        new Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            new Padding(
-                              padding: const EdgeInsets.only(right: 35, bottom: 10),
-                              child: textSignInLogin(),
-                            ),
-                            new GestureDetector(
-                              onTap: () async {
-                                _formKeyLog.currentState.save();
-                                recieveData();
-                              },
-                              child: new Padding(
-                                padding: const EdgeInsets.only(left: 30),
-                                child: circleAvatarSignIn(),
+                        Container(
+                          height: phonesize.height*.46,
+                          child: new Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              new Form(
+                                key: _formKeyLog,
+                                child: new Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 35),
+                                    child: new Column(
+                                      children: <Widget>[
+                                        InputTextForm(
+                                          onSaved: usernameOnSaved,
+                                          lableColor: Colors.black,
+                                          color: Colors.black,
+                                          textColor: Colors.black,
+                                          lable: 'نام کاربری',
+                                          obscure: false,
+                                        ),
+                                        InputTextForm(
+                                          onSaved: passwordOnSaved,
+                                          lableColor: Colors.black,
+                                          color: Colors.black,
+                                          textColor: Colors.black,
+                                          lable: 'کلمه عبور',
+                                          obscure: true,
+                                        ),
+                                        error
+                                            ? Container()
+                                            : containerError()
+                                      ],
+                                    )),
                               ),
-                            )
-                          ],
-                        ),
-                        new SizedBox(height: phonesize.height * 0.05),
-                        new Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: <Widget>[
-                            new GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).push(
-                                    new MaterialPageRoute(
-                                        builder: (context) =>
-                                        new ValidatePhoneNumber()));
-                              },
-                              child: textSignInPage(),
-                            ),
-                            new GestureDetector(
-                              onTap: () {
-                                print('pressed1');
-                              },
-                              child: textSigInForget(),
-                            )
-                          ],
+                              new Column(
+                                children: [
+                                  new Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      new Padding(
+                                        padding: const EdgeInsets.only(right: 35, bottom: 10),
+                                        child: textSignInLogin(),
+                                      ),
+                                      new GestureDetector(
+                                        onTap: () async {
+                                          _formKeyLog.currentState.save();
+                                          recieveData();
+                                        },
+                                        child: new Padding(
+                                          padding: const EdgeInsets.only(left: 30),
+                                          child: circleAvatarSignIn(),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  new SizedBox(height: phonesize.height * 0.05),
+                                  new Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: <Widget>[
+                                      new GestureDetector(
+                                        onTap: () {
+                                          Navigator.of(context).push(
+                                              new MaterialPageRoute(
+                                                  builder: (context) =>
+                                                  new ValidatePhoneNumber()));
+                                        },
+                                        child: textSignInPage(),
+                                      ),
+                                      new GestureDetector(
+                                        onTap: () {
+                                          print('pressed1');
+                                        },
+                                        child: textSigInForget(),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
                         )
                       ],
                     ),
