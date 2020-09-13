@@ -204,7 +204,7 @@ class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
 
   @override
   void initState() {
-    print(widget.profile.id);
+    // print(widget.profile.id+" id profile");
     _scrollController = ScrollController();
     _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(_smoothScrollToTop);
@@ -395,7 +395,8 @@ List<Profile> profile;
 
 class _ListTwoState extends State<ListTwo> {
   Map body;
-  bool refresh= true,onRefresh=false;
+  bool refresh= true;
+  List username=[];
   ScrollController _scrollController = new ScrollController();
   List<Comment> comments = [];
   TextEditingController _controller;
@@ -407,23 +408,20 @@ class _ListTwoState extends State<ListTwo> {
     _controller = new TextEditingController();
   }
 
-  Future<void> getComments() async {
-    if(onRefresh) comments.clear();
+  Future<void> getComments({bool refresh2 : false}) async {
+    if(refresh2) comments.clear();
     Map body = await HttpComments.getComments(widget.user.id);
+    username = await HttpComments.getUsername(widget.user.id);
     comments = body['comments'];
     setState(() {
       refresh = false;
     });
   }
 
-  Future onRefreshMethod(){
-    setState(() {
-      onRefresh =true ;
-    });
-    getComments();
-    setState(() {
-      onRefresh = false;
-    });
+  Future<Null> onRefreshMethod()async{
+
+    await getComments(refresh2: true);
+
     return null;
   }
   
@@ -438,7 +436,64 @@ class _ListTwoState extends State<ListTwo> {
                 ],
               ))
               : comments.length ==0
-                ? new Center(child: new Text("نظری برای این صفحه وجود ندارد"),)
+                ? Column(
+                  children: [
+                    new Expanded(child: RefreshIndicator(
+                        onRefresh: onRefreshMethod,
+                        child: Center(child: new Text("نظری برای این صفحه وجود ندارد"))),),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 15.0,left: 5.0,bottom: 5.0),
+                              child: Container(
+                                height: MediaQuery.of(context).size.height * 0.075,
+                                width: MediaQuery.of(context).size.width * 0.9,
+                                child: new TextFormField(
+                                  controller: _controller,
+                                  decoration: InputDecoration(
+                                      hoverColor: Colors.black,
+                                      focusColor: Colors.black,
+                                      errorStyle: TextStyle(),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(color: Colors.black),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black),
+                                          borderRadius: BorderRadius.circular(35.0)),
+                                      disabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                      suffixIcon: new IconButton(
+                                        icon: Icon(Icons.send,color: Colors.blue,),
+                                        onPressed: ()async{
+                                          if(_controller.text!=""){
+                                            await sendComment();
+                                            setState(() {
+                                              _controller.text = "";
+                                            });
+                                            getComments();
+                                            setState(() {
+                                              SchedulerBinding.instance.addPostFrameCallback((_) => _scrollController.animateTo(_scrollController.position.maxScrollExtent, duration: Duration(milliseconds: 1), curve: Curves.easeOut));
+                                            });
+                                          }
+
+                                        },
+                                        color: Colors.black,),
+                                      hintText: "نظر خود را وارد کنید",
+                                      contentPadding: EdgeInsets.only(bottom: 0.0,right: 7.0),
+                                      hintStyle: TextStyle(fontSize: 15),
+                                      border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black),
+                                          borderRadius: BorderRadius.circular(35.0))
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                )
                 : Column(
                     children: [
                     Expanded(
@@ -458,7 +513,7 @@ class _ListTwoState extends State<ListTwo> {
                                     children: [
                                     new CircleAvatar(maxRadius: 20,backgroundColor: R.color.banafshKamRang,),
                                         new SizedBox(width: 10,),
-                                        new Text('username'), ]),
+                                        new Text(username[index]), ]),
                                            Row(
                                              children: [
                                                new SizedBox(width: MediaQuery.of(context).size.width*0.13,),
@@ -478,7 +533,7 @@ class _ListTwoState extends State<ListTwo> {
                             Row(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(right: 15.0,left: 5.0,bottom: 5.0),
+                                  padding: const EdgeInsets.only(right: 15.0,left: 5.0,bottom: 5.0,top:2.0),
                                   child: Container(
                                     height: MediaQuery.of(context).size.height * 0.075,
                                     width: MediaQuery.of(context).size.width * 0.9,

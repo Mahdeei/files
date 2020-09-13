@@ -29,8 +29,6 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen> {
   Future<void> getComments() async {
     Map body = await HttpComments.getComments(widget.profile.id);
     comments = body['comments'];
-    print(comments[0].comment_text);
-    print(comments[1].comment_text);
     setState(() {
       refresh = false;
     });
