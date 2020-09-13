@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Models/profileModels.dart';
 import 'package:stubbbb/Other/R.dart';
-import '../ProfilePage/ProPage.dart';
+import 'Moshakhsat.dart';
 
 class ListProfiles extends StatefulWidget {
   final User model;
-  ListProfiles({this.model});
+  Profile profile;
+  ListProfiles({this.profile,this.model});
 
   final controller = new PageController();
   @override
@@ -22,7 +24,7 @@ class _ListProfilesState extends State<ListProfiles> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ProPage(user: widget.model,)),
+              MaterialPageRoute(builder: (context) => ProPage(user: widget.model,profile: widget.profile,)),
             );
           },
           child: Card(

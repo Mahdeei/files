@@ -238,7 +238,7 @@ class _FieldsListInternState extends State<FieldsListIntern> {
                         Container(
                           padding: const EdgeInsets.only(right: 10.0,top: 10.0),
                           child: DropdownButton<String>(
-                            hint: Container(width: phoneSize.width*0.6,child: new Text(type)),
+                            hint: Container(width: phoneSize.width*0.85,child: new Text(type)),
                             items: _listdrop.map((String dropdownStringItem){
                               return DropdownMenuItem<String>(
                                 value: dropdownStringItem,

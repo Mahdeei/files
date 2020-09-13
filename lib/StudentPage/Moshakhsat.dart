@@ -1,12 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:stubbbb/Models/Comment.dart';
+import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Models/profileModels.dart';
 import 'package:stubbbb/Other/R.dart';
+import 'package:stubbbb/http/httpComments.dart';
+import 'package:flutter/scheduler.dart';
+
 
 
 class ProPage extends StatefulWidget {
   User user;
-  ProPage({this.user});
+  Profile profile;
+  ProPage({this.profile,this.user});
+
   @override
   _ProPageState createState() => _ProPageState();
 }
@@ -197,6 +204,7 @@ class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
 
   @override
   void initState() {
+    print(widget.profile.id);
     _scrollController = ScrollController();
     _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(_smoothScrollToTop);
@@ -225,6 +233,7 @@ class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
         child: new SafeArea(top: true,
             bottom: true,
             child: Scaffold(
+              // resizeToAvoidBottomInset: false,
               body: NestedScrollView(
                 floatHeaderSlivers: true,
                 controller: _scrollController,
@@ -248,7 +257,7 @@ class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
                 body: Container(
                   child: TabBarView(
                     controller: _tabController,
-                    children: [ListOne(user: widget.user,), ListTwo(user: widget.user,),ListImages(user: widget.user,)],
+                    children: [ListOne(user: widget.user,), ListTwo(user: widget.user,profile: widget.profile,),ListImages(user: widget.user,)],
                   ),
                 ),
               ),
@@ -376,20 +385,156 @@ class _ListOneState extends State<ListOne> {
 
 class ListTwo extends StatefulWidget {
   User user;
-  ListTwo({this.user});
+  Profile profile;
+  ListTwo({this.profile,this.user});
+
   @override
   _ListTwoState createState() => _ListTwoState();
 }
+List<Profile> profile;
 
 class _ListTwoState extends State<ListTwo> {
+  Map body;
+  bool refresh= true,onRefresh=false;
+  ScrollController _scrollController = new ScrollController();
+  List<Comment> comments = [];
+  TextEditingController _controller;
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    getComments();
+    _controller = new TextEditingController();
+  }
+
+  Future<void> getComments() async {
+    if(onRefresh) comments.clear();
+    Map body = await HttpComments.getComments(widget.user.id);
+    comments = body['comments'];
+    setState(() {
+      refresh = false;
+    });
+  }
+
+  Future onRefreshMethod(){
+    setState(() {
+      onRefresh =true ;
+    });
+    getComments();
+    setState(() {
+      onRefresh = false;
+    });
+    return null;
+  }
+  
   @override
   Widget build(BuildContext context) {
     return new Padding(padding: const EdgeInsets.only(top: 0),
-      child: new ListView(
-        children: <Widget>[
+      child: refresh
+              ? Center(child: Column(
+                children: [
+                  new SizedBox(height: MediaQuery.of(context).size.height *.2,),
+                  new CircularProgressIndicator(),
+                ],
+              ))
+              : comments.length ==0
+                ? new Center(child: new Text("نظری برای این صفحه وجود ندارد"),)
+                : Column(
+                    children: [
+                    Expanded(
+                      child: RefreshIndicator(
+                        onRefresh: onRefreshMethod,
+                        child: new ListView.builder(
+                          controller: _scrollController,
+                          itemCount: comments.length,
+                          itemBuilder: (ctx , int index) {
+                            return Container(
+                              padding: EdgeInsets.only(right: 10),
+                              margin: const EdgeInsets.only(top: 8,bottom: 4),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                    children: [
+                                    new CircleAvatar(maxRadius: 20,backgroundColor: R.color.banafshKamRang,),
+                                        new SizedBox(width: 10,),
+                                        new Text('username'), ]),
+                                           Row(
+                                             children: [
+                                               new SizedBox(width: MediaQuery.of(context).size.width*0.13,),
+                                               new Text(comments[index].comment_text),
+                                             ],
+                                           ),
+                                      ],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                      Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 15.0,left: 5.0,bottom: 5.0),
+                                  child: Container(
+                                    height: MediaQuery.of(context).size.height * 0.075,
+                                    width: MediaQuery.of(context).size.width * 0.9,
+                                    child: new TextFormField(
+                                      controller: _controller,
+                                      decoration: InputDecoration(
+                                          hoverColor: Colors.black,
+                                          focusColor: Colors.black,
+                                          errorStyle: TextStyle(),
+                                          errorBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(color: Colors.black),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black),
+                                              borderRadius: BorderRadius.circular(35.0)),
+                                          disabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                          suffixIcon: new IconButton(
+                                            icon: Icon(Icons.send,color: Colors.blue,),
+                                            onPressed: ()async{
+                                              if(_controller.text!=""){
+                                                await sendComment();
+                                                setState(() {
+                                                  _controller.text = "";
+                                                });
+                                                getComments();
+                                                setState(() {
+                                                  SchedulerBinding.instance.addPostFrameCallback((_) => _scrollController.animateTo(_scrollController.position.maxScrollExtent, duration: Duration(milliseconds: 1), curve: Curves.easeOut));
+                                                });
+                                              }
 
-        ],
-      ),);
+                                            },
+                                            color: Colors.black,),
+                                          hintText: "نظر خود را وارد کنید",
+                                          contentPadding: EdgeInsets.only(bottom: 0.0,right: 7.0),
+                                          hintStyle: TextStyle(fontSize: 15),
+                                          border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black),
+                                              borderRadius: BorderRadius.circular(35.0))
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                  ],
+                ),
+    );
+  }
+  sendComment()async{
+    body = await HttpComments.sendComment({
+      "user_id": widget.user.id,
+      "user_comment":widget.profile.id,
+      "comment_text": _controller.text,
+      "date":"${DateTime.now()}",
+    });
+
   }
 }
 

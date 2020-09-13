@@ -52,7 +52,7 @@ class _MyRequestPageState extends State<MyRequestPage> {
           drawer: DrawerLists(),
           appBar: appBarMessagePage(_scaffoldKey),
           body: isLoading
-              ? bodyRequest(phoneSize: phoneSize,requests: requests,usernames: usernames,)
+              ? bodyRequest(phoneSize: phoneSize,requests: requests,usernames: usernames,profile: widget.profile,)
               : new Center(
             child: new CircularProgressIndicator(),
           )),

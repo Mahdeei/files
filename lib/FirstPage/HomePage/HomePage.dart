@@ -20,10 +20,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+
     // print("username : ${widget.profile.username}");
     return new Directionality(
         textDirection: TextDirection.rtl,
         child: Scaffold(
+          resizeToAvoidBottomInset: false,
           appBar: appBarHomePage(context,widget.profile),
           drawer: DrawerLists(),
           drawerEnableOpenDragGesture: true,

@@ -3,8 +3,8 @@ import 'package:stubbbb/Component/textformfield.dart';
 import 'package:stubbbb/Models/Comment.dart';
 import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Other/R.dart';
-import 'package:stubbbb/http/httpGetComments.dart';
-import 'ProPage.dart';
+import 'package:stubbbb/http/httpComments.dart';
+import '../StudentPage/Moshakhsat.dart';
 
 
 class MyProfileStudentScreen extends StatefulWidget {
@@ -27,7 +27,8 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen> {
   }
 
   Future<void> getComments() async {
-    comments = await HttpGetComments.getComments(widget.profile.id);
+    Map body = await HttpComments.getComments(widget.profile.id);
+    comments = body['comments'];
     print(comments[0].comment_text);
     print(comments[1].comment_text);
     setState(() {
@@ -69,7 +70,6 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen> {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children :[
-
                             new GestureDetector(
                               child: new Stack(
                                 children: [

@@ -20,6 +20,7 @@ class _ListCardsState extends State<ListCards> {
   @override
   void initState() {
     super.initState();
+
   }
 
   @override
@@ -65,7 +66,7 @@ class _ListCardsState extends State<ListCards> {
   }
 
   void goToStu() {
-    Navigator.push(context,MaterialPageRoute(builder: (context) => ProfilesPages()));
+    Navigator.push(context,MaterialPageRoute(builder: (context) => ProfilesPages(profile: widget.profile,)));
   }
 
   void goToProjects() {
