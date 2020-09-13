@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:stubbbb/Component/textformfield.dart';
+import 'package:stubbbb/Models/Comment.dart';
 import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Other/R.dart';
+import 'package:stubbbb/http/httpGetComments.dart';
 import 'ProPage.dart';
 
 
 class MyProfileStudentScreen extends StatefulWidget {
+
 
   Profile profile;
   MyProfileStudentScreen({this.profile});
@@ -14,7 +17,23 @@ class MyProfileStudentScreen extends StatefulWidget {
 }
 
 class _MyProfileStudentScreenState extends State<MyProfileStudentScreen> {
+  bool refresh = true;
+  List<Comment> comments = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getComments();
+  }
 
+  Future<void> getComments() async {
+    comments = await HttpGetComments.getComments(widget.profile.id);
+    print(comments[0].comment_text);
+    print(comments[1].comment_text);
+    setState(() {
+      refresh = false;
+    });
+  }
 
   GlobalKey _formKeyOne = GlobalKey<FormState>();
 
@@ -178,6 +197,20 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen> {
 
                                   ),
                                 )),
+                            new SizedBox(height: 15.0,),
+                            new Text("Comments"),
+                            new SizedBox(height: 15.0,),
+                            refresh
+                                ? new CircularProgressIndicator()
+                                : Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      new Text(comments[0].comment_text),
+                                      new SizedBox(height: 15.0,),
+                                      new Text(comments[1].comment_text),
+
+                                    ],
+                                  ),
                           ]
                       ),
                     ),

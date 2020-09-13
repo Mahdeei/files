@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:stubbbb/Models/profileModels.dart';
 import 'package:stubbbb/Other/R.dart';
 
 
 class ProPage extends StatefulWidget {
+  User user;
+  ProPage({this.user});
   @override
   _ProPageState createState() => _ProPageState();
 }
@@ -56,7 +59,7 @@ class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
                           width: 3.0,
                         ),
                         new Text(
-                          'omeadr',
+                          widget.user.username,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: Colors.white,
@@ -90,9 +93,7 @@ class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
                 ],
               ),
             ),
-            new SizedBox(
-              height: 15.0,
-            ),
+            new SizedBox(height: 15.0),
             new Row(
               children: <Widget>[
                 new IconButton(
@@ -103,6 +104,27 @@ class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
                     onPressed: () {
                       print('pressed save');
                     }),
+//                 new GestureDetector(
+//                   onTap: () {
+//                     print('pressed ');
+//                   },
+//                   child: new Container(
+//                       alignment: Alignment.center,
+// //                            height: 20.0,
+//                       width: 60.0,
+//                       decoration: BoxDecoration(
+//                           color: Colors.white,
+//                           borderRadius: BorderRadius.circular(15.0)),
+//                       child: new Padding(
+//                         padding: const EdgeInsets.only(top: 0.5, bottom: 0.5),
+//                         child: new Text(
+//                           'پیام',
+//                           style: TextStyle(
+//                               color: Color(0xff2C003E), fontSize: 12.0),
+//                         ),
+//                       )),
+//                 ),
+                new SizedBox(width: 3.0,),
                 new GestureDetector(
                   onTap: () {
                     print('pressed ');
@@ -110,39 +132,16 @@ class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
                   child: new Container(
                       alignment: Alignment.center,
 //                            height: 20.0,
-                      width: 60.0,
+                      width: 120.0,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(15.0)),
                       child: new Padding(
-                        padding: const EdgeInsets.only(top: 0.5, bottom: 0.5),
-                        child: new Text(
-                          'پیام',
-                          style: TextStyle(
-                              color: Color(0xff2C003E), fontSize: 12.0),
-                        ),
-                      )),
-                ),
-                new SizedBox(
-                  width: 3.0,
-                ),
-                new GestureDetector(
-                  onTap: () {
-                    print('pressed ');
-                  },
-                  child: new Container(
-                      alignment: Alignment.center,
-//                            height: 20.0,
-                      width: 60.0,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15.0)),
-                      child: new Padding(
-                        padding: const EdgeInsets.only(top: 0.5, bottom: 0.5),
+                        padding: const EdgeInsets.only(top: 2.5, bottom: 2.5),
                         child: new Text(
                           'درخواست',
                           style: TextStyle(
-                              color: Color(0xff2C003E), fontSize: 12.0),
+                              color: Color(0xff2C003E), fontSize: 15.0),
                         ),
                       )),
                 ),
@@ -153,7 +152,6 @@ class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
         new Align(
           alignment: Alignment.centerLeft,
           child: new ClipPath(
-//            clipper: ClipPathLine(),   TODO : error clipPath
             child: Container(
                 height: MediaQuery.of(context).size.height * 0.28,
                 width: MediaQuery.of(context).size.width * 0.5,
@@ -171,7 +169,7 @@ class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
                       height: 5.0,
                     ),
                     new Text(
-                      'امید روینده',
+                      widget.user.name,
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 15.0,
@@ -227,7 +225,8 @@ class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
         child: new SafeArea(top: true,
             bottom: true,
             child: Scaffold(
-              body: NestedScrollView(floatHeaderSlivers: true,
+              body: NestedScrollView(
+                floatHeaderSlivers: true,
                 controller: _scrollController,
                 headerSliverBuilder: (context, value) {
                   return [

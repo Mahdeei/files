@@ -22,7 +22,7 @@ class _ListProfilesState extends State<ListProfiles> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ProPage()),
+              MaterialPageRoute(builder: (context) => ProPage(user: widget.model,)),
             );
           },
           child: Card(

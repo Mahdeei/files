@@ -86,8 +86,7 @@ class _ProfilesPagesState extends State<ProfilesPages> {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-        theme: ThemeData(
-            primaryIconTheme: IconThemeData(color: R.color.banafshmain)),
+        theme: ThemeData(primaryIconTheme: IconThemeData(color: R.color.banafshmain)),
         debugShowCheckedModeBanner: false,
         home: new SafeArea(
           top: true,
