@@ -248,7 +248,7 @@ class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
                 body: Container(
                   child: TabBarView(
                     controller: _tabController,
-                    children: [ListOne(), ListTwo(),ListImages()],
+                    children: [ListOne(user: widget.user,), ListTwo(user: widget.user,),ListImages(user: widget.user,)],
                   ),
                 ),
               ),
@@ -258,6 +258,8 @@ class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
 
 
 class ListOne extends StatefulWidget {
+  User user;
+  ListOne({this.user});
   @override
   _ListOneState createState() => _ListOneState();
 }
@@ -270,53 +272,44 @@ class _ListOneState extends State<ListOne> {
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           new Padding(
-            padding: const EdgeInsets.only(right: 7.0, top: 18.0),
+            padding: const EdgeInsets.only(right: 15.0, left: 15.0, top: 10.0),
             child: new Text(
-              'یکسال به طور حرفه ای برنامه نویسی اپ کار کردم و فرانت و بک را خودم انجام میدم . لطفا برای صحبت برای هزینه بهم پیام بدید و اینکه کار رو با ضمانت تحویل میدم و از لحاظ کیفیت خیالتان راحت ',
+              'معرفی نامه',
+              style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+            ),
+          ),
+          new Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            child: new Text(
+              widget.user.moarefinameh,
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
             ),
           ),
-          new Padding(
-              padding:
-              const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-              child: new Wrap(
-                runSpacing: 8.0,
-                spacing: 7.0,
-                children: <Widget>[
-                  ObjectTag(
-                    tags: 'رنامه نویسی موبایل',
-                  ),
-                  ObjectTag(
-                    tags: 'ui',
-                  ),
-                  ObjectTag(
-                    tags: 'ux',
-                  ),
-                  ObjectTag(
-                    tags: 'رنامه',
-                  ),
-                  ObjectTag(
-                    tags: 'back end',
-                  ),
-                ],
-              )),
-        ],
-      ),);
-  }
-}
-
-class ListTwo extends StatefulWidget {
-  @override
-  _ListTwoState createState() => _ListTwoState();
-}
-
-class _ListTwoState extends State<ListTwo> {
-  @override
-  Widget build(BuildContext context) {
-    return new Padding(padding: const EdgeInsets.only(top: 0),
-      child: new ListView(
-        children: <Widget>[
+          // new Padding(
+          //     padding:
+          //     const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+          //     child: new Wrap(
+          //       runSpacing: 8.0,
+          //       spacing: 7.0,
+          //       children: <Widget>[
+          //         ObjectTag(
+          //           tags: 'رنامه نویسی موبایل',
+          //         ),
+          //         ObjectTag(
+          //           tags: 'ui',
+          //         ),
+          //         ObjectTag(
+          //           tags: 'ux',
+          //         ),
+          //         ObjectTag(
+          //           tags: 'رنامه',
+          //         ),
+          //         ObjectTag(
+          //           tags: 'back end',
+          //         ),
+          //       ],
+          //     )),
           new Padding(
             padding: const EdgeInsets.only(right: 15.0, left: 15.0, top: 0.0),
             child: new Text(
@@ -381,6 +374,25 @@ class _ListTwoState extends State<ListTwo> {
   }
 }
 
+class ListTwo extends StatefulWidget {
+  User user;
+  ListTwo({this.user});
+  @override
+  _ListTwoState createState() => _ListTwoState();
+}
+
+class _ListTwoState extends State<ListTwo> {
+  @override
+  Widget build(BuildContext context) {
+    return new Padding(padding: const EdgeInsets.only(top: 0),
+      child: new ListView(
+        children: <Widget>[
+
+        ],
+      ),);
+  }
+}
+
 
 
 
@@ -404,6 +416,8 @@ class ObjectTag extends StatelessWidget {
   }
 }
 class ListImages extends StatefulWidget {
+  User user;
+  ListImages({this.user});
   @override
   _ListImagesState createState() => _ListImagesState();
 }
