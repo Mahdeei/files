@@ -3,20 +3,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart'as http;
 import 'package:flutter/material.dart';
 import 'package:stubbbb/Models/AgahiModel.dart';
-import 'package:stubbbb/Models/Profile.dart';
+import 'package:stubbbb/Models/InterShip.dart';
+import 'package:stubbbb/Models/myData.dart';
 
 
 
 class SendReq extends StatefulWidget {
   Advertising advertising;
-  Profile profile;
-  SendReq({this.advertising,this.profile});
+  MyData profile;
+  InterShip interShip;
+  SendReq({this.advertising,this.profile,this.interShip});
   @override
   _SendReqState createState() => _SendReqState();
 }
 
 class _SendReqState extends State<SendReq> {
-  String url = "http://192.168.1.4/Stub/SendRequest.php";
+  String urlSendAd = "http://192.168.1.4/Stub/SendRequestAd.php";
+  String url = "http://192.168.1.4/Stub/SendRequestAd.php";
   bool seccesSend=false;
   String req_text;
 
@@ -70,7 +73,7 @@ class _SendReqState extends State<SendReq> {
                   new RaisedButton(
                     onPressed: ()async{
                       // sendRequest();
-                      Map recieve=await sendRequest();
+                      Map recieve=await sendRequestAd();
                       if(recieve['status']=='created success'){
                         setState(() {
                           seccesSend=true;
@@ -105,9 +108,9 @@ class _SendReqState extends State<SendReq> {
     );
   }
 
-  Future sendRequest() async {
+  Future sendRequestAd() async {
     print(req_text);
-    var response = await http.post(url, body: {
+    var response = await http.post(urlSendAd, body: {
       'id_advertising': widget.advertising.id,
       'user_id': widget.profile.id,
       'req_text': req_text,

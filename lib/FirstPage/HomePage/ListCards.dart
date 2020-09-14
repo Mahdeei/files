@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stubbbb/AgahiPage/AdvertisingsPage.dart';
-import 'package:stubbbb/Models/Profile.dart';
+import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/widget.dart';
 import 'package:stubbbb/StudentPerfect/StudentPerfectScreen.dart';
 import '../../KarAmouziPage/KarAmouziPage.dart';
@@ -8,7 +8,7 @@ import '../../StudentPage/StudentScreen.dart';
 import '../../Other/R.dart';
 
 class ListCards extends StatefulWidget {
-  Profile profile;
+  MyData profile;
   ListCards({this.profile});
 
   @override
@@ -17,11 +17,8 @@ class ListCards extends StatefulWidget {
 
 class _ListCardsState extends State<ListCards> {
 
-  @override
-  void initState() {
-    super.initState();
 
-  }
+
 
   @override
   Widget build(BuildContext context) {

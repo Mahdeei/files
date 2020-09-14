@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:stubbbb/Models/Profile.dart';
+import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Models/profileModels.dart';
 import 'package:stubbbb/Other/R.dart';
 import 'package:stubbbb/Other/widget.dart';
+import 'package:stubbbb/ProfilePage/MyProfileScreen.dart';
+import 'package:stubbbb/http/Authenticate.dart';
 import 'package:stubbbb/http/httpProfiles.dart';
 import 'package:stubbbb/http/maxID.dart';
 import 'ListStudents.dart';
 
 class ProfilesPages extends StatefulWidget {
-  Profile profile;
+  MyData profile;
   ProfilesPages({this.profile});
   @override
   _ProfilesPagesState createState() => _ProfilesPagesState();
@@ -22,6 +25,7 @@ class _ProfilesPagesState extends State<ProfilesPages> {
   List<User> models;
   Map body = new Map();
   int firstid, lastid;
+
 
   @override
   void initState() {
@@ -107,8 +111,10 @@ class _ProfilesPagesState extends State<ProfilesPages> {
                             controller: scrollController,
                             itemCount: _profiles.length,
                             itemBuilder: (BuildContext context, int index) =>
-                                ListProfiles(model: _profiles[index],profile: widget.profile,),
-                          ),
+                               ListProfiles(model: _profiles[index],
+                                profile: widget.profile,)
+
+                            ),
                         ),
                         onRefresh: refreshList
                 )

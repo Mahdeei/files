@@ -32,18 +32,12 @@ class _SignUpState extends State<SignUp> {
   void setBody() async {
     _body = await signUp();
     if (_body['status'] == 'created') {
-      profile =new Profile(
-          id: _body['id'],
-          name: _body['name'],
-          phoneNumber: _body['phonenumber'],
-          type: _body['type'],
-          username: _body['username']
-      );
+
       storeUserData(_body);
       Navigator.of(context).pushReplacement(
           new MaterialPageRoute(
               builder: (context) =>
-              new HomePage(profile: profile,)));
+              new HomePage(id: _body['id'],)));
     }else if(_body['status'] == 'exist'){
       setState(() {
         check = true;

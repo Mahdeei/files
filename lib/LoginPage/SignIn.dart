@@ -39,20 +39,11 @@ class _SignInState extends State<SignIn> {
   recieveData() async {
       boody = await AuthenticateService.signIn({"username":_username,"password":_password});
       if (await boody['status'] == 'succes') {
-        profile =new Profile(
-            id: boody['id'],
-            image: boody['image'],
-            moarefiNameh: boody['moarefinameh'],
-            name: boody['name'],
-            phoneNumber: boody['phonenumber'],
-            title: boody['title'],
-            type: boody['type'],
-            username: boody['username']
-        );
+
         _userSaveToken(boody);
         Navigator.of(context).pushReplacement(new MaterialPageRoute(
             builder: (context) =>
-            new HomePage(profile: profile,)));
+            new HomePage(id: boody['id'],)));
         if (error == false) {
           setState(() {
             error = true;

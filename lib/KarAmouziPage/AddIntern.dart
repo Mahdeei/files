@@ -4,11 +4,12 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:stubbbb/AgahiPage/TextAddPost.dart';
 import 'package:stubbbb/Models/Profile.dart';
+import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/R.dart';
 import 'package:stubbbb/http/AddAd.dart';
 
 class AddInternPost extends StatefulWidget {
-  Profile profile;
+  MyData profile;
   AddInternPost({this.profile});
   @override
   _AddInternPostState createState() => _AddInternPostState();
@@ -28,7 +29,7 @@ class _AddInternPostState extends State<AddInternPost> {
 
 class FieldsListIntern extends StatefulWidget {
   FieldsListIntern({this.profile});
-  Profile profile;
+  MyData profile;
   @override
   _FieldsListInternState createState() => _FieldsListInternState();
 }

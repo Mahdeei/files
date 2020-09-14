@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:stubbbb/AgahiPage/Send_Req.dart';
 import 'package:stubbbb/Models/AgahiModel.dart';
-import 'package:stubbbb/Models/Profile.dart';
-import 'AddPostAgahi.dart';
+import 'package:stubbbb/Models/myData.dart';
 
 
 class AdvertisingScreen extends StatefulWidget {
   Advertising advertising;
-  Profile profile;
+  MyData profile;
   AdvertisingScreen({this.profile,this.advertising});
 
   @override
@@ -25,7 +24,7 @@ class _AdvertisingScreenState extends State<AdvertisingScreen> {
             textDirection: TextDirection.rtl, child: new SafeArea(top: true,child: new Scaffold(
             body: ListView(
               children: <Widget>[
-                HeadersItemsPage(),
+                HeadersItemsPage(profile: widget.profile,advertising: widget.advertising,),
                 // HeadersItems(advertising: widget.advertising,profile: widget.profile,),
                 new Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -96,7 +95,7 @@ class _AdvertisingScreenState extends State<AdvertisingScreen> {
 
 class HeadersItemsPage extends StatelessWidget {
   Advertising advertising;
-  Profile profile;
+  MyData profile;
   HeadersItemsPage({this.profile,this.advertising});
   @override
   Widget build(BuildContext context) {
@@ -166,7 +165,7 @@ class HeadersItemsPage extends StatelessWidget {
                               textAlign: TextAlign.center,),
                           ),
                           onTap: (){
-                            Navigator.of(context).push(new MaterialPageRoute(builder: (ctx) => new SendReq()));
+                            Navigator.of(context).push(new MaterialPageRoute(builder: (ctx) => new SendReq(profile: profile,advertising: advertising,)));
                           },
                         ),
                         new GestureDetector(

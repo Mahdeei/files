@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stubbbb/KarAmouziPage/AddIntern.dart';
 import 'package:stubbbb/Models/InterShip.dart';
 import 'package:stubbbb/Models/Profile.dart';
+import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/R.dart';
 import 'package:stubbbb/Other/widget.dart';
 import 'package:stubbbb/http/AddIntern.dart';
@@ -13,7 +14,8 @@ import 'KaPage.dart';
 
 
 class KarAmouziPage extends StatefulWidget {
-  Profile profile;
+  MyData profile;
+
   KarAmouziPage({this.profile});
 
   @override
@@ -43,7 +45,7 @@ class _KarAmouziPageState extends State<KarAmouziPage> {
                 backgroundColor: Color(0xfff2f3f8),
                 drawer: DrawerLists(),
                 appBar: appBarKaramouziScreen(),
-                body: KarAmouziListList(),
+                body: KarAmouziListList(profile: widget.profile,),
               ),
             )));
   }
@@ -52,6 +54,8 @@ class _KarAmouziPageState extends State<KarAmouziPage> {
 
 
 class KarAmouziListList extends StatefulWidget {
+  MyData profile;
+  KarAmouziListList({this.profile});
   @override
   _KarAmouziListListState createState() => _KarAmouziListListState();
 }
@@ -146,7 +150,7 @@ class _KarAmouziListListState extends State<KarAmouziListList> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => KaPage()),
+                      MaterialPageRoute(builder: (context) => KaPage(interShip: interShips[index],profile: widget.profile,)),
                     );
                   },
                   child: new Container(

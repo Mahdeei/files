@@ -5,42 +5,33 @@ import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:stubbbb/FirstPage/MessagePage/MessagePage.dart';
 import 'package:stubbbb/FirstPage/RequestPage/RequestPage.dart';
 import 'package:stubbbb/Models/Profile.dart';
+import 'package:stubbbb/Models/myData.dart';
+import 'package:stubbbb/http/Authenticate.dart';
 import '../../Other/R.dart';
 import 'HomePage.dart';
 
-
-
 class HomePage extends StatefulWidget {
-
-  Profile profile;
-  HomePage({this.profile});
+  String id;
+  static  GlobalKey<ScaffoldState> kiey = new GlobalKey<ScaffoldState>();
+  HomePage({this.id});
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>{
 
-
-  Profile profile;
+  MyData profile;
+  bool isLoading = true;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    setState(() {
-      profile = widget.profile;
-      // print(profile.username);
-    });
+    _getMyData();
   }
 
-  Map data ;
   int currentindex = 1;
-  List listwidget = [
-    MyRequestPage(),
-    MyHomePage(),
-    MyMessagePage(),
-  ];
 
   changePage(int indexpage) {
     setState(() {
@@ -48,58 +39,68 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-
+  _getMyData() async {
+    MyData body = await AuthenticateService.getMyData(widget.id);
+    setState(() {
+      profile = body;
+      isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      resizeToAvoidBottomInset: false,
-      bottomNavigationBar: FFNavigationBar(
-        theme: FFNavigationBarTheme(
-          barBackgroundColor: Colors.white,
-          selectedItemBackgroundColor: R.color.red,
-          selectedItemIconColor: Colors.white,
-          selectedItemLabelColor: R.color.banafshtire,
-        ),
-        selectedIndex: currentindex,
-        onSelectTab: (index) {
-          setState(() {
-            currentindex = index;
-          });
-        },
-        items: [
-          FFNavigationBarItem(
-            iconData: Icons.mail,
-            label: 'جعبه',
-          ),
-          FFNavigationBarItem(
-            iconData: Icons.home,
-            label: 'خانه',
-          ),
-          FFNavigationBarItem(
-            iconData: Icons.chat,
-            label: 'پیام ها',
-          ),
-        ],
-      ),
-      body: currentindex==1
-          ? MyHomePage(profile: profile,)
-          : currentindex==0
-            ? MyRequestPage(profile: this.profile,)
-            : MyMessagePage()
-
-      ,
-    );
+    return isLoading
+        ? new Scaffold(
+            body: new Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  new Text('استیوب',style: TextStyle(fontSize: 30),),
+                  CircularProgressIndicator(),
+                ],
+              ),
+            ),
+          )
+        : new Scaffold(
+            key: HomePage.kiey,
+            resizeToAvoidBottomInset: false,
+            bottomNavigationBar: FFNavigationBar(
+              theme: FFNavigationBarTheme(
+                barBackgroundColor: Colors.white,
+                selectedItemBackgroundColor: R.color.red,
+                selectedItemIconColor: Colors.white,
+                selectedItemLabelColor: R.color.banafshtire,
+              ),
+              selectedIndex: currentindex,
+              onSelectTab: (index) {
+                setState(() {
+                  currentindex = index;
+                });
+              },
+              items: [
+                FFNavigationBarItem(
+                  iconData: Icons.mail,
+                  label: 'جعبه',
+                ),
+                FFNavigationBarItem(
+                  iconData: Icons.home,
+                  label: 'خانه',
+                ),
+                FFNavigationBarItem(
+                  iconData: Icons.chat,
+                  label: 'پیام ها',
+                ),
+              ],
+            ),
+            body: currentindex == 1
+                ? MyHomePage(
+                    profile: profile,
+                  )
+                : currentindex == 0
+                    ? MyRequestPage(
+                        profile: profile,
+                      )
+                    : MyMessagePage(),
+          );
   }
-
-
-
-
-
-
 }
-
-
-
-
-

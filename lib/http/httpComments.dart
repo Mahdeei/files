@@ -26,7 +26,6 @@ class HttpComments{
   }
   
   static Future<List> getUsername(var user_id) async {
-    print(user_id);
     List usrnames = [];
     var response = await http.post(url_getUsername,body: {"user_id":user_id});
     var responsebody = json.decode(response.body);

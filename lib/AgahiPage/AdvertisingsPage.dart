@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:stubbbb/Models/AgahiModel.dart';
 import 'package:stubbbb/Models/Profile.dart';
+import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/R.dart';
 import 'package:stubbbb/Other/widget.dart';
+import 'package:stubbbb/http/Authenticate.dart';
 import 'package:stubbbb/http/httpAdvertisings.dart';
 import 'package:stubbbb/http/maxID.dart';
 import 'AddPostAgahi.dart';
 import 'AgahPage.dart';
 
 class AdvertisingsPage extends StatefulWidget {
-  Profile profile;
+  MyData profile;
   AdvertisingsPage({this.profile});
 
   @override
@@ -17,8 +19,6 @@ class AdvertisingsPage extends StatefulWidget {
 }
 
 class _AdvertisingsPageState extends State<AdvertisingsPage> with SingleTickerProviderStateMixin{
-
-
   TabController tabController;
 
   @override
@@ -82,7 +82,7 @@ class _AdvertisingsPageState extends State<AdvertisingsPage> with SingleTickerPr
 }
 
 class ProjectsList extends StatefulWidget {
-  Profile profile;
+  MyData profile;
   ProjectsList({this.profile});
   @override
   _ProjectsListState createState() => _ProjectsListState();

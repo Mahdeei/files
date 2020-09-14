@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:stubbbb/Models/Profile.dart';
+import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/R.dart';
 import 'package:stubbbb/Other/widget.dart';
 import 'ListCards.dart';
 
 
 class MyHomePage extends StatefulWidget {
-
-
-  Profile profile;
-
+  MyData profile;
   MyHomePage({this.profile});
-
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -26,7 +23,7 @@ class _MyHomePageState extends State<MyHomePage> {
         textDirection: TextDirection.rtl,
         child: Scaffold(
           resizeToAvoidBottomInset: false,
-          appBar: appBarHomePage(context,widget.profile),
+          appBar: appBarHomePage(context, widget.profile),
           drawer: DrawerLists(),
           drawerEnableOpenDragGesture: true,
           backgroundColor: R.color.backGround1,

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:stubbbb/Component/textformfield.dart';
 import 'package:stubbbb/Models/Profile.dart';
+import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/R.dart';
+import 'package:stubbbb/http/Authenticate.dart';
 
 class MyProfileUserNormalScreen extends StatefulWidget {
 
-  Profile profile;
-  MyProfileUserNormalScreen({this.profile});
+  String id;
+  MyProfileUserNormalScreen({id});
 
 
   @override
@@ -15,7 +17,18 @@ class MyProfileUserNormalScreen extends StatefulWidget {
 
 class _MyProfileUserNormalScreenState extends State<MyProfileUserNormalScreen> {
   GlobalKey _formKeyOne = GlobalKey<FormState>();
+  MyData profile;
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getMyData();
+  }
+  _getMyData()async{
+    MyData body = await AuthenticateService.getMyData(widget.id);
+    profile = body;
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -74,7 +87,7 @@ class _MyProfileUserNormalScreenState extends State<MyProfileUserNormalScreen> {
                             new SizedBox(height: 10.0,),
                             new Align(
                               alignment: Alignment.center,
-                              child: new Text(widget.profile.username,style: TextStyle(color: R.color.banafshKamRang)),
+                              child: new Text(profile.username,style: TextStyle(color: R.color.banafshKamRang)),
                             ),
                             new Form(
                                 key: _formKeyOne,

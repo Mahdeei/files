@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stubbbb/Models/Comment.dart';
 import 'package:stubbbb/Models/Profile.dart';
+import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Models/profileModels.dart';
 import 'package:stubbbb/Other/R.dart';
+import 'package:stubbbb/http/Authenticate.dart';
 import 'package:stubbbb/http/httpComments.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -11,7 +13,7 @@ import 'package:flutter/scheduler.dart';
 
 class ProPage extends StatefulWidget {
   User user;
-  Profile profile;
+  MyData profile;
   ProPage({this.profile,this.user});
 
   @override
@@ -24,8 +26,8 @@ class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
   final bodyGlobalKey = GlobalKey();
   final List<Widget> myTabs = [
     Tab(text: 'مشخصات'),
+    Tab(text: 'نمونه کارها',),
     Tab(text: 'نظرات'),
-    Tab(text: 'نمونه کارها',)
   ];
   TabController _tabController;
   ScrollController _scrollController;
@@ -202,6 +204,7 @@ class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
   }
 
 
+
   @override
   void initState() {
     // print(widget.profile.id+" id profile");
@@ -211,6 +214,7 @@ class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
 
     super.initState();
   }
+
 
   @override
   void dispose() {
@@ -257,7 +261,7 @@ class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
                 body: Container(
                   child: TabBarView(
                     controller: _tabController,
-                    children: [ListOne(user: widget.user,), ListTwo(user: widget.user,profile: widget.profile,),ListImages(user: widget.user,)],
+                    children: [ListOne(user: widget.user,),ListImages(user: widget.user,), ListTwo(user: widget.user,profile: widget.profile,)],
                   ),
                 ),
               ),
@@ -385,13 +389,12 @@ class _ListOneState extends State<ListOne> {
 
 class ListTwo extends StatefulWidget {
   User user;
-  Profile profile;
+  MyData profile;
   ListTwo({this.profile,this.user});
 
   @override
   _ListTwoState createState() => _ListTwoState();
 }
-List<Profile> profile;
 
 class _ListTwoState extends State<ListTwo> {
   Map body;
@@ -403,10 +406,10 @@ class _ListTwoState extends State<ListTwo> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
     getComments();
     _controller = new TextEditingController();
   }
+
 
   Future<void> getComments({bool refresh2 : false}) async {
     if(refresh2) comments.clear();
@@ -517,7 +520,9 @@ class _ListTwoState extends State<ListTwo> {
                                            Row(
                                              children: [
                                                new SizedBox(width: MediaQuery.of(context).size.width*0.13,),
-                                               new Text(comments[index].comment_text),
+                                               Container(
+                                                   width: MediaQuery.of(context).size.width * 0.8,
+                                                   child: new Text(comments[index].comment_text,maxLines: null,)),
                                              ],
                                            ),
                                       ],
@@ -596,25 +601,25 @@ class _ListTwoState extends State<ListTwo> {
 
 
 
-class ObjectTag extends StatelessWidget {
-  final String tags;
-
-  const ObjectTag({this.tags});
-  @override
-  Widget build(BuildContext context) {
-    return new Container(
-        height: 20.0,
-
-        decoration: BoxDecoration(
-            color: Color(0xff2D0827),
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(15.0)),
-        child:new Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 6.0,vertical: 3.0),
-          child: new Text(tags,style: new TextStyle(color: Colors.white,fontSize: 10.0,),),
-        ));
-  }
-}
+// class ObjectTag extends StatelessWidget {
+//   final String tags;
+//
+//   const ObjectTag({this.tags});
+//   @override
+//   Widget build(BuildContext context) {
+//     return new Container(
+//         height: 20.0,
+//
+//         decoration: BoxDecoration(
+//             color: Color(0xff2D0827),
+//             shape: BoxShape.rectangle,
+//             borderRadius: BorderRadius.circular(15.0)),
+//         child:new Padding(
+//           padding: const EdgeInsets.symmetric(horizontal: 6.0,vertical: 3.0),
+//           child: new Text(tags,style: new TextStyle(color: Colors.white,fontSize: 10.0,),),
+//         ));
+//   }
+// }
 class ListImages extends StatefulWidget {
   User user;
   ListImages({this.user});

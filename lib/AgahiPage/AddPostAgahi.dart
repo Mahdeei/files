@@ -5,11 +5,12 @@ import 'package:image_picker/image_picker.dart';
 import 'package:stubbbb/AgahiPage/TextAddPost.dart';
 import 'package:stubbbb/Models/AgahiModel.dart';
 import 'package:stubbbb/Models/Profile.dart';
+import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/R.dart';
 import 'package:stubbbb/http/AddAd.dart';
 
 class AddPostAgahi extends StatefulWidget {
-  Profile profile;
+  MyData profile;
   AddPostAgahi({this.profile});
   @override
   _AddPostAgahiState createState() => _AddPostAgahiState();
@@ -29,7 +30,7 @@ class _AddPostAgahiState extends State<AddPostAgahi> {
 
 class FieldsList extends StatefulWidget {
   FieldsList({this.profile});
-  Profile profile;
+  MyData profile;
   @override
   _FieldsListState createState() => _FieldsListState();
 }

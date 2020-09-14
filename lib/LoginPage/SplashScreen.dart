@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stubbbb/FirstPage/HomePage/HomeScreen.dart';
 import 'package:stubbbb/LoginPage/SignIn.dart';
 import 'package:stubbbb/Models/Profile.dart';
+import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/widget.dart';
 import 'package:stubbbb/http/Authenticate.dart';
 
@@ -86,10 +87,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
         boody = await AuthenticateService.signIn({"username":username,"password":password});
         if (await boody['status'] == 'succes') {
-
-          await authenticate(username,password);
+          String id = await authenticate(username,password);
+           // MyData edge = await AuthenticateService.getMyData(id);
           Navigator.of(context).pushReplacement(
-              new MaterialPageRoute(builder: (context) => new HomePage(profile:profile ))
+              new MaterialPageRoute(builder: (context) => new HomePage(id:id ))
           );
 
 
@@ -114,19 +115,9 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   authenticate(String username , String password) async{
     boody = await AuthenticateService.signIn({"username":username,"password":password});
-    await setData(boody);
+    return boody['id'];
   }
 
-   setData(Map boody) {
-     profile =new Profile(
-         id: boody['id'],
-         image: boody['image'],
-         moarefiNameh: boody['moarefinameh'],
-         name: boody['name'],
-         phoneNumber: boody['phonenumber'],
-         title: boody['title'],
-         type: boody['type'],
-         username: boody['username']
-     );
-   }
+
+
 }

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Models/Request.dart';
+import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/widget.dart';
 import 'package:stubbbb/http/httpRequest.dart';
 
 
 class MyRequestPage extends StatefulWidget {
 
-  Profile profile;
-  MyRequestPage({this.data,this.profile});
-  Map data;
+  MyData profile;
+  MyRequestPage({this.profile});
   @override
   _MyRequestPageState createState() => _MyRequestPageState();
 }

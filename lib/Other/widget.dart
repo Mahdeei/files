@@ -8,6 +8,7 @@ import 'package:stubbbb/KarAmouziPage/KarAmouziPage.dart';
 import 'package:stubbbb/LoginPage/SignIn.dart';
 import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Models/Request.dart';
+import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/ProfilePage/MyProfileScreen.dart';
 import 'package:stubbbb/ProfilePage/MyProfileUserNormalScreen.dart';
 import 'package:stubbbb/StudentPage/StudentScreen.dart';
@@ -430,7 +431,7 @@ CircleAvatar circleAvatarKaramouziScreen(){
   );
 }
 
-AppBar appBarHomePage(BuildContext context,Profile profile) {
+AppBar appBarHomePage(BuildContext context,MyData profile) {
 
   return new AppBar(actions: <Widget>[
     new Padding(
@@ -438,24 +439,16 @@ AppBar appBarHomePage(BuildContext context,Profile profile) {
       child: new Stack(
         children: [
           new IconButton(
-              icon: IconButton(
-                  icon: Icon(Icons.person,color: Colors.white,size: 28,)
-              ),
+              icon:Icon(Icons.person,color: Colors.white,size: 28,),
               onPressed: () {
                 Navigator.push(context, new MaterialPageRoute(builder: (context)=>
                 profile.type=="2"
-                    ? new MyProfileUserNormalScreen(profile: profile)
-                    : new MyProfileStudentScreen(profile: profile)
+                    ? new MyProfileUserNormalScreen(id: profile.id)
+                    : new MyProfileStudentScreen(id: profile.id)
                 ));
               }
           ),
-          new Positioned(
-            right: 10.0,
-            top: 35.0,
-            child: new CircleAvatar(
-            minRadius: 5.0,
-            backgroundColor: Colors.red,
-          ),)
+
 
 
 
@@ -810,9 +803,9 @@ Padding paddingOneKaramouziScreen(){
 }
 
 
-Padding paddingTwoKaramouziScreen(){
+Padding paddingTwoKaramouziScreen(String description){
   return new Padding(padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 10.0),
-    child: new Text('تعدادی دانشجوی کامپیوتر جهت کارآموزی برنامه نویسی اپلیکیشن در شرکت می پذیریم',
+    child: new Text(description,
       style: TextStyle(fontSize: 17.0),),);
 }
 
@@ -1041,7 +1034,7 @@ class DrawerLists extends StatelessWidget {
 
 class Headers extends StatelessWidget {
 
-  Profile profile;
+  MyData profile;
   Headers({this.profile});
   var username;
   @override
@@ -1210,7 +1203,7 @@ class bodyMessage extends StatelessWidget {
 
 class bodyRequest extends StatefulWidget {
 
-  Profile profile;
+  MyData profile;
   var phoneSize;
   List<Request> requests;
   List usernames;
