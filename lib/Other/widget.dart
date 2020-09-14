@@ -1215,6 +1215,8 @@ class bodyRequest extends StatefulWidget {
 
 class _bodyRequestState extends State<bodyRequest> {
 
+  
+  
   @override
   Widget build(BuildContext context) {
     return widget.requests.length==0
@@ -1275,7 +1277,16 @@ class _bodyRequestState extends State<bodyRequest> {
                           new Padding(
                             padding: const EdgeInsets.only(right: 80.0),
                             child: new Text(
-                              widget.requests[index].date,
+                              widget.requests[index].date.substring(0,10) == DateTime.now().toString().substring(0,10)
+                                ? widget.requests[index].date.substring(11,13)==DateTime.now().toString().substring(11,13)
+                                  ? "لحظاتی پیش"
+                                  : "${int.parse(DateTime.now().toString().substring(11,13)) - int.parse(widget.requests[index].date.substring(11,13))} ساعت قبل"
+                                : widget.requests[index].date.substring(0,7)==DateTime.now().toString().substring(0,7)
+                                  ? "${int.parse(DateTime.now().toString().substring(8,10)) - int.parse(widget.requests[index].date.substring(8,10))} روز قبل"
+                                  : widget.requests[index].date.substring(0,4)==DateTime.now().toString().substring(0,4)
+                                    ? "${int.parse(DateTime.now().toString().substring(5,7)) - int.parse(widget.requests[index].date.substring(5,7))} ماه قبل"
+                                    : "${int.parse(DateTime.now().toString().substring(0,4)) - int.parse(widget.requests[index].date.substring(0,4))} سال قبل"
+                              ,
                               style: TextStyle(fontSize: 12.0),
                             ),
                           ),

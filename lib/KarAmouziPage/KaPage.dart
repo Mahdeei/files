@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shamsi_date/shamsi_date.dart';
 import 'package:stubbbb/AgahiPage/AgahPage.dart';
 import 'package:stubbbb/AgahiPage/Send_Req.dart';
 import 'package:stubbbb/Models/InterShip.dart';
@@ -19,6 +20,15 @@ class _KaPageState extends State<KaPage> {
   @override
   Widget build(BuildContext context) {
     print(widget.interShip.description);
+    // DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
+    // final DateFormat displayFormater = DateFormat('yyyy-MM-dd HH:mm:ss.SSS');
+    // Jalali jNow = Jalali.now();
+    // print(jNow.year);
+    // print(jNow.month);
+    // print(jNow.day);
+    // print(jNow);
+    print(new DateTime.now().toString().substring(11,19));
+    print(DateTime.now());
     return new Directionality(
         textDirection: TextDirection.rtl,
         child: new SafeArea(

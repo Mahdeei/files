@@ -513,19 +513,45 @@ class _ListTwoState extends State<ListTwo> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Row(
-                                    children: [
-                                    new CircleAvatar(maxRadius: 20,backgroundColor: R.color.banafshKamRang,),
-                                        new SizedBox(width: 10,),
-                                        new Text(username[index]), ]),
-                                           Row(
-                                             children: [
-                                               new SizedBox(width: MediaQuery.of(context).size.width*0.13,),
-                                               Container(
-                                                   width: MediaQuery.of(context).size.width * 0.8,
-                                                   child: new Text(comments[index].comment_text,maxLines: null,)),
-                                             ],
-                                           ),
-                                      ],
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                new CircleAvatar(maxRadius: 20,backgroundColor: R.color.banafshKamRang,),
+                                                new SizedBox(width: 10,),
+                                                new Text(username[index]),
+                                              ],
+                                            ),
+                                            new Row(
+                                              children: [
+                                                new Padding(
+                                                  padding: const EdgeInsets.only(left: 10.0),
+                                                  child: new Text(
+                                                    comments[index].date.substring(0,10) == DateTime.now().toString().substring(0,10)
+                                                        ? comments[index].date.substring(11,13)==DateTime.now().toString().substring(11,13)
+                                                        ? "لحظاتی پیش"
+                                                        : "${int.parse(DateTime.now().toString().substring(11,13)) - int.parse(comments[index].date.substring(11,13))} ساعت قبل"
+                                                        : comments[index].date.substring(0,7)==DateTime.now().toString().substring(0,7)
+                                                        ? "${int.parse(DateTime.now().toString().substring(8,10)) - int.parse(comments[index].date.substring(8,10))} روز قبل"
+                                                        : comments[index].date.substring(0,4)==DateTime.now().toString().substring(0,4)
+                                                        ? "${int.parse(DateTime.now().toString().substring(5,7)) - int.parse(comments[index].date.substring(5,7))} ماه قبل"
+                                                        : "${int.parse(DateTime.now().toString().substring(0,4)) - int.parse(comments[index].date.substring(0,4))} سال قبل"
+                                                    ,
+                                                    style: TextStyle(fontSize: 10.0),),
+                                                )
+                                              ],
+                                            )
+                                          ]
+                                        ),
+                                         Row(
+                                           children: [
+                                             new SizedBox(width: MediaQuery.of(context).size.width*0.13,),
+                                             Container(
+                                                 width: MediaQuery.of(context).size.width * 0.8,
+                                                 child: new Text(comments[index].comment_text,maxLines: null,)),
+                                           ],
+                                         ),
+                                            ],
                               ),
                             );
                           },
