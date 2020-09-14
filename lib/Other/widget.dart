@@ -1205,7 +1205,7 @@ class bodyRequest extends StatefulWidget {
 
   MyData profile;
   var phoneSize;
-  List<Request> requests;
+  List<RequestAd> requests;
   List usernames;
   bodyRequest({this.phoneSize,this.profile,this.requests,this.usernames});
 

@@ -1,7 +1,6 @@
-class RequestAd{
+class RequestIntern{
 
-
-  RequestAd.fromjson(Map<String, dynamic> parsedJson) {
+  RequestIntern.fromjson(Map<String, dynamic> parsedJson) {
     id = parsedJson['id'];
     date = parsedJson['date'];
     req_id = parsedJson['req_id'];
@@ -16,7 +15,5 @@ class RequestAd{
   String id;
   String user_id;
   String id_advertising;
-
-
 
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shamsi_date/shamsi_date.dart';
 import 'package:stubbbb/AgahiPage/AgahPage.dart';
 import 'package:stubbbb/AgahiPage/Send_Req.dart';
+import 'package:stubbbb/KarAmouziPage/SendReqIntern.dart';
 import 'package:stubbbb/Models/InterShip.dart';
 import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/widget.dart';
@@ -163,7 +163,7 @@ class HeadersItemsPage extends StatelessWidget {
                               textAlign: TextAlign.center,),
                           ),
                           onTap: (){
-                            Navigator.of(context).push(new MaterialPageRoute(builder: (ctx) => new SendReq(profile: profile)));
+                            Navigator.of(context).push(new MaterialPageRoute(builder: (ctx) => new SendReqIntern(profile: profile,interShip: interShip,)));
                           },
                         ),
                         new GestureDetector(
