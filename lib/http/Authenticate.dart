@@ -4,12 +4,12 @@ import 'package:http/http.dart'as http;
 import 'package:stubbbb/Models/myData.dart';
 class AuthenticateService{
   static Future<Map> signIn(Map databody) async {
-    var response = await http.post("http://192.168.1.4/Stub/Login.php", body: databody);
+    var response = await http.post("http://192.168.1.5/Stub/Login.php", body: databody);
     final body = json.decode(response.body);
     return body;
   }
   static Future<MyData> getMyData(String id) async {
-    var response = await http.post("http://192.168.1.4/Stub/GetMyData.php", body: {'id': id});
+    var response = await http.post("http://192.168.1.5/Stub/GetMyData.php", body: {'id': id});
     final  body = json.decode(response.body);
     MyData body2 = new MyData(
       image: body['image'],
@@ -33,7 +33,7 @@ class AuthenticateService{
   }
 
   static Future<bool> checkLog (String apiToken) async {
-    var apiResponse = await http.post('http://192.168.1.4/Stub/AuthenticateService.php',body: {
+    var apiResponse = await http.post('http://192.168.1.5/Stub/AuthenticateService.php',body: {
       'apiToken' : apiToken
     });
     Map result = json.decode(apiResponse.body);

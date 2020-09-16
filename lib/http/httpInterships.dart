@@ -4,7 +4,7 @@ import 'package:stubbbb/Models/InterShip.dart';
 
 
 class HttpInterships{
-  static var url = 'http://192.168.1.4/Stub/getInterships.php';
+  static var url = 'http://192.168.1.5/Stub/getInterships.php';
 
 
   static Future<Map> getData(Map body) async {

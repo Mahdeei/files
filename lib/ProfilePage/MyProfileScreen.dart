@@ -6,7 +6,6 @@ import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/R.dart';
 import 'package:stubbbb/http/Authenticate.dart';
 import 'package:stubbbb/http/httpComments.dart';
-
 import 'editData.dart';
 
 class MyProfileStudentScreen extends StatefulWidget {
@@ -24,11 +23,10 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
   final bodyGlobalKey = GlobalKey();
   final List<Widget> myTabs = [
     Tab(text: 'مشخصات'),
-    Tab(
-      text: 'نمونه کارها',
-    ),
+    Tab(text: 'نمونه کارها',),
     Tab(text: 'نظرات'),
   ];
+
   TabController _tabController;
   ScrollController _scrollController;
   MyData profile;
@@ -83,9 +81,9 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
             ),
             onPressed: () {
               print('pressed share');
-            }),
+            }
+        ),
         new Column(
-//                    mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             new Directionality(
@@ -169,9 +167,7 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
 //                         ),
 //                       )),
 //                 ),
-                new SizedBox(
-                  width: 3.0,
-                ),
+                new SizedBox(width: 3.0,),
                 new GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(new MaterialPageRoute(
@@ -181,7 +177,6 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
                   },
                   child: new Container(
                       alignment: Alignment.center,
-//                            height: 20.0,
                       width: 120.0,
                       decoration: BoxDecoration(
                           color: Colors.white,

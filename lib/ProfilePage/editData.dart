@@ -16,9 +16,11 @@ class EditData extends StatefulWidget {
 }
 
 class _EditDataState extends State<EditData> {
+
   TextEditingController usernameCont ,nameCont,moarefiCont;
-  @override
+  
   GlobalKey _formKeyOne = GlobalKey<FormState>();
+  
 @override
   void initState() {
     // TODO: implement initState
