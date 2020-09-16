@@ -208,7 +208,10 @@ class _ProjectsListState extends State<ProjectsList> {
                                 bottomRight: Radius.circular(65.0)),
                             image: DecorationImage(
                                 fit: BoxFit.cover,
-                                image: AssetImage('assets/image/download.jfif'))),
+                                image: advertisings[index].image==""
+                                  ? AssetImage('assets/image/download.jfif')
+                                  : NetworkImage("http://192.168.1.5/Stub/image/${advertisings[index].image}")
+                            )),
                       ),
                       new Expanded(
                           child: new Column(

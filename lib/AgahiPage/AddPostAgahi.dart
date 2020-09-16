@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -67,7 +68,8 @@ class _FieldsListState extends State<FieldsList> {
 
   File _image;
   var picker = new ImagePicker();
-
+  var rand;
+  var fileName;
   Future pickImageFromGallery() async {
     var imageFile = await picker.getImage(source: ImageSource.gallery);
     File file = File(imageFile.path);
@@ -79,20 +81,15 @@ class _FieldsListState extends State<FieldsList> {
       aspectRatio:  CropAspectRatio(ratioX: 1.0,ratioY: 1.0),
     );
 
-    // var result = await FlutterImageCompress.compressAndGetFile(
-    //   croppedFile.absolute.path, file.path,
-    //   quality: 32,
-    // );
-
     final tempDir = await getTemporaryDirectory();
     final path = tempDir.path;
     Img.Image image = Img.decodeImage(croppedFile.readAsBytesSync());
     Img.Image smallerImg = Img.copyResize(image,width: 500);
 
-    var rand= new Random().nextInt(100000000).toString() + new Random().nextInt(10000000).toString() + new Random().nextInt(10000000).toString();
-    var fileName = "image_${widget.profile.id}_${widget.profile.username}_${widget.profile.name}_$rand.jpg";
+    this.rand= new Random().nextInt(100000000).toString() + new Random().nextInt(10000000).toString() + new Random().nextInt(10000000).toString();
+    this.fileName = "image_${widget.profile.id}_${widget.profile.username}_${widget.profile.name}_$rand.jpg";
     var compressImg = new File("$path/$fileName")
-    ..writeAsBytesSync(Img.encodeJpg(smallerImg,quality: 50));
+    ..writeAsBytesSync(Img.encodeJpg(smallerImg,quality: 85));
 
     setState((){
       this._image = compressImg;
@@ -114,21 +111,62 @@ class _FieldsListState extends State<FieldsList> {
     var request = new http.MultipartRequest("POST", uri);
 
     var multiPartFile = new http.MultipartFile("image", stream, length,filename: basename(imageFile.path));
-    // request.fields['title'] = _title.text;
-    request.files.add(multiPartFile);
 
+
+    String sharayet = shrayet;
+    if (sharayet == 'شرایط') {
+      sharayet = "";
+    }
+
+    request.fields['user_id'] = widget.profile.id;
+    request.fields['title'] = onvan;
+    request.fields['description'] = tozihat;
+    request.fields['date'] = "${DateTime.now()}";
+    request.fields['price'] = boodje;
+    request.fields['conditions'] = sharayet;
+    request.fields['location'] = adress;
+    request.fields['image'] = this.fileName;
+
+    request.files.add(multiPartFile);
     var response = await request.send();
+    // print(response);
+    // print(json.decode(response.stream.toString()));
+    // var responseBody = json.decode(response.headers);
 
 //    print(stream);
 //    print(length);
 //    print(uri);
 //    print(request);
+    print(response.statusCode);
+
+
+     await response.stream.transform(utf8.decoder).listen((value) {
+      res = json.decode(value);
+      print(res);
+      print(res['status']);
+    });
     if(response.statusCode == 200) {
       print('upload seccess');
     }else{
       print('upload failed');
     }
   }
+
+  // addAd() async {
+  //   String sharayet = shrayet;
+  //   if (sharayet == 'شرایط') {
+  //     sharayet = "";
+  //   }
+  //   res = await AddAd.addAdv({
+  //     "user_id": widget.profile.id,
+  //     "title": onvan,
+  //     "description": tozihat,
+  //     "date": "${DateTime.now()}",
+  //     "price": boodje,
+  //     "conditions": sharayet,
+  //     "location": adress,
+  //   });
+  // }
 
   Color _color() {
     return clr ? Colors.red : Colors.black;
@@ -470,7 +508,6 @@ class _FieldsListState extends State<FieldsList> {
             ),
             new GestureDetector(
               onTap: () async {
-                await upload(_image);
                 if (onvan == 'عنوان آگهی') {
                   setState(() {
                     clr1 = true;
@@ -490,7 +527,7 @@ class _FieldsListState extends State<FieldsList> {
                   });
                 } else {
 
-                  await addAd();
+                  await upload(_image);
                   if (res['status'] == "added") {
                     key.currentState.showSnackBar(new SnackBar(
                         content: new Text("آگهی شما با موفقیت ارسال شد")));
@@ -521,19 +558,5 @@ class _FieldsListState extends State<FieldsList> {
     );
   }
 
-  addAd() async {
-    String sharayet = shrayet;
-    if (sharayet == 'شرایط') {
-      sharayet = "";
-    }
-    res = await AddAd.addAdv({
-      "user_id": widget.profile.id,
-      "title": onvan,
-      "description": tozihat,
-      "date": "${DateTime.now()}",
-      "price": boodje,
-      "conditions": sharayet,
-      "location": adress,
-    });
-  }
+
 }

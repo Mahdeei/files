@@ -8,6 +8,7 @@ class Advertising{
   var category;
   var conditions;
   var location;
+  var image;
 
 
   Advertising.fromJson(Map<String, dynamic> parsedJson) {
@@ -20,6 +21,7 @@ class Advertising{
     category = parsedJson['category'];
     conditions = parsedJson['conditions'];
     location = parsedJson['location'];
+    image = parsedJson['image'];
   }
 }
 
