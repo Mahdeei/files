@@ -474,6 +474,7 @@ AppBar appBarHomePage(BuildContext context,MyData profile) {
       child: new Stack(
         children: [
           new IconButton(
+
               icon:Icon(Icons.person,color: Colors.white,size: 28,),
               onPressed: () {
                 Navigator.push(context, new MaterialPageRoute(builder: (context)=>
@@ -483,9 +484,13 @@ AppBar appBarHomePage(BuildContext context,MyData profile) {
                 ));
               }
           ),
-
-
-
+          profile.image == null || profile.title == null || profile.moarefiNameh == null || profile.skills == null
+               || profile.certificates == null || profile.fieldUni == null || profile.languages == null || profile.resumes == null
+               || profile.educational == null?
+             new Positioned(bottom: 18,
+                right: 6,
+                child: new CircleAvatar(backgroundColor: Colors.red,maxRadius: 5,))
+              : new SizedBox()
 
         ],
       )
@@ -494,7 +499,6 @@ AppBar appBarHomePage(BuildContext context,MyData profile) {
 }
 
 AppBar appBarMessagePage(_scaffoldKey) {
-  // final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   return new AppBar(
     leading: IconButton(
@@ -1249,6 +1253,13 @@ class bodyRequest extends StatefulWidget {
   @override
   _bodyRequestState createState() => _bodyRequestState();
 }
+
+String FieldText(String text){
+  return text=="" || text==null
+      ? 'وارد نشده'
+      : text;
+}
+
 
 class _bodyRequestState extends State<bodyRequest> {
 

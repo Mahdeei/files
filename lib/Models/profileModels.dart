@@ -23,7 +23,7 @@ class User {
     phonenumber = parsedJson['phonenumber'];
     image = parsedJson['image'];
     password = parsedJson['password'];
-    moarefinameh = parsedJson['moarefiName'];
+    moarefinameh = parsedJson['moarefiname'];
     title = parsedJson['title'];
     apiToken = parsedJson['apiToken'];
     address = parsedJson['address'];

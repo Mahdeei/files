@@ -47,4 +47,22 @@ class RequestHttp {
       'requests' : requests
     };
   }
+
+  static Future<List<String>> getImages(id) async {
+    String url='http://stube.ir/getImageStudent.php';
+    List<String> images=[];
+    var response = await http.post(url,body: {"user_id": id});
+
+    var responseBody = json.decode(response.body);
+    // print(responseBody);
+    responseBody.forEach((item) {
+      // print(item['image']);
+      images.add(item['image']);
+      // print(item);
+    });
+
+    return images;
+
+  }
+
 }

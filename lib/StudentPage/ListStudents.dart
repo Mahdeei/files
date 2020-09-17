@@ -6,7 +6,7 @@ import 'package:stubbbb/ProfilePage/MyProfileScreen.dart';
 import 'Moshakhsat.dart';
 
 class ListProfiles extends StatefulWidget {
-  final User model;
+  User model;
   MyData profile;
   ListProfiles({this.profile,this.model});
 

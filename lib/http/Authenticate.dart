@@ -20,7 +20,7 @@ class AuthenticateService{
       fieldUni: body['fieldUni'],
       id: body['id'],
       languages: body['languages'],
-      moarefiNameh: body['moarefiName'],
+      moarefiNameh: body['moarefiname'],
       name: body['name'],
       password: body['password'],
       phoneNumber: body['phonenumber'],

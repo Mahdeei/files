@@ -116,6 +116,15 @@ class _FieldsListState extends State<FieldsList> {
       sharayet = "";
     }
 
+    print(widget.profile.id);
+    print(onvan);
+    print(tozihat);
+    print("${DateTime.now()}");
+    print(boodje);
+    print(sharayet);
+    print(adress);
+    print(this.fileName);
+
     request.fields['user_id'] = widget.profile.id;
     request.fields['title'] = onvan;
     request.fields['description'] = tozihat;

@@ -11,7 +11,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:stubbbb/AgahiPage/TextAddPost.dart';
 import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/R.dart';
-import 'package:stubbbb/http/AddAd.dart';
 import 'dart:convert';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
@@ -55,7 +54,7 @@ class _FieldsListInternState extends State<FieldsListIntern> {
   File _image;
   var picker = new ImagePicker();
   var rand;
-  var fileName;
+  var fileName="";
 
 
   String tozihat = 'توضیحات',

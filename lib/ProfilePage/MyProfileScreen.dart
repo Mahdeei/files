@@ -1,5 +1,12 @@
+import 'dart:convert';
+import 'dart:io';
+import 'dart:math';
+import 'package:image/image.dart' as Img;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:stubbbb/Models/Comment.dart';
 import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Models/myData.dart';
@@ -7,7 +14,12 @@ import 'package:stubbbb/Other/R.dart';
 import 'package:stubbbb/Other/widget.dart';
 import 'package:stubbbb/http/Authenticate.dart';
 import 'package:stubbbb/http/httpComments.dart';
+import 'package:stubbbb/http/httpRequest.dart';
 import 'editData.dart';
+import 'package:http/http.dart' as http;
+import 'package:async/async.dart';
+import 'dart:async';
+import 'package:path/path.dart';
 
 class MyProfileStudentScreen extends StatefulWidget {
   String id;
@@ -68,7 +80,7 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
     );
   }
 
-  Widget _head() {
+  Widget _head(context) {
     return new Stack(
       children: <Widget>[
         new Container(
@@ -141,14 +153,14 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
             new SizedBox(height: 15.0),
             new Row(
               children: <Widget>[
-                new IconButton(
-                    icon: Icon(
-                      Icons.bookmark,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {
-                      print('pressed save');
-                    }),
+                // new IconButton(
+                //     icon: Icon(
+                //       Icons.bookmark,
+                //       color: Colors.white,
+                //     ),
+                //     onPressed: () {
+                //       print('pressed save');
+                //     }),
 //                 new GestureDetector(
 //                   onTap: () {
 //                     print('pressed ');
@@ -265,7 +277,7 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
                       controller: _scrollController,
                       headerSliverBuilder: (context, value) {
                         return [
-                          SliverToBoxAdapter(child: _head()),
+                          SliverToBoxAdapter(child: _head(context)),
                           SliverToBoxAdapter(
                             child: TabBar(
                               indicatorColor: R.color.banafshtire,
@@ -370,7 +382,7 @@ class _ListOneState extends State<ListOne> {
             padding:
                 const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             child: new Text(
-              'به مدت دوسال با شرکت ایران کُد همکاری میکردم ، نزدیک به 30 تا پروژه موفق داشتم.عضو تیم طراحان اپلیکیشن های بایو، کیهان، مرداب و شهر به شهر بوده ام.بنیان گذار و طراح و برنامه نویس اپلیکیشن استیوب هم هستم ',
+              FieldText(widget.profile.resumes),
               style: TextStyle(fontSize: 16.0),
             ),
           ),
@@ -386,8 +398,8 @@ class _ListOneState extends State<ListOne> {
             padding:
                 const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             child: new Text(
-              'بنده در مقطع کارشناسی رشته مهندسی برق در حال تحصیل می باشم.',
-              style: TextStyle(fontSize: 16.0),
+              FieldText(widget.profile.educational),
+              style: TextStyle(fontSize: MediaQuery.of(context).size.width *0.05),
             ),
           ),
           Divider(),
@@ -402,7 +414,7 @@ class _ListOneState extends State<ListOne> {
             padding:
                 const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             child: new Text(
-              'مدرک فنی حرفه ای الکترونیک رو هم دارم .دارای مدرک الپیک دو و مدرک تافل میباشم.',
+              FieldText(widget.profile.certificates),
               style: TextStyle(fontSize: 16.0),
             ),
           ),
@@ -418,7 +430,7 @@ class _ListOneState extends State<ListOne> {
             padding:
                 const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             child: new Text(
-              'فارسی، عربی، انگلیسی و ترکی',
+              FieldText(widget.profile.languages),
               style: TextStyle(fontSize: 16.0),
             ),
           ),
@@ -703,6 +715,8 @@ class ObjectTag extends StatelessWidget {
   }
 }
 
+
+
 class ListImages extends StatefulWidget {
   MyData profile;
 
@@ -713,22 +727,127 @@ class ListImages extends StatefulWidget {
 }
 
 class _ListImagesState extends State<ListImages> {
+
   int current = 0;
 
-  List imglist = [
-    'assets/image/undraw_folder_files_nweq.png',
-    'assets/image/dev.jpg',
-    'assets/image/avt.jpg',
-    'assets/image/Startup life-rafiki (2).png'
-  ];
+  List imglist = [];
+  Map res;
+  File _image;
+  var picker = new ImagePicker();
+  var rand;
+  var fileName="";
+  bool isLoading=false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getImages();
+  }
+
+
+  _getImages() async {
+
+    setState(() {
+      isLoading = true;
+    });
+    var response = await RequestHttp.getImages(widget.profile.id);
+    // print(response);
+    setState(() {
+      imglist.addAll(response);
+      isLoading = false;
+    });
+
+  }
+
+
+  Future pickImage(ImageSource imageSource) async {
+    var imageFile = await picker.getImage(source: imageSource);
+    if(imageFile!= null){
+      File file = File(imageFile.path);
+
+      File croppedFile = await ImageCropper.cropImage(
+        sourcePath: file.path,
+        maxWidth : 512,
+        maxHeight: 512,
+        aspectRatio:  CropAspectRatio(ratioX: 1.0,ratioY: 1.0),
+      );
+
+      final tempDir = await getTemporaryDirectory();
+      final path = tempDir.path;
+      Img.Image image = Img.decodeImage(croppedFile.readAsBytesSync());
+      Img.Image smallerImg = Img.copyResize(image,width: 500);
+
+      this.rand= new Random().nextInt(100000000).toString() + new Random().nextInt(10000000).toString() + new Random().nextInt(10000000).toString();
+      this.fileName = "image_${widget.profile.id}_${widget.profile.username}_Intern_$rand.jpg";
+      var compressImg = new File("$path/$fileName")
+        ..writeAsBytesSync(Img.encodeJpg(smallerImg,quality: 85));
+
+      setState((){
+        this._image = compressImg;
+        upload(_image);
+      });
+    }
+  }
+
+  Future upload(File imageFile) async{
+    var stream = new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+    var length = await imageFile.length();
+    var uri = Uri.parse("http://stube.ir/uploadImageStudent.php");
+
+    var request = new http.MultipartRequest("POST", uri);
+
+    var multiPartFile = new http.MultipartFile("image", stream, length,filename: basename(imageFile.path));
+
+
+    print(widget.profile.id);
+    print(this.fileName);
+    request.fields['user_id'] = widget.profile.id;
+    request.fields['image'] = this.fileName;
+
+
+    request.files.add(multiPartFile);
+    var response = await request.send();
+    // print(response);
+    // print(json.decode(response.stream.toString()));
+    // var responseBody = json.decode(response.headers);
+
+//    print(stream);
+//    print(length);
+//    print(uri);
+//    print(request);
+    print(response.statusCode);
+
+
+    await response.stream.transform(utf8.decoder).listen((value) {
+      res = json.decode(value);
+      print(res);
+      print(res['status']);
+    });
+    if(response.statusCode == 200) {
+      print('upload seccess');
+      setState(() {
+
+      });
+    }else{
+      print('upload failed');
+    }
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
-    return new GridView.builder(
-        gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-        itemCount: imglist.length,
-        itemBuilder: (context, index) => new GestureDetector(
+    return isLoading
+        ? Center(child: new CircularProgressIndicator())
+        : new GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+        itemCount: imglist.length >= 6
+            ? 6
+            : imglist.length +1,
+        itemBuilder: (context, index) => imglist.length==6
+            ?  new GestureDetector(
             onTap: () {
               _showSecondPage(context, imglist[index]);
             },
@@ -737,7 +856,75 @@ class _ListImagesState extends State<ListImages> {
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage(imglist[index]), fit: BoxFit.cover)),
-            )));
+            ))
+            : index == imglist.length
+            ? Container(
+          padding: EdgeInsets.only(bottom: 10.0,right: 15.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              new IconButton(
+                icon:Icon(Icons.add_circle_outline,size: 65.0,),
+                onPressed: () async{
+                  showDialog(
+                    context: context,
+                    builder: (context) => new AlertDialog(
+                      title: new Text(
+                        "انتخاب فایل از",
+                        style: TextStyle(fontSize: 16.0),
+                        textDirection: TextDirection.rtl,
+                      ),
+                      actions: [
+                        Column(
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              child: new MaterialButton(
+                                elevation: 0,
+                                color: Colors.white,
+                                child: new Text("گالری"),
+                                onPressed: () async{
+                                  Navigator.of(context).pop();
+                                  await pickImage(ImageSource.gallery);
+                                },
+                              ),
+                            ),
+                            new Container(
+                              width: MediaQuery.of(context).size.width,
+                              child: new MaterialButton(
+                                elevation: 0,
+                                color: Colors.white,
+                                child: new Text("دوربین گوشی"),
+                                onPressed: () async {
+                                  await pickImage(ImageSource.camera);
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+              new Text("اضافه کردن عکس",style: TextStyle(fontSize: 12.0),)
+            ],
+          ),
+        )
+            : new GestureDetector(
+            onTap: () {
+              _showSecondPage(context, "http://stube.ir/image/${imglist[index]}");
+            },
+            child: new Container(
+              margin: const EdgeInsets.fromLTRB(2, 0, 2, 4),
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage("http://stube.ir/image/${imglist[index]}"), fit: BoxFit.cover)),
+            ))
+
+    );
   }
 }
 
@@ -747,7 +934,7 @@ void _showSecondPage(BuildContext context, imageAddres) {
             body: new Center(
               child: new Hero(
                 tag: 'my-hero-animation-tag',
-                child: Image.asset(imageAddres),
+                child: Image.network(imageAddres),
               ),
             ),
           )));

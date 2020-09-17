@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:stubbbb/Component/textformfield.dart';
-import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/R.dart';
 import 'package:stubbbb/http/Authenticate.dart';
