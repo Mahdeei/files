@@ -5,9 +5,9 @@ import 'package:stubbbb/Models/Profile.dart';
 
 
 class HttpComments{
-  static var url_getComment = 'http://192.168.1.5/Stub/GetComments.php';
-  static var url_getUsername = 'http://192.168.1.5/Stub/getUsernameComments.php';
-  static var url_sendComment = 'http://192.168.1.5/Stub/SendComments.php';
+  static var url_getComment = 'http://192.168.1.2/Stub/GetComments.php';
+  static var url_getUsername = 'http://192.168.1.2/Stub/getUsernameComments.php';
+  static var url_sendComment = 'http://192.168.1.2/Stub/SendComments.php';
 
   static Future<Map>  getComments(var user_id) async {
     List<Comment> comments=[];

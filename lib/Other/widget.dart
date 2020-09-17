@@ -377,6 +377,36 @@ Text textLoginPageLogin(){
   );
 }
 
+String textTime(String date){
+
+
+  if(date.substring(0,10) == DateTime.now().toString().substring(0,10)){
+      if(date.substring(11,13)==DateTime.now().toString().substring(11,13)){
+        return  "لحظاتی پیش";
+      }else{
+        return "${int.parse(DateTime.now().toString().substring(11,13)) - int.parse(date.substring(11,13))} ساعت قبل";
+      }
+  }else if(date.substring(0,7)==DateTime.now().toString().substring(0,7)){
+    return "${int.parse(DateTime.now().toString().substring(8,10)) - int.parse(date.substring(8,10))} روز قبل";
+  }else if(date.substring(0,4)==DateTime.now().toString().substring(0,4)){
+    return "${int.parse(DateTime.now().toString().substring(5,7)) - int.parse(date.substring(5,7))} ماه قبل";
+  }else{
+    return "${int.parse(DateTime.now().toString().substring(0,4)) - int.parse(date.substring(0,4))} سال قبل";
+  }
+
+  //
+  // date.substring(0,10) == DateTime.now().toString().substring(0,10)
+  //     ? date.substring(11,13)==DateTime.now().toString().substring(11,13)
+  //       ?  "لحظاتی پیش"
+  //       : "${int.parse(DateTime.now().toString().substring(11,13)) - int.parse(date.substring(11,13))} ساعت قبل"
+  //     : date.substring(0,7)==DateTime.now().toString().substring(0,7)
+  //       ? "${int.parse(DateTime.now().toString().substring(8,10)) - int.parse(date.substring(8,10))} روز قبل"
+  //       : date.substring(0,4)==DateTime.now().toString().substring(0,4)
+  //       ? "${int.parse(DateTime.now().toString().substring(5,7)) - int.parse(date.substring(5,7))} ماه قبل"
+  //       : "${int.parse(DateTime.now().toString().substring(0,4)) - int.parse(date.substring(0,4))} سال قبل";
+}
+
+
 Padding textLoginPageSignup(){
   return new Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 0),
@@ -1276,16 +1306,7 @@ class _bodyRequestState extends State<bodyRequest> {
                           new Padding(
                             padding: const EdgeInsets.only(right: 80.0),
                             child: new Text(
-                              widget.requests[index].date.substring(0,10) == DateTime.now().toString().substring(0,10)
-                                ? widget.requests[index].date.substring(11,13)==DateTime.now().toString().substring(11,13)
-                                  ? "لحظاتی پیش"
-                                  : "${int.parse(DateTime.now().toString().substring(11,13)) - int.parse(widget.requests[index].date.substring(11,13))} ساعت قبل"
-                                : widget.requests[index].date.substring(0,7)==DateTime.now().toString().substring(0,7)
-                                  ? "${int.parse(DateTime.now().toString().substring(8,10)) - int.parse(widget.requests[index].date.substring(8,10))} روز قبل"
-                                  : widget.requests[index].date.substring(0,4)==DateTime.now().toString().substring(0,4)
-                                    ? "${int.parse(DateTime.now().toString().substring(5,7)) - int.parse(widget.requests[index].date.substring(5,7))} ماه قبل"
-                                    : "${int.parse(DateTime.now().toString().substring(0,4)) - int.parse(widget.requests[index].date.substring(0,4))} سال قبل"
-                              ,
+                              textTime(widget.requests[index].date),
                               style: TextStyle(fontSize: 12.0),
                             ),
                           ),

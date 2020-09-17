@@ -210,7 +210,7 @@ class _ProjectsListState extends State<ProjectsList> {
                                 fit: BoxFit.cover,
                                 image: advertisings[index].image==""
                                   ? AssetImage('assets/image/download.jfif')
-                                  : NetworkImage("http://192.168.1.5/Stub/image/${advertisings[index].image}")
+                                  : NetworkImage("http://192.168.1.2/Stub/image/${advertisings[index].image}")
                             )),
                       ),
                       new Expanded(
@@ -322,7 +322,9 @@ class _ProjectsListState extends State<ProjectsList> {
                                   new Padding(
                                     padding:
                                     const EdgeInsets.symmetric(horizontal: 5.0),
-                                    child: new Text('دقایقی پیش'),
+                                    child: new Text(
+                                        textTime(advertisings[index].date)
+                                    ),
                                   )
                                 ],
                               )
