@@ -78,7 +78,7 @@ class _EditDataState extends State<EditData> {
 
     var stream = new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
     var length = await imageFile.length();
-    var uri = Uri.parse("http://192.168.1.2/Stub/CompleteProfile.php");
+    var uri = Uri.parse("http://stube.ir/CompleteProfile.php");
 
     var request = new http.MultipartRequest("POST", uri);
 

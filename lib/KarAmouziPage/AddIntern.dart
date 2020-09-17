@@ -106,7 +106,7 @@ class _FieldsListInternState extends State<FieldsListIntern> {
   Future upload(File imageFile) async{
     var stream = new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
     var length = await imageFile.length();
-    var uri = Uri.parse("http://192.168.1.2/Stub/uploadAndAddIntern.php");
+    var uri = Uri.parse("http://stube.ir/uploadAndAddIntern.php");
 
     var request = new http.MultipartRequest("POST", uri);
 

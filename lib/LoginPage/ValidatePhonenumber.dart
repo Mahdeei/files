@@ -13,7 +13,7 @@ class ValidatePhoneNumber extends StatefulWidget {
 }
 
 class _ValidatePhoneNumberState extends State<ValidatePhoneNumber> {
-  final String url = "http://192.168.1.2/Stub/ValidatePhone.php";
+  final String url = "http://stube.ir/ValidatePhone.php";
   bool onpresscode = true;
   bool _validatephone = true;
   bool _validateCode = true;
@@ -32,9 +32,10 @@ class _ValidatePhoneNumberState extends State<ValidatePhoneNumber> {
   }
 
   setcode() async {
-    setState(() async {
-      code = await postPhone();
+
+    setState((){
     });
+    code = await postPhone();
   }
 
   void _startTime() {
@@ -247,8 +248,7 @@ class _ValidatePhoneNumberState extends State<ValidatePhoneNumber> {
   }
 
   Future<String> postPhone() async {
-    var response =
-        await http.post(url, body: {"phoneCode": _controllerPhone.text});
+    var response = await http.post(url, body: {"phoneCode": _controllerPhone.text});
     var bodyy = response.body;
     print(bodyy);
     return bodyy;

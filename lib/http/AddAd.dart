@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 
 class AddAd {
-  static var url = 'http://192.168.1.2/Stub/add_Ad.php';
+  static var url = 'http://stube.ir/add_Ad.php';
 
 
   static addAdv(Map body) async {

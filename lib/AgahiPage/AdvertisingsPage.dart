@@ -194,7 +194,7 @@ class _ProjectsListState extends State<ProjectsList> {
                                 fit: BoxFit.cover,
                                 image: advertisings[index].image==""
                                   ? AssetImage('assets/image/download.jfif')
-                                  : NetworkImage("http://192.168.1.2/Stub/image/${advertisings[index].image}")
+                                  : NetworkImage("http://stube.ir/image/${advertisings[index].image}")
                             )),
                       ),
                       new Expanded(

@@ -124,7 +124,7 @@ BoxDecoration boxDecorationKaramouziScreen(String image){
           fit: BoxFit.cover,
           image: image==null
               ? AssetImage('assets/image/download.jfif')
-              : NetworkImage("http://192.168.1.2/Stub/image/$image")
+              : NetworkImage("http://stube.ir/image/$image")
       ));
 }
 
