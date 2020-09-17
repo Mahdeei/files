@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'dart:io';
@@ -8,7 +7,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:stubbbb/AgahiPage/TextAddPost.dart';
 import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/R.dart';
-import 'package:stubbbb/http/AddAd.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
 import 'package:async/async.dart';
@@ -70,8 +68,8 @@ class _FieldsListState extends State<FieldsList> {
   var picker = new ImagePicker();
   var rand;
   var fileName;
-  Future pickImageFromGallery() async {
-    var imageFile = await picker.getImage(source: ImageSource.gallery);
+  Future pickImage(ImageSource imageSource) async {
+    var imageFile = await picker.getImage(source: imageSource);
     File file = File(imageFile.path);
 
     File croppedFile = await ImageCropper.cropImage(
@@ -87,7 +85,7 @@ class _FieldsListState extends State<FieldsList> {
     Img.Image smallerImg = Img.copyResize(image,width: 500);
 
     this.rand= new Random().nextInt(100000000).toString() + new Random().nextInt(10000000).toString() + new Random().nextInt(10000000).toString();
-    this.fileName = "image_${widget.profile.id}_${widget.profile.username}_${widget.profile.name}_$rand.jpg";
+    this.fileName = "image_${widget.profile.id}_${widget.profile.username}_${widget.profile.name}_Advertising_$rand.jpg";
     var compressImg = new File("$path/$fileName")
     ..writeAsBytesSync(Img.encodeJpg(smallerImg,quality: 85));
 
@@ -96,17 +94,17 @@ class _FieldsListState extends State<FieldsList> {
     });
   }
 
-  Future<Null> pickImageFromCamera() async {
-    PickedFile pickedFile =await ImagePicker().getImage(source: ImageSource.camera);
-    setState((){
-      this._image = File(pickedFile.path);
-    });
-  }
+  // Future<Null> pickImageFromCamera() async {
+  //   PickedFile pickedFile =await ImagePicker().getImage(source: ImageSource.camera);
+  //   setState((){
+  //     this._image = File(pickedFile.path);
+  //   });
+  // }
 
   Future upload(File imageFile) async{
     var stream = new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
     var length = await imageFile.length();
-    var uri = Uri.parse("http://192.168.1.2/Stub/uploadAndEditPro.php");
+    var uri = Uri.parse("http://192.168.1.2/Stub/uploadAndAddAd.php");
 
     var request = new http.MultipartRequest("POST", uri);
 
@@ -220,7 +218,7 @@ class _FieldsListState extends State<FieldsList> {
                                                   child: new Text("گالری"),
                                                   onPressed: () async{
                                                     Navigator.of(context).pop();
-                                                    await pickImageFromGallery();
+                                                    await pickImage(ImageSource.gallery);
 
                                                   },
                                                 ),
@@ -232,7 +230,7 @@ class _FieldsListState extends State<FieldsList> {
                                                   color: Colors.white,
                                                   child: new Text("دوربین گوشی",textDirection: TextDirection.rtl,),
                                                   onPressed: () async {
-                                                    await pickImageFromCamera();
+                                                    await pickImage(ImageSource.camera);
                                                     Navigator.of(context).pop();
                                                   },
                                                 ),

@@ -18,6 +18,7 @@ class AdvertisingsPage extends StatefulWidget {
   _AdvertisingsPageState createState() => _AdvertisingsPageState();
 }
 
+
 class _AdvertisingsPageState extends State<AdvertisingsPage> with SingleTickerProviderStateMixin{
   TabController tabController;
 
@@ -25,7 +26,7 @@ class _AdvertisingsPageState extends State<AdvertisingsPage> with SingleTickerPr
   void initState() {
     // TODO: implement initState
     super.initState();
-    tabController = new TabController(length: 3,vsync: this,);
+    tabController = new TabController(length: 2,vsync: this,);
 
   }
 
@@ -37,44 +38,27 @@ class _AdvertisingsPageState extends State<AdvertisingsPage> with SingleTickerPr
   Widget build(BuildContext context) {
 
     return new Directionality(
-          textDirection: TextDirection.rtl,
-          child: new SafeArea(
-              child: new Scaffold(
-                    floatingActionButton: new FloatingActionButton(
-                      onPressed: () {
-                        Navigator.of(context).push(new MaterialPageRoute(builder: (ctx)=> AddPostAgahi(profile: widget.profile,)));
-                      },
-                      child: new Icon(Icons.add),
-                      backgroundColor: R.color.banafshmain,
-                      // child: OpenContainer(
-                      //   transitionDuration: Duration(milliseconds: 500),
-                      //   closedBuilder: (ctx, action) => new Container(
-                      //     color: R.color.banafshmain,
-                      //     width: MediaQuery.of(context).size.width,
-                      //     child: new Icon(
-                      //       Icons.add,
-                      //       color: R.color.red,
-                      //     ),
-                      //   ),
-                      //   openBuilder: (ctx, action) => AddPostAgahi(profile: widget.profile,),
-                      // ),
-                    ),
-                    backgroundColor: Color(0xfff2f3f8),
-                    drawer: DrawerLists(),
-                    appBar:/* appBarAgahiScreen(),*/ new AppBar(
-                      bottom: new TabBar(
+        textDirection: TextDirection.rtl,
+        child: new SafeArea(
+            child: new Scaffold(
+                floatingActionButton: new FloatingActionButton(
+                  onPressed: () {
+                    Navigator.of(context).push(new MaterialPageRoute(builder: (ctx)=> AddPostAgahi(profile: widget.profile,)));
+                  },
+                  child: new Icon(Icons.add),
+                  backgroundColor: R.color.banafshmain,
+                ),
+                backgroundColor: Color(0xfff2f3f8),
+                drawer: DrawerLists(),
+                appBar: appBarAgahiScreen(tabController),
 
-                        controller: tabController,
-                        tabs: [
-                          Tab(child: new Icon(Icons.ac_unit),),
-                          Tab(child: new Icon(Icons.access_alarm),),
-                          Tab(child: new Icon(Icons.ac_unit),),
-                        ],
-
-                      ),
-                    ),
-
-                    body:ProjectsList(profile: widget.profile,)
+                body:TabBarView(
+                    controller: tabController,
+                    children: [
+                      ProjectsList(profile: widget.profile,),
+                      new Center(child: Text('salam'),),
+                    ]
+                )
             )));
   }
 

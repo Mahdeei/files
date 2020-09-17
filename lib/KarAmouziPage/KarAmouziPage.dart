@@ -163,7 +163,7 @@ class _KarAmouziListListState extends State<KarAmouziListList> {
                           margin: const EdgeInsets.only(right: 4.0,left: 3.0),
                           height: phonesize.height * 0.12,
                           width: phonesize.width * 0.30,
-                          decoration: boxDecorationKaramouziScreen(),
+                          decoration: boxDecorationKaramouziScreen(interShips[index].image),
                         ),
                         new Expanded(
                             child: new Column(

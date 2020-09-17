@@ -115,14 +115,17 @@ BoxDecoration decorationKaramouziScreen(){
       ));
 }
 
-BoxDecoration boxDecorationKaramouziScreen(){
+BoxDecoration boxDecorationKaramouziScreen(String image){
   return BoxDecoration(
       borderRadius: BorderRadius.only(
           topRight: Radius.circular(65.0),
           bottomRight: Radius.circular(65.0)),
       image: DecorationImage(
           fit: BoxFit.cover,
-          image: AssetImage('assets/image/download.jfif')));
+          image: image==null
+              ? AssetImage('assets/image/download.jfif')
+              : NetworkImage("http://192.168.1.2/Stub/image/$image")
+      ));
 }
 
 BoxDecoration boxDecorationKaramouziScrenn(){
@@ -556,7 +559,8 @@ AppBar appBarKaramouziScreen(){
   );
 }
 
-AppBar appBarAgahiScreen(){
+AppBar appBarAgahiScreen(TabController tabController){
+
   return AppBar(
       actions: <Widget>[
         new Padding(
@@ -570,6 +574,7 @@ AppBar appBarAgahiScreen(){
       ],
       backgroundColor: Colors.white,
       bottom: TabBar(
+        controller: tabController,
         tabs: [
           Tab(
               icon: new Text(
@@ -581,11 +586,11 @@ AppBar appBarAgahiScreen(){
                 'فروش کتاب',
                 style: TextStyle(color: Colors.black),
               )),
-          Tab(
-              icon: new Text(
-                'کارفرکا',
-                style: TextStyle(color: Colors.black),
-              )),
+          // Tab(
+          //     icon: new Text(
+          //       'کارفرکا',
+          //       style: TextStyle(color: Colors.black),
+          //     )),
         ],
       ));
 }

@@ -1,12 +1,22 @@
+import 'dart:math';
+import 'package:image/image.dart' as Img;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'dart:io';
+import 'dart:async';
+import 'package:http/http.dart'as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:stubbbb/AgahiPage/TextAddPost.dart';
-import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/R.dart';
 import 'package:stubbbb/http/AddAd.dart';
+import 'dart:convert';
+import 'package:path/path.dart';
+import 'package:async/async.dart';
+
+
 
 class AddInternPost extends StatefulWidget {
   MyData profile;
@@ -35,45 +45,133 @@ class FieldsListIntern extends StatefulWidget {
 }
 
 class _FieldsListInternState extends State<FieldsListIntern> {
-
+  var _listdrop=["کارآموزی","کارآموزی منجر به استخدام","استخدام"];
   final key = GlobalKey<ScaffoldState>();
+  bool clr = false;
+  bool clr1 = false;
+  int group = 1,type=0;
   Map res;
+
+  File _image;
+  var picker = new ImagePicker();
+  var rand;
+  var fileName;
+
+
   String tozihat = 'توضیحات',
       shrayet = 'شرایط',
       numberPeople = 'تعداد افراد',
       timeWork = 'ساعت کاری',
       phone = 'شماره تلفن',
-      adress = 'آدرس',
+      address = 'آدرس',
       onvan = '+عنوان کار اموزی',
       company = '+نام شرکت',
-      type='نوع کارآموزی';
-  bool clr = false;
-  bool clr1 = false;
-  int group = 1;
-
-  var _listdrop=["کارآموزی","کارآموزی منجر به استخدام","استخدام"];
+      showType='نوع کارآموزی';
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    setState(() {});
+    print(type);
   }
 
-  File imageFile;
-  final _picker = ImagePicker();
 
-  Future<Null> pickImageFromGallery() async {
-    final PickedFile pickedFile =
-    await _picker.getImage(source: ImageSource.gallery);
-    setState(() => this.imageFile = File(pickedFile.path));
+
+  Future pickImage(ImageSource imageSource) async {
+    var imageFile = await picker.getImage(source: imageSource);
+    File file = File(imageFile.path);
+
+    File croppedFile = await ImageCropper.cropImage(
+      sourcePath: file.path,
+      maxWidth : 512,
+      maxHeight: 512,
+      aspectRatio:  CropAspectRatio(ratioX: 1.0,ratioY: 1.0),
+    );
+
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Img.Image image = Img.decodeImage(croppedFile.readAsBytesSync());
+    Img.Image smallerImg = Img.copyResize(image,width: 500);
+
+    this.rand= new Random().nextInt(100000000).toString() + new Random().nextInt(10000000).toString() + new Random().nextInt(10000000).toString();
+    this.fileName = "image_${widget.profile.id}_${widget.profile.username}_${widget.profile.name}_Intern_$rand.jpg";
+    var compressImg = new File("$path/$fileName")
+      ..writeAsBytesSync(Img.encodeJpg(smallerImg,quality: 85));
+
+    setState((){
+      this._image = compressImg;
+    });
   }
 
-  Future<Null> pickImageFromCamera() async {
-    final PickedFile pickedFile =
-    await _picker.getImage(source: ImageSource.camera);
-    setState(() => this.imageFile = File(pickedFile.path));
+  Future upload(File imageFile) async{
+    var stream = new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+    var length = await imageFile.length();
+    var uri = Uri.parse("http://192.168.1.2/Stub/uploadAndAddIntern.php");
+
+    var request = new http.MultipartRequest("POST", uri);
+
+    var multiPartFile = new http.MultipartFile("image", stream, length,filename: basename(imageFile.path));
+
+
+    String sharayet = shrayet;
+    if (sharayet == 'شرایط') {
+      sharayet = "";
+    }
+
+    request.fields['user_id'] = widget.profile.id;
+    request.fields['title'] = onvan;
+    request.fields['company'] = company;
+    request.fields['date'] = "${DateTime.now()}";
+    request.fields['numberinternship'] = numberPeople;
+    request.fields['time_work'] = timeWork;
+    request.fields['type'] = "$type";
+    request.fields['description'] = tozihat;
+    request.fields['image'] = this.fileName;
+    request.fields['address'] = address;
+    request.fields['phonenumber'] = phone;
+
+    request.files.add(multiPartFile);
+    var response = await request.send();
+    // print(response);
+    // print(json.decode(response.stream.toString()));
+    // var responseBody = json.decode(response.headers);
+
+//    print(stream);
+//    print(length);
+//    print(uri);
+//    print(request);
+    print(response.statusCode);
+
+
+    await response.stream.transform(utf8.decoder).listen((value) {
+      res = json.decode(value);
+      print(res);
+      print(res['status']);
+    });
+    if(response.statusCode == 200) {
+      print('upload seccess');
+    }else{
+      print('upload failed');
+    }
   }
+
+
+  // addAd()async{
+  //   String sharayet = shrayet;
+  //   if(sharayet=='شرایط'){
+  //     sharayet="";
+  //   }
+  //   res =await AddAd.addAdv(
+  //       {
+  //         "user_id":widget.profile.id,
+  //         "title":onvan,
+  //         "description":tozihat,
+  //         "date":"${DateTime.now()}",
+  //         "price":timeWork,
+  //         "conditions":sharayet,
+  //         "location":address,
+  //       });
+  // }
 
   Color _color() {
     return clr ? Colors.red : Colors.black;
@@ -106,15 +204,58 @@ class _FieldsListInternState extends State<FieldsListIntern> {
                   children: <Widget>[
                     new Row(
                       children: <Widget>[
-                        new GestureDetector(
-                          onTap: () async => await pickImageFromCamera(),
+                        _image == null
+                            ? new GestureDetector(
+                          onTap: () async {
+                            showDialog(
+                              context: context,
+                              builder: (context) => new AlertDialog(
+                                title: new Text(
+                                  "انتخاب فایل از",
+                                  style: TextStyle(fontSize: 16.0),
+                                  textDirection: TextDirection.rtl,
+                                ),
+                                actions: [
+                                  Column(
+                                    children: [
+                                      Container(
+                                        width: MediaQuery.of(context).size.width,
+                                        child: new MaterialButton(
+                                          elevation: 0,
+                                          color: Colors.white,
+                                          child: new Text("گالری"),
+                                          onPressed: () async{
+                                            Navigator.of(context).pop();
+                                            await pickImage(ImageSource.gallery);
+                                          },
+                                        ),
+                                      ),
+                                      new Container(
+                                        width: MediaQuery.of(context).size.width,
+                                        child: new MaterialButton(
+                                          elevation: 0,
+                                          color: Colors.white,
+                                          child: new Text("دوربین گوشی"),
+                                          onPressed: () async {
+                                            await pickImage(ImageSource.camera);
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
                           child: new Container(
                               height: phoneSize.height * 0.25,
                               width: phoneSize.width * 0.45,
                               child: new Align(
                                 alignment: Alignment.center,
                                 child: new Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.center,
                                   children: <Widget>[
                                     new Icon(
                                       Icons.add_a_photo,
@@ -127,6 +268,13 @@ class _FieldsListInternState extends State<FieldsListIntern> {
                                   ],
                                 ),
                               )),
+                        )
+                            : new Container(
+                          height: phoneSize.height * 0.25,
+                          width: phoneSize.width * 0.45,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(image: FileImage(_image),fit: BoxFit.cover)
+                          ),
                         ),
                         new Container(
                           height: phoneSize.height * 0.25,
@@ -170,7 +318,7 @@ class _FieldsListInternState extends State<FieldsListIntern> {
                               // GestureDetector(
                               //   onTap: () async {
                               //     dste = await AlertTextField.alertDialog(
-                              //         'انتحاب دسته بندی', dste, context);
+                              //         'نام شرکت', dste, context);
                               //   },
                               //   child: new Align(
                               //       alignment: Alignment.topRight,
@@ -239,7 +387,7 @@ class _FieldsListInternState extends State<FieldsListIntern> {
                         Container(
                           padding: const EdgeInsets.only(right: 10.0,top: 10.0),
                           child: DropdownButton<String>(
-                            hint: Container(width: phoneSize.width*0.85,child: new Text(type)),
+                            hint: Container(width: phoneSize.width*0.85,child: new Text(showType)),
                             items: _listdrop.map((String dropdownStringItem){
                               return DropdownMenuItem<String>(
                                 value: dropdownStringItem,
@@ -247,12 +395,19 @@ class _FieldsListInternState extends State<FieldsListIntern> {
 
                                 },
                                 child: Align(alignment: Alignment.centerRight,child: Text(dropdownStringItem,textAlign: TextAlign.right,)),
-
                               );
                             }).toList(),
                             onChanged: (value){
                               setState(() {
-                                type=value;
+                                showType=value;
+                                if(value=="استخدام"){
+                                  type=3;
+                                }else if(value=="کارآموزی منجر به استخدام"){
+                                  type=2;
+                                }else if(value=="کارآموزی"){
+                                  type=1;
+                                }
+                                print(type);
                               });
                             },
                           ),
@@ -438,17 +593,17 @@ class _FieldsListInternState extends State<FieldsListIntern> {
                         children: [
                           new GestureDetector(
                               onTap: () async {
-                                adress = await AlertTextField.alertDialog(
-                                    'آدرس', adress, context);
+                                address = await AlertTextField.alertDialog(
+                                    'آدرس', address, context);
                                 setState(() {});
                               },
                               child: Container(
                                   width: phoneSize.width * .78,
-                                  child: _text(18, adress))),
-                          new Text(adress == 'آدرس' ? 'وارد نشده' : 'آدرس',
+                                  child: _text(18, address))),
+                          new Text(address == 'آدرس' ? 'وارد نشده' : 'آدرس',
                               style: TextStyle(
                                   color:
-                                  adress == 'آدرس' ? _color() : Colors.black))
+                                  address == 'آدرس' ? _color() : Colors.black))
                         ],
                       ),
                     ),
@@ -481,13 +636,13 @@ class _FieldsListInternState extends State<FieldsListIntern> {
                 if (tozihat == 'توضیحات' ||
                     timeWork == 'مهلت' ||
                     phone == 'بودجه' ||
-                    adress == 'آدرس' ||
+                    address == 'آدرس' ||
                     onvan == 'عنوان آگهی') {
                   setState(() {
                     clr = true;
                   });
                 } else {
-                  await addAd();
+                  await upload(_image);
                   if(res['status']=="added"){
                     key.currentState.showSnackBar(
                         new SnackBar(content: new Text("آگهی شما با موفقیت ارسال شد"))
@@ -496,7 +651,6 @@ class _FieldsListInternState extends State<FieldsListIntern> {
                 }
               },
               child: new Container(
-
                 alignment: Alignment.center,
                 width: phoneSize.width * 0.8,
                 margin: const EdgeInsets.only(bottom: 20),
@@ -518,20 +672,5 @@ class _FieldsListInternState extends State<FieldsListIntern> {
     );
   }
 
-  addAd()async{
-    String sharayet = shrayet;
-    if(sharayet=='شرایط'){
-      sharayet="";
-    }
-    res =await AddAd.addAdv(
-        {
-          "user_id":widget.profile.id,
-          "title":onvan,
-          "description":tozihat,
-          "date":"${DateTime.now()}",
-          "price":timeWork,
-          "conditions":sharayet,
-          "location":adress,
-        });
-  }
+
 }

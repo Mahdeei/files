@@ -5,6 +5,7 @@ import 'package:stubbbb/FirstPage/HomePage/HomeScreen.dart';
 import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Other/widget.dart';
 import 'package:stubbbb/http/Authenticate.dart';
+import 'package:validators/validators.dart';
 import 'ValidatePhonenumber.dart';
 
 
@@ -20,14 +21,21 @@ class _SignInState extends State<SignIn> {
 
   final _formKeyLog = GlobalKey<FormState>();
   String _username;
-  String _password;
+  String _password,_phonenumber;
   Color _color = Colors.white;
   bool error = true;
   Map boody;
   Profile profile ;
 
   void usernameOnSaved(String value) {
-    _username = value;
+    if(!isNumeric(value)) {_username = value;
+    _phonenumber = null;
+    }
+    else{
+      _phonenumber = value;
+      _username = null;
+    }
+
   }
 
   void passwordOnSaved(String value) {
@@ -37,26 +45,28 @@ class _SignInState extends State<SignIn> {
 
 
   recieveData() async {
-      boody = await AuthenticateService.signIn({"username":_username,"password":_password});
-      if (await boody['status'] == 'succes') {
 
-        _userSaveToken(boody);
-        Navigator.of(context).pushReplacement(new MaterialPageRoute(
-            builder: (context) =>
-            new HomePage(id: boody['id'],)));
-        if (error == false) {
-          setState(() {
-            error = true;
-          });
-        }
-      } else if (boody['status'] ==
-          'not exist user') {
-        if (error == true) {
-          setState(() {
-            error = false;
-          });
-        }
+    _username == null ? boody = await AuthenticateService.signIn({"phonenumber":_phonenumber,"password":_password})
+        : boody = await AuthenticateService.signIn({"username":_username,"password":_password});
+    if (await boody['status'] == 'succes') {
+
+      _userSaveToken(boody);
+      Navigator.of(context).pushReplacement(new MaterialPageRoute(
+          builder: (context) =>
+          new HomePage(id: boody['id'],)));
+      if (error == false) {
+        setState(() {
+          error = true;
+        });
       }
+    } else if (boody['status'] ==
+        'not exist user') {
+      if (error == true) {
+        setState(() {
+          error = false;
+        });
+      }
+    }
   }
 
 
