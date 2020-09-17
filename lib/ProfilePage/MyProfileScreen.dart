@@ -4,6 +4,7 @@ import 'package:stubbbb/Models/Comment.dart';
 import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/R.dart';
+import 'package:stubbbb/Other/widget.dart';
 import 'package:stubbbb/http/Authenticate.dart';
 import 'package:stubbbb/http/httpComments.dart';
 import 'editData.dart';
@@ -47,6 +48,7 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
     MyData body = await AuthenticateService.getMyData(widget.id);
     setState(() {
       profile = body;
+      // print(profile.phoneNumber+" : Phone number");
       isLoading = false;
     });
   }
@@ -169,11 +171,15 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
 //                 ),
                 new SizedBox(width: 3.0,),
                 new GestureDetector(
+
                   onTap: () {
+
                     Navigator.of(context).push(new MaterialPageRoute(
                         builder: (context) => new EditData(
                               profile: profile,
                             )));
+                    print(profile.phoneNumber);
+                    print(" : Phone number");
                   },
                   child: new Container(
                       alignment: Alignment.center,
@@ -562,16 +568,25 @@ class _ListTwoState extends State<ListTwo> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
-                                            new CircleAvatar(
-                                              maxRadius: 20,
-                                              backgroundColor:
+                                            new Row(
+                                              children: [
+                                                new CircleAvatar(
+                                                  maxRadius: 20,
+                                                  backgroundColor:
                                                   R.color.banafshKamRang,
+                                                ),
+                                                new SizedBox(
+                                                  width: 10,
+                                                ),
+                                                new Text(username[index]),
+                                              ],
                                             ),
-                                            new SizedBox(
-                                              width: 10,
-                                            ),
-                                            new Text(username[index]),
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 8.0),
+                                              child: new Text(textTime(comments[index].date),style: TextStyle(fontSize: 10.0,fontWeight: FontWeight.w300),),
+                                            )
                                           ],
                                         ),
                                         Row(

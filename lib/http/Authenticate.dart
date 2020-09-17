@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:http/http.dart'as http;
 import 'package:stubbbb/Models/myData.dart';
 class AuthenticateService{
@@ -24,7 +23,7 @@ class AuthenticateService{
       moarefiNameh: body['moarefiName'],
       name: body['name'],
       password: body['password'],
-      phoneNumber: body['phoneNumber'],
+      phoneNumber: body['phonenumber'],
       resumes: body['resumes'],
       skills: body['skills'],
       type: body['type'],

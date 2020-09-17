@@ -236,7 +236,7 @@ class _KarAmouziListListState extends State<KarAmouziListList> {
                                       children: <Widget>[
                                         iconKarAmouziScreen(),
                                         new SizedBox(width: 1.0),
-                                        texKarAmouziScreen()
+                                        texKarAmouziScreen(interShips[index].address)
                                       ],
                                     )),
                               ],

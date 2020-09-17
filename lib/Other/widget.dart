@@ -161,9 +161,9 @@ Icon iconKarAmouziScreen(){
 }
 
 
-Text texKarAmouziScreen(){
+Text texKarAmouziScreen(String address){
   return new Text(
-    'مشهد،وکیل آباد 56 ، مجتمع احسان',
+    address,
     style: TextStyle(fontSize: 8.0),
   );
 }
@@ -218,7 +218,10 @@ Text textTwoKaramouziScreen(String description){
 
 Text textthreeKaramouziScreen(String company){
   return new Text(
-    company,
+    company=='+نام شرکت'
+      ? "مستقل"
+      : company
+    ,
     overflow: TextOverflow.ellipsis,
     maxLines: 1,
     style: TextStyle(
