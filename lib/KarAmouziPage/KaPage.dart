@@ -113,11 +113,11 @@ class HeadersItemsPage extends StatelessWidget {
               decoration: BoxDecoration(
                   image: DecorationImage(colorFilter: ColorFilter.mode(Colors.black45, BlendMode.darken),
                       fit: BoxFit.cover,
-                      image: AssetImage('assets/image/dev.jpg',)
+                      image: NetworkImage('http://stube.ir/image/${interShip.image}',)
                   )
               ),
-              child:new Align(alignment: Alignment.topRight,
-                child:   new IconButton(icon: Icon(Icons.share,color: Colors.white,), onPressed: (){print('pressed');}),),
+              // child:new Align(alignment: Alignment.topRight,
+              //   child:   new IconButton(icon: Icon(Icons.share,color: Colors.white,), onPressed: (){print('pressed');}),),
             ),
             new Container(
               height: phonesize.height*0.25,
@@ -128,21 +128,21 @@ class HeadersItemsPage extends StatelessWidget {
                   new Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      new Padding(padding: const EdgeInsets.only(top: 2.0,right: 5.0),
-                        child: new CircleAvatar(backgroundImage: AssetImage('assets/image/avt.jpg'),maxRadius: 16.0,)
-                        ,),
+                      // new Padding(padding: const EdgeInsets.only(top: 2.0,right: 5.0),
+                      //   child: new CircleAvatar(backgroundImage: NetworkImage('http://stube.ir/image/${profile.image}'),maxRadius: 16.0,)
+                      //   ,),
                       new IconButton(icon: Icon(Icons.arrow_forward,color: Colors.white,), onPressed: (){})
 
                     ],
                   ),
-                  new Align(alignment: Alignment.topRight,
+                  new Align(alignment: Alignment.topCenter,
                     child: new Padding(padding: const EdgeInsets.only(right: 5.0),
                       child: new Text(interShip.title,overflow: TextOverflow.ellipsis,maxLines: 1,
                         style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.bold,color: Colors.white),),),),
-                  new Align(alignment: Alignment.topRight,
-                      child: new Padding(padding: const EdgeInsets.only(right: 8.0),
-                        child: new Text('تکنولوژی و فناوری اطلاعات',overflow: TextOverflow.ellipsis,maxLines: 1,
-                          style: TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold,color: Color(0xff44143E),),),)),
+                  // new Align(alignment: Alignment.topRight,
+                  //     child: new Padding(padding: const EdgeInsets.only(right: 8.0),
+                  //       child: new Text('تکنولوژی و فناوری اطلاعات',overflow: TextOverflow.ellipsis,maxLines: 1,
+                  //         style: TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold,color: Color(0xff44143E),),),)),
                   new SizedBox(height: phonesize.height*0.04,),
                   new Align(alignment: Alignment.bottomCenter,
                     child: new Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -173,9 +173,9 @@ class HeadersItemsPage extends StatelessWidget {
                             Navigator.of(context).push(new MaterialPageRoute(builder: (ctx) => new SendReqIntern(profile: profile,interShip: interShip,)));
                           },
                         ),
-                        new GestureDetector(
-                          child: Icon(Icons.bookmark_border,color: Colors.white,),
-                        )
+                        // new GestureDetector(
+                        //   child: Icon(Icons.bookmark_border,color: Colors.white,),
+                        // )
 
 
 

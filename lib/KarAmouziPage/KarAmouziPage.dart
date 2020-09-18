@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:stubbbb/KarAmouziPage/AddIntern.dart';
 import 'package:stubbbb/Models/InterShip.dart';
-import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/R.dart';
 import 'package:stubbbb/Other/widget.dart';
-import 'package:stubbbb/http/AddIntern.dart';
 import 'package:stubbbb/http/httpInterships.dart';
 import 'package:stubbbb/http/maxID.dart';
 import 'KaPage.dart';
@@ -144,110 +142,132 @@ class _KarAmouziListListState extends State<KarAmouziListList> {
         ? interShips.length==0
           ? new Center(child: new Text('در حال حاضر آگهی برای نمایش وجود ندارد.'),)
           : RefreshIndicator(
-      onRefresh: refreshList,
-      child: new ListView.builder(
-          controller: scrollController,
-          itemCount: interShips.length,
-          itemBuilder: (BuildContext context, int index) => new GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => KaPage(interShip: interShips[index],profile: widget.profile,)),
-              );
-            },
-            child: new Container(
-              margin: const EdgeInsets.only(right: 6.0, bottom: 5.0, top: 10.0, left: 9.0),
-              height: phonesize.height * 0.13,
-              decoration: decorationKaramouziScreen(),
-              child: new Row(
-                children: <Widget>[
-                  new Container(
-                    margin: const EdgeInsets.only(right: 4.0,left: 3.0),
-                    height: phonesize.height * 0.12,
-                    width: phonesize.width * 0.30,
-                    decoration: boxDecorationKaramouziScreen(interShips[index].image),
-                  ),
-                  new Expanded(
-                      child: new Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          new Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              textoneKaramouziScreen(interShips[index].title),
-                              Container(
-                                  margin: EdgeInsets.only(right: 5.0),
-                                  width: MediaQuery.of(context).size.width*0.6,
-                                  child: textTwoKaramouziScreen(interShips[index].description)),
-                              new Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  new Row(
+            onRefresh: refreshList,
+            child: new ListView.builder(
+                controller: scrollController,
+                itemCount: interShips.length,
+                itemBuilder: (BuildContext context, int index) =>
+                new GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => KaPage(interShip: interShips[index],profile: widget.profile,)),
+                    );
+                  },
+                  child: new Container(
+                    margin: const EdgeInsets.only(right: 6.0, bottom: 5.0, top: 10.0, left: 9.0),
+                    height: phonesize.height * 0.13,
+                    // width: phonesize.width*0.5,
+                    decoration: decorationKaramouziScreen(),
+                    child: new Row(
+                      children: <Widget>[
+                        new Container(
+                          margin: const EdgeInsets.only(right: 4.0,left: 3.0),
+                          height: phonesize.height * 0.12,
+                          width: phonesize.width * 0.30,
+                          decoration: boxDecorationKaramouziScreen(interShips[index].image),
+                        ),
+                        new Expanded(
+                            child: new Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                new Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    textoneKaramouziScreen(interShips[index].title),
+                                    Container(
+                                        margin: EdgeInsets.only(right: 5.0),
+                                        width: MediaQuery.of(context).size.width*0.6,
+                                        child: textTwoKaramouziScreen(interShips[index].description)),
+                                    new Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        new Row(
+                                          children: [
+                                            new Padding(
+                                                padding: const EdgeInsets.only(right: 5.0),
+                                                child: Container(
+                                                    width: MediaQuery.of(context).size.width*0.19,
+                                                    child: textthreeKaramouziScreen(interShips[index].company)
+                                                )
+                                            ),
+                                            textlineBetween(),
+                                            Container(
+                                                margin: EdgeInsets.only(right: 3.0),
+                                                width: MediaQuery.of(context).size.width *0.25,
+                                                child: textType(interShips[index].type)),
+                                          ],
+                                        ),
+                                        new Padding(
+                                            padding:const EdgeInsets.only(left: 5.0,),
+                                            child: circleAvatarKaramouziScreen()
+                                        )
+                                      ],
+                                    ),
+                                    // new Row(
+                                    //   children: <Widget>[
+                                    //     new Container(
+                                    //         margin: const EdgeInsets.only(right: 10.0),
+                                    //         decoration: boxDecorationKaramouziScrenn(),
+                                    //         child: new Padding(
+                                    //           padding: const EdgeInsets.symmetric(horizontal: 3.0, vertical: 1.0),
+                                    //           child: textKarAmouziScreen()
+                                    //         )),
+                                    //     new Container(
+                                    //         margin: const EdgeInsets.only(right: 2.0),
+                                    //         decoration: boxDecorationKaramouziScrenn(),
+                                    //         child: new Padding(
+                                    //           padding: const EdgeInsets.symmetric(horizontal: 3.0, vertical: 1.0),
+                                    //           child: textKarAmoziScreen(),
+                                    //     )),
+                                    //     new Container(
+                                    //         margin: const EdgeInsets.only(right: 2.0),
+                                    //         decoration: boxDecorationKaramouziScrenn(),
+                                    //         child: new Padding(
+                                    //           padding: const EdgeInsets.symmetric(horizontal: 3.0, vertical: 1.0),
+                                    //           child: textKarAmouzziScreen(),
+                                    //         )),
+                                    //   ],
+                                    // ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom:2.0,right: 0.0),
+                                  child: Row(
                                     children: [
-                                      new Padding(
-                                          padding: const EdgeInsets.only(right: 5.0),
-                                          child: Container(
-                                              width: MediaQuery.of(context).size.width*0.19,
-                                              child: textthreeKaramouziScreen(interShips[index].company)
-                                          )
-                                      ),
-                                      textlineBetween(),
+                                      new Icon(Icons.location_city,size: 10.0,),
+                                      new SizedBox(width: 2.0,),
                                       Container(
-                                          margin: EdgeInsets.only(right: 3.0),
-                                          width: MediaQuery.of(context).size.width *0.25,
-                                          child: textType(interShips[index].type)),
+                                        width: phonesize.width*0.5,
+                                        child: new Text(
+                                          interShips[index].address,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(fontSize: phonesize.height*0.01),),
+                                      ),
                                     ],
                                   ),
-                                  new Padding(
-                                      padding:const EdgeInsets.only(left: 5.0,),
-                                      child: circleAvatarKaramouziScreen()
-                                  )
-                                ],
-                              ),
-                              // new Row(
-                              //   children: <Widget>[
-                              //     new Container(
-                              //         margin: const EdgeInsets.only(right: 10.0),
-                              //         decoration: boxDecorationKaramouziScrenn(),
-                              //         child: new Padding(
-                              //           padding: const EdgeInsets.symmetric(horizontal: 3.0, vertical: 1.0),
-                              //           child: textKarAmouziScreen()
-                              //         )),
-                              //     new Container(
-                              //         margin: const EdgeInsets.only(right: 2.0),
-                              //         decoration: boxDecorationKaramouziScrenn(),
-                              //         child: new Padding(
-                              //           padding: const EdgeInsets.symmetric(horizontal: 3.0, vertical: 1.0),
-                              //           child: textKarAmoziScreen(),
-                              //     )),
-                              //     new Container(
-                              //         margin: const EdgeInsets.only(right: 2.0),
-                              //         decoration: boxDecorationKaramouziScrenn(),
-                              //         child: new Padding(
-                              //           padding: const EdgeInsets.symmetric(horizontal: 3.0, vertical: 1.0),
-                              //           child: textKarAmouzziScreen(),
-                              //         )),
-                              //   ],
-                              // ),
-                            ],
-                          ),
-                          new Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 4.0),
-                              child: new Row(
-                                children: <Widget>[
-                                  iconKarAmouziScreen(),
-                                  new SizedBox(width: 1.0),
-                                  texKarAmouziScreen(interShips[index].address)
-                                ],
-                              )),
-                        ],
-                      ))
-                ],
-              ),
-            ),
-          )),
-    )
+                                )
+                                // Container(
+                                //       // height: phonesize.height*0.001,
+                                //       width: phonesize.width*0.1,
+                                //       child: new Row(
+                                //         children: <Widget>[
+                                //           iconKarAmouziScreen(),
+                                //           // new SizedBox(width: 1.0),
+                                //           texKarAmouziScreen(interShips[index].address),
+                                //
+                                //         ],
+                                //       ),
+                                //     )
+                              ],
+                            ))
+                      ],
+                    ),
+                  ),
+                )),
+          )
         : Center(child: CircularProgressIndicator());
   }
 }

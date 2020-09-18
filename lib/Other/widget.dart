@@ -15,16 +15,15 @@ import 'R.dart';
 import 'package:animations/animations.dart';
 
 
-
-
 class ModelMenu {
   String titr;
   String image;
   Color color;
+
   ModelMenu(this.titr, this.image, this.color);
 }
 
-BoxDecoration decorationLoginPagee(){
+BoxDecoration decorationLoginPagee() {
   return BoxDecoration(
       boxShadow: [
         BoxShadow(
@@ -36,7 +35,7 @@ BoxDecoration decorationLoginPagee(){
       borderRadius: BorderRadius.circular(30.0));
 }
 
-BoxDecoration deorationLoginPage(){
+BoxDecoration deorationLoginPage() {
   return BoxDecoration(
       color: Colors.white,
       boxShadow: [
@@ -48,39 +47,39 @@ BoxDecoration deorationLoginPage(){
       borderRadius: BorderRadius.circular(30.0));
 }
 
-BoxDecoration decorationHomePage(){
+BoxDecoration decorationHomePage() {
   return BoxDecoration(
       color: R.color.banafshmain,
       borderRadius: BorderRadius.only(bottomLeft: Radius.circular(35.0)));
 }
 
-BoxDecoration decorationImageHomePage(){
+BoxDecoration decorationImageHomePage(String image) {
   return BoxDecoration(
       shape: BoxShape.circle,
       image: DecorationImage(
           fit: BoxFit.cover,
-          image: AssetImage('assets/image/download.jfif'))
+          image: NetworkImage('http://stube.ir/image/$image'))
   );
 }
 
 
-BoxDecoration decorationImageSignin(){
+BoxDecoration decorationImageSignin() {
   return new BoxDecoration(
       image: DecorationImage(
           fit: BoxFit.cover,
           image: AssetImage(
             'assets/image/backlog.png',
-      )));
+          )));
 }
 
-BoxDecoration decorationSignin(){
+BoxDecoration decorationSignin() {
   return new BoxDecoration(
       borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(40),
           bottomRight: Radius.circular(40)));
 }
 
-BoxDecoration decorationSignUp(){
+BoxDecoration decorationSignUp() {
   return new BoxDecoration(
       image: DecorationImage(
           fit: BoxFit.cover,
@@ -89,7 +88,7 @@ BoxDecoration decorationSignUp(){
           )));
 }
 
-BoxDecoration decorationWelcomePage(){
+BoxDecoration decorationWelcomePage() {
   return new BoxDecoration(
       image: DecorationImage(
           image: AssetImage('assets/image/back.jpg'),
@@ -98,7 +97,7 @@ BoxDecoration decorationWelcomePage(){
   );
 }
 
-BoxDecoration decorationKaramouziScreen(){
+BoxDecoration decorationKaramouziScreen() {
   return BoxDecoration(
       boxShadow: [
         BoxShadow(
@@ -115,20 +114,20 @@ BoxDecoration decorationKaramouziScreen(){
       ));
 }
 
-BoxDecoration boxDecorationKaramouziScreen(String image){
+BoxDecoration boxDecorationKaramouziScreen(String image) {
   return BoxDecoration(
       borderRadius: BorderRadius.only(
           topRight: Radius.circular(65.0),
           bottomRight: Radius.circular(65.0)),
       image: DecorationImage(
           fit: BoxFit.cover,
-          image: image==null
+          image: image == null
               ? AssetImage('assets/image/download.jfif')
               : NetworkImage("http://stube.ir/image/$image")
       ));
 }
 
-BoxDecoration boxDecorationKaramouziScrenn(){
+BoxDecoration boxDecorationKaramouziScrenn() {
   return BoxDecoration(
       color: Color(0xffD2FAFB),
       shape: BoxShape.rectangle,
@@ -136,9 +135,9 @@ BoxDecoration boxDecorationKaramouziScrenn(){
 }
 
 
-InputDecoration inputDecorationLoginPage(String labelText,IconData icon){
+InputDecoration inputDecorationLoginPage(String labelText, IconData icon) {
   return InputDecoration(
-      prefixIcon: Icon(icon,color: Colors.white,),
+      prefixIcon: Icon(icon, color: Colors.white,),
       labelText: labelText,
       labelStyle: TextStyle(color: Colors.white),
       border: UnderlineInputBorder(
@@ -152,23 +151,25 @@ InputDecoration inputDecorationLoginPage(String labelText,IconData icon){
           BorderSide(color: Colors.white)));
 }
 
-Icon iconKarAmouziScreen(){
+Icon iconKarAmouziScreen() {
   return new Icon(
     Icons.location_city,
-    size: 8.0,
+    size: 2.0,
     color: R.color.banafshmain,
   );
 }
 
 
-Text texKarAmouziScreen(String address){
+Text texKarAmouziScreen(String address) {
   return new Text(
     address,
     style: TextStyle(fontSize: 8.0),
+    maxLines: 1,
+    overflow: TextOverflow.ellipsis,
   );
 }
 
-Text textKarAmouzziScreen(){
+Text textKarAmouzziScreen() {
   return new Text(
     'ux',
     style: new TextStyle(
@@ -178,7 +179,7 @@ Text textKarAmouzziScreen(){
   );
 }
 
-Text textKarAmoziScreen(){
+Text textKarAmoziScreen() {
   return new Text(
     'ui',
     style: new TextStyle(
@@ -188,7 +189,7 @@ Text textKarAmoziScreen(){
   );
 }
 
-Text textKarAmouziScreen(){
+Text textKarAmouziScreen() {
   return new Text(
     'گرافیک',
     style: new TextStyle(
@@ -198,7 +199,7 @@ Text textKarAmouziScreen(){
   );
 }
 
-Text textoneKaramouziScreen(String title){
+Text textoneKaramouziScreen(String title) {
   return new Text(
     title,
     style: TextStyle(
@@ -208,19 +209,19 @@ Text textoneKaramouziScreen(String title){
   );
 }
 
-Text textTwoKaramouziScreen(String description){
-    return new Text(
-      description,
-        maxLines: 1,
-      overflow: TextOverflow.ellipsis,
-      );
+Text textTwoKaramouziScreen(String description) {
+  return new Text(
+    description,
+    maxLines: 1,
+    overflow: TextOverflow.ellipsis,
+  );
 }
 
-Text textthreeKaramouziScreen(String company){
+Text textthreeKaramouziScreen(String company) {
   return new Text(
-    company=='+نام شرکت'
-      ? "مستقل"
-      : company
+    company == '+نام شرکت'
+        ? "مستقل"
+        : company
     ,
     overflow: TextOverflow.ellipsis,
     maxLines: 1,
@@ -230,7 +231,7 @@ Text textthreeKaramouziScreen(String company){
   );
 }
 
-Text textlineBetween(){
+Text textlineBetween() {
   return new Text(
     '|',
     style: TextStyle(
@@ -238,28 +239,27 @@ Text textlineBetween(){
   );
 }
 
-Text textType(String type){
+Text textType(String type) {
   String modeltype;
-  if(type=="1"){
-    modeltype="کار آموزی";
-  }else if(type=="2"){
-    modeltype="کار آموزی منجر به استخدام";
-  }else if(type=="3"){
-    modeltype="استخدام";
+  if (type == "1") {
+    modeltype = "کار آموزی";
+  } else if (type == "2") {
+    modeltype = "کار آموزی منجر به استخدام";
+  } else if (type == "3") {
+    modeltype = "استخدام";
   }
   return new Text(
     modeltype,
-        overflow: TextOverflow.ellipsis,
-      maxLines: 1,
-      style: TextStyle(
+    overflow: TextOverflow.ellipsis,
+    maxLines: 1,
+    style: TextStyle(
       fontSize: 12.0,
-      ),
-    );
+    ),
+  );
 }
 
 
-
-Text textSignUp(){
+Text textSignUp() {
   return new Text('خوش اومدی',
       style: TextStyle(
           fontSize: 35.0,
@@ -267,7 +267,7 @@ Text textSignUp(){
           color: Colors.white));
 }
 
-Text textWelcomePage(){
+Text textWelcomePage() {
   return new Text('Stub',
     style: TextStyle(
         color: Colors.white,
@@ -276,17 +276,17 @@ Text textWelcomePage(){
         fontStyle: FontStyle.italic),);
 }
 
-Text textWelcomePagehint(String text,double fontsize,FontWeight fontWeight){
+Text textWelcomePagehint(String text, double fontsize, FontWeight fontWeight) {
   return new Text(text,
     style: TextStyle(
-      color: Colors.white,
-      fontSize: fontsize,
-      fontWeight: fontWeight,
-      fontStyle: FontStyle.normal),);
+        color: Colors.white,
+        fontSize: fontsize,
+        fontWeight: fontWeight,
+        fontStyle: FontStyle.normal),);
 }
 
 
-Text textSignUpS(){
+Text textSignUpS() {
   return new Text(
     'ثبت نام',
     style: new TextStyle(
@@ -296,7 +296,7 @@ Text textSignUpS(){
   );
 }
 
-Text textSignUpLogin(){
+Text textSignUpLogin() {
   return new Text(
     'ورود',
     style: TextStyle(
@@ -328,14 +328,14 @@ String validateSignUp(String value) {
   }
 }
 
-Text textSplashScreen(){
+Text textSplashScreen() {
   return new Text(
     'استیوب',
     style: new TextStyle(fontSize: 30.0),
   );
 }
 
-Text textSignIn(){
+Text textSignIn() {
   return new Text('منتظرت بودیم !',
       style: TextStyle(
           fontSize: 35.0,
@@ -343,8 +343,8 @@ Text textSignIn(){
           color: Colors.white));
 }
 
-Text textSignInLogin(){
-  return  new Text(
+Text textSignInLogin() {
+  return new Text(
     'ورود',
     style: new TextStyle(
         fontSize: 30,
@@ -352,7 +352,7 @@ Text textSignInLogin(){
   );
 }
 
-Text textSignInPage(){
+Text textSignInPage() {
   return new Text(
     'ثبت نام',
     style: TextStyle(
@@ -361,7 +361,7 @@ Text textSignInPage(){
   );
 }
 
-Text textSigInForget(){
+Text textSigInForget() {
   return new Text(
     'فراموشی گلمه عبور',
     style: TextStyle(
@@ -370,11 +370,12 @@ Text textSigInForget(){
   );
 }
 
-Text textLoginPage(){
-  return new Text('ورود',style: TextStyle(fontSize: 35.0,fontWeight: FontWeight.bold,color: Colors.white),);
+Text textLoginPage() {
+  return new Text('ورود', style: TextStyle(
+      fontSize: 35.0, fontWeight: FontWeight.bold, color: Colors.white),);
 }
 
-Text textLoginPageLogin(){
+Text textLoginPageLogin() {
   return new Text(
     'ورود',
     style: TextStyle(
@@ -383,21 +384,25 @@ Text textLoginPageLogin(){
   );
 }
 
-String textTime(String date){
-
-
-  if(date.substring(0,10) == DateTime.now().toString().substring(0,10)){
-      if(date.substring(11,13)==DateTime.now().toString().substring(11,13)){
-        return  "لحظاتی پیش";
-      }else{
-        return "${int.parse(DateTime.now().toString().substring(11,13)) - int.parse(date.substring(11,13))} ساعت قبل";
-      }
-  }else if(date.substring(0,7)==DateTime.now().toString().substring(0,7)){
-    return "${int.parse(DateTime.now().toString().substring(8,10)) - int.parse(date.substring(8,10))} روز قبل";
-  }else if(date.substring(0,4)==DateTime.now().toString().substring(0,4)){
-    return "${int.parse(DateTime.now().toString().substring(5,7)) - int.parse(date.substring(5,7))} ماه قبل";
-  }else{
-    return "${int.parse(DateTime.now().toString().substring(0,4)) - int.parse(date.substring(0,4))} سال قبل";
+String textTime(String date) {
+  if (date.substring(0, 10) == DateTime.now().toString().substring(0, 10)) {
+    if (date.substring(11, 13) == DateTime.now().toString().substring(11, 13)) {
+      return "لحظاتی پیش";
+    } else {
+      return "${int.parse(DateTime.now().toString().substring(11, 13)) -
+          int.parse(date.substring(11, 13))} ساعت قبل";
+    }
+  } else
+  if (date.substring(0, 7) == DateTime.now().toString().substring(0, 7)) {
+    return "${int.parse(DateTime.now().toString().substring(8, 10)) -
+        int.parse(date.substring(8, 10))} روز قبل";
+  } else
+  if (date.substring(0, 4) == DateTime.now().toString().substring(0, 4)) {
+    return "${int.parse(DateTime.now().toString().substring(5, 7)) -
+        int.parse(date.substring(5, 7))} ماه قبل";
+  } else {
+    return "${int.parse(DateTime.now().toString().substring(0, 4)) -
+        int.parse(date.substring(0, 4))} سال قبل";
   }
 
   //
@@ -413,7 +418,7 @@ String textTime(String date){
 }
 
 
-Padding textLoginPageSignup(){
+Padding textLoginPageSignup() {
   return new Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 0),
       child: new Text(
@@ -425,14 +430,14 @@ Padding textLoginPageSignup(){
   );
 }
 
-TextStyle styleHomePage(){
+TextStyle styleHomePage() {
   return TextStyle(
       color: Colors.white,
       fontSize: 22.0,
       fontWeight: FontWeight.bold);
 }
 
-CircleAvatar circleAvatarSignIn(){
+CircleAvatar circleAvatarSignIn() {
   return new CircleAvatar(
     radius: 40,
     backgroundColor: R.color.banafshmain,
@@ -443,7 +448,7 @@ CircleAvatar circleAvatarSignIn(){
   );
 }
 
-CircleAvatar circleSignUp(){
+CircleAvatar circleSignUp() {
   return new CircleAvatar(
     radius: 40,
     backgroundColor: R.color.banafshmain,
@@ -454,52 +459,54 @@ CircleAvatar circleSignUp(){
   );
 }
 
-CircleAvatar circleAvatarKaramouziScreen(){
+CircleAvatar circleAvatarKaramouziScreen() {
   return new CircleAvatar(
-    maxRadius: 9.0,
+    maxRadius: 11.0,
     child: new Icon(
       Icons.arrow_forward_ios,
       color: Colors.white,
-      size: 9.0,
+      size: 10.0,
     ),
     backgroundColor: Color(0xff2C003E),
   );
 }
 
-AppBar appBarHomePage(BuildContext context,MyData profile) {
-
+AppBar appBarHomePage(BuildContext context, MyData profile) {
   return new AppBar(actions: <Widget>[
     new Padding(
-      padding: EdgeInsets.only(left: 15.0),
-      child: new Stack(
-        children: [
-          new IconButton(
+        padding: EdgeInsets.only(left: 15.0),
+        child: new Stack(
+          children: [
+            new IconButton(
 
-              icon:Icon(Icons.person,color: Colors.white,size: 28,),
-              onPressed: () {
-                Navigator.push(context, new MaterialPageRoute(builder: (context)=>
-                profile.type=="2"
-                    ? new MyProfileUserNormalScreen(id: profile.id)
-                    : new MyProfileStudentScreen(id: profile.id)
-                ));
-              }
-          ),
-          profile.image == null || profile.title == null || profile.moarefiNameh == null || profile.skills == null
-               || profile.certificates == null || profile.fieldUni == null || profile.languages == null || profile.resumes == null
-               || profile.educational == null?
-             new Positioned(bottom: 18,
+                icon: Icon(Icons.person, color: Colors.white, size: 28,),
+                onPressed: () {
+                  Navigator.push(
+                      context, new MaterialPageRoute(builder: (context) =>
+                  profile.type == "2"
+                      ? new MyProfileUserNormalScreen(id: profile.id)
+                      : new MyProfileStudentScreen(id: profile.id)
+                  ));
+                }
+            ),
+            profile.image == null || profile.title == null ||
+                profile.moarefiNameh == null || profile.skills == null
+                || profile.certificates == null || profile.fieldUni == null ||
+                profile.languages == null || profile.resumes == null
+                || profile.educational == null ?
+            new Positioned(bottom: 18,
                 right: 6,
-                child: new CircleAvatar(backgroundColor: Colors.red,maxRadius: 5,))
-              : new SizedBox()
+                child: new CircleAvatar(
+                  backgroundColor: Colors.red, maxRadius: 5,))
+                : new SizedBox()
 
-        ],
-      )
-      )
+          ],
+        )
+    )
   ], elevation: 0.0, backgroundColor: R.color.banafshmain);
 }
 
 AppBar appBarMessagePage(_scaffoldKey) {
-
   return new AppBar(
     leading: IconButton(
       icon: Icon(
@@ -535,7 +542,7 @@ AppBar appBarMessagePage(_scaffoldKey) {
   );
 }
 
-AppBar appBarProfilePage(){
+AppBar appBarProfilePage() {
   return new AppBar(
 //            title: this.cusSearchBar,
     title: SearchProfilePage(),
@@ -550,7 +557,7 @@ AppBar appBarProfilePage(){
   );
 }
 
-AppBar appBarKaramouziScreen(){
+AppBar appBarKaramouziScreen() {
   return AppBar(
     actions: <Widget>[
       new Padding(
@@ -566,8 +573,7 @@ AppBar appBarKaramouziScreen(){
   );
 }
 
-AppBar appBarAgahiScreen(TabController tabController){
-
+AppBar appBarAgahiScreen(TabController tabController) {
   return AppBar(
       actions: <Widget>[
         new Padding(
@@ -602,7 +608,7 @@ AppBar appBarAgahiScreen(TabController tabController){
       ));
 }
 
-AppBar appBarProfileScreen(){
+AppBar appBarProfileScreen() {
   return new AppBar(
     title: TextfieldSearch(),
     backgroundColor: Colors.white,
@@ -678,18 +684,20 @@ class _SearchProfilePageState extends State<SearchProfilePage> {
           onTap: () {
             showModalBottomSheet(
                 context: context,
-                builder: (builder) => Container(
-                    child: new Column(
-                      children: <Widget>[
-                        new Container(
-                          color: R.color.red,
-                          child: new Text(
-                            'فیلتر دسته بندی ها',
-                            textDirection: TextDirection.rtl,
-                            style: TextStyle(
-                                fontSize: 20.0, fontWeight: FontWeight.bold),
-                          ),
-                        ),
+                builder: (builder) =>
+                    Container(
+                        child: new Column(
+                          children: <Widget>[
+                            new Container(
+                              color: R.color.red,
+                              child: new Text(
+                                'فیلتر دسته بندی ها',
+                                textDirection: TextDirection.rtl,
+                                style: TextStyle(
+                                    fontSize: 20.0, fontWeight: FontWeight
+                                    .bold),
+                              ),
+                            ),
 //                                              new Row(
 //                                                children: <Widget>[
 //
@@ -769,8 +777,8 @@ class _SearchProfilePageState extends State<SearchProfilePage> {
 ////                                    ),
 //                                                ],
 //                                              )
-                      ],
-                    )));
+                          ],
+                        )));
           },
         ),
       ],
@@ -779,45 +787,50 @@ class _SearchProfilePageState extends State<SearchProfilePage> {
 }
 
 
-Row rowOneKaramouziScreen(){
+Row rowOneKaramouziScreen() {
   return new Row(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: <Widget>[
-      new Icon(Icons.timer,color: Colors.black54,size: 20.0,),
+      new Icon(Icons.timer, color: Colors.black54, size: 20.0,),
       new SizedBox(width: 3.0,),
       new Padding(
           padding: const EdgeInsets.only(top: 3.0),
-          child: new Text('4 ساعت در روز',style: TextStyle(color: Colors.black54,fontSize: 15.0))
+          child: new Text('4 ساعت در روز',
+              style: TextStyle(color: Colors.black54, fontSize: 15.0))
       )
     ],
   );
 }
 
-Row rowTwoKaramouziScreen(){
+Row rowTwoKaramouziScreen() {
   new Row(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: <Widget>[
-      new Icon(Icons.people,color: Colors.black54,size: 20.0,),
+      new Icon(Icons.people, color: Colors.black54, size: 20.0,),
       new SizedBox(width: 3.0,),
       new Padding(
           padding: const EdgeInsets.only(top: 3.0, left: 3.0),
-          child: new Text('6 نفر',style: TextStyle(color: Colors.black54,fontSize: 15.0),)
+          child: new Text(
+            '6 نفر', style: TextStyle(color: Colors.black54, fontSize: 15.0),)
       )
     ],
   );
 }
 
-Row rowKaramouziScreenOne(String phonenumber){
-  return new Row(
-    children: <Widget>[
-      new Icon(Icons.call),
-      new SizedBox(width: 3.0,),
-      new Text(phonenumber, style: TextStyle(fontSize: 17.0),)
-    ],
+Padding rowKaramouziScreenOne(String phonenumber) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+    child: new Row(
+      children: <Widget>[
+        new Icon(Icons.call),
+        new SizedBox(width: 3.0,),
+        new Text(phonenumber, style: TextStyle(fontSize: 17.0),)
+      ],
+    ),
   );
 }
 
-Row rowKaramouziScreenTwo(){
+Row rowKaramouziScreenTwo() {
   return new Row(
     children: <Widget>[
       new Icon(Icons.mail),
@@ -827,7 +840,7 @@ Row rowKaramouziScreenTwo(){
 }
 
 
-Row rowKaramouziScreenThree(){
+Row rowKaramouziScreenThree() {
   return new Row(
     children: <Widget>[
       new Icon(Icons.check_circle),
@@ -837,53 +850,58 @@ Row rowKaramouziScreenThree(){
 }
 
 
-
-Padding paddingOneKaramouziScreen(){
-  return new Padding(padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 10.0),
+Padding paddingOneKaramouziScreen() {
+  return new Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
     child: new Text('کارآموزی منجر به استخدام ',
-      style: TextStyle(fontSize: 17.0,fontWeight: FontWeight.bold),),);
+      style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold),),);
 }
 
 
-Padding paddingTwoKaramouziScreen(String description){
-  return new Padding(padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 10.0),
+Padding paddingTwoKaramouziScreen(String description) {
+  return new Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
     child: new Text(description,
       style: TextStyle(fontSize: 17.0),),);
 }
 
 
-Padding paddingThreeKaramouziScreen(){
-  return new Padding(padding: const EdgeInsets.only(right: 15.0,left: 15.0,top: 10.0),
+Padding paddingThreeKaramouziScreen() {
+  return new Padding(
+    padding: const EdgeInsets.only(right: 15.0, left: 15.0, top: 10.0),
     child: new Text('شرایط',
-      style: TextStyle(fontSize: 22.0,fontWeight: FontWeight.bold),),);
+      style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),),);
 }
 
 
-Padding paddingFourKaramouziScreen(String conditions){
-  return new Padding(padding: const EdgeInsets.symmetric(horizontal: 25.0,vertical: 5.0),
-      child: new Text(
-            conditions,
-            style: TextStyle(fontSize: 17.0),),
+Padding paddingFourKaramouziScreen(String conditions) {
+  return new Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 5.0),
+    child: new Text(
+      conditions,
+      style: TextStyle(fontSize: 17.0),),
   );
-
 }
 
 
-Padding paddingFiveKaramouziScreen(){
-  return new Padding(padding: const EdgeInsets.only(right: 15.0,left: 15.0,top: 10.0),
+Padding paddingFiveKaramouziScreen() {
+  return new Padding(
+    padding: const EdgeInsets.only(right: 15.0, left: 15.0, top: 10.0),
     child: new Text('آدرس',
-      style: TextStyle(fontSize: 22.0,fontWeight: FontWeight.bold),),);
+      style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),),);
 }
 
 
-Padding paddingSixKaramouziScreen(String address){
-  return new Padding(padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 10.0),
+Padding paddingSixKaramouziScreen(String address) {
+  return new Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
     child: new Text(address, style: TextStyle(fontSize: 17.0),),);
 }
 
 
-Padding paddingSevenKaramouziScreen(){
-  return new Padding(padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 20.0),
+Padding paddingSevenKaramouziScreen() {
+  return new Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
     child: new Wrap(
       runSpacing: 8.0,
       spacing: 7.0,
@@ -896,15 +914,15 @@ Padding paddingSevenKaramouziScreen(){
     ),);
 }
 
-Padding paddingEightKaramouziScreen(){
-  return new Padding(padding: const EdgeInsets.only(right: 15.0,left: 15.0,top: 10.0),
+Padding paddingEightKaramouziScreen() {
+  return new Padding(
+    padding: const EdgeInsets.only(right: 15.0, left: 15.0, top: 10.0),
     child: new Text('ارتباط',
-      style: TextStyle(fontSize: 22.0,fontWeight: FontWeight.bold),),);
+      style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),),);
 }
 
 
-
-Container containerError(){
+Container containerError() {
   return new Container(
       child: new Text(
         "کاربر یافت نشد",
@@ -914,7 +932,7 @@ Container containerError(){
       ));
 }
 
-Container containerSplash(){
+Container containerSplash() {
   return new Container(
     decoration: new BoxDecoration(
         image: DecorationImage(
@@ -922,13 +940,14 @@ Container containerSplash(){
   );
 }
 
-Container ContainerImageLoginPage(var phonesize){
+Container ContainerImageLoginPage(var phonesize) {
   return new Container(color: Colors.white,
     height: phonesize.height,
     width: phonesize.width,
     child: new Align(alignment: Alignment.bottomLeft,
         child: new Opacity(opacity: 0.25,
-            child: new Image(image: AssetImage('assets/image/hom.png',),height: phonesize.height*0.4,))),);
+            child: new Image(image: AssetImage('assets/image/hom.png',),
+              height: phonesize.height * 0.4,))),);
 }
 
 
@@ -961,7 +980,6 @@ class DrawerLists extends StatelessWidget {
       ListTile(
         leading: new Icon(Icons.create_new_folder),
         onTap: () {
-
           Navigator.push(
               context,
               MaterialPageRoute(
@@ -1007,35 +1025,38 @@ class DrawerLists extends StatelessWidget {
       // ),
       ListTile(
         leading: new Icon(Icons.exit_to_app),
-        onTap: () async{
-          showDialog(context: context,builder: (context)=>  Directionality(
-            textDirection: TextDirection.rtl,
-            child: new AlertDialog(
-              title: new Text("آیا برای خروج از حساب کاربری مطمئن هستید ؟ ",style: TextStyle(fontSize: 16.0),),
-              actions: [
-                new FlatButton(
-                  child: new Text("خیر"),
-                  onPressed: (){
-                    Navigator.of(context).pop(false);
-                  },
+        onTap: () async {
+          showDialog(context: context, builder: (context) =>
+              Directionality(
+                textDirection: TextDirection.rtl,
+                child: new AlertDialog(
+                  title: new Text("آیا برای خروج از حساب کاربری مطمئن هستید ؟ ",
+                    style: TextStyle(fontSize: 16.0),),
+                  actions: [
+                    new FlatButton(
+                      child: new Text("خیر"),
+                      onPressed: () {
+                        Navigator.of(context).pop(false);
+                      },
+                    ),
+                    new FlatButton(
+                      child: new Text("بله"),
+                      onPressed: () async {
+                        SharedPreferences perfs = await SharedPreferences
+                            .getInstance();
+                        await perfs.remove('user_apiToken');
+                        await perfs.remove('user_username');
+                        await perfs.remove('user_password');
+                        Navigator.of(context).pushReplacement(
+                            new MaterialPageRoute(builder: (
+                                context) => new SignIn())
+                        );
+                      },
+                    ),
+                  ],
                 ),
-                new FlatButton(
-                  child: new Text("بله"),
-                  onPressed: ()async{
-                    SharedPreferences perfs = await SharedPreferences.getInstance();
-                    await perfs.remove('user_apiToken');
-                    await perfs.remove('user_username');
-                    await perfs.remove('user_password');
-                    Navigator.of(context).pushReplacement(
-                        new MaterialPageRoute(builder: (context)=>new SignIn())
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
+              ),
           );
-
         },
         title: Text('خروج'),
         trailing: Icon(Icons.arrow_forward),
@@ -1071,11 +1092,16 @@ class DrawerLists extends StatelessWidget {
 class Headers extends StatelessWidget {
 
   MyData profile;
+
   Headers({this.profile});
+
   var username;
+
   @override
   Widget build(BuildContext context) {
-    var sizePhone = MediaQuery.of(context).size;
+    var sizePhone = MediaQuery
+        .of(context)
+        .size;
     return new Container(
       decoration: decorationHomePage(),
       height: sizePhone.height * 0.16,
@@ -1085,20 +1111,27 @@ class Headers extends StatelessWidget {
             padding: const EdgeInsets.only(right: 20.0, top: 0.0),
             child: new Row(
               children: <Widget>[
-                new Container(
+                profile.image == null || profile.image == ""
+                    ? new CircleAvatar(
+                    child: new Icon(
+                      Icons.person, color: Colors.grey, size: 35.0,),
+                    backgroundColor: Colors.white,
+                    minRadius: 30.0
+                )
+                    : new Container(
                     margin: const EdgeInsets.only(left: 5.0, top: 10.0),
                     height: 70.0,
                     width: 70.0,
-                    decoration: decorationImageHomePage()
+                    decoration: decorationImageHomePage(profile.image)
                 ),
                 new SizedBox(width: 10.0),
-                    new Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        new Text(profile.name,style: styleHomePage()),
-                      ],
-                    )
+                new Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    new Text(profile.name, style: styleHomePage()),
+                  ],
+                )
 
               ],
             ),
@@ -1110,7 +1143,6 @@ class Headers extends StatelessWidget {
 }
 
 
-
 class Constants {
   static String first = 'ایجاد درخواست';
   static String second = 'پیام';
@@ -1118,7 +1150,6 @@ class Constants {
 
   static List<String> textMorebutton = ['ایجاد درخواست', 'پیام', 'ذخیره'];
 }
-
 
 
 class MenuItemWidget extends StatelessWidget {
@@ -1139,7 +1170,8 @@ class MenuItemWidget extends StatelessWidget {
           child: new Card(
             shadowColor: Colors.black,
             elevation: 10.0,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0)),
             margin: const EdgeInsets.only(left: 15.0, right: 5.0, top: 25.0),
             color: Colors.white,
             child: new Container(
@@ -1203,11 +1235,15 @@ class bodyMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     return new ListView.builder(
         itemCount: 20,
-        itemBuilder: (BuildContext context, int index) => new Column(
+        itemBuilder: (BuildContext context, int index) =>
+        new Column(
           children: <Widget>[
             new GestureDetector(
               child: new Container(
-                width: MediaQuery.of(context).size.width,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
                 child: new ListTile(
                   title: new Text('Omeadr'),
                   subtitle: new Text(
@@ -1243,14 +1279,15 @@ class bodyRequest extends StatefulWidget {
   var phoneSize;
   List<RequestAd> requests;
   List usernames;
-  bodyRequest({this.phoneSize,this.profile,this.requests,this.usernames});
+
+  bodyRequest({this.phoneSize, this.profile, this.requests, this.usernames});
 
   @override
   _bodyRequestState createState() => _bodyRequestState();
 }
 
-String FieldText(String text){
-  return text=="" || text==null
+String FieldText(String text) {
+  return text == "" || text == null
       ? 'وارد نشده'
       : text;
 }
@@ -1258,177 +1295,213 @@ String FieldText(String text){
 
 class _bodyRequestState extends State<bodyRequest> {
 
-  
-  
+
   @override
   Widget build(BuildContext context) {
-    return widget.requests.length==0
+    return widget.requests.length == 0
         ? new Center(
-                  child: new Text(
-                'در حال حاضر هیچ درخواستی برای شما وجود ندارد (:',
-                style: TextStyle(color: Colors.black),
-              ))
+        child: new Text(
+          'در حال حاضر هیچ درخواستی برای شما وجود ندارد (:',
+          style: TextStyle(color: Colors.black),
+        ))
         : new ListView.builder(
-            padding: const EdgeInsets.only(top: 5.0),
-            itemCount: widget.requests.length,
-          itemBuilder: (BuildContext context, int index) =>
-           new Column(
-            children: <Widget>[
-              new GestureDetector(
-                onTap: (){
-                  Navigator.of(context).push(new MaterialPageRoute(builder: (ctx) => new MyRequests(userName:widget.usernames[index],date: widget.requests[index].date,text: widget.requests[index].req_text)));
-                },
-                child: new Container(
-                  margin: const EdgeInsets.only(top: 5.0),
-                  width: widget.phoneSize.width,
-                  child: new Column(
-                    children: <Widget>[
-                      new Row(
-                        children: <Widget>[
-                          new Container(
-                              margin: const EdgeInsets.symmetric(horizontal: 8.0),
-                              height: widget.phoneSize.height * 0.10,
-                              width: widget.phoneSize.width * 0.19,
-                              decoration: decorationImageHomePage()
-                          ),
-                          new Column(
-                            crossAxisAlignment:
-                            CrossAxisAlignment.start,
-                            children: <Widget>[
-                              new Text(widget.usernames[index]),
-                              new Row(
-                                children: <Widget>[
-                                  new SizedBox(
-                                    width: 250.0,
-                                    child: new Text(
-                                      widget.requests[index].req_text,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
+        padding: const EdgeInsets.only(top: 5.0),
+        itemCount: widget.requests.length,
+        itemBuilder: (BuildContext context, int index) =>
+        new Column(
+          children: <Widget>[
+            new GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(new MaterialPageRoute(
+                    builder: (ctx) =>
+                    new MyRequests(userName: widget.usernames[index],
+                        date: widget.requests[index].date,
+                        text: widget.requests[index].req_text)));
+              },
+              child: new Container(
+                margin: const EdgeInsets.only(top: 5.0),
+                width: widget.phoneSize.width,
+                child: new Column(
+                  children: <Widget>[
+                    new Row(
+                      children: <Widget>[
+                        //TODO inja az comment dar biad
+                        // new Container(
+                        //     margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                        //     height: widget.phoneSize.height * 0.10,
+                        //     width: widget.phoneSize.width * 0.19,
+                        //     decoration: decorationImageHomePage()
+                        // ),
+                        new Column(
+                          crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                          children: <Widget>[
+                            new Text(widget.usernames[index]),
+                            new Row(
+                              children: <Widget>[
+                                new SizedBox(
+                                  width: 250.0,
+                                  child: new Text(
+                                    widget.requests[index].req_text,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                  ButtonMore(),
-                                ],
+                                ),
+                                ButtonMore(),
+                              ],
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                    new Row(
+                      mainAxisAlignment:
+                      MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        new Padding(
+                          padding: const EdgeInsets.only(right: 80.0),
+                          child: new Text(
+                            textTime(widget.requests[index].date),
+                            style: TextStyle(fontSize: 12.0),
+                          ),
+                        ),
+                        new Padding(
+                          padding: const EdgeInsets.only(left: 27.0),
+                          child: new Row(
+                            children: <Widget>[
+                              new Text(
+                                'khorasan,mashhad',
+                                style: TextStyle(fontSize: 8.0),
+                              ),
+                              new Icon(
+                                Icons.location_on,
+                                size: 10.0,
                               )
                             ],
                           ),
-                        ],
-                      ),
-                      new Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          new Padding(
-                            padding: const EdgeInsets.only(right: 80.0),
-                            child: new Text(
-                              textTime(widget.requests[index].date),
-                              style: TextStyle(fontSize: 12.0),
-                            ),
-                          ),
-                          new Padding(
-                            padding: const EdgeInsets.only(left: 27.0),
-                            child: new Row(
-                              children: <Widget>[
-                                new Text(
-                                  'khorasan,mashhad',
-                                  style: TextStyle(fontSize: 8.0),
-                                ),
-                                new Icon(
-                                  Icons.location_on,
-                                  size: 10.0,
-                                )
-                              ],
-                            ),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
+                        )
+                      ],
+                    )
+                  ],
                 ),
               ),
-              Line()
-            ],
-          )
+            ),
+            Line()
+          ],
+        )
     );
   }
 }
 
 
-
-
 class HeadersItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var phoneSize = MediaQuery.of(context).size;
+    var phoneSize = MediaQuery
+        .of(context)
+        .size;
     return new Column(
       children: <Widget>[
         new Row(
           children: <Widget>[
-            new Container(height: phoneSize.height*0.25,
+            new Container(height: phoneSize.height * 0.25,
               width: phoneSize.width * 0.45,
               decoration: BoxDecoration(
-                  image: DecorationImage(colorFilter: ColorFilter.mode(Colors.black45, BlendMode.darken),
+                  image: DecorationImage(colorFilter: ColorFilter.mode(
+                      Colors.black45, BlendMode.darken),
                       fit: BoxFit.cover,
                       image: AssetImage('assets/image/dev.jpg',)
                   )
               ),
-              child:new Align(alignment: Alignment.topRight,
-                child:   new IconButton(icon: Icon(Icons.share,color: Colors.white,), onPressed: (){print('pressed');}),),
+              child: new Align(alignment: Alignment.topRight,
+                child: new IconButton(
+                    icon: Icon(Icons.share, color: Colors.white,),
+                    onPressed: () {
+                      print('pressed');
+                    }),),
             ),
-            new Container(height: phoneSize.height*0.25,
-              width:phoneSize.width*0.55,
+            new Container(height: phoneSize.height * 0.25,
+              width: phoneSize.width * 0.55,
               color: Color(0xff2D0827),
               child: new Column(
                 children: <Widget>[
                   new Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      new Padding(padding: const EdgeInsets.only(top: 2.0,right: 5.0),
-                        child: new CircleAvatar(backgroundImage: AssetImage('assets/image/avt.jpg'),maxRadius: 16.0,)
+                      new Padding(
+                        padding: const EdgeInsets.only(top: 2.0, right: 5.0),
+                        child: new CircleAvatar(
+                          backgroundImage: AssetImage('assets/image/avt.jpg'),
+                          maxRadius: 16.0,)
                         ,),
-                      new IconButton(icon: Icon(Icons.arrow_forward,color: Colors.white,), onPressed: (){})
+                      new IconButton(
+                          icon: Icon(Icons.arrow_forward, color: Colors.white,),
+                          onPressed: () {})
 
                     ],
                   ),
                   new Align(alignment: Alignment.topRight,
-                    child: new Padding(padding: const EdgeInsets.only(right: 5.0),
-                      child: new Text('برنامه نویس اپلیکیشن',overflow: TextOverflow.ellipsis,maxLines: 1,
-                        style: TextStyle(fontSize: 21.0,fontWeight: FontWeight.bold,color: Colors.white),),),),
+                    child: new Padding(
+                      padding: const EdgeInsets.only(right: 5.0),
+                      child: new Text(
+                        'برنامه نویس اپلیکیشن', overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: TextStyle(fontSize: 21.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),),),),
                   new Align(alignment: Alignment.topRight,
-                    child: new Padding(padding: const EdgeInsets.only(right: 5.0),
-                      child: new Text('ایران سرور',overflow: TextOverflow.ellipsis,maxLines: 1,
-                        style: TextStyle(fontSize: 18.0,color: Colors.white),),),),
+                    child: new Padding(
+                      padding: const EdgeInsets.only(right: 5.0),
+                      child: new Text(
+                        'ایران سرور', overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: TextStyle(
+                            fontSize: 18.0, color: Colors.white),),),),
                   new Align(alignment: Alignment.topRight,
-                      child: new Padding(padding: const EdgeInsets.only(right: 8.0),
-                        child: new Text('رایانه و فناوری اطلاعات',overflow: TextOverflow.ellipsis,maxLines: 1,
-                          style: TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold,color: Color(0xff44143E),),),)),
-                  new SizedBox(height: phoneSize.height*0.02,),
+                      child: new Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: new Text('رایانه و فناوری اطلاعات',
+                          overflow: TextOverflow.ellipsis, maxLines: 1,
+                          style: TextStyle(fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff44143E),),),)),
+                  new SizedBox(height: phoneSize.height * 0.02,),
                   new Align(alignment: Alignment.bottomCenter,
-                    child: new Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    child: new Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         new GestureDetector(
-                          child: new Container(decoration: BoxDecoration(color: Colors.white,
-                              borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                            width: phoneSize.width*0.17,
+                          child: new Container(decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(20.0))),
+                            width: phoneSize.width * 0.17,
                             child: new Text('پیام',
-                              style:TextStyle(
-                                  color: Color(0xff2D0827),fontWeight: FontWeight.bold,fontSize: 14.0),
+                              style: TextStyle(
+                                  color: Color(0xff2D0827),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14.0),
                               textAlign: TextAlign.center,),
                           ),
                         ),
                         new GestureDetector(
-                          child: new Container(decoration: BoxDecoration(color: Colors.white,
-                              borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                            width: phoneSize.width*0.17,
+                          child: new Container(decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(20.0))),
+                            width: phoneSize.width * 0.17,
                             child: new Text('شروع کار',
-                              style:TextStyle(
-                                  color: Color(0xff2D0827),fontWeight: FontWeight.bold,fontSize: 14.0),
+                              style: TextStyle(
+                                  color: Color(0xff2D0827),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14.0),
                               textAlign: TextAlign.center,),
                           ),
                         ),
                         new GestureDetector(
-                          child: Icon(Icons.bookmark_border,color: Colors.white,),
+                          child: Icon(
+                            Icons.bookmark_border, color: Colors.white,),
                         )
-
 
 
                       ],
@@ -1470,6 +1543,7 @@ class ObjectTag extends StatelessWidget {
   final String tags;
 
   const ObjectTag({this.tags});
+
   @override
   Widget build(BuildContext context) {
     return new Container(
@@ -1479,9 +1553,10 @@ class ObjectTag extends StatelessWidget {
             color: Color(0xff2D0827),
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(15.0)),
-        child:new Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 6.0,vertical: 3.0),
-          child: new Text(tags,style: new TextStyle(color: Colors.white,fontSize: 10.0,),),
+        child: new Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 3.0),
+          child: new Text(
+            tags, style: new TextStyle(color: Colors.white, fontSize: 10.0,),),
         ));
   }
 }
@@ -1502,7 +1577,7 @@ void choiceAction(String choice) {
 //   return ;
 // }
 
-FloatingActionButton floatingActionButtonAgahiScreen(context){
+FloatingActionButton floatingActionButtonAgahiScreen(context) {
   return new FloatingActionButton(
     onPressed: () {
       print('Pressed');
@@ -1510,9 +1585,13 @@ FloatingActionButton floatingActionButtonAgahiScreen(context){
     backgroundColor: R.color.banafshmain,
     child: OpenContainer(
       transitionDuration: Duration(milliseconds: 500),
-      closedBuilder: (ctx, action) => new Container(
+      closedBuilder: (ctx, action) =>
+      new Container(
         color: R.color.banafshmain,
-        width: MediaQuery.of(context).size.width,
+        width: MediaQuery
+            .of(context)
+            .size
+            .width,
         child: new Icon(
           Icons.add,
           color: R.color.red,
