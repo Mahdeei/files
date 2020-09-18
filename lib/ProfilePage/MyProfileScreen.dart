@@ -23,6 +23,7 @@ import 'package:path/path.dart';
 
 class MyProfileStudentScreen extends StatefulWidget {
   String id;
+
   MyProfileStudentScreen({
     this.id,
   });
@@ -36,7 +37,9 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
   final bodyGlobalKey = GlobalKey();
   final List<Widget> myTabs = [
     Tab(text: 'مشخصات'),
-    Tab(text: 'نمونه کارها',),
+    Tab(
+      text: 'نمونه کارها',
+    ),
     Tab(text: 'نظرات'),
   ];
 
@@ -95,8 +98,7 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
             ),
             onPressed: () {
               print('pressed share');
-            }
-        ),
+            }),
         new Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -181,11 +183,11 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
 //                         ),
 //                       )),
 //                 ),
-                new SizedBox(width: 3.0,),
+                new SizedBox(
+                  width: 3.0,
+                ),
                 new GestureDetector(
-
                   onTap: () {
-
                     Navigator.of(context).push(new MaterialPageRoute(
                         builder: (context) => new EditData(
                               profile: profile,
@@ -399,7 +401,8 @@ class _ListOneState extends State<ListOne> {
                 const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             child: new Text(
               FieldText(widget.profile.educational),
-              style: TextStyle(fontSize: MediaQuery.of(context).size.width *0.05),
+              style:
+                  TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
             ),
           ),
           Divider(),
@@ -453,7 +456,7 @@ class ListTwo extends StatefulWidget {
 
 List<Profile> profile;
 
-class _ListTwoState extends State<ListTwo> {
+class _ListTwoState extends State<ListTwo> with AutomaticKeepAliveClientMixin<ListTwo> {
   Map body;
   bool refresh = true;
   List username = [];
@@ -580,14 +583,15 @@ class _ListTwoState extends State<ListTwo> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             new Row(
                                               children: [
                                                 new CircleAvatar(
                                                   maxRadius: 20,
                                                   backgroundColor:
-                                                  R.color.banafshKamRang,
+                                                      R.color.banafshKamRang,
                                                 ),
                                                 new SizedBox(
                                                   width: 10,
@@ -596,8 +600,15 @@ class _ListTwoState extends State<ListTwo> {
                                               ],
                                             ),
                                             Padding(
-                                              padding: const EdgeInsets.only(left: 8.0),
-                                              child: new Text(textTime(comments[index].date),style: TextStyle(fontSize: 10.0,fontWeight: FontWeight.w300),),
+                                              padding: const EdgeInsets.only(
+                                                  left: 8.0),
+                                              child: new Text(
+                                                textTime(comments[index].date),
+                                                style: TextStyle(
+                                                    fontSize: 10.0,
+                                                    fontWeight:
+                                                        FontWeight.w300),
+                                              ),
                                             )
                                           ],
                                         ),
@@ -678,6 +689,10 @@ class _ListTwoState extends State<ListTwo> {
                     ],
                   ));
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 //   sendComment()async{
 //     body = await HttpComments.sendComment({
 //       "user_id": widget.user.id,
@@ -715,8 +730,6 @@ class ObjectTag extends StatelessWidget {
   }
 }
 
-
-
 class ListImages extends StatefulWidget {
   MyData profile;
 
@@ -726,8 +739,7 @@ class ListImages extends StatefulWidget {
   _ListImagesState createState() => _ListImagesState();
 }
 
-class _ListImagesState extends State<ListImages> {
-
+class _ListImagesState extends State<ListImages> with AutomaticKeepAliveClientMixin<ListImages>{
   int current = 0;
 
   List imglist = [];
@@ -735,8 +747,8 @@ class _ListImagesState extends State<ListImages> {
   File _image;
   var picker = new ImagePicker();
   var rand;
-  var fileName="";
-  bool isLoading=false;
+  var fileName = "";
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -745,9 +757,7 @@ class _ListImagesState extends State<ListImages> {
     _getImages();
   }
 
-
   _getImages() async {
-
     setState(() {
       isLoading = true;
     });
@@ -757,54 +767,56 @@ class _ListImagesState extends State<ListImages> {
       imglist.addAll(response);
       isLoading = false;
     });
-
   }
 
 
   Future pickImage(ImageSource imageSource) async {
     var imageFile = await picker.getImage(source: imageSource);
-    if(imageFile!= null){
+    if (imageFile != null) {
       File file = File(imageFile.path);
 
       File croppedFile = await ImageCropper.cropImage(
         sourcePath: file.path,
-        maxWidth : 512,
+        maxWidth: 512,
         maxHeight: 512,
-        aspectRatio:  CropAspectRatio(ratioX: 1.0,ratioY: 1.0),
+        aspectRatio: CropAspectRatio(ratioX: 1.0, ratioY: 1.0),
       );
 
       final tempDir = await getTemporaryDirectory();
       final path = tempDir.path;
       Img.Image image = Img.decodeImage(croppedFile.readAsBytesSync());
-      Img.Image smallerImg = Img.copyResize(image,width: 500);
+      Img.Image smallerImg = Img.copyResize(image, width: 500);
 
-      this.rand= new Random().nextInt(100000000).toString() + new Random().nextInt(10000000).toString() + new Random().nextInt(10000000).toString();
-      this.fileName = "image_${widget.profile.id}_${widget.profile.username}_Intern_$rand.jpg";
+      this.rand = new Random().nextInt(100000000).toString() +
+          new Random().nextInt(10000000).toString() +
+          new Random().nextInt(10000000).toString();
+      this.fileName =
+          "image_${widget.profile.id}_${widget.profile.username}_Intern_$rand.jpg";
       var compressImg = new File("$path/$fileName")
-        ..writeAsBytesSync(Img.encodeJpg(smallerImg,quality: 85));
+        ..writeAsBytesSync(Img.encodeJpg(smallerImg, quality: 85));
 
-      setState((){
+      setState(() {
         this._image = compressImg;
         upload(_image);
       });
     }
   }
 
-  Future upload(File imageFile) async{
-    var stream = new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+  Future upload(File imageFile) async {
+    var stream =
+        new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
     var length = await imageFile.length();
     var uri = Uri.parse("http://stube.ir/uploadImageStudent.php");
 
     var request = new http.MultipartRequest("POST", uri);
 
-    var multiPartFile = new http.MultipartFile("image", stream, length,filename: basename(imageFile.path));
-
+    var multiPartFile = new http.MultipartFile("image", stream, length,
+        filename: basename(imageFile.path));
 
     print(widget.profile.id);
     print(this.fileName);
     request.fields['user_id'] = widget.profile.id;
     request.fields['image'] = this.fileName;
-
 
     request.files.add(multiPartFile);
     var response = await request.send();
@@ -818,114 +830,125 @@ class _ListImagesState extends State<ListImages> {
 //    print(request);
     print(response.statusCode);
 
-
     await response.stream.transform(utf8.decoder).listen((value) {
       res = json.decode(value);
       print(res);
       print(res['status']);
     });
-    if(response.statusCode == 200) {
+    if (response.statusCode == 200) {
       print('upload seccess');
-      setState(() {
-
-      });
-    }else{
+      setState(() {});
+    } else {
       print('upload failed');
     }
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
     return isLoading
         ? Center(child: new CircularProgressIndicator())
         : new GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-        itemCount: imglist.length >= 6
-            ? 6
-            : imglist.length +1,
-        itemBuilder: (context, index) => imglist.length==6
-            ?  new GestureDetector(
-            onTap: () {
-              _showSecondPage(context, imglist[index]);
-            },
-            child: new Container(
-              margin: const EdgeInsets.fromLTRB(2, 0, 2, 4),
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(imglist[index]), fit: BoxFit.cover)),
-            ))
-            : index == imglist.length
-            ? Container(
-          padding: EdgeInsets.only(bottom: 10.0,right: 15.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              new IconButton(
-                icon:Icon(Icons.add_circle_outline,size: 65.0,),
-                onPressed: () async{
-                  showDialog(
-                    context: context,
-                    builder: (context) => new AlertDialog(
-                      title: new Text(
-                        "انتخاب فایل از",
-                        style: TextStyle(fontSize: 16.0),
-                        textDirection: TextDirection.rtl,
-                      ),
-                      actions: [
-                        Column(
+            gridDelegate:
+                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+            itemCount: imglist.length >= 6 ? 6 : imglist.length + 1,
+            itemBuilder: (context, index) => imglist.length == 6
+                ? new GestureDetector(
+                    onTap: () {
+                      _showSecondPage(context, imglist[index]);
+                    },
+                    child: new Container(
+                      margin: const EdgeInsets.fromLTRB(2, 0, 2, 4),
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage(imglist[index]),
+                              fit: BoxFit.cover)),
+                    ))
+                : index == imglist.length
+                    ? Container(
+                        padding: EdgeInsets.only(bottom: 10.0, right: 15.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              width: MediaQuery.of(context).size.width,
-                              child: new MaterialButton(
-                                elevation: 0,
-                                color: Colors.white,
-                                child: new Text("گالری"),
-                                onPressed: () async{
-                                  Navigator.of(context).pop();
-                                  await pickImage(ImageSource.gallery);
-                                },
+                            new IconButton(
+                              icon: Icon(
+                                Icons.add_circle_outline,
+                                size: 65.0,
                               ),
+                              onPressed: () async {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => new AlertDialog(
+                                    title: new Text(
+                                      "انتخاب فایل از",
+                                      style: TextStyle(fontSize: 16.0),
+                                      textDirection: TextDirection.rtl,
+                                    ),
+                                    actions: [
+                                      Column(
+                                        children: [
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            child: new MaterialButton(
+                                              elevation: 0,
+                                              color: Colors.white,
+                                              child: new Text("گالری"),
+                                              onPressed: () async {
+                                                Navigator.of(context).pop();
+                                                await pickImage(
+                                                    ImageSource.gallery);
+                                              },
+                                            ),
+                                          ),
+                                          new Container(
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            child: new MaterialButton(
+                                              elevation: 0,
+                                              color: Colors.white,
+                                              child: new Text("دوربین گوشی"),
+                                              onPressed: () async {
+                                                await pickImage(
+                                                    ImageSource.camera);
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
                             ),
-                            new Container(
-                              width: MediaQuery.of(context).size.width,
-                              child: new MaterialButton(
-                                elevation: 0,
-                                color: Colors.white,
-                                child: new Text("دوربین گوشی"),
-                                onPressed: () async {
-                                  await pickImage(ImageSource.camera);
-                                  Navigator.of(context).pop();
-                                },
-                              ),
+                            new Text(
+                              "اضافه کردن عکس",
+                              style: TextStyle(fontSize: 12.0),
                             )
                           ],
                         ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-              new Text("اضافه کردن عکس",style: TextStyle(fontSize: 12.0),)
-            ],
-          ),
-        )
-            : new GestureDetector(
-            onTap: () {
-              _showSecondPage(context, "http://stube.ir/image/${imglist[index]}");
-            },
-            child: new Container(
-              margin: const EdgeInsets.fromLTRB(2, 0, 2, 4),
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: NetworkImage("http://stube.ir/image/${imglist[index]}"), fit: BoxFit.cover)),
-            ))
-
-    );
+                      )
+                    : new GestureDetector(
+                        onTap: () {
+                          _showSecondPage(context,
+                              "http://stube.ir/image/${imglist[index]}");
+                        },
+                        child: new Container(
+                          margin: const EdgeInsets.fromLTRB(2, 0, 2, 4),
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: NetworkImage(
+                                      "http://stube.ir/image/${imglist[index]}"),
+                                  fit: BoxFit.cover)),
+                        )));
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
 
 void _showSecondPage(BuildContext context, imageAddres) {

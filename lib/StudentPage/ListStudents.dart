@@ -8,15 +8,17 @@ import 'Moshakhsat.dart';
 class ListProfiles extends StatefulWidget {
   User model;
   MyData profile;
-  ListProfiles({this.profile,this.model});
+
+  ListProfiles({this.profile, this.model});
 
   final controller = new PageController();
+
   @override
   _ListProfilesState createState() => _ListProfilesState();
 }
 
-class _ListProfilesState extends State<ListProfiles> {
-
+class _ListProfilesState extends State<ListProfiles>
+    with AutomaticKeepAliveClientMixin<ListProfiles> {
   @override
   Widget build(BuildContext context) {
     var phoneSize = MediaQuery.of(context).size;
@@ -26,9 +28,12 @@ class _ListProfilesState extends State<ListProfiles> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => widget.profile.id != widget.model.id
-                  ? ProPage(user: widget.model,profile: widget.profile)
-                  : MyProfileStudentScreen(id: widget.profile.id,)),
+              MaterialPageRoute(
+                  builder: (context) => widget.profile.id != widget.model.id
+                      ? ProPage(user: widget.model, profile: widget.profile)
+                      : MyProfileStudentScreen(
+                          id: widget.profile.id,
+                        )),
             );
           },
           child: Card(
@@ -47,24 +52,27 @@ class _ListProfilesState extends State<ListProfiles> {
                         new Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            new Padding(
-                              padding: const EdgeInsets.only(right: 8.0),
-                              child: new Text(
-                                  widget.model.name,
+                            Container(
+                              alignment: Alignment.centerRight,
+                              width: phoneSize.width * .3,
+                              child: new Text("علی قنبر پزاده",
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
-                                  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18.0)),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18.0)),
                             ),
-                            new Padding(
-                              padding: const EdgeInsets.only(left: 12.0),
+                            Container(margin: const EdgeInsets.only(left: 5),
+                              width: phoneSize.width * .35,
                               child: new Text(
                                 widget.model.username,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 18.0),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.0),
                               ),
-                            )
+                            ),
                           ],
                         ),
                         new Row(
@@ -117,11 +125,13 @@ class _ListProfilesState extends State<ListProfiles> {
                                   alignment: Alignment.topRight,
                                   child: new Padding(
                                     padding: EdgeInsets.only(right: 8.0),
-                                    child: new Text(
-                                      widget.model.moarefinameh,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(fontSize: 17.0),
+                                    child: Container(
+                                      child: new Text(
+                                        widget.model.moarefinameh,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(fontSize: 17.0),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -129,7 +139,8 @@ class _ListProfilesState extends State<ListProfiles> {
                             ]),
                         new Expanded(child: new Container()),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 3.0,right: 8.0),
+                          padding:
+                              const EdgeInsets.only(bottom: 3.0, right: 8.0),
                           child: new Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.end,
@@ -174,4 +185,8 @@ class _ListProfilesState extends State<ListProfiles> {
       ],
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
