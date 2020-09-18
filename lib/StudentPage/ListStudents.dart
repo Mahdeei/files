@@ -53,9 +53,9 @@ class _ListProfilesState extends State<ListProfiles>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             Container(
-                              alignment: Alignment.centerRight,
+                              margin: const EdgeInsets.only(top: 3),
                               width: phoneSize.width * .3,
-                              child: new Text("علی قنبر پزاده",
+                              child: new Text(widget.profile.name,
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
                                   style: TextStyle(
@@ -63,6 +63,7 @@ class _ListProfilesState extends State<ListProfiles>
                                       fontSize: 18.0)),
                             ),
                             Container(margin: const EdgeInsets.only(left: 5),
+                              alignment: Alignment.centerLeft,
                               width: phoneSize.width * .35,
                               child: new Text(
                                 widget.model.username,
@@ -126,6 +127,7 @@ class _ListProfilesState extends State<ListProfiles>
                                   child: new Padding(
                                     padding: EdgeInsets.only(right: 8.0),
                                     child: Container(
+                                      width: phoneSize.width*.6,
                                       child: new Text(
                                         widget.model.moarefinameh,
                                         maxLines: 1,
