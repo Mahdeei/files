@@ -57,28 +57,36 @@ class _KaPageState extends State<KaPage> {
                   paddingOneKaramouziScreen(),
                   Line(),
                   paddingTwoKaramouziScreen(widget.interShip.description),
-                  Line(),
-                  paddingThreeKaramouziScreen(),
-                  paddingFourKaramouziScreen(),
+                  widget.interShip.conditions ==null || widget.interShip.conditions==""
+                      ? new Container()
+                      : Line(),
+                  widget.interShip.conditions ==null || widget.interShip.conditions==""
+                      ?new Container()
+                      : paddingThreeKaramouziScreen(),
+                  widget.interShip.conditions ==null || widget.interShip.conditions==""
+                      ?new Container()
+                      : paddingFourKaramouziScreen(widget.interShip.conditions),
                   Line(),
                   paddingFiveKaramouziScreen(),
-                  paddingSixKaramouziScreen(),
-                  Line(),
-                  paddingSevenKaramouziScreen(),
+                  paddingSixKaramouziScreen(widget.interShip.address),
+                  // Line(),
+                  // paddingSevenKaramouziScreen(),
                   Line(),
                   paddingEightKaramouziScreen(),
-                  new Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 10.0),
-                      child: new Column(
-                        children: <Widget>[
-                          rowKaramouziScreenOne(),
-                          new SizedBox(height: 5,),
-                          rowKaramouziScreenTwo(),
-                          new SizedBox(height: 5,),
-                          rowKaramouziScreenThree(),
-                      ],
-                    )
-                  ),
+                  rowKaramouziScreenOne(widget.interShip.phonenumber),
+                  // paddingSixKaramouziScreen(widget.interShip.phonenumber),
+                  // new Padding(
+                  //     padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 10.0),
+                  //     child: new Column(
+                  //       children: <Widget>[
+                  //         rowKaramouziScreenOne(),
+                  //         new SizedBox(height: 5,),
+                  //         rowKaramouziScreenTwo(),
+                  //         new SizedBox(height: 5,),
+                  //         rowKaramouziScreenThree(),
+                  //     ],
+                  //   )
+                  // ),
                 ],
               )
         )));

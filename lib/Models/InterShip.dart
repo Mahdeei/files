@@ -13,7 +13,7 @@ class InterShip{
   var address;
   var image;
   var phonenumber;
-
+  var conditions;
 
 
 
@@ -32,5 +32,6 @@ class InterShip{
     address = parsedJson['address'];
     image = parsedJson['image'];
     phonenumber = parsedJson['phonenumber'];
+    conditions = parsedJson['conditions'];
   }
 }

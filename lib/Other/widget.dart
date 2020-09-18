@@ -807,11 +807,12 @@ Row rowTwoKaramouziScreen(){
   );
 }
 
-Row rowKaramouziScreenOne(){
+Row rowKaramouziScreenOne(String phonenumber){
   return new Row(
     children: <Widget>[
       new Icon(Icons.call),
-      new Text(' 0939734053', style: TextStyle(fontSize: 17.0),)
+      new SizedBox(width: 3.0,),
+      new Text(phonenumber, style: TextStyle(fontSize: 17.0),)
     ],
   );
 }
@@ -858,19 +859,13 @@ Padding paddingThreeKaramouziScreen(){
 }
 
 
-Padding paddingFourKaramouziScreen(){
+Padding paddingFourKaramouziScreen(String conditions){
   return new Padding(padding: const EdgeInsets.symmetric(horizontal: 25.0,vertical: 5.0),
-      child: new Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          new Text('حداقل ترم 3 کامپیوتر',
+      child: new Text(
+            conditions,
             style: TextStyle(fontSize: 17.0),),
-          new Text('آشنایی مقدماتی با برنامه نویسی',
-            style: TextStyle(fontSize: 17.0),),
-          new Text('کار با فوتوشاپ و افترافکت',
-            style: TextStyle(fontSize: 17.0),),
-        ],)
   );
+
 }
 
 
@@ -881,9 +876,9 @@ Padding paddingFiveKaramouziScreen(){
 }
 
 
-Padding paddingSixKaramouziScreen(){
+Padding paddingSixKaramouziScreen(String address){
   return new Padding(padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 10.0),
-    child: new Text('مشهد، وکیل آباد 56، خیابان طاهر، مجتمع صدف', style: TextStyle(fontSize: 17.0),),);
+    child: new Text(address, style: TextStyle(fontSize: 17.0),),);
 }
 
 

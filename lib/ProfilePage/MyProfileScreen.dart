@@ -50,13 +50,16 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
 
   @override
   void initState() {
+    super.initState();
     // print(widget.profile.id+" id profile");
     _getMyData();
     _scrollController = ScrollController();
     _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(_smoothScrollToTop);
+    setState(() {
 
-    super.initState();
+    });
+
   }
 
   _getMyData() async {
@@ -91,14 +94,14 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
           width: MediaQuery.of(context).size.width,
           color: Color(0xff44143E),
         ),
-        new IconButton(
-            icon: Icon(
-              Icons.share,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              print('pressed share');
-            }),
+        // new IconButton(
+        //     icon: Icon(
+        //       Icons.share,
+        //       color: Colors.white,
+        //     ),
+        //     onPressed: () {
+        //       print('pressed share');
+        //     }),
         new Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -197,14 +200,14 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
                   },
                   child: new Container(
                       alignment: Alignment.center,
-                      width: 120.0,
+                      width: MediaQuery.of(context).size.width*.4,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(15.0)),
                       child: new Padding(
                         padding: const EdgeInsets.only(top: 2.5, bottom: 2.5),
                         child: new Text(
-                          'تغییر',
+                          'تغییر پروفایل',
                           style: TextStyle(
                               color: Color(0xff2C003E), fontSize: 15.0),
                         ),
@@ -225,9 +228,14 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    new CircleAvatar(
-                      child: new Image.asset('assets/image/download (4).png'),
-                      backgroundColor: Colors.white,
+                    profile.image=="" || profile.image==null
+                        ?new CircleAvatar(
+                          child: new Icon(Icons.person,color: Colors.grey,size: MediaQuery.of(context).size.width*0.1,),
+                          backgroundColor: Colors.white,
+                          minRadius: 40.0,
+                        )
+                        : new CircleAvatar(
+                      backgroundImage: new NetworkImage('http://stube.ir/image/${profile.image}'),
                       maxRadius: 40.0,
                     ),
                     new SizedBox(
@@ -791,7 +799,7 @@ class _ListImagesState extends State<ListImages> with AutomaticKeepAliveClientMi
           new Random().nextInt(10000000).toString() +
           new Random().nextInt(10000000).toString();
       this.fileName =
-          "image_${widget.profile.id}_${widget.profile.username}_Intern_$rand.jpg";
+          "image_${widget.profile.id}_${widget.profile.username}_Student_$rand.jpg";
       var compressImg = new File("$path/$fileName")
         ..writeAsBytesSync(Img.encodeJpg(smallerImg, quality: 85));
 
@@ -804,7 +812,7 @@ class _ListImagesState extends State<ListImages> with AutomaticKeepAliveClientMi
 
   Future upload(File imageFile) async {
     var stream =
-        new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+    new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
     var length = await imageFile.length();
     var uri = Uri.parse("http://stube.ir/uploadImageStudent.php");
 
@@ -813,7 +821,7 @@ class _ListImagesState extends State<ListImages> with AutomaticKeepAliveClientMi
     var multiPartFile = new http.MultipartFile("image", stream, length,
         filename: basename(imageFile.path));
 
-    print(widget.profile.id);
+    print(widget.profile.id is int);
     print(this.fileName);
     request.fields['user_id'] = widget.profile.id;
     request.fields['image'] = this.fileName;
@@ -837,7 +845,10 @@ class _ListImagesState extends State<ListImages> with AutomaticKeepAliveClientMi
     });
     if (response.statusCode == 200) {
       print('upload seccess');
-      setState(() {});
+      setState(() {
+        imglist.clear();
+      });
+      _getImages();
     } else {
       print('upload failed');
     }
