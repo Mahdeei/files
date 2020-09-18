@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:stubbbb/AgahiPage/AgahPage.dart';
 import 'package:stubbbb/KarAmouziPage/SendReqIntern.dart';
 import 'package:stubbbb/Models/InterShip.dart';
@@ -16,6 +17,7 @@ class KaPage extends StatefulWidget {
 }
 
 class _KaPageState extends State<KaPage> {
+  GlobalKey<ScaffoldState> key = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     print(widget.interShip.description);
@@ -31,8 +33,10 @@ class _KaPageState extends State<KaPage> {
     return new Directionality(
         textDirection: TextDirection.rtl,
         child: new SafeArea(
+
             top: true,
             child: new Scaffold(
+                key: key,
               body: ListView(
                 children: <Widget>[
                   HeadersItemsPage(interShip: widget.interShip,profile: widget.profile,),
@@ -47,7 +51,7 @@ class _KaPageState extends State<KaPage> {
                           new SizedBox(width: 3.0,),
                           new Padding(
                             padding: const EdgeInsets.only(top: 3.0),
-                            child: new Text('4 ساعت در روز',style: TextStyle(color: Colors.black54,fontSize: 15.0))
+                            child: new Text(widget.interShip.time_work,style: TextStyle(color: Colors.black54,fontSize: 15.0))
                       )
                       ],
                       ),
@@ -73,7 +77,25 @@ class _KaPageState extends State<KaPage> {
                   // paddingSevenKaramouziScreen(),
                   Line(),
                   paddingEightKaramouziScreen(),
-                  rowKaramouziScreenOne(widget.interShip.phonenumber),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                    child: new Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        new GestureDetector(
+                          child: new Text(widget.interShip.phonenumber, style: TextStyle(fontSize: 17.0),),
+                          onTap: () {
+                            Clipboard.setData(new ClipboardData(text: widget.interShip.phonenumber));
+                            key.currentState.showSnackBar(
+                                new SnackBar(content: new Text("در کلیپ بورد شما کپی شد"),));
+                          },
+                        ),
+                        new SizedBox(width: 5.0,),
+                        new Icon(Icons.call),
+                      ],
+                    ),
+                  )
+                  // rowKaramouziScreenOne(widget.interShip.phonenumber),
                   // paddingSixKaramouziScreen(widget.interShip.phonenumber),
                   // new Padding(
                   //     padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 10.0),
@@ -126,7 +148,7 @@ class HeadersItemsPage extends StatelessWidget {
               child: new Column(
                 children: <Widget>[
                   new Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       // new Padding(padding: const EdgeInsets.only(top: 2.0,right: 5.0),
                       //   child: new CircleAvatar(backgroundImage: NetworkImage('http://stube.ir/image/${profile.image}'),maxRadius: 16.0,)

@@ -21,6 +21,7 @@ class KarAmouziPage extends StatefulWidget {
 }
 
 class _KarAmouziPageState extends State<KarAmouziPage> {
+
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -43,7 +44,7 @@ class _KarAmouziPageState extends State<KarAmouziPage> {
                 backgroundColor: Color(0xfff2f3f8),
                 drawer: DrawerLists(),
                 appBar: appBarKaramouziScreen(),
-                body: KarAmouziListList(profile: widget.profile,),
+                body: KarAmouziListList(profile: widget.profile),
               ),
             )));
   }
@@ -151,7 +152,7 @@ class _KarAmouziListListState extends State<KarAmouziListList> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => KaPage(interShip: interShips[index],profile: widget.profile,)),
+                      MaterialPageRoute(builder: (context) => KaPage(interShip: interShips[index],profile: widget.profile)),
                     );
                   },
                   child: new Container(

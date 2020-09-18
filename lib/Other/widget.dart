@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stubbbb/AgahiPage/AddPostAgahi.dart';
 import 'package:stubbbb/AgahiPage/AdvertisingsPage.dart';
@@ -821,10 +822,18 @@ Padding rowKaramouziScreenOne(String phonenumber) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
     child: new Row(
+      mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
+        new GestureDetector(
+          child: new Text(phonenumber, style: TextStyle(fontSize: 17.0),),
+          // onLongPress: () {
+          //   Clipboard.setData(new ClipboardData(text: phonenumber));
+          //   // key.currentState.showSnackBar(
+          //   //     new SnackBar(content: new Text("Copied to Clipboard"),));
+          // },
+        ),
+        new SizedBox(width: 5.0,),
         new Icon(Icons.call),
-        new SizedBox(width: 3.0,),
-        new Text(phonenumber, style: TextStyle(fontSize: 17.0),)
       ],
     ),
   );
