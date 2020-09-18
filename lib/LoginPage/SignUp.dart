@@ -6,6 +6,7 @@ import 'package:stubbbb/Component/textformfield.dart';
 import 'package:stubbbb/FirstPage/HomePage/HomeScreen.dart';
 import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Other/widget.dart';
+import 'package:stubbbb/http/Authenticate.dart';
 
 class SignUp extends StatefulWidget {
   final String phone;
@@ -32,12 +33,12 @@ class _SignUpState extends State<SignUp> {
   void setBody() async {
     _body = await signUp();
     if (_body['status'] == 'created') {
-
-      storeUserData(_body);
+      Map bodi = await AuthenticateService.signIn({"username":_body['username'],"password":_body['password']});
+      await storeUserData(_body);
       Navigator.of(context).pushReplacement(
           new MaterialPageRoute(
               builder: (context) =>
-              new HomePage(id: _body['id'],)));
+              new HomePage(id: bodi['id'],)));
     }else if(_body['status'] == 'exist'){
       setState(() {
         check = true;
@@ -82,14 +83,14 @@ class _SignUpState extends State<SignUp> {
                           new SizedBox(height: phoneSize.height * 0.09),
                           new Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 18.0),
+                              const EdgeInsets.symmetric(horizontal: 18.0),
                               child: textSignUp()),
                           new SizedBox(height: phoneSize.height * 0.09),
                           new Form(
                               key: _formKey,
                               child: new Container(
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 35),
+                                const EdgeInsets.symmetric(horizontal: 35),
                                 child: new Column(
                                   children: <Widget>[
                                     InputTextForm(
@@ -133,7 +134,7 @@ class _SignUpState extends State<SignUp> {
                                           }
                                         }),
                                     InputTextForm(
-                                      errColor: Colors.white,
+                                        errColor: Colors.white,
                                         obscure: false,
                                         onSaved: nameOnsaved,
                                         color: Colors.white,
@@ -202,8 +203,9 @@ class _SignUpState extends State<SignUp> {
       'password': passCon,
       'name': nameCon
     });
+
     final body = json.decode(response.body);
-    // await storeUserData(body);
+    print(body);
     return body;
   }
 

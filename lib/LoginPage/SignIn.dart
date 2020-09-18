@@ -19,7 +19,7 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
 
 
-  final _formKeyLog = GlobalKey<FormState>();
+  GlobalKey<FormState> _formKeyLog = GlobalKey<FormState>();
   String _username;
   String _password,_phonenumber;
   Color _color = Colors.white;

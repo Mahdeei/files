@@ -12,7 +12,6 @@ import 'HomePage.dart';
 
 class HomePage extends StatefulWidget {
   String id;
-  static  GlobalKey<ScaffoldState> kiey = new GlobalKey<ScaffoldState>();
   HomePage({this.id});
 
   @override
@@ -62,7 +61,6 @@ class _HomePageState extends State<HomePage>{
             ),
           )
         : new Scaffold(
-            key: HomePage.kiey,
             resizeToAvoidBottomInset: false,
             bottomNavigationBar: FFNavigationBar(
               theme: FFNavigationBarTheme(

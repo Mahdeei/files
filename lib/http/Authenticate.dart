@@ -5,6 +5,7 @@ class AuthenticateService{
   static Future<Map> signIn(Map databody) async {
     var response = await http.post("http://stube.ir/Login.php", body: databody);
     final body = json.decode(response.body);
+    print(body);
     return body;
   }
   static Future<MyData> getMyData(String id) async {
@@ -31,13 +32,13 @@ class AuthenticateService{
     return body2;
   }
 
-  static Future<bool> checkLog (String apiToken) async {
+  static Future<Map> checkLog (String apiToken) async {
     var apiResponse = await http.post('http://stube.ir/AuthenticateService.php',body: {
       'apiToken' : apiToken
     });
     Map result = json.decode(apiResponse.body);
 
-    return result['status'] == 'Defined';
+    return result;
   }
 
 

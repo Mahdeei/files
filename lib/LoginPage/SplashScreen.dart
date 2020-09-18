@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   checkinternet() async {
     if (await netConnet()) {
-       checkLogin();
+      checkLogin();
     } else {
       print('not connected internet');
       skaffoldKey.currentState.showSnackBar(new SnackBar(
@@ -81,28 +81,21 @@ class _SplashScreenState extends State<SplashScreen> {
     String username =  perfs.getString('user_username');
     String password =  perfs.getString('user_password');
     if(apiToken != null){
-      if(await AuthenticateService.checkLog(apiToken)){
+      boody = await AuthenticateService.checkLog(apiToken);
 
-        boody = await AuthenticateService.signIn({"username":username,"password":password});
-        if (await boody['status'] == 'succes') {
-          String id = await authenticate(username,password);
-           // MyData edge = await AuthenticateService.getMyData(id);
-          Navigator.of(context).pushReplacement(
-              new MaterialPageRoute(builder: (context) => new HomePage(id:id ))
-          );
+      if(boody['status'] == 'Defined'){
+        Navigator.of(context).pushReplacement(
+            new MaterialPageRoute(builder: (context) => new HomePage(id:boody['id'] ))
+        );
+
 
 
       }else{
 
-          Navigator.of(context).pushReplacement(
-            new MaterialPageRoute(builder: (context) => new SignIn()));
-      }
-    }else{
-
         Navigator.of(context).pushReplacement(
-          new MaterialPageRoute(builder: (context) => new SignIn()));
+            new MaterialPageRoute(builder: (context) => new SignIn()));
 
-    }}else{
+      }}else{
       await perfs.remove('user_apiToken');
       await perfs.remove('user_username');
       await perfs.remove('user_password');
@@ -111,10 +104,7 @@ class _SplashScreenState extends State<SplashScreen> {
     }
 
   }
-  authenticate(String username , String password) async{
-    boody = await AuthenticateService.signIn({"username":username,"password":password});
-    return boody['id'];
-  }
+
 
 
 
