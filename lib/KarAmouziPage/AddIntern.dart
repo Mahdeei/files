@@ -14,6 +14,7 @@ import 'package:stubbbb/Other/R.dart';
 import 'dart:convert';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
+import 'package:stubbbb/Other/SizeConfig.dart';
 
 
 
@@ -63,8 +64,8 @@ class _FieldsListInternState extends State<FieldsListIntern> {
       timeWork = 'ساعت کاری',
       phone = 'شماره تلفن',
       address = 'آدرس',
-      onvan = '+عنوان کار اموزی',
-      company = '+نام شرکت',
+      onvan = 'عنوان کار اموزی',
+      company = 'نام شرکت',
       showType='نوع کارآموزی';
 
   @override
@@ -197,13 +198,15 @@ class _FieldsListInternState extends State<FieldsListIntern> {
       body: new Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            new Column(
-              children: [
-                new Column(
-                  children: <Widget>[
-                    new Row(
+            Expanded(
+              flex: 17,
+              child: new Column(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child:  new Row(
                       children: <Widget>[
-                        _image == null
+                        /*_image == null
                             ? new GestureDetector(
                           onTap: () async {
                             showDialog(
@@ -274,396 +277,470 @@ class _FieldsListInternState extends State<FieldsListIntern> {
                           decoration: BoxDecoration(
                               image: DecorationImage(image: FileImage(_image),fit: BoxFit.cover)
                           ),
-                        ),
-                        new Container(
-                          height: phoneSize.height * 0.25,
-                          width: phoneSize.width * 0.55,
-                          color: R.color.banafshtire,
-                          child: new Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: <Widget>[
-                              new IconButton(
-                                  icon: Icon(
-                                    Icons.arrow_forward,
-                                    color: Colors.white,
+                        ),*/
+                        Expanded(
+                          flex: 4,
+                          child:  _image == null
+                              ? new GestureDetector(
+                            onTap: () async {
+                              showDialog(
+                                context: context,
+                                builder: (context) => new AlertDialog(
+                                  title: new Text(
+                                    "انتخاب فایل از",
+                                    style: TextStyle(fontSize: 16.0),
+                                    textDirection: TextDirection.rtl,
                                   ),
-                                  onPressed: () {
-                                    // Navigator.of(context).pushReplacement(new MaterialPageRoute(builder: (ctx)=> new AdvertisingsPage()));
-                                  }),
-                              new SizedBox(
-                                height: phoneSize.height * 0.03,
-                              ),
-                              GestureDetector(
-                                onTap: () async {
-                                  onvan = await AlertTextField.alertDialog(
-                                      '+عنوان کار اموزی', onvan, context);
-                                },
+                                  actions: [
+                                    Column(
+                                      children: [
+                                        Container(
+                                          width: MediaQuery.of(context).size.width,
+                                          child: new RaisedButton(
+                                            elevation: 0,
+                                            color: Colors.white,
+                                            child: new Text("گالری"),
+                                            onPressed: () async{
+                                              Navigator.of(context).pop();
+                                              await pickImage(ImageSource.gallery);
+
+                                            },
+                                          ),
+                                        ),
+                                        new Container(
+                                          width: MediaQuery.of(context).size.width,
+                                          child: new MaterialButton(
+                                            elevation: 0,
+                                            color: Colors.white,
+                                            child: new Text("دوربین گوشی",textDirection: TextDirection.rtl,),
+                                            onPressed: () async {
+                                              await pickImage(ImageSource.camera);
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                            child: new Container(
+                                height: phoneSize.height * 0.25,
+                                width: phoneSize.width * 0.45,
                                 child: new Align(
-                                  alignment: Alignment.topRight,
-                                  child: new Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
-                                    child: new Text(
-                                      onvan,
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 1,
-                                      style: TextStyle(
-                                          fontSize: 25.0,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
+                                  alignment: Alignment.center,
+                                  child: new Column(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      new Icon(
+                                        Icons.add_a_photo,
+                                        size: SizeConfig.textMultiplier*9.9,
+                                      ),
+                                      new Text(
+                                        'اضافه کردن عکس',
+                                        style: TextStyle(fontSize: SizeConfig.textMultiplier*3),
+                                      )
+                                    ],
+                                  ),
+                                )),
+                          )
+                              : new Container(
+                            height: phoneSize.height * 0.25,
+                            width: phoneSize.width * 0.45,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(image: FileImage(_image),fit: BoxFit.cover)
+                            ),
+                          ),),
+                        Expanded(
+                          flex: 5,
+                          child: new Container(
+                            height: phoneSize.height * 0.25,
+                            width: phoneSize.width * 0.55,
+                            color: R.color.banafshtire,
+                            child: new Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Expanded(
+                                  flex: 1,
+                                  child: new IconButton(
+                                      icon: Icon(
+                                        Icons.arrow_forward,
+                                        color: Colors.white,
+                                      ),
+                                      onPressed: () {
+                                        // Navigator.of(context).pushReplacement(new MaterialPageRoute(builder: (ctx)=> new AdvertisingsPage()));
+                                      }),
+                                ),
+                                Expanded(
+                                  flex: 3,
+                                  child: Padding(
+                                    padding:  EdgeInsets.only(top: SizeConfig.heightMultiplier*3,),
+                                    child: GestureDetector(
+                                      onTap: () async {
+                                        onvan = await AlertTextField.alertDialog(
+                                            'عنوان کارآموزی', onvan, context);
+                                      },
+                                      child: new Align(
+                                        alignment: Alignment.topRight,
+                                        child: new Padding(
+                                          padding:  EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*2),
+                                          child: new Text(
+                                            onvan,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                            style: TextStyle(
+                                                fontSize: SizeConfig.textMultiplier*3.3,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white),
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              // GestureDetector(
-                              //   onTap: () async {
-                              //     dste = await AlertTextField.alertDialog(
-                              //         'نام شرکت', dste, context);
-                              //   },
-                              //   child: new Align(
-                              //       alignment: Alignment.topRight,
-                              //       child: new Padding(
-                              //         padding: const EdgeInsets.only(right: 8.0),
-                              //         child: GestureDetector(
-                              //           child: new Text(
-                              //             dste,
-                              //             overflow: TextOverflow.ellipsis,
-                              //             maxLines: 1,
-                              //             style: TextStyle(
-                              //               fontSize: 16.0,
-                              //               fontWeight: FontWeight.bold,
-                              //               color: R.color.blueTire,
-                              //             ),
-                              //           ),
-                              //         ),
-                              //       )),
-                              // ),
+                                Expanded(
+                                  flex: 2,
+                                  child: GestureDetector(
+                                    onTap: () async {
+                                      company = await AlertTextField.alertDialog(
+                                          'نام شرکت', company, context);
+                                    },
+                                    child: new Align(
+                                        alignment: Alignment.topRight,
+                                        child: new Padding(
+                                          padding:  EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*2,left: SizeConfig.imageSizeMultiplier*3),
+                                          child: GestureDetector(
+                                            child: new Text(
+                                              company,
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                              style: TextStyle(
+                                                fontSize: SizeConfig.textMultiplier*2.5,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        )),),
+                                )
+                                // ),
 
-                              // new Align(
-                              //   alignment: Alignment.bottomCenter,
-                              //   child: new Row(
-                              //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              //     children: <Widget>[
-                              //       // new GestureDetector(
-                              //       //   child: new Container(
-                              //       //     decoration: BoxDecoration(
-                              //       //         color: Colors.white,
-                              //       //         borderRadius:
-                              //       //             BorderRadius.all(Radius.circular(20.0))),
-                              //       //     width: phoneSize.width * 0.34,
-                              //       //     child: new Text(
-                              //       //       'شروع کار',
-                              //       //       style: TextStyle(
-                              //       //           color: Color(0xff2D0827),
-                              //       //           fontWeight: FontWeight.bold,
-                              //       //           fontSize: 14.0),
-                              //       //       textAlign: TextAlign.center,
-                              //       //     ),
-                              //       //   ),
-                              //       //   onTap: () {
-                              //       //     Navigator.of(context).push(new MaterialPageRoute(
-                              //       //         builder: (ctx) => new SendReq(
-                              //       //               advertising: widget.advertising,
-                              //       //               profile: widget.profile,
-                              //       //             )));
-                              //       //   },
-                              //       // ),
-                              //     ],
-                              //   ),
-                              // ),
+                                // new Align(
+                                //   alignment: Alignment.bottomCenter,
+                                //   child: new Row(
+                                //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                //     children: <Widget>[
+                                //       // new GestureDetector(
+                                //       //   child: new Container(
+                                //       //     decoration: BoxDecoration(
+                                //       //         color: Colors.white,
+                                //       //         borderRadius:
+                                //       //             BorderRadius.all(Radius.circular(20.0))),
+                                //       //     width: phoneSize.width * 0.34,
+                                //       //     child: new Text(
+                                //       //       'شروع کار',
+                                //       //       style: TextStyle(
+                                //       //           color: Color(0xff2D0827),
+                                //       //           fontWeight: FontWeight.bold,
+                                //       //           fontSize: 14.0),
+                                //       //       textAlign: TextAlign.center,
+                                //       //     ),
+                                //       //   ),
+                                //       //   onTap: () {
+                                //       //     Navigator.of(context).push(new MaterialPageRoute(
+                                //       //         builder: (ctx) => new SendReq(
+                                //       //               advertising: widget.advertising,
+                                //       //               profile: widget.profile,
+                                //       //             )));
+                                //       //   },
+                                //       // ),
+                                //     ],
+                                //   ),
+                                // ),
 //                  Image.file(this._imageFile),
-                            ],
+                              ],
+                            ),
                           ),
                         )
+
                       ],
                     )
-                  ],
-                ),
-                new Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    new Row(
+                  ),
+                  Expanded(
+                    flex: 5,
+                    child: new Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Container(
-                          padding: const EdgeInsets.only(right: 10.0,top: 10.0),
-                          child: DropdownButton<String>(
-                            hint: Container(width: phoneSize.width*0.85,child: new Text(showType)),
-                            items: _listdrop.map((String dropdownStringItem){
-                              return DropdownMenuItem<String>(
-                                value: dropdownStringItem,
-                                onTap: (){
+                        new Row(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.only(right:SizeConfig.imageSizeMultiplier*2.5,top: SizeConfig.heightMultiplier*1.3),
+                              child: DropdownButton<String>(
+                                hint: Container(width: phoneSize.width*0.85,child: new Text(showType,style: TextStyle(fontSize: SizeConfig.textMultiplier*2.3),)),
+                                items: _listdrop.map((String dropdownStringItem){
+                                  return DropdownMenuItem<String>(
+                                    value: dropdownStringItem,
+                                    onTap: (){
 
+                                    },
+                                    child: Align(alignment: Alignment.centerRight,child: Text(dropdownStringItem,textAlign: TextAlign.right,)),
+                                  );
+                                }).toList(),
+                                onChanged: (value){
+                                  setState(() {
+                                    showType=value;
+                                    if(value=="استخدام"){
+                                      type=3;
+                                    }else if(value=="کارآموزی منجر به استخدام"){
+                                      type=2;
+                                    }else if(value=="کارآموزی"){
+                                      type=1;
+                                    }
+                                    print(type);
+                                  });
                                 },
-                                child: Align(alignment: Alignment.centerRight,child: Text(dropdownStringItem,textAlign: TextAlign.right,)),
-                              );
-                            }).toList(),
-                            onChanged: (value){
-                              setState(() {
-                                showType=value;
-                                if(value=="استخدام"){
-                                  type=3;
-                                }else if(value=="کارآموزی منجر به استخدام"){
-                                  type=2;
-                                }else if(value=="کارآموزی"){
-                                  type=1;
-                                }
-                                print(type);
-                              });
-                            },
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding:
+                           EdgeInsets.only(top: SizeConfig.heightMultiplier*1.3, left: SizeConfig.imageSizeMultiplier*3, right: SizeConfig.imageSizeMultiplier*3),
+                          child: new Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                flex: 5,
+                                child: new GestureDetector(
+                                    onTap: () async {
+                                      tozihat = await AlertTextField.alertDialog(
+                                          'توضیحات', tozihat, context);
+                                      setState(() {});
+                                    },
+                                    child: Container(
+                                        width: phoneSize.width * .78,
+                                        child: _text(SizeConfig.textMultiplier*2.5, tozihat))),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: new Text(
+                                  tozihat == 'توضیحات' ? 'وارد نشده' : 'توضیحات',
+                                  style: TextStyle(fontSize: SizeConfig.textMultiplier*2,
+                                      color: tozihat == 'توضیحات'
+                                          ? _color()
+                                          : Colors.black),
+                                ),
+                              )
+                            ],
                           ),
                         ),
+                        Divider(),
+                        Padding(
+                          padding:
+                           EdgeInsets.only(top: SizeConfig.heightMultiplier*1.3, left: SizeConfig.imageSizeMultiplier*3, right: SizeConfig.imageSizeMultiplier*3),
+                          child: new Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                flex: 5,
+                                child: new GestureDetector(
+                                    onTap: () async {
+                                      shrayet = await AlertTextField.alertDialog(
+                                          'شرایط', shrayet, context);
+                                      setState(() {});
+                                    },
+                                    child: Container(
+                                        width: phoneSize.width * .78,
+                                        child: _text(SizeConfig.textMultiplier*2.5, shrayet))),
+                              ),
+                              Expanded(
+                                  flex: 1,child: new Text(shrayet == 'شرایط' ? 'وارد نشده' : 'شرایط',style:TextStyle(fontSize: SizeConfig.textMultiplier*2)))
+                            ],
+                          ),
+                        ),
+                        Divider(),
+                        Padding(
+                          padding:
+                           EdgeInsets.only(top: SizeConfig.heightMultiplier*1.3, left: SizeConfig.imageSizeMultiplier*3, right: SizeConfig.imageSizeMultiplier*3),
+                          child: new Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                flex: 5,
+                                child: new GestureDetector(
+                                    onTap: () async {
+                                      numberPeople = await AlertTextField.alertDialog(
+                                          'تعداد افراد', numberPeople, context);
+                                      setState(() {});
+                                    },
+                                    child: Container(
+                                        width: phoneSize.width * .78,
+                                        child: _text(SizeConfig.textMultiplier*2.5, numberPeople))),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: new Text(numberPeople == 'تعداد افراد' ? 'وارد نشده' : 'تعداد افراد',
+                                    style: TextStyle(fontSize: SizeConfig.textMultiplier*2,
+                                        color:
+                                        numberPeople == 'تعداد افراد' ? _color() : Colors.black)),
+                              )
+                            ],
+                          ),
+                        ),
+                        Divider(),
+                        Padding(
+                          padding:
+                           EdgeInsets.only(top: SizeConfig.heightMultiplier*1.3, left: SizeConfig.imageSizeMultiplier*3, right: SizeConfig.imageSizeMultiplier*3),
+                          child: new Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                flex: 5,
+                                child: new GestureDetector(
+                                    onTap: () async {
+                                      timeWork = await AlertTextField.alertDialog(
+                                          'ساعت کاری', timeWork, context);
+                                      setState(() {});
+                                    },
+                                    child: Container(
+                                        width: phoneSize.width * .78,
+                                        child: _text(SizeConfig.textMultiplier*2.5, timeWork))),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: new Text(timeWork == 'ساعت کاری' ? 'وارد نشده' : 'ساعت کاری',
+                                    style: TextStyle(fontSize: SizeConfig.textMultiplier*2,
+                                        color: timeWork == 'ساعت کاری'
+                                            ? _color()
+                                            : Colors.black)),
+                              )
+                            ],
+                          ),
+                        ),
+                        Divider(),
+                        Padding(
+                          padding:
+                           EdgeInsets.only(top: SizeConfig.heightMultiplier*1.3, left: SizeConfig.imageSizeMultiplier*3, right: SizeConfig.imageSizeMultiplier*3),
+                          child: new Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                flex: 5,
+                                child: new GestureDetector(
+                                    onTap: () async {
+                                      phone = await AlertTextField.alertDialog(
+                                          'شماره تلفن', phone, context);
+                                      setState(() {});
+                                    },
+                                    child: Container(
+                                        width: phoneSize.width * .78,
+                                        child: _text(SizeConfig.textMultiplier*2.5, phone))),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: new Text(phone == 'شماره تلفن' ? 'وارد نشده' : 'شماره تلفن',
+                                    style: TextStyle(fontSize: SizeConfig.textMultiplier*2,
+                                        color: phone == 'شماره تلفن'
+                                            ? _color()
+                                            : Colors.black)),
+                              )
+                            ],
+                          ),
+                        ),
+                        Divider(),
+                        Padding(
+                          padding:
+                           EdgeInsets.only(top: SizeConfig.heightMultiplier*1.3, left: SizeConfig.imageSizeMultiplier*3, right: SizeConfig.imageSizeMultiplier*3),
+                          child: new Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                flex: 5,
+                                child: new GestureDetector(
+                                    onTap: () async {
+                                      address = await AlertTextField.alertDialog(
+                                          'آدرس', address, context);
+                                      setState(() {});
+                                    },
+                                    child: Container(
+                                        width: phoneSize.width * .78,
+                                        child: _text(SizeConfig.textMultiplier*2.5, address))),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: new Text(address == 'آدرس' ? 'وارد نشده' : 'آدرس',
+                                    style: TextStyle(fontSize: SizeConfig.textMultiplier*2,
+                                        color:
+                                        address == 'آدرس' ? _color() : Colors.black)),
+                              )
+                            ],
+                          ),
+                        ),
+                        clr1
+                            ? onvan == 'عنوان آگهی'
+                            ? new Column(
+                          children: [
+                            new Divider(),
+                            new Text('عنوان آگهی را سربرگ وارد کنید',
+                                style: TextStyle(color: Colors.red))
+                          ],
+                        )
+                            : new SizedBox()
+                            : new SizedBox(),
                       ],
                     ),
-
-                    // new Text("نوع کارآموزی"),
-                    // new Row(
-                    //   children: [
-                    //
-                    //     new Radio(
-                    //       value: 1,
-                    //       groupValue: group,
-                    //       onChanged: (T){
-                    //         setState(() {
-                    //           group = T;
-                    //           print(group);
-                    //         });
-                    //       }
-                    //     ),
-                    //     new Radio(
-                    //         value: 2,
-                    //         groupValue: group,
-                    //         onChanged: (T){
-                    //           setState(() {
-                    //             group = T;
-                    //             print(group);
-                    //           });
-                    //         }
-                    //     ),
-                    //     new Radio(
-                    //         value: 3,
-                    //         groupValue: group,
-                    //         onChanged: (T){
-                    //           setState(() {
-                    //             group = T;
-                    //             print(group);
-                    //           });
-                    //         }
-                    //     ),
-                    //
-                    //     // ListTile(
-                    //     //   title: const Text('کارآموزی'),
-                    //     //   leading: new Radio(
-                    //     //       value: 'کارآموزی', groupValue: "a", onChanged: null),
-                    //     // ),
-                    //     // ListTile(
-                    //     //   title: const Text('کارآموزی'),
-                    //     //   leading: new Radio(
-                    //     //       value: 'کارآموزی', groupValue: null, onChanged: null),
-                    //     // ),
-                    //     // ListTile(
-                    //     //   title: const Text('کارآموزی'),
-                    //     //   leading: new Radio(
-                    //     //       value: 'کارآموزی', groupValue: null, onChanged: null),
-                    //     // ),
-                    //     //
-                    //   ],
-                    // ),
-                    Padding(
-                      padding:
-                      const EdgeInsets.only(top: 10, left: 12, right: 12),
-                      child: new Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          new GestureDetector(
-                              onTap: () async {
-                                tozihat = await AlertTextField.alertDialog(
-                                    'توضیحات', tozihat, context);
-                                setState(() {});
-                              },
-                              child: Container(
-                                  width: phoneSize.width * .78,
-                                  child: _text(18, tozihat))),
-                          new Text(
-                            tozihat == 'توضیحات' ? 'وارد نشده' : 'توضیحات',
-                            style: TextStyle(
-                                color: tozihat == 'توضیحات'
-                                    ? _color()
-                                    : Colors.black),
-                          )
-                        ],
-                      ),
-                    ),
-                    Divider(),
-                    Padding(
-                      padding:
-                      const EdgeInsets.only(top: 10, left: 12, right: 12),
-                      child: new Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          new GestureDetector(
-                              onTap: () async {
-                                shrayet = await AlertTextField.alertDialog(
-                                    'شرایط', shrayet, context);
-                                setState(() {});
-                              },
-                              child: Container(
-                                  width: phoneSize.width * .78,
-                                  child: _text(18, shrayet))),
-                          new Text(shrayet == 'شرایط' ? 'وارد نشده' : 'شرایط')
-                        ],
-                      ),
-                    ),
-                    Divider(),
-                    Padding(
-                      padding:
-                      const EdgeInsets.only(top: 10, left: 12, right: 12),
-                      child: new Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          new GestureDetector(
-                              onTap: () async {
-                                numberPeople = await AlertTextField.alertDialog(
-                                    'تعداد افراد', numberPeople, context);
-                                setState(() {});
-                              },
-                              child: Container(
-                                  width: phoneSize.width * .78,
-                                  child: _text(18, numberPeople))),
-                          new Text(numberPeople == 'تعداد افراد' ? 'وارد نشده' : 'تعداد افراد',
-                              style: TextStyle(
-                                  color:
-                                  numberPeople == 'تعداد افراد' ? _color() : Colors.black))
-                        ],
-                      ),
-                    ),
-                    Divider(),
-                    Padding(
-                      padding:
-                      const EdgeInsets.only(top: 10, left: 12, right: 12),
-                      child: new Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          new GestureDetector(
-                              onTap: () async {
-                                timeWork = await AlertTextField.alertDialog(
-                                    'ساعت کاری', timeWork, context);
-                                setState(() {});
-                              },
-                              child: Container(
-                                  width: phoneSize.width * .78,
-                                  child: _text(18, timeWork))),
-                          new Text(timeWork == 'ساعت کاری' ? 'وارد نشده' : 'ساعت کاری',
-                              style: TextStyle(
-                                  color: timeWork == 'ساعت کاری'
-                                      ? _color()
-                                      : Colors.black))
-                        ],
-                      ),
-                    ),
-                    Divider(),
-                    Padding(
-                      padding:
-                      const EdgeInsets.only(top: 10, left: 12, right: 12),
-                      child: new Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          new GestureDetector(
-                              onTap: () async {
-                                phone = await AlertTextField.alertDialog(
-                                    'شماره تلفن', phone, context);
-                                setState(() {});
-                              },
-                              child: Container(
-                                  width: phoneSize.width * .78,
-                                  child: _text(18, phone))),
-                          new Text(phone == 'شماره تلفن' ? 'وارد نشده' : 'شماره تلفن',
-                              style: TextStyle(
-                                  color: phone == 'شماره تلفن'
-                                      ? _color()
-                                      : Colors.black))
-                        ],
-                      ),
-                    ),
-                    Divider(),
-                    Padding(
-                      padding:
-                      const EdgeInsets.only(top: 10, left: 12, right: 12),
-                      child: new Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          new GestureDetector(
-                              onTap: () async {
-                                address = await AlertTextField.alertDialog(
-                                    'آدرس', address, context);
-                                setState(() {});
-                              },
-                              child: Container(
-                                  width: phoneSize.width * .78,
-                                  child: _text(18, address))),
-                          new Text(address == 'آدرس' ? 'وارد نشده' : 'آدرس',
-                              style: TextStyle(
-                                  color:
-                                  address == 'آدرس' ? _color() : Colors.black))
-                        ],
-                      ),
-                    ),
-                    clr1
-                        ? onvan == 'عنوان آگهی'
-                        ? new Column(
-                      children: [
-                        new Divider(),
-                        new Text('عنوان آگهی را سربرگ وارد کنید',
-                            style: TextStyle(color: Colors.red))
-                      ],
-                    )
-                        : new SizedBox()
-                        : new SizedBox(),
-                  ],
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
-            new GestureDetector(
-              onTap: () async{
-                if (onvan == 'عنوان آگهی') {
-                  setState(() {
-                    clr1 = true;
-                  });
-                } else {
-                  setState(() {
-                    clr1 = false;
-                  });
-                }
-                if (tozihat == 'توضیحات' ||
-                    timeWork == 'مهلت' ||
-                    phone == 'بودجه' ||
-                    address == 'آدرس' ||
-                    onvan == 'عنوان آگهی') {
-                  setState(() {
-                    clr = true;
-                  });
-                } else {
-                  await upload(_image);
-                  if(res['status']=="added"){
-                    key.currentState.showSnackBar(
-                        new SnackBar(content: new Text("آگهی شما با موفقیت ارسال شد"))
-                    );
+            Expanded(
+              flex: 2,
+              child: new GestureDetector(
+                onTap: () async{
+                  if (onvan == 'عنوان آگهی') {
+                    setState(() {
+                      clr1 = true;
+                    });
+                  } else {
+                    setState(() {
+                      clr1 = false;
+                    });
                   }
-                }
-              },
-              child: new Container(
-                alignment: Alignment.center,
-                width: phoneSize.width * 0.8,
-                margin: const EdgeInsets.only(bottom: 20),
-                padding: const EdgeInsets.symmetric(vertical: 6),
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey, blurRadius: 5, offset: Offset(2, 2))
-                    ],
-                    color: R.color.banafshKamRang,
-                    borderRadius: BorderRadius.circular(25)),
-                child: new Text(
-                  'آگهی کن',
-                  style: TextStyle(color: Colors.white, fontSize: 17),
+                  if (tozihat == 'توضیحات' ||
+                      timeWork == 'مهلت' ||
+                      phone == 'بودجه' ||
+                      address == 'آدرس' ||
+                      onvan == 'عنوان آگهی') {
+                    setState(() {
+                      clr = true;
+                    });
+                  } else {
+                    await upload(_image);
+                    if(res['status']=="added"){
+                      key.currentState.showSnackBar(
+                          new SnackBar(content: new Text("آگهی شما با موفقیت ارسال شد"))
+                      );
+                    }
+                  }
+                },
+                child: new Container(
+                  alignment: Alignment.center,
+                  width: phoneSize.width * 0.8,
+                  margin:  EdgeInsets.only(bottom: SizeConfig.heightMultiplier*3),
+                  padding:  EdgeInsets.symmetric(vertical: SizeConfig.imageSizeMultiplier*2),
+                  decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey, blurRadius: 5, offset: Offset(2, 2))
+                      ],
+                      color: R.color.banafshKamRang,
+                      borderRadius: BorderRadius.circular(SizeConfig.heightMultiplier*3.5)),
+                  child: new Text(
+                    'آگهی کن',
+                    style: TextStyle(color: Colors.white, fontSize: SizeConfig.heightMultiplier*2.5),
+                  ),
                 ),
               ),
             )

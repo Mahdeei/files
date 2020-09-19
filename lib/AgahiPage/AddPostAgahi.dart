@@ -315,7 +315,7 @@ class _FieldsListState extends State<FieldsList> {
                                           child: new Align(
                                             alignment: Alignment.topRight,
                                             child: new Padding(
-                                              padding: const EdgeInsets.only(right: 8.0),
+                                              padding:  EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*2),
                                               child: new Text(
                                                 onvan,
                                                 overflow: TextOverflow.ellipsis,
@@ -415,7 +415,7 @@ class _FieldsListState extends State<FieldsList> {
                                     },
                                     child: Container(
                                         width: phoneSize.width * .78,
-                                        child: _text(18, tozihat))),
+                                        child: _text(SizeConfig.textMultiplier*2.5, tozihat))),
                               ),
                               Expanded(
                                 flex: 1,

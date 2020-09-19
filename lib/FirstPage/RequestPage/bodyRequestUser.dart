@@ -36,15 +36,19 @@ class _bodyRequestUserState extends State<bodyRequestUser> {
 
 
   _getRequestUser() async {
-    setState(() {
-      isLoading = true;
-    });
+    if(this.mounted){
+      setState(() {
+        isLoading = true;
+      });
+    }
     requestProfile= await RequestHttp.getProfile(widget.profile.id);
     var response = await RequestHttp.getReqUser(widget.profile.id);
     requestsUser.addAll(response);
-    setState(() {
-      isLoading= false;
-    });
+    if(this.mounted){
+      setState(() {
+        isLoading= false;
+      });
+    }
 
   }
 

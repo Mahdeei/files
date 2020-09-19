@@ -7,7 +7,6 @@ import 'package:stubbbb/Models/profileModels.dart';
 import 'package:stubbbb/Other/R.dart';
 import 'package:stubbbb/Other/SizeConfig.dart';
 import 'package:stubbbb/Other/widget.dart';
-import 'package:stubbbb/ProfilePage/MyProfileScreen.dart';
 import 'package:stubbbb/http/Authenticate.dart';
 import 'package:stubbbb/http/httpComments.dart';
 import 'package:flutter/scheduler.dart';
@@ -548,9 +547,11 @@ class _ListTwoState extends State<ListTwo> {
     Map body = await HttpComments.getComments(widget.user.id);
     username = await HttpComments.getUsername(widget.user.id);
     comments = body['comments'];
-    setState(() {
-      refresh = false;
-    });
+    if(this.mounted){
+      setState(() {
+        refresh = false;
+      });
+    }
   }
 
   Future<Null> onRefreshMethod() async {
@@ -891,15 +892,19 @@ class _ListImagesState extends State<ListImages> {
   }
 
   _getImages() async {
-    setState(() {
-      isLoading = true;
-    });
+    if(this.mounted){
+      setState(() {
+        isLoading = true;
+      });
+    }
     var response = await RequestHttp.getImages(widget.user.id);
     // print(response);
-    setState(() {
-      imglist.addAll(response);
-      isLoading = false;
-    });
+    if(this.mounted){
+      setState(() {
+        imglist.addAll(response);
+        isLoading = false;
+      });
+    }
   }
 
   @override

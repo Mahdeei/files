@@ -242,7 +242,7 @@ Text textlineBetween() {
   return new Text(
     '|',
     style: TextStyle(
-        fontSize: SizeConfig.textMultiplier*1.7, fontWeight: FontWeight.bold),
+        fontSize: SizeConfig.textMultiplier*1.4, fontWeight: FontWeight.bold),
   );
 }
 
@@ -566,7 +566,7 @@ AppBar appBarProfilePage() {
 
 AppBar appBarKaramouziScreen() {
   return AppBar(
-    actions: <Widget>[
+    /*actions: <Widget>[
       new Padding(
           padding: const EdgeInsets.only(left: 5.0),
           child: new IconButton(
@@ -575,7 +575,7 @@ AppBar appBarKaramouziScreen() {
                 color: Color(0xff2C003E),
               ),
               onPressed: () {}))
-    ],
+    ],*/
     backgroundColor: Colors.white,
     elevation: 5.0,
     bottomOpacity: 25.0,
@@ -849,16 +849,16 @@ Row rowOneKaramouziScreen() {
   );
 }
 
-Row rowTwoKaramouziScreen() {
+Row rowTwoKaramouziScreen(String pp) {
   new Row(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: <Widget>[
-      new Icon(Icons.people, color: Colors.black54, size: 20.0,),
-      new SizedBox(width: 3.0,),
+      new Icon(Icons.people, color: Colors.black54, size: SizeConfig.heightMultiplier*3,),
+      new SizedBox(width: SizeConfig.imageSizeMultiplier,),
       new Padding(
-          padding: const EdgeInsets.only(top: 3.0, left: 3.0),
+          padding:  EdgeInsets.only(top: SizeConfig.heightMultiplier*0.5, left: SizeConfig.imageSizeMultiplier),
           child: new Text(
-            '6 نفر', style: TextStyle(color: Colors.black54, fontSize: 15.0),)
+            pp, style: TextStyle(color: Colors.black54, fontSize: SizeConfig.textMultiplier*2),)
       )
     ],
   );
@@ -907,50 +907,55 @@ Row rowKaramouziScreenThree() {
 
 Padding paddingOneKaramouziScreen() {
   return new Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+    padding: EdgeInsets.symmetric(horizontal: SizeConfig.imageSizeMultiplier * 5.5, vertical: SizeConfig.heightMultiplier * 1.5),
     child: new Text('کارآموزی منجر به استخدام ',
-      style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold),),);
+      style: TextStyle(fontSize: SizeConfig.textMultiplier*2.8, fontWeight: FontWeight.bold),),);
 }
 
 
 Padding paddingTwoKaramouziScreen(String description) {
   return new Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+    padding:  EdgeInsets.symmetric(horizontal: SizeConfig.imageSizeMultiplier * 5.5,
+        vertical: SizeConfig.heightMultiplier * 1.5),
     child: new Text(description,
-      style: TextStyle(fontSize: 17.0),),);
+      style: TextStyle(fontSize: SizeConfig.textMultiplier*2.5),),);
 }
 
 
 Padding paddingThreeKaramouziScreen() {
   return new Padding(
-    padding: const EdgeInsets.only(right: 15.0, left: 15.0, top: 10.0),
+    padding:  EdgeInsets.only(right: SizeConfig.imageSizeMultiplier * 3.5,
+        top: SizeConfig.heightMultiplier * 1.5),
     child: new Text('شرایط',
-      style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),),);
+      style: TextStyle(fontSize:SizeConfig.heightMultiplier * 3, fontWeight: FontWeight.bold),),);
 }
 
 
 Padding paddingFourKaramouziScreen(String conditions) {
   return new Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 5.0),
+    padding:  EdgeInsets.symmetric( horizontal: SizeConfig.imageSizeMultiplier * 5.5,
+        vertical: SizeConfig.heightMultiplier * 1.5),
     child: new Text(
       conditions,
-      style: TextStyle(fontSize: 17.0),),
+      style: TextStyle(fontSize: SizeConfig.heightMultiplier * 2.7),),
   );
 }
 
 
 Padding paddingFiveKaramouziScreen() {
   return new Padding(
-    padding: const EdgeInsets.only(right: 15.0, left: 15.0, top: 10.0),
+    padding:  EdgeInsets.only(right: SizeConfig.imageSizeMultiplier * 3.5,
+        top: SizeConfig.heightMultiplier * 1.5),
     child: new Text('آدرس',
-      style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),),);
+      style: TextStyle(fontSize: SizeConfig.heightMultiplier * 3, fontWeight: FontWeight.bold),),);
 }
 
 
 Padding paddingSixKaramouziScreen(String address) {
   return new Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-    child: new Text(address, style: TextStyle(fontSize: 17.0),),);
+    padding:  EdgeInsets.symmetric(horizontal: SizeConfig.imageSizeMultiplier * 5.5,
+        vertical: SizeConfig.heightMultiplier * 1.5),
+    child: new Text(address, style: TextStyle(fontSize: SizeConfig.heightMultiplier * 2.7),),);
 }
 
 
@@ -971,9 +976,10 @@ Padding paddingSevenKaramouziScreen() {
 
 Padding paddingEightKaramouziScreen() {
   return new Padding(
-    padding: const EdgeInsets.only(right: 15.0, left: 15.0, top: 10.0),
+    padding:  EdgeInsets.only(right: SizeConfig.imageSizeMultiplier * 3.5,
+        top: SizeConfig.heightMultiplier * 1.5),
     child: new Text('ارتباط',
-      style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),),);
+      style: TextStyle(fontSize: SizeConfig.textMultiplier*3, fontWeight: FontWeight.bold),),);
 }
 
 
@@ -1375,19 +1381,21 @@ class _bodyRequestState extends State<bodyRequest> {
 
   _getRequestAd() async {
 
-    setState(() {
-
-      isLoading = true;
-    });
+   if(this.mounted){
+     setState(() {
+       isLoading = true;
+     });
+   }
     requestProfile= await RequestHttp.getProfileReqAd(widget.profile.id);
     var response = await RequestHttp.getAd(widget.profile.id);
     print(response);
 
     requestsAd.addAll(response['requests']);
-    setState(() {
-      isLoading=false;
-    });
-
+    if(this.mounted){
+      setState(() {
+        isLoading=false;
+      });
+    }
   }
 
 

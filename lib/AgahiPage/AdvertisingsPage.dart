@@ -41,11 +41,13 @@ class _AdvertisingsPageState extends State<AdvertisingsPage> with SingleTickerPr
 
   @override
   Widget build(BuildContext context) {
+    GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
     return new Directionality(
         textDirection: TextDirection.rtl,
         child: new SafeArea(
             child: new Scaffold(
+              key:_scaffoldKey,
                 floatingActionButton: new FloatingActionButton(
                   onPressed: () {
                     Navigator.of(context).push(new MaterialPageRoute(builder: (ctx)=> AddPostAgahi(profile: widget.profile,)));
@@ -55,7 +57,7 @@ class _AdvertisingsPageState extends State<AdvertisingsPage> with SingleTickerPr
                 ),
                 backgroundColor: Color(0xfff2f3f8),
                 drawer: DrawerLists(profile: widget.profile,),
-                appBar: appBarAgahiScreen(/*tabController*/),
+                appBar: appBarMessagePage(_scaffoldKey),
 
                 body: ProjectsList(profile: widget.profile,)
 /*
@@ -110,10 +112,12 @@ class _ProjectsListState extends State<ProjectsList> {
 
   getId() async {
     lastid = await ReceiveMaxid.getAdID();
-    setState(() {
-      if(onRefresh) advertisings.clear();
-      firstid = lastid - 10;
-    });
+    if(this.mounted){
+      setState(() {
+        if(onRefresh) advertisings.clear();
+        firstid = lastid - 10;
+      });
+    }
 
     await _getAd();
   }
@@ -140,10 +144,12 @@ class _ProjectsListState extends State<ProjectsList> {
 
   _getAd() async {
     var response = await HttpAdvertisings.getData({'firstid': '$firstid', 'lastid': '$lastid'});
-    setState(() {
-      advertisings.addAll(response['advertisings']);
-      isLoading = true;
-    });
+    if(this.mounted){
+      setState(() {
+        advertisings.addAll(response['advertisings']);
+        isLoading = true;
+      });
+    }
   }
 
   Future<Null> refreshList() async{

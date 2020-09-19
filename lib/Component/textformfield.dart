@@ -26,6 +26,7 @@ class InputTextForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new TextFormField(
+      maxLines: 4                                       ,
       controller: controller,
       validator: validate,
       onSaved: onSaved,

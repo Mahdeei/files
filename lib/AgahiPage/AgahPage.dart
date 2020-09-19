@@ -30,7 +30,7 @@ class _AdvertisingScreenState extends State<AdvertisingScreen> {
                             profile: widget.profile,
                             advertising: widget.advertising,
                           ),
-                      // HeadersItems(advertising: widget.advertising,profile: widget.profile,),
+
                       new Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
@@ -64,11 +64,11 @@ class _AdvertisingScreenState extends State<AdvertisingScreen> {
                                   size: SizeConfig.textMultiplier*3,
                                 ),
                                 new SizedBox(
-                                  width: 3.0,
+                                  width: SizeConfig.imageSizeMultiplier,
                                 ),
                                 new Padding(
                                   padding:
-                                      const EdgeInsets.only(top: 3.0, left: 3.0),
+                                       EdgeInsets.only(top: SizeConfig.heightMultiplier*0.5, left: SizeConfig.imageSizeMultiplier),
                                   child: new Text(
                                     'تا 2,000,000 تومان',
                                     style: TextStyle(
@@ -85,7 +85,7 @@ class _AdvertisingScreenState extends State<AdvertisingScreen> {
                               vertical: SizeConfig.heightMultiplier * 1.5),
                           child: new Text(
                             widget.advertising.description,
-                            style: TextStyle(fontSize: 17.0),
+                            style: TextStyle(fontSize: SizeConfig.textMultiplier*2.5),
                           ),
                         ),
                         Line(),
@@ -255,7 +255,6 @@ class HeadersItemsPage extends StatelessWidget {
                     Expanded(
                       flex: 4,
                         child: new Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
                               // new GestureDetector(
                               //   child: Icon(Icons.playlist_add_check,color: Colors.white,size: 28.0,),
@@ -270,29 +269,32 @@ class HeadersItemsPage extends StatelessWidget {
                               //       textAlign: TextAlign.center,),
                               //   ),
                               // ),
-                              new GestureDetector(
-                                child: new Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(SizeConfig.heightMultiplier*3))),
-                                  width: phonesize.width * 0.34,
-                                  child: new Text(
-                                    'شروع کار',
-                                    style: TextStyle(
-                                        color: Color(0xff2D0827),
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: SizeConfig.textMultiplier*2),
-                                    textAlign: TextAlign.center,
+                              Expanded(
+                                child: new GestureDetector(
+                                  child: new Container(
+                                    margin: EdgeInsets.symmetric(horizontal: SizeConfig.imageSizeMultiplier*3),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                            BorderRadius.all(Radius.circular(SizeConfig.heightMultiplier*3))),
+                                    width: phonesize.width * 0.34,
+                                    child: new Text(
+                                      'شروع کار',
+                                      style: TextStyle(
+                                          color: Color(0xff2D0827),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: SizeConfig.textMultiplier*2.3),
+                                      textAlign: TextAlign.center,
+                                    ),
                                   ),
+                                  onTap: () {
+                                    Navigator.of(context).push(new MaterialPageRoute(
+                                        builder: (ctx) => new SendReq(
+                                              profile: profile,
+                                              advertising: advertising,
+                                            )));
+                                  },
                                 ),
-                                onTap: () {
-                                  Navigator.of(context).push(new MaterialPageRoute(
-                                      builder: (ctx) => new SendReq(
-                                            profile: profile,
-                                            advertising: advertising,
-                                          )));
-                                },
                               ),
                               // new GestureDetector(
                               //   child: Icon(
@@ -319,7 +321,7 @@ class Line extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
+      padding:  EdgeInsets.symmetric(horizontal: SizeConfig.imageSizeMultiplier *4, vertical: SizeConfig.heightMultiplier*.7),
       child: new Container(
         height: 1.0,
         color: Colors.grey[300],
@@ -328,6 +330,7 @@ class Line extends StatelessWidget {
   }
 }
 
+/*
 class ObjectTag extends StatelessWidget {
   final String tags;
 
@@ -353,3 +356,4 @@ class ObjectTag extends StatelessWidget {
         ));
   }
 }
+*/

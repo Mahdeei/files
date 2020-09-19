@@ -168,7 +168,6 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
                             builder: (context) => new EditData(
                               profile: profile,
                             )));
-
                       },
                       child: new Container(
                           alignment: Alignment.center,
@@ -178,7 +177,7 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
                           child: new Padding(
                             padding: const EdgeInsets.only(top: 2.5, bottom: 2.5),
                             child: new Text(
-                              'تغییر پروفایل',
+                              'تغییر اطلاعات',
                               style: TextStyle(
                                   color: Color(0xff2C003E), fontSize:SizeConfig.textMultiplier*2),
                             ),
@@ -237,7 +236,13 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
                     child: Padding(
                       padding:  EdgeInsets.only(top: SizeConfig.heightMultiplier*4,bottom: SizeConfig.heightMultiplier),
                       child: Center(
-                        child: new CircleAvatar(
+                        child: profile.image == null || profile.image == '' ?
+                        new CircleAvatar(
+                          child: new Text(profile.username.toString().substring(0,1),style: TextStyle(fontSize: SizeConfig.textMultiplier*5,color: R.color.banafshtire),),
+                          backgroundColor: Colors.white,
+                          radius: SizeConfig.imageSizeMultiplier * 10,
+                        )
+                        :new CircleAvatar(
                           backgroundImage: NetworkImage('http://stube.ir/image/${profile.image}'),
                           backgroundColor: Colors.white,
                           radius: SizeConfig.imageSizeMultiplier * 10,

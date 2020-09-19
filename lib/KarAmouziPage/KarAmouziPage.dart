@@ -87,16 +87,18 @@ class _KarAmouziListListState extends State<KarAmouziListList> {
   }
   getId() async {
     lastid = await ReceiveMaxid.getInterID();
-    setState(() {
-      if(onRefresh) interShips.clear();
-      if(lastid<10){
-        firstid = 1;
-      }else{
-        firstid = lastid - 10;
-      }
+    if(this.mounted){
+      setState(() {
+        if(onRefresh) interShips.clear();
+        if(lastid<10){
+          firstid = 1;
+        }else{
+          firstid = lastid - 10;
+        }
 
-    });
+      });
 
+    }
 
     await _getInterships();
   }
@@ -123,10 +125,12 @@ class _KarAmouziListListState extends State<KarAmouziListList> {
 
   _getInterships() async {
     var response = await HttpInterships.getData({'firstid': '$firstid', 'lastid': '$lastid'});
-    setState(() {
-      interShips.addAll(response['interships']);
-      isLoading = true;
-    });
+    if(this.mounted){
+      setState(() {
+        interShips.addAll(response['interships']);
+        isLoading = true;
+      });
+    }
   }
 
   Future<Null> refreshList() async{
@@ -157,8 +161,8 @@ class _KarAmouziListListState extends State<KarAmouziListList> {
                     );
                   },
                   child: new Container(
-                    margin: const EdgeInsets.only(right: 6.0, bottom: 5.0, top: 10.0, left: 9.0),
-                    height: phonesize.height * 0.14,
+                    margin: const EdgeInsets.only(right: 6.0, bottom: 0.0, top: 10.0, left: 9.0),
+                    height: phonesize.height * 0.148,
                     // width: phonesize.width*0.5,
                     decoration: decorationKaramouziScreen(),
                     child: new Row(
@@ -166,109 +170,94 @@ class _KarAmouziListListState extends State<KarAmouziListList> {
                         Expanded(
                           flex: 3,
                           child: new Container(
-                            margin: const EdgeInsets.only(right: 4.0,left: 3.0),
-                            height: phonesize.height * 0.13,
+                            margin:  EdgeInsets.only(right: SizeConfig.imageSizeMultiplier,left: SizeConfig.imageSizeMultiplier*.8),
+                            height: phonesize.height * 0.138,
                             width: phonesize.width * 0.30,
                             decoration: boxDecorationKaramouziScreen(interShips[index].image),
                           ),
                         ),
                         new Expanded(
                           flex: 7,
-                            child: new Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
+                            child:
                                 new Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    textoneKaramouziScreen(interShips[index].title),
-                                    new Row(
-                                      children: [
-                                        Expanded(
-                                          flex: 5,
-                                          child: new Padding(
-                                            padding: EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*1.3),
-                                            child: new Column(
-                                            children: <Widget>[
-                                              Container(
-                                                  width: MediaQuery.of(context).size.width*0.6,
-                                                  child: textTwoKaramouziScreen(interShips[index].description)),
-                                              new Row(
-                                                children: [
-                                                   Expanded(
-                                                     flex: 4,
-                                                     child: Container(
-                                                            // width: MediaQuery.of(context).size.width*0.17,
-                                                            child: textthreeKaramouziScreen(interShips[index].company)
-                                                        ),
-                                                   ),
+                                    Expanded(
+                                      flex: 3,
+                                        child: textoneKaramouziScreen(interShips[index].title)),
+                                    Expanded(
+                                      flex: 6,
+                                      child: new Row(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Expanded(
+                                            flex: 5,
+                                            child: new Padding(
+                                              padding: EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*1.3,bottom: 0),
+                                              child: new Column(
+                                              children: <Widget>[
+                                                Container(margin: const EdgeInsets.only(bottom: 0,top: 0),
+                                                    width: MediaQuery.of(context).size.width*0.6,
+                                                    child: textTwoKaramouziScreen(interShips[index].description)),
+                                                new Row(
+                                                  children: [
+                                                     Expanded(
+                                                       flex: 4,
+                                                       child: Container(margin: const EdgeInsets.only(bottom: 0,top: 0),
+                                                              // width: MediaQuery.of(context).size.width*0.17,
+                                                              child: textthreeKaramouziScreen(interShips[index].company)
+                                                          ),
+                                                     ),
 
-                                                  textlineBetween(),
-                                                  Expanded(
-                                                    flex: 6,
-                                                    child: Container(
-                                                        margin: EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*.8),
-                                                        // width: MediaQuery.of(context).size.width *0.25,
-                                                        child: textType(interShips[index].type,)),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),),
-                                        ),
-                                        Expanded(
-                                          flex: 1,
-                                          child: new Padding(
-                                              padding: EdgeInsets.only(left: SizeConfig.imageSizeMultiplier*1.3,),
-                                              child: circleAvatarKaramouziScreen()
+                                                    textlineBetween(),
+                                                    Expanded(
+                                                      flex: 6,
+                                                      child: Container(
+                                                          margin: EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*.8,bottom: 0),
+                                                          // width: MediaQuery.of(context).size.width *0.25,
+                                                          child: textType(interShips[index].type,)),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),),
                                           ),
-                                        )
-                                      ],
+                                          Expanded(
+                                            flex: 1,
+                                            child: new Padding(
+                                                padding: EdgeInsets.only(left: SizeConfig.imageSizeMultiplier*1.3,top: SizeConfig.heightMultiplier*1.5),
+                                                child: circleAvatarKaramouziScreen()
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+
+                                    Expanded(
+                                      flex: 3,
+                                      child: Padding(
+                                        padding:  EdgeInsets.only(bottom:SizeConfig.heightMultiplier*.8,right: 0.0,top: 0),
+                                        child: Row(
+
+                                          children: [
+                                            new Icon(Icons.location_city,size: SizeConfig.heightMultiplier*1.8,),
+                                            new SizedBox(width: 2.0,),
+                                            Container(
+                                              width: phonesize.width*0.5,
+                                              child: new Text(
+                                                interShips[index].address,
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(fontSize: SizeConfig.textMultiplier*1.7),),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     )
-                                    // new Row(
-                                    //   children: <Widget>[
-                                    //     new Container(
-                                    //         margin: const EdgeInsets.only(right: 10.0),
-                                    //         decoration: boxDecorationKaramouziScrenn(),
-                                    //         child: new Padding(
-                                    //           padding: const EdgeInsets.symmetric(horizontal: 3.0, vertical: 1.0),
-                                    //           child: textKarAmouziScreen()
-                                    //         )),
-                                    //     new Container(
-                                    //         margin: const EdgeInsets.only(right: 2.0),
-                                    //         decoration: boxDecorationKaramouziScrenn(),
-                                    //         child: new Padding(
-                                    //           padding: const EdgeInsets.symmetric(horizontal: 3.0, vertical: 1.0),
-                                    //           child: textKarAmoziScreen(),
-                                    //     )),
-                                    //     new Container(
-                                    //         margin: const EdgeInsets.only(right: 2.0),
-                                    //         decoration: boxDecorationKaramouziScrenn(),
-                                    //         child: new Padding(
-                                    //           padding: const EdgeInsets.symmetric(horizontal: 3.0, vertical: 1.0),
-                                    //           child: textKarAmouzziScreen(),
-                                    //         )),
-                                    //   ],
-                                    // ),
                                   ],
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom:2.0,right: 0.0),
-                                  child: Row(
-                                    children: [
-                                      new Icon(Icons.location_city,size: 10.0,),
-                                      new SizedBox(width: 2.0,),
-                                      Container(
-                                        width: phonesize.width*0.5,
-                                        child: new Text(
-                                          interShips[index].address,
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(fontSize: SizeConfig.textMultiplier*1.7),),
-                                      ),
-                                    ],
-                                  ),
-                                )
+
                                 // Container(
                                 //       // height: phonesize.height*0.001,
                                 //       width: phonesize.width*0.1,
@@ -281,8 +270,7 @@ class _KarAmouziListListState extends State<KarAmouziListList> {
                                 //         ],
                                 //       ),
                                 //     )
-                              ],
-                            ))
+                             )
                       ],
                     ),
                   ),

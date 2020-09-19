@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stubbbb/Models/myData.dart';
+import 'package:stubbbb/Other/SizeConfig.dart';
 import 'package:stubbbb/Other/widget.dart';
 
 
@@ -28,8 +29,8 @@ class _StudentPerfectScreenState extends State<StudentPerfectScreen> {
           child: new Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              new Text("در حال حاضر این نسخه ازمایشی است",style: TextStyle(fontSize: 20.0),),
-              new Text("...منتظر این قسمت جذاب در اینده باشید",style: TextStyle(fontSize: 20.0),),
+              FittedBox(child: new Text("در حال حاضر این نسخه ازمایشی است",style: TextStyle(fontSize: SizeConfig.textMultiplier*2.8),)),
+              FittedBox(child: new Text("منتظر این قسمت جذاب در اینده باشید...",style: TextStyle(fontSize: SizeConfig.textMultiplier*2.8),)),
             ],
           ),
         ),

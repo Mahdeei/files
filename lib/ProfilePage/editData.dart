@@ -27,7 +27,7 @@ class EditData extends StatefulWidget {
 
 class _EditDataState extends State<EditData> {
 
-  TextEditingController usernameCont ,nameCont,moarefiCont;
+  TextEditingController usernameCont ,nameCont,moarefiCont,resumCont,educCont,certCont,langCont,skillCont,uniCont;
   
   GlobalKey _formKeyOne = GlobalKey<FormState>();
   Map res;
@@ -45,6 +45,12 @@ class _EditDataState extends State<EditData> {
     usernameCont = new TextEditingController(text: widget.profile.username);
     nameCont = new TextEditingController(text: widget.profile.name);
     moarefiCont = new TextEditingController(text: widget.profile.moarefiNameh);
+    resumCont = new TextEditingController(text: widget.profile.resumes );
+    educCont = new TextEditingController(text: widget.profile.educational);
+    langCont = new TextEditingController(text: widget.profile.languages);
+    certCont = new TextEditingController(text: widget.profile.certificates);
+    certCont = new TextEditingController(text: widget.profile.skills);
+    uniCont = new TextEditingController(text: widget.profile.fieldUni);
   }
 
   Future pickImage(ImageSource imageSource) async {
@@ -389,6 +395,7 @@ class _EditDataState extends State<EditData> {
                                         child: new Text('مشخصات',textAlign: TextAlign.center,style: TextStyle(fontSize: 20.0),),
                                       ),
                                       InputTextForm(
+                                        controller: resumCont,
                                         obscure: false,
                                         // onSaved: userOnsaved,
                                         color: Colors.black26,
@@ -397,6 +404,7 @@ class _EditDataState extends State<EditData> {
                                         // validate: validateSignUp
                                       ),
                                       InputTextForm(
+                                        controller: educCont,
                                         // onSaved: passOnsaved,
                                         color: Colors.black26,
                                         lableColor: Colors.black54,
@@ -406,6 +414,7 @@ class _EditDataState extends State<EditData> {
                                         // controller: _controller,
                                       ),
                                       InputTextForm(
+                                        controller: certCont,
                                           color: Colors.black26,
                                           lableColor: Colors.black54,
                                           lable: 'مدرک یا گواهیناممه های معتبر',
@@ -416,6 +425,7 @@ class _EditDataState extends State<EditData> {
                                             // }
                                           }),
                                       InputTextForm(
+                                        controller: langCont,
                                         obscure: false,
                                         // onSaved: nameOnsaved,
                                         color: Colors.black26,

@@ -37,16 +37,19 @@ class _bodyRequestInternState extends State<bodyRequestIntern> {
 
 
   _getRequestIntern() async {
-    setState(() {
-
-      isLoading = true;
-    });
+    if(this.mounted){
+      setState(() {
+        isLoading = true;
+      });
+    }
     profiles= await RequestHttp.getProfileIntern(widget.profile.id);
     var response = await RequestHttp.getIntern(widget.profile.id);
     requestsIntern.addAll(response['requests']);
-    setState(() {
-      isLoading= false;
-    });
+    if(this.mounted){
+      setState(() {
+        isLoading= false;
+      });
+    }
 
   }
 

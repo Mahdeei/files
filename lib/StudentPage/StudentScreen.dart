@@ -74,12 +74,13 @@ class _ProfilesPagesState extends State<ProfilesPages> {
   _getProfiles() async {
     var response =
         await ProfileHttp.getData({'firstid': '$firstid', 'lastid': '$lastid'});
-    setState(() {
+    if(this.mounted){
+      setState(() {
         _profiles.addAll(response['profiles']);
-    });
-    setState(() {
-      isLoading = true;
-    });
+        isLoading = true;
+      });
+    }
+
   }
 
   Future<Null> refreshList() async{
