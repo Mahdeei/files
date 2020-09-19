@@ -80,7 +80,7 @@ class _SplashScreenState extends State<SplashScreen> {
     String apiToken =  perfs.getString('user_apiToken');
     String username =  perfs.getString('user_username');
     String password =  perfs.getString('user_password');
-    if(apiToken != null){
+    if(false/*apiToken != null*/){
       boody = await AuthenticateService.checkLog(apiToken);
 
       if(boody['status'] == 'Defined'){

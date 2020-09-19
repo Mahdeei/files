@@ -13,6 +13,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
+import 'package:stubbbb/Other/widget.dart';
 
 
 class EditData extends StatefulWidget {
@@ -34,7 +35,7 @@ class _EditDataState extends State<EditData> {
   var picker = new ImagePicker();
   var rand;
   var fileName="";
-
+  bool isSaveData=false;
 
 
 @override
@@ -75,7 +76,9 @@ class _EditDataState extends State<EditData> {
 
 
   Future upload(File imageFile) async{
-
+    setState(() {
+      isSaveData=true;
+    });
     var stream = new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
     var length = await imageFile.length();
     var uri = Uri.parse("http://stube.ir/CompleteProfile.php");
@@ -119,10 +122,43 @@ class _EditDataState extends State<EditData> {
       res = json.decode(value);
       print(res);
     });
+    setState(() {
+      isSaveData=false;
+    });
     if(response.statusCode == 200) {
       print('upload seccess');
     }else{
       print('upload failed');
+    }
+  }
+
+  showDia(context){
+      return showDialog(context: context,builder: (ctx)=> new AlertDialog(
+        title: new Center(child: Text("لطفا کمی صبر کنید")),
+        actions: [
+          new LinearProgressIndicator()
+        ],
+
+      ));
+  }
+
+  deleteImage(String image)async{
+    String url="http://stube.ir/DeleteImage.php";
+    print(image);
+    var response = await http.post(url,body: {"imagePro":image});
+    var responseBody = await json.decode(response.body);
+    print(responseBody);
+    if(responseBody['status']=="yes deleted"){
+     widget.profile.image="";
+      setState(() {
+
+        print(widget.profile.image);
+      });
+      setState(() {
+
+      });
+    }else{
+      print('error');
     }
   }
 
@@ -145,7 +181,10 @@ class _EditDataState extends State<EditData> {
                         new FlatButton(
                             onPressed: ()async{
                               await upload(_image);
-                              Navigator.of(context).pop();
+                              isSaveData
+                                ? showDia(context)
+                                :Navigator.of(context).pop();
+
                             },
                             child: new Text('ذخیره',style: TextStyle(fontSize: 20.0,color: R.color.banafshKamRang),)
                         ),
@@ -160,79 +199,139 @@ class _EditDataState extends State<EditData> {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children :[
-                            new GestureDetector(
-                              onTap: (){
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => new AlertDialog(
-                                    title: new Text(
-                                      "انتخاب فایل از",
-                                      style: TextStyle(fontSize: 16.0),
-                                      textDirection: TextDirection.rtl,
-                                    ),
-                                    actions: [
-                                      Column(
-                                        children: [
-                                          Container(
-                                            width: MediaQuery.of(context).size.width,
-                                            child: new RaisedButton(
-                                              elevation: 0,
-                                              color: Colors.white,
-                                              child: new Text("گالری"),
-                                              onPressed: () async{
-                                                Navigator.of(context).pop();
-                                                await pickImage(ImageSource.gallery);
-                                              },
-                                            ),
+                            widget.profile.image=="" ||widget.profile.image==null
+                              ? new GestureDetector(
+                                  onTap: (){
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) =>
+                                  new AlertDialog(
+                                        title: new Text(
+                                          "انتخاب عکس از",
+                                          style: TextStyle(fontSize: 16.0),
+                                          textDirection: TextDirection.rtl,
+                                        ),
+                                        actions: [
+                                          Column(
+                                            children: [
+                                              Container(
+                                                width: MediaQuery.of(context).size.width,
+                                                child: new RaisedButton(
+                                                  elevation: 0,
+                                                  color: Colors.white,
+                                                  child: new Text("گالری"),
+                                                  onPressed: () async{
+                                                    Navigator.of(context).pop();
+                                                    await pickImage(ImageSource.gallery);
+                                                  },
+                                                ),
+                                              ),
+                                              new Container(
+                                                width: MediaQuery.of(context).size.width,
+                                                child: new MaterialButton(
+                                                  elevation: 0,
+                                                  color: Colors.white,
+                                                  child: new Text("دوربین گوشی",textDirection: TextDirection.rtl,),
+                                                  onPressed: () async {
+                                                    await pickImage(ImageSource.camera);
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ),
+                                              )
+                                            ],
                                           ),
-                                          new Container(
-                                            width: MediaQuery.of(context).size.width,
-                                            child: new MaterialButton(
-                                              elevation: 0,
-                                              color: Colors.white,
-                                              child: new Text("دوربین گوشی",textDirection: TextDirection.rtl,),
-                                              onPressed: () async {
-                                                await pickImage(ImageSource.camera);
-                                                Navigator.of(context).pop();
-                                              },
-                                            ),
-                                          )
                                         ],
                                       ),
-                                    ],
+                                    );
+                                  },
+                              child:new Container(
+                                alignment: Alignment.center,
+                                child: new CircleAvatar(
+                                  radius: 45.0,
+                                  backgroundColor: R.color.banafshKamRang,
+                                  child: new Text(
+                                    widget.profile.username.toString().substring(0,1),
+                                    style: TextStyle(fontSize: 25.0,color: Colors.white),
                                   ),
-                                );
-                              },
-                              child: _image==null
-                                ? new Stack(
-                                children: [
-                                  new Container(
-                                    alignment: Alignment.center,
-                                    child: new CircleAvatar(
-                                      radius: 50.0,
-                                      backgroundColor: Colors.grey,
-                                      child: new Icon(Icons.person,size: 60.0,color: Colors.white),
-                                    ),
-                                  ),
-                                  new Container(
-                                    padding: EdgeInsets.only(left: 60.0,top: 70.0),
-                                    alignment: Alignment.bottomCenter,
-                                    child: new Icon(Icons.add,size: 40.0,),
-                                  )
-                                ],
-                              )
-                              : Center(
-                                child: CircleAvatar(
-                                    radius: 60.0,
-                                    backgroundImage: FileImage(_image),
-                                    backgroundColor: Colors.transparent,
                                 ),
                               )
-                            ),
-                            _image==null
+                              )
+                              : GestureDetector(
+                                  onTap: (){
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) =>
+                                    new AlertDialog(
+                                      title: new Text(
+                                        "ویرایش عکس",
+                                        style: TextStyle(fontSize: 16.0),
+                                        textDirection: TextDirection.rtl,
+                                      ),
+                                      actions: [
+                                        Column(
+                                          children: [
+                                            Container(
+                                              width: MediaQuery.of(context).size.width,
+                                              child: new RaisedButton(
+                                                elevation: 0,
+                                                color: Colors.white,
+                                                child: new Text("گالری"),
+                                                onPressed: () async{
+                                                  Navigator.of(context).pop();
+                                                  await pickImage(ImageSource.gallery);
+                                                },
+                                              ),
+                                            ),
+                                            new Container(
+                                              width: MediaQuery.of(context).size.width,
+                                              child: new MaterialButton(
+                                                elevation: 0,
+                                                color: Colors.white,
+                                                child: new Text("دوربین گوشی",textDirection: TextDirection.rtl,),
+                                                onPressed: () async {
+                                                  await pickImage(ImageSource.camera);
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    );
+                                  },
+                                  onLongPress: (){
+                                    return showDialog(context: context,builder: (ctx)=> new AlertDialog(
+                                      title: Text("آیا میخواهید عکس را حذف کنید ؟"),
+                                      actions: [
+                                        new FlatButton(
+                                            onPressed: (){
+                                              deleteImage(widget.profile.image);
+                                              Navigator.of(context).pop(false);
+                                            },
+                                            child: Text("بله")),
+                                        new FlatButton(
+                                            onPressed: (){
+                                              Navigator.of(context).pop(false);
+                                            },
+                                            child: Text("خیر")),
+                                      ],
+                                    ));
+
+                                  },
+                                child: Center(
+                                  child: CircleAvatar(
+                                      radius: 60.0,
+                                      backgroundImage: NetworkImage("http://stube.ir/image/${widget.profile.image}"),
+                                      backgroundColor: Colors.transparent,
+                                  ),
+                                ),
+                              ),
+
+                            widget.profile.image=="" ||widget.profile.image==null
                                 ?new SizedBox(height: 10.0,)
                                 : new Container(),
-                            _image==null
+                            widget.profile.image=="" ||widget.profile.image==null
                                 ? new  Align(
                               alignment: Alignment.center,
                               child: new Text("بارگذاری تصویر",style: TextStyle(color: R.color.banafshKamRang)),

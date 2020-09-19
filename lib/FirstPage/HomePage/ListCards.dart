@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stubbbb/AgahiPage/AdvertisingsPage.dart';
 import 'package:stubbbb/Models/myData.dart';
+import 'package:stubbbb/Other/SizeConfig.dart';
 import 'package:stubbbb/Other/widget.dart';
 import 'package:stubbbb/StudentPerfect/StudentPerfectScreen.dart';
 import '../../KarAmouziPage/KarAmouziPage.dart';
@@ -24,40 +25,57 @@ class _ListCardsState extends State<ListCards> {
   Widget build(BuildContext context) {
     var phoneSize = MediaQuery.of(context).size;
     return Center(
-      child: new Column(
-        children: <Widget>[
-          new Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              new MenuItemWidget(
-                model: new ModelMenu(R.titr.daneshjo, R.images.daneshjoHa, R.color.red),
-                phoneSize: phoneSize,
-                listener: goToStu,
+      child: Padding(
+        padding:  EdgeInsets.symmetric(vertical: SizeConfig.heightMultiplier *3,horizontal: SizeConfig.imageSizeMultiplier*4 ),
+        child: new Column(
+          children: <Widget>[
+            Expanded(
+              flex: 1,
+              child: new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    flex: 1,
+                    child: new MenuItemWidget(
+                      model: new ModelMenu(R.titr.daneshjo, R.images.daneshjoHa, R.color.red),
+                      listener: goToStu,
 
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: new MenuItemWidget(
+                      model: new ModelMenu(R.titr.aagahi, R.images.projects, R.color.banafshmain),
+                      listener: goToProjects,
+                    ),
+                  ),
+                ],
               ),
-              new MenuItemWidget(
-                model: new ModelMenu(R.titr.aagahi, R.images.projects, R.color.banafshmain),
-                phoneSize: phoneSize,
-                listener: goToProjects,
+            ),
+            Expanded(
+              flex: 1,
+              child: new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    flex: 1,
+                    child: new MenuItemWidget(
+                      model: new ModelMenu(R.titr.karamouzu , R.images.karAmouzi , R.color.blueTire),
+                      listener: goToKarAmouozi,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: new MenuItemWidget(
+                      model: new ModelMenu(R.titr.daneshjoyehefei , R.images.daneshjoyeHerfei , R.color.red),
+                      listener: goToStudentPerfectScreen,
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
-          new Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              new MenuItemWidget(
-                model: new ModelMenu(R.titr.karamouzu , R.images.karAmouzi , R.color.blueTire),
-                phoneSize: phoneSize,
-                listener: goToKarAmouozi,
-              ),
-              new MenuItemWidget(
-                model: new ModelMenu(R.titr.daneshjoyehefei , R.images.daneshjoyeHerfei , R.color.red),
-                phoneSize: phoneSize,
-                listener: goToStudentPerfectScreen,
-              ),
-            ],
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stubbbb/Models/Comment.dart';
-import 'package:stubbbb/Models/Profile.dart';
+import 'package:stubbbb/Models/DataUser.dart';
 import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Models/profileModels.dart';
 import 'package:stubbbb/Other/R.dart';
+import 'package:stubbbb/Other/SizeConfig.dart';
 import 'package:stubbbb/Other/widget.dart';
 import 'package:stubbbb/http/Authenticate.dart';
 import 'package:stubbbb/http/httpComments.dart';
@@ -15,6 +16,7 @@ import 'package:flutter/scheduler.dart';
 class ProPage extends StatefulWidget {
   User user;
   MyData profile;
+
   ProPage({this.profile,this.user});
 
   @override
@@ -24,184 +26,219 @@ class ProPage extends StatefulWidget {
 
 
 class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
+
   final bodyGlobalKey = GlobalKey();
   final List<Widget> myTabs = [
     Tab(text: 'مشخصات'),
     Tab(text: 'نمونه کارها',),
     Tab(text: 'نظرات'),
   ];
+
+  DataUser dataUser;
   TabController _tabController;
   ScrollController _scrollController;
+  bool isLoading=false;
+
 
   Widget _head() {
-    return new Stack(
-      children: <Widget>[
-        new Container(
-          height: MediaQuery.of(context).size.height * 0.28,
-          width: MediaQuery.of(context).size.width,
-          color: Color(0xff44143E),
-        ),
-        new IconButton(
-            icon: Icon(
-              Icons.share,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              print('pressed share');
-            }),
-        new Column(
-//                    mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            new Directionality(
-              textDirection: TextDirection.ltr,
-              child: new Column(
-                children: <Widget>[
-                  new Padding(
-                    padding: const EdgeInsets.only(left: 200.0, top: 60.0),
-                    child: new Row(
-                      children: <Widget>[
-                        new Icon(
-                          Icons.school,
-                          color: Colors.white,
+    return
+        new Row(
+            children: [
+              Expanded(
+                flex: 1,
+                child: Container(
+                  color: Color(0xff44143E),
+                  height: MediaQuery.of(context).size.height * 0.28,
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: new Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Expanded(
+                        flex: 2,
+                        child: new Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Directionality(
+                                textDirection: TextDirection.ltr,
+                                child: new Padding(
+                                  padding:  EdgeInsets.only(left: SizeConfig.imageSizeMultiplier,top: SizeConfig.heightMultiplier ),
+                                  child: new Row(
+                                    children: <Widget>[
+                                      new Icon(
+                                        Icons.school,
+                                        color: Colors.white,
+                                        size: SizeConfig.heightMultiplier *3.3,
+                                      ),
+                                      new SizedBox(
+                                        width: SizeConfig.imageSizeMultiplier *1.5,
+                                      ),
+                                      new Text(
+                                        widget.user.username,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: SizeConfig.textMultiplier *3.0,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              // Directionality(
+                              //   textDirection: TextDirection.rtl,
+                              //   child: new Padding(
+                              //     padding: const EdgeInsets.only(left: 0.0, top: 0.0),
+                              //     child: new Row(
+                              //       children: <Widget>[
+                              //         new Icon(
+                              //           Icons.location_on,
+                              //           color: Colors.white,
+                              //         ),
+                              //         new SizedBox(
+                              //           width: 3.0,
+                              //         ),
+                              //         new Text(
+                              //           'khorasan razavi,mashhad',
+                              //           style: TextStyle(
+                              //               color: Colors.white,
+                              //               fontSize: 12.0,
+                              //               fontWeight: FontWeight.bold),
+                              //         ),
+                              //       ],
+                              //     ),
+                              //   ),
+                              // ),
+                            ],
+                          ),
                         ),
-                        new SizedBox(
-                          width: 3.0,
+
+                      Expanded(
+                        flex: 1,
+                        child: Padding(
+                          padding:  EdgeInsets.symmetric(vertical:SizeConfig.heightMultiplier * 2.5,horizontal: SizeConfig.imageSizeMultiplier*4),
+                          child: new GestureDetector(
+                            onTap: () {
+                              print('pressed ');
+                            },
+                            child: new Container(
+                                alignment: Alignment.center,
+                             height: 20.0,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15.0)),
+                                child: new Padding(
+                                  padding: const EdgeInsets.only(top: 2.5, bottom: 2.5),
+                                  child: new Text(
+                                    'درخواست',
+                                    style: TextStyle(
+                                        color: Color(0xff2C003E), fontSize: SizeConfig.textMultiplier *2),
+                                  ),
+                                )),
+                          ),
                         ),
-                        new Text(
-                          widget.user.username,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ),
-                  new Padding(
-                    padding: const EdgeInsets.only(left: 200.0, top: 20.0),
-                    child: new Row(
-                      children: <Widget>[
-                        new Icon(
-                          Icons.location_on,
-                          color: Colors.white,
-                        ),
-                        new SizedBox(
-                          width: 3.0,
-                        ),
-                        new Text(
-                          'khorasan razavi,mashhad',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12.0,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            new SizedBox(height: 15.0),
-            new Row(
-              children: <Widget>[
-                new IconButton(
-                    icon: Icon(
-                      Icons.bookmark,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {
-                      print('pressed save');
-                    }),
-//                 new GestureDetector(
-//                   onTap: () {
-//                     print('pressed ');
-//                   },
-//                   child: new Container(
-//                       alignment: Alignment.center,
-// //                            height: 20.0,
-//                       width: 60.0,
-//                       decoration: BoxDecoration(
-//                           color: Colors.white,
-//                           borderRadius: BorderRadius.circular(15.0)),
-//                       child: new Padding(
-//                         padding: const EdgeInsets.only(top: 0.5, bottom: 0.5),
-//                         child: new Text(
-//                           'پیام',
-//                           style: TextStyle(
-//                               color: Color(0xff2C003E), fontSize: 12.0),
-//                         ),
-//                       )),
-//                 ),
-                new SizedBox(width: 3.0,),
-                new GestureDetector(
-                  onTap: () {
-                    print('pressed ');
-                  },
-                  child: new Container(
-                      alignment: Alignment.center,
-//                            height: 20.0,
-                      width: 120.0,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15.0)),
-                      child: new Padding(
-                        padding: const EdgeInsets.only(top: 2.5, bottom: 2.5),
-                        child: new Text(
-                          'درخواست',
-                          style: TextStyle(
-                              color: Color(0xff2C003E), fontSize: 15.0),
-                        ),
-                      )),
-                ),
-              ],
-            )
-          ],
-        ),
-        new Align(
-          alignment: Alignment.centerLeft,
-          child: new ClipPath(
-            child: Container(
-                height: MediaQuery.of(context).size.height * 0.28,
-                width: MediaQuery.of(context).size.width * 0.5,
-                color: Color(0xff2D0827),
-                child: new Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    new CircleAvatar(
-                      child: new Image.asset('assets/image/download (4).png'),
-                      backgroundColor: Colors.white,
-                      maxRadius: 40.0,
-                    ),
-                    new SizedBox(
-                      height: 5.0,
-                    ),
-                    new Text(
-                      widget.user.name,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.bold),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    new Text(
-                      'مهندسی برق',
-                      style: TextStyle(
-                        color: Color(0xff44143E),
-                        fontWeight: FontWeight.bold,
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                )),
-          ),
-        )
-      ],
-    );
+//                       new Row(
+//                         children: <Widget>[
+//                           // new IconButton(
+//                           //     icon: Icon(
+//                           //       Icons.bookmark,
+//                           //       color: Colors.white,
+//                           //     ),
+//                           //     onPressed: () {
+//                           //       print('pressed save');
+//                           //     }),
+// //                 new GestureDetector(
+// //                   onTap: () {
+// //                     print('pressed ');
+// //                   },
+// //                   child: new Container(
+// //                       alignment: Alignment.center,
+// // //                            height: 20.0,
+// //                       width: 60.0,
+// //                       decoration: BoxDecoration(
+// //                           color: Colors.white,
+// //                           borderRadius: BorderRadius.circular(15.0)),
+// //                       child: new Padding(
+// //                         padding: const EdgeInsets.only(top: 0.5, bottom: 0.5),
+// //                         child: new Text(
+// //                           'پیام',
+// //                           style: TextStyle(
+// //                               color: Color(0xff2C003E), fontSize: 12.0),
+// //                         ),
+// //                       )),
+// //                 ),
+//
+//
+//                         ],
+//                       )
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Container(
+                        height: SizeConfig.heightMultiplier *28,
+                        color: Color(0xff2D0827),
+                        child: new Column(
+
+                          children: <Widget>[
+                            Expanded(
+                              flex: 6,
+                                child: Padding(
+                                  padding:  EdgeInsets.only(top: SizeConfig.heightMultiplier*4,bottom: SizeConfig.heightMultiplier),
+                                  child: new CircleAvatar(
+                                    child: new Image.asset('assets/image/download (4).png'),
+                                    backgroundColor: Colors.white,
+                                    maxRadius: SizeConfig.imageSizeMultiplier * 10,
+                                  ),
+                                ),
+                            ),
+                            new Expanded(
+                                flex: 5,
+                                child: new Container(
+                                  margin: EdgeInsets.only(top: SizeConfig.heightMultiplier*1),
+                                    child: Column(
+                                      children: [
+
+                                          new Text(
+                                            widget.user.name,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: SizeConfig.heightMultiplier*2.5,
+                                                fontWeight: FontWeight.bold),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+
+                                        new Text(
+                                            'مهندسی برق',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: SizeConfig.heightMultiplier*1.8
+                                            ),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+
+                                      ],
+                                    ),
+                            ))
+                          ],
+                        )),
+              ),
+
+            ],
+          );
+        // new IconButton(
+        //     icon: Icon(
+        //       Icons.share,
+        //       color: Colors.white,
+        //     ),
+        //     onPressed: () {
+        //       print('pressed share');
+        //     }),
   }
 
 
@@ -212,10 +249,23 @@ class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
     _scrollController = ScrollController();
     _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(_smoothScrollToTop);
-
+    setState(() {
+      isLoading=true;
+    });
+    _getData();
     super.initState();
   }
 
+
+
+  _getData() async {
+    DataUser body = await AuthenticateService.getDataUser(widget.user.id);
+    setState(() {
+      dataUser = body;
+      // print(profile.phoneNumber+" : Phone number");
+      isLoading = false;
+    });
+  }
 
   @override
   void dispose() {
@@ -234,8 +284,12 @@ class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return new Directionality(textDirection: TextDirection.rtl,
-        child: new SafeArea(top: true,
+    return isLoading
+        ? new Center(
+             child: new CircularProgressIndicator(),
+          )
+        : new Directionality(textDirection: TextDirection.rtl,
+          child: new SafeArea(top: true,
             bottom: true,
             child: Scaffold(
               // resizeToAvoidBottomInset: false,
@@ -262,7 +316,7 @@ class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
                 body: Container(
                   child: TabBarView(
                     controller: _tabController,
-                    children: [ListOne(user: widget.user,),ListImages(user: widget.user,), ListTwo(user: widget.user,profile: widget.profile,)],
+                    children: [ListOne(user: dataUser,),ListImages(user: dataUser,), ListTwo(user: dataUser,profile: widget.profile,)],
                   ),
                 ),
               ),
@@ -272,7 +326,7 @@ class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
 
 
 class ListOne extends StatefulWidget {
-  User user;
+  DataUser user;
   ListOne({this.user});
   @override
   _ListOneState createState() => _ListOneState();
@@ -281,24 +335,28 @@ class ListOne extends StatefulWidget {
 class _ListOneState extends State<ListOne> {
   @override
   Widget build(BuildContext context) {
+
     return new Padding(padding: const EdgeInsets.only(top: 0),
       child: new ListView(
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           new Padding(
-            padding: const EdgeInsets.only(right: 15.0, left: 15.0, top: 10.0),
+            padding: EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*3.5,  top: SizeConfig.heightMultiplier*1.5),
             child: new Text(
               'معرفی نامه',
-              style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize:SizeConfig.heightMultiplier*3, fontWeight: FontWeight.bold),
             ),
           ),
           new Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-            child: new Text(
-              widget.user.moarefinameh,
-              maxLines: 3,
+            padding:  EdgeInsets.symmetric(horizontal: SizeConfig.imageSizeMultiplier*5.5, vertical: SizeConfig.heightMultiplier*1.5),
+            child:widget.user.moarefiNameh ==null || widget.user.moarefiNameh == ""
+                ? new Text("مشخص نشده",style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.7))
+                : new Text(
+              widget.user.moarefiNameh,
+              maxLines: 1,
               overflow: TextOverflow.ellipsis,
-            ),
+              style: TextStyle(fontSize:  SizeConfig.heightMultiplier*2.7),
+            )
           ),
           // new Padding(
           //     padding:
@@ -324,63 +382,68 @@ class _ListOneState extends State<ListOne> {
           //         ),
           //       ],
           //     )),
+          Divider(),
           new Padding(
-            padding: const EdgeInsets.only(right: 15.0, left: 15.0, top: 0.0),
+            padding:  EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*3.5,  top: SizeConfig.heightMultiplier*1.5),
             child: new Text(
               'سوابق کاری',
-              style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: SizeConfig.heightMultiplier*3, fontWeight: FontWeight.bold),
             ),
           ),
           new Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-            child: new Text(
-              'به مدت دوسال با شرکت ایران کُد همکاری میکردم ، نزدیک به 30 تا پروژه موفق داشتم.عضو تیم طراحان اپلیکیشن های بایو، کیهان، مرداب و شهر به شهر بوده ام.بنیان گذار و طراح و برنامه نویس اپلیکیشن استیوب هم هستم ',
-              style: TextStyle(fontSize: 16.0),
+            padding:  EdgeInsets.symmetric(horizontal: SizeConfig.imageSizeMultiplier*5.5, vertical:  SizeConfig.heightMultiplier*1.5),
+            child: widget.user.moarefiNameh ==null || widget.user.moarefiNameh == ""
+              ? new Text("مشخص نشده",style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.7))
+              : new Text(
+              widget.user.moarefiNameh,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.7),
+              )
             ),
-          ),
           Divider(),
           new Padding(
-            padding: const EdgeInsets.only(right: 15.0, left: 15.0, top: 10.0),
+            padding: EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*3.5, top: SizeConfig.heightMultiplier*1.5),
             child: new Text(
               'سوابق تحصیلی',
-              style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: SizeConfig.heightMultiplier*3, fontWeight: FontWeight.bold),
             ),
           ),
           new Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            padding: EdgeInsets.symmetric(horizontal: SizeConfig.imageSizeMultiplier*5.5, vertical: SizeConfig.heightMultiplier*1.5),
             child: new Text(
               'بنده در مقطع کارشناسی رشته مهندسی برق در حال تحصیل می باشم.',
-              style: TextStyle(fontSize: 16.0),
+              style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.7),
             ),
           ),
           Divider(),
           new Padding(
-            padding: const EdgeInsets.only(right: 15.0, left: 15.0, top: 10.0),
+            padding:  EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*3.5,top: SizeConfig.heightMultiplier*1.5),
             child: new Text(
               'مدارک و یا گواهینامه های معتبر',
-              style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize:SizeConfig.heightMultiplier*3, fontWeight: FontWeight.bold),
             ),
           ),
           new Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            padding: EdgeInsets.symmetric(horizontal: SizeConfig.imageSizeMultiplier*5.5, vertical: SizeConfig.heightMultiplier*1.5),
             child: new Text(
               'مدرک فنی حرفه ای الکترونیک رو هم دارم .دارای مدرک الپیک دو و مدرک تافل میباشم.',
-              style: TextStyle(fontSize: 16.0),
+              style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.7),
             ),
           ),
           Divider(),
           new Padding(
-            padding: const EdgeInsets.only(right: 15.0, left: 15.0, top: 10.0),
+            padding:  EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*3.5,  top: SizeConfig.heightMultiplier*1.5),
             child: new Text(
               'زبان های مسلط',
-              style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: SizeConfig.heightMultiplier*3, fontWeight: FontWeight.bold),
             ),
           ),
           new Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            padding: EdgeInsets.symmetric(horizontal: SizeConfig.imageSizeMultiplier*5.5, vertical: SizeConfig.heightMultiplier*1.5),
             child: new Text(
               'فارسی، عربی، انگلیسی و ترکی',
-              style: TextStyle(fontSize: 16.0),
+              style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.7),
             ),
           ),
         ],
@@ -389,7 +452,7 @@ class _ListOneState extends State<ListOne> {
 }
 
 class ListTwo extends StatefulWidget {
-  User user;
+  DataUser user;
   MyData profile;
   ListTwo({this.profile,this.user});
 
@@ -451,7 +514,7 @@ class _ListTwoState extends State<ListTwo> {
                         Row(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(right: 15.0,left: 5.0,bottom: 5.0),
+                              padding:  EdgeInsets.only(right: SizeConfig.imageSizeMultiplier * 3.8 ,left: SizeConfig.imageSizeMultiplier*1.2,bottom: SizeConfig.heightMultiplier *1.2),
                               child: Container(
                                 height: MediaQuery.of(context).size.height * 0.075,
                                 width: MediaQuery.of(context).size.width * 0.9,
@@ -465,7 +528,7 @@ class _ListTwoState extends State<ListTwo> {
                                         borderSide: BorderSide(color: Colors.black),
                                       ),
                                       focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black),
-                                          borderRadius: BorderRadius.circular(35.0)),
+                                          borderRadius: BorderRadius.circular(SizeConfig.heightMultiplier*5)),
                                       disabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
                                       suffixIcon: new IconButton(
                                         icon: Icon(Icons.send,color: Colors.blue,),
@@ -476,18 +539,16 @@ class _ListTwoState extends State<ListTwo> {
                                               _controller.text = "";
                                             });
                                             getComments();
-                                            setState(() {
-                                              SchedulerBinding.instance.addPostFrameCallback((_) => _scrollController.animateTo(_scrollController.position.maxScrollExtent, duration: Duration(milliseconds: 1), curve: Curves.easeOut));
-                                            });
+
                                           }
 
                                         },
                                         color: Colors.black,),
                                       hintText: "نظر خود را وارد کنید",
-                                      contentPadding: EdgeInsets.only(bottom: 0.0,right: 7.0),
-                                      hintStyle: TextStyle(fontSize: 15),
+                                      contentPadding: EdgeInsets.only(bottom: 0.0,right: SizeConfig.imageSizeMultiplier*2),
+                                      hintStyle: TextStyle(fontSize: SizeConfig.textMultiplier*2),
                                       border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black),
-                                          borderRadius: BorderRadius.circular(35.0))
+                                          borderRadius: BorderRadius.circular(SizeConfig.heightMultiplier*5))
                                   ),
                                 ),
                               ),
@@ -508,8 +569,8 @@ class _ListTwoState extends State<ListTwo> {
                           itemCount: comments.length,
                           itemBuilder: (ctx , int index) {
                             return Container(
-                              padding: EdgeInsets.only(right: 10),
-                              margin: const EdgeInsets.only(top: 8,bottom: 4),
+                              padding: EdgeInsets.only(right: SizeConfig.imageSizeMultiplier *2.5),
+                              margin:  EdgeInsets.only(top: SizeConfig.heightMultiplier *1.1,bottom: SizeConfig.heightMultiplier *0.7),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
@@ -518,18 +579,18 @@ class _ListTwoState extends State<ListTwo> {
                                           children: [
                                             Row(
                                               children: [
-                                                new CircleAvatar(maxRadius: 20,backgroundColor: R.color.banafshKamRang,),
-                                                new SizedBox(width: 10,),
-                                                new Text(username[index]),
+                                                new CircleAvatar(maxRadius: SizeConfig.imageSizeMultiplier *5,backgroundColor: R.color.banafshKamRang,),
+                                                new SizedBox(width: SizeConfig.imageSizeMultiplier *2,),
+                                                new Text(username[index],style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.3),),
                                               ],
                                             ),
                                             new Row(
                                               children: [
                                                 new Padding(
-                                                  padding: const EdgeInsets.only(left: 10.0),
+                                                  padding: EdgeInsets.only(left: SizeConfig.imageSizeMultiplier*2),
                                                   child: new Text(
                                                     textTime(comments[index].date),
-                                                    style: TextStyle(fontSize: 10.0),),
+                                                    style: TextStyle(fontSize: SizeConfig.heightMultiplier*1.4),),
                                                 )
                                               ],
                                             )
@@ -540,7 +601,7 @@ class _ListTwoState extends State<ListTwo> {
                                              new SizedBox(width: MediaQuery.of(context).size.width*0.13,),
                                              Container(
                                                  width: MediaQuery.of(context).size.width * 0.8,
-                                                 child: new Text(comments[index].comment_text,maxLines: null,)),
+                                                 child: new Text(comments[index].comment_text,maxLines: null,style: TextStyle(fontSize: SizeConfig.heightMultiplier*1.9))),
                                            ],
                                          ),
                                             ],
@@ -556,7 +617,7 @@ class _ListTwoState extends State<ListTwo> {
                             Row(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(right: 15.0,left: 5.0,bottom: 5.0,top:2.0),
+                                  padding:  EdgeInsets.only(right: SizeConfig.imageSizeMultiplier * 3.8,left:SizeConfig.imageSizeMultiplier*1.2,bottom: SizeConfig.heightMultiplier *1.2,top:2.0),
                                   child: Container(
                                     height: MediaQuery.of(context).size.height * 0.075,
                                     width: MediaQuery.of(context).size.width * 0.9,
@@ -570,7 +631,7 @@ class _ListTwoState extends State<ListTwo> {
                                             borderSide: BorderSide(color: Colors.black),
                                           ),
                                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black),
-                                              borderRadius: BorderRadius.circular(35.0)),
+                                              borderRadius: BorderRadius.circular(SizeConfig.heightMultiplier*5)),
                                           disabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
                                           suffixIcon: new IconButton(
                                             icon: Icon(Icons.send,color: Colors.blue,),
@@ -589,10 +650,10 @@ class _ListTwoState extends State<ListTwo> {
                                             },
                                             color: Colors.black,),
                                           hintText: "نظر خود را وارد کنید",
-                                          contentPadding: EdgeInsets.only(bottom: 0.0,right: 7.0),
-                                          hintStyle: TextStyle(fontSize: 15),
+                                          contentPadding: EdgeInsets.only(bottom: 0.0,right: SizeConfig.imageSizeMultiplier*2),
+                                          hintStyle: TextStyle(fontSize: SizeConfig.textMultiplier*2),
                                           border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black),
-                                              borderRadius: BorderRadius.circular(35.0))
+                                              borderRadius: BorderRadius.circular(SizeConfig.heightMultiplier*5))
                                       ),
                                     ),
                                   ),
@@ -639,7 +700,7 @@ class _ListTwoState extends State<ListTwo> {
 //   }
 // }
 class ListImages extends StatefulWidget {
-  User user;
+  DataUser user;
   ListImages({this.user});
   @override
   _ListImagesState createState() => _ListImagesState();

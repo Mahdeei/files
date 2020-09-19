@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stubbbb/Other/SizeConfig.dart';
 
 class InputTextForm extends StatelessWidget {
   final String lable;
@@ -30,7 +31,7 @@ class InputTextForm extends StatelessWidget {
       onSaved: onSaved,
       obscureText: obscure,
       cursorColor: color,
-      style: TextStyle(color: color),
+      style: TextStyle(color: color,fontSize: SizeConfig.heightMultiplier*2.3),
 
       decoration: InputDecoration(
         errorStyle: TextStyle(color: errColor),

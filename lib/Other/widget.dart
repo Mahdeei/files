@@ -9,6 +9,7 @@ import 'package:stubbbb/KarAmouziPage/KarAmouziPage.dart';
 import 'package:stubbbb/LoginPage/SignIn.dart';
 import 'package:stubbbb/Models/Request.dart';
 import 'package:stubbbb/Models/myData.dart';
+import 'package:stubbbb/Other/SizeConfig.dart';
 import 'package:stubbbb/ProfilePage/MyProfileScreen.dart';
 import 'package:stubbbb/ProfilePage/MyProfileUserNormalScreen.dart';
 import 'package:stubbbb/StudentPage/StudentScreen.dart';
@@ -51,7 +52,7 @@ BoxDecoration deorationLoginPage() {
 BoxDecoration decorationHomePage() {
   return BoxDecoration(
       color: R.color.banafshmain,
-      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(35.0)));
+      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(SizeConfig.heightMultiplier * 6.5)));
 }
 
 BoxDecoration decorationImageHomePage(String image) {
@@ -339,7 +340,7 @@ Text textSplashScreen() {
 Text textSignIn() {
   return new Text('منتظرت بودیم !',
       style: TextStyle(
-          fontSize: 35.0,
+          fontSize: SizeConfig.textMultiplier * 4.6 ,
           fontWeight: FontWeight.bold,
           color: Colors.white));
 }
@@ -348,7 +349,7 @@ Text textSignInLogin() {
   return new Text(
     'ورود',
     style: new TextStyle(
-        fontSize: 30,
+        fontSize: SizeConfig.heightMultiplier*5,
         fontWeight: FontWeight.w700),
   );
 }
@@ -358,7 +359,7 @@ Text textSignInPage() {
     'ثبت نام',
     style: TextStyle(
         decoration: TextDecoration.underline,
-        fontSize: 17),
+        fontSize: SizeConfig.heightMultiplier * 2.5),
   );
 }
 
@@ -434,17 +435,17 @@ Padding textLoginPageSignup() {
 TextStyle styleHomePage() {
   return TextStyle(
       color: Colors.white,
-      fontSize: 22.0,
+      fontSize: SizeConfig.textMultiplier *3.3,
       fontWeight: FontWeight.bold);
 }
 
 CircleAvatar circleAvatarSignIn() {
   return new CircleAvatar(
-    radius: 40,
+    radius: SizeConfig.heightMultiplier * 5.8,
     backgroundColor: R.color.banafshmain,
     child: new Icon(
       Icons.arrow_forward,
-      size: 40,
+      size: SizeConfig.heightMultiplier*7,
     ),
   );
 }
@@ -480,7 +481,7 @@ AppBar appBarHomePage(BuildContext context, MyData profile) {
           children: [
             new IconButton(
 
-                icon: Icon(Icons.person, color: Colors.white, size: 28,),
+                icon: Icon(Icons.person, color: Colors.white, size: SizeConfig.heightMultiplier *5,),
                 onPressed: () {
                   Navigator.push(
                       context, new MaterialPageRoute(builder: (context) =>
@@ -495,10 +496,10 @@ AppBar appBarHomePage(BuildContext context, MyData profile) {
                 || profile.certificates == null || profile.fieldUni == null ||
                 profile.languages == null || profile.resumes == null
                 || profile.educational == null ?
-            new Positioned(bottom: 18,
-                right: 6,
+            new Positioned(bottom: SizeConfig.heightMultiplier * 3.2,
+                right: SizeConfig.imageSizeMultiplier *3,
                 child: new CircleAvatar(
-                  backgroundColor: Colors.red, maxRadius: 5,))
+                  backgroundColor: Colors.red, maxRadius: 4,))
                 : new SizedBox()
 
           ],
@@ -546,7 +547,7 @@ AppBar appBarMessagePage(_scaffoldKey) {
 AppBar appBarProfilePage() {
   return new AppBar(
 //            title: this.cusSearchBar,
-    title: SearchProfilePage(),
+//     title: SearchProfilePage(),
     backgroundColor: Colors.white,
     elevation: 5.0,
     bottomOpacity: 25.0,
@@ -623,169 +624,169 @@ AppBar appBarProfileScreen() {
   );
 }
 
-class SearchProfilePage extends StatefulWidget {
-  @override
-  _SearchProfilePageState createState() => _SearchProfilePageState();
-}
-
-class _SearchProfilePageState extends State<SearchProfilePage> {
-  FocusNode focusNode = FocusNode();
-  String hintText = 'جستجو ...';
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    focusNode.addListener(() {
-      if (focusNode.hasFocus) {
-        hintText = '';
-      } else {
-        hintText = 'جستجو ...';
-      }
-      setState(() {});
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return new Row(
-      children: <Widget>[
-        new Expanded(
-          child: new TextField(
-            decoration: InputDecoration(
-//          border: InputBorder.none,
-              contentPadding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 10.0),
-              suffixIcon: new Icon(
-                Icons.search,
-                color: Color(0xff2c003e),
-              ),
-//            labelText: "جستجو ...",
-              enabledBorder: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                borderSide: const BorderSide(
-                  color: Color(0xffF2F3F8),
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                borderSide: BorderSide(color: Colors.white),
-              ),
-              fillColor: Color(0xffF2F3F8),
-              hintText: hintText,
-
-              filled: true,
-            ),
-          ),
-        ),
-        new GestureDetector(
-          child: new Icon(
-            Icons.filter_list,
-            color: Colors.black,
-          ),
-          onTap: () {
-            showModalBottomSheet(
-                context: context,
-                builder: (builder) =>
-                    Container(
-                        child: new Column(
-                          children: <Widget>[
-                            new Container(
-                              color: R.color.red,
-                              child: new Text(
-                                'فیلتر دسته بندی ها',
-                                textDirection: TextDirection.rtl,
-                                style: TextStyle(
-                                    fontSize: 20.0, fontWeight: FontWeight
-                                    .bold),
-                              ),
-                            ),
-//                                              new Row(
-//                                                children: <Widget>[
+// class SearchProfilePage extends StatefulWidget {
+//   @override
+//   _SearchProfilePageState createState() => _SearchProfilePageState();
+// }
 //
-////                                    CustomRadio<int, double>(
-////                                        value: value,
-////                                        groupValue: widget.radioValue,
-////                                        duration: Duration(milliseconds: 400),
-////                                        animsBuilder: (AnimationController controller) => [
-////                                          CurvedAnimation(
-////                                              parent: controller,
-////                                              curve: Curves.ease
-////                                          )
-////                                        ],
-////                                        builder: ({ BuildContext context, List<double> animValues, Function updateState, bool checked }) {
-////                                          return GestureDetector(
-////                                              onTapDown: (TapDownDetails details) {
-////                                                setState(() {
-////                                                  if (_controller.status != AnimationStatus.completed)
-////                                                    _controller.forward();
-////                                                });
-////                                              },
-////                                              onTapUp: (TapUpDetails details) {
-////                                                setState(() {
-////                                                  if (_controller.status != AnimationStatus.dismissed)
-////                                                    _controller.reverse();
-////                                                });
-////                                              },
-////                                              onTap: () {
-////                                                setState(() {
-////                                                  widget.radioValue = value;
-////                                                });
-////                                              },
-////                                              child: Container(
-////                                                margin: EdgeInsets.all(8.0),
-////                                                width: 38.0,
-////                                                height: 38.0,
-////                                                alignment: Alignment.center,
-////                                                decoration: BoxDecoration(
-////                                                  shape: BoxShape.circle,
-////                                                ),
-////                                                child: Stack(
-////                                                    alignment: Alignment.center,
-////                                                    children: <Widget>[
-////                                                      Container(
-////                                                        width: 38.0 * _animation.value,
-////                                                        height: 38.0 * _animation.value,
-////                                                        decoration: BoxDecoration(
-////                                                            shape: BoxShape.circle,
-////                                                            color: Theme.of(context).primaryColor.withAlpha(40)
-////                                                        ),
-////                                                      ),
-////                                                      Container(
-////                                                        width: 18.0,
-////                                                        height: 18.0,
-////                                                        decoration: BoxDecoration(
-////                                                            shape: BoxShape.circle,
-////                                                            color: Colors.transparent,
-////                                                            border: Border.all(
-////                                                                color: checked ? Theme.of(context).primaryColor : Theme.of(context).hintColor,
-////                                                                width: 2.0
-////                                                            )
-////                                                        ),
-////                                                      ),
-////                                                      Container(
-////                                                        width: 11.0 * animValues[0],
-////                                                        height: 11.0 * animValues[0],
-////                                                        decoration: BoxDecoration(
-////                                                          shape: BoxShape.circle,
-////                                                          color: Theme.of(context).primaryColor,
-////                                                        ),
-////                                                      ),
-////                                                    ]
-////                                                ),
-////                                              )
-////                                          );
-////                                        }
-////                                    ),
-//                                                ],
-//                                              )
-                          ],
-                        )));
-          },
-        ),
-      ],
-    );
-  }
-}
+// class _SearchProfilePageState extends State<SearchProfilePage> {
+//   FocusNode focusNode = FocusNode();
+//   String hintText = 'جستجو ...';
+//
+//   @override
+//   void initState() {
+//     // TODO: implement initState
+//     super.initState();
+//     focusNode.addListener(() {
+//       if (focusNode.hasFocus) {
+//         hintText = '';
+//       } else {
+//         hintText = 'جستجو ...';
+//       }
+//       setState(() {});
+//     });
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return new Row(
+//       children: <Widget>[
+//         new Expanded(
+//           child: new TextField(
+//             decoration: InputDecoration(
+// //          border: InputBorder.none,
+//               contentPadding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 10.0),
+//               suffixIcon: new Icon(
+//                 Icons.search,
+//                 color: Color(0xff2c003e),
+//               ),
+// //            labelText: "جستجو ...",
+//               enabledBorder: const OutlineInputBorder(
+//                 borderRadius: BorderRadius.all(Radius.circular(20.0)),
+//                 borderSide: const BorderSide(
+//                   color: Color(0xffF2F3F8),
+//                 ),
+//               ),
+//               focusedBorder: OutlineInputBorder(
+//                 borderRadius: BorderRadius.all(Radius.circular(20.0)),
+//                 borderSide: BorderSide(color: Colors.white),
+//               ),
+//               fillColor: Color(0xffF2F3F8),
+//               hintText: hintText,
+//
+//               filled: true,
+//             ),
+//           ),
+//         ),
+//         new GestureDetector(
+//           child: new Icon(
+//             Icons.filter_list,
+//             color: Colors.black,
+//           ),
+//           onTap: () {
+//             showModalBottomSheet(
+//                 context: context,
+//                 builder: (builder) =>
+//                     Container(
+//                         child: new Column(
+//                           children: <Widget>[
+//                             new Container(
+//                               color: R.color.red,
+//                               child: new Text(
+//                                 'فیلتر دسته بندی ها',
+//                                 textDirection: TextDirection.rtl,
+//                                 style: TextStyle(
+//                                     fontSize: 20.0, fontWeight: FontWeight
+//                                     .bold),
+//                               ),
+//                             ),
+// //                                              new Row(
+// //                                                children: <Widget>[
+// //
+// ////                                    CustomRadio<int, double>(
+// ////                                        value: value,
+// ////                                        groupValue: widget.radioValue,
+// ////                                        duration: Duration(milliseconds: 400),
+// ////                                        animsBuilder: (AnimationController controller) => [
+// ////                                          CurvedAnimation(
+// ////                                              parent: controller,
+// ////                                              curve: Curves.ease
+// ////                                          )
+// ////                                        ],
+// ////                                        builder: ({ BuildContext context, List<double> animValues, Function updateState, bool checked }) {
+// ////                                          return GestureDetector(
+// ////                                              onTapDown: (TapDownDetails details) {
+// ////                                                setState(() {
+// ////                                                  if (_controller.status != AnimationStatus.completed)
+// ////                                                    _controller.forward();
+// ////                                                });
+// ////                                              },
+// ////                                              onTapUp: (TapUpDetails details) {
+// ////                                                setState(() {
+// ////                                                  if (_controller.status != AnimationStatus.dismissed)
+// ////                                                    _controller.reverse();
+// ////                                                });
+// ////                                              },
+// ////                                              onTap: () {
+// ////                                                setState(() {
+// ////                                                  widget.radioValue = value;
+// ////                                                });
+// ////                                              },
+// ////                                              child: Container(
+// ////                                                margin: EdgeInsets.all(8.0),
+// ////                                                width: 38.0,
+// ////                                                height: 38.0,
+// ////                                                alignment: Alignment.center,
+// ////                                                decoration: BoxDecoration(
+// ////                                                  shape: BoxShape.circle,
+// ////                                                ),
+// ////                                                child: Stack(
+// ////                                                    alignment: Alignment.center,
+// ////                                                    children: <Widget>[
+// ////                                                      Container(
+// ////                                                        width: 38.0 * _animation.value,
+// ////                                                        height: 38.0 * _animation.value,
+// ////                                                        decoration: BoxDecoration(
+// ////                                                            shape: BoxShape.circle,
+// ////                                                            color: Theme.of(context).primaryColor.withAlpha(40)
+// ////                                                        ),
+// ////                                                      ),
+// ////                                                      Container(
+// ////                                                        width: 18.0,
+// ////                                                        height: 18.0,
+// ////                                                        decoration: BoxDecoration(
+// ////                                                            shape: BoxShape.circle,
+// ////                                                            color: Colors.transparent,
+// ////                                                            border: Border.all(
+// ////                                                                color: checked ? Theme.of(context).primaryColor : Theme.of(context).hintColor,
+// ////                                                                width: 2.0
+// ////                                                            )
+// ////                                                        ),
+// ////                                                      ),
+// ////                                                      Container(
+// ////                                                        width: 11.0 * animValues[0],
+// ////                                                        height: 11.0 * animValues[0],
+// ////                                                        decoration: BoxDecoration(
+// ////                                                          shape: BoxShape.circle,
+// ////                                                          color: Theme.of(context).primaryColor,
+// ////                                                        ),
+// ////                                                      ),
+// ////                                                    ]
+// ////                                                ),
+// ////                                              )
+// ////                                          );
+// ////                                        }
+// ////                                    ),
+// //                                                ],
+// //                                              )
+//                           ],
+//                         )));
+//           },
+//         ),
+//       ],
+//     );
+//   }
+// }
 
 
 Row rowOneKaramouziScreen() {
@@ -937,7 +938,8 @@ Container containerError() {
         "کاربر یافت نشد",
         style: TextStyle(
             color: Colors.red,
-            fontSize: 17),
+            fontSize: SizeConfig.heightMultiplier*2.3
+        ),
       ));
 }
 
@@ -1108,39 +1110,35 @@ class Headers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var sizePhone = MediaQuery
-        .of(context)
-        .size;
     return new Container(
       decoration: decorationHomePage(),
-      height: sizePhone.height * 0.16,
+      // height: SizeConfig.heightMultiplier * 15,
       child: new Column(
         children: <Widget>[
           new Padding(
-            padding: const EdgeInsets.only(right: 20.0, top: 0.0),
+            padding: EdgeInsets.only(right: SizeConfig.heightMultiplier * 3, top: 0.0),
             child: new Row(
               children: <Widget>[
                 profile.image == null || profile.image == ""
                     ? new CircleAvatar(
-                    child: new Icon(
-                      Icons.person, color: Colors.grey, size: 35.0,),
+                    child: Padding(
+                      padding: EdgeInsets.only(bottom: SizeConfig.heightMultiplier*0.7),
+                        child: new Text(profile.username.toString().substring(0,1),
+                          style: TextStyle(
+                              color: R.color.banafshtire,
+                              fontSize: SizeConfig.textMultiplier * 6.5),)),
                     backgroundColor: Colors.white,
-                    minRadius: 30.0
+                    minRadius: SizeConfig.heightMultiplier * 5
                 )
                     : new Container(
-                    margin: const EdgeInsets.only(left: 5.0, top: 10.0),
-                    height: 70.0,
-                    width: 70.0,
+                    margin: EdgeInsets.only(left: SizeConfig.heightMultiplier *1, top: SizeConfig.heightMultiplier * 1.3),
+                    height: SizeConfig.imageSizeMultiplier *14,
+                    width: SizeConfig.imageSizeMultiplier *14,
                     decoration: decorationImageHomePage(profile.image)
                 ),
-                new SizedBox(width: 10.0),
-                new Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
+                new SizedBox(width: SizeConfig.imageSizeMultiplier * 2),
+
                     new Text(profile.name, style: styleHomePage()),
-                  ],
-                )
 
               ],
             ),
@@ -1164,10 +1162,9 @@ class Constants {
 class MenuItemWidget extends StatelessWidget {
 
   ModelMenu model;
-  var phoneSize;
   var listener;
 
-  MenuItemWidget({@required this.model, this.phoneSize, this.listener});
+  MenuItemWidget({@required this.model,  this.listener});
 
   @override
   Widget build(BuildContext context) {
@@ -1180,33 +1177,39 @@ class MenuItemWidget extends StatelessWidget {
             shadowColor: Colors.black,
             elevation: 10.0,
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.0)),
-            margin: const EdgeInsets.only(left: 15.0, right: 5.0, top: 25.0),
+                borderRadius: BorderRadius.circular(SizeConfig.heightMultiplier * 2)),
+            margin: EdgeInsets.only(left: SizeConfig.imageSizeMultiplier * 2,
+                right: SizeConfig.imageSizeMultiplier * 2, top: SizeConfig.heightMultiplier * 1 ,bottom: SizeConfig.heightMultiplier * 1),
             color: Colors.white,
             child: new Container(
-              height: phoneSize.height * 0.27,
-              width: phoneSize.width * 0.38,
+
               child: new Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  new Align(
-                    alignment: Alignment.topCenter,
-                    child: new Image(
-                      image: AssetImage(model.image),
-                      height: 120.0,
+                  Expanded(
+                    flex: 3,
+                    child: new Align(
+                      alignment: Alignment.topCenter,
+                      child: new Image(
+                        image: AssetImage(model.image),
+                        width: SizeConfig.imageSizeMultiplier * 40,
+                      ),
                     ),
                   ),
-                  new SizedBox(
-                    height: 20.0,
-                  ),
-                  new Align(
-                    alignment: Alignment.bottomCenter,
-                    child: new Text(
-                      model.titr,
-                      style: TextStyle(
-                          color: model.color,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold),
+                  Expanded(
+                    flex: 1,
+                    child: Padding(
+                      padding:  EdgeInsets.only(bottom: SizeConfig.heightMultiplier * 1,),
+                      child: new Align(
+                        alignment: Alignment.bottomCenter,
+                        child: new Text(
+                          model.titr,
+                          style: TextStyle(
+                              color: model.color,
+                              fontSize: SizeConfig.textMultiplier * 2.8,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
                     ),
                   ),
                 ],

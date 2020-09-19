@@ -29,8 +29,12 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: R.color.backGround1,
           body: new Column(
             children: <Widget>[
-              Headers(profile: widget.profile,),
-              ListCards(profile: widget.profile,),
+              Expanded(
+                  flex: 1,
+                  child: Headers(profile: widget.profile,)),
+              Expanded(
+                  flex: 4,
+                  child: ListCards(profile: widget.profile,)),
             ],
           ),
         ));

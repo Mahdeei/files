@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stubbbb/Other/SizeConfig.dart';
 import 'package:stubbbb/Other/widget.dart';
 
 class MyMessagePage extends StatelessWidget {
@@ -22,8 +23,8 @@ class MyMessagePage extends StatelessWidget {
             child: new Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                new Text('نسخه فعلی ازمایشی است',style: TextStyle(fontSize: 20.0),),
-                new Text('این قسمت در نسخه اصلی تکمیل می شود',style: TextStyle(fontSize: 20.0),),
+                FittedBox(child: new Text('نسخه فعلی ازمایشی است',style: TextStyle(fontSize: SizeConfig.textMultiplier*3),)),
+                FittedBox(child: new Text('این قسمت در نسخه اصلی تکمیل می شود',style: TextStyle(fontSize: SizeConfig.textMultiplier*3),)),
               ],
             )
           ))

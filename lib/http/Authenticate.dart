@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart'as http;
+import 'package:stubbbb/Models/DataUser.dart';
 import 'package:stubbbb/Models/myData.dart';
 class AuthenticateService{
+
   static Future<Map> signIn(Map databody) async {
     var response = await http.post("http://stube.ir/Login.php", body: databody);
     final body = json.decode(response.body);
@@ -31,6 +33,33 @@ class AuthenticateService{
     );
     return body2;
   }
+
+
+  static Future<DataUser> getDataUser(String id) async {
+    var response = await http.post("http://stube.ir/GetMyData.php", body: {'id': id});
+    final  body = json.decode(response.body);
+    print(body);
+    DataUser body2 = new DataUser(
+      image: body['image'],
+      title: body['title'],
+      username: body['username'],
+      certificates: body['certificates'],
+      educational: body['educational'],
+      fieldUni: body['fieldUni'],
+      id: body['id'],
+      languages: body['languages'],
+      moarefiNameh: body['moarefiname'],
+      name: body['name'],
+      phoneNumber: body['phonenumber'],
+      resumes: body['resumes'],
+      skills: body['skills'],
+      type: body['type'],
+    );
+    return body2;
+  }
+
+
+
 
   static Future<Map> checkLog (String apiToken) async {
     var apiResponse = await http.post('http://stube.ir/AuthenticateService.php',body: {

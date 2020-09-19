@@ -11,6 +11,7 @@ import 'package:stubbbb/Models/Comment.dart';
 import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/R.dart';
+import 'package:stubbbb/Other/SizeConfig.dart';
 import 'package:stubbbb/Other/widget.dart';
 import 'package:stubbbb/http/Authenticate.dart';
 import 'package:stubbbb/http/httpComments.dart';
@@ -87,182 +88,196 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
   }
 
   Widget _head(context) {
-    return new Stack(
-      children: <Widget>[
-        new Container(
-          height: MediaQuery.of(context).size.height * 0.28,
-          width: MediaQuery.of(context).size.width,
-          color: Color(0xff44143E),
-        ),
-        // new IconButton(
-        //     icon: Icon(
-        //       Icons.share,
-        //       color: Colors.white,
-        //     ),
-        //     onPressed: () {
-        //       print('pressed share');
-        //     }),
-        new Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            new Directionality(
-              textDirection: TextDirection.ltr,
-              child: new Column(
-                children: <Widget>[
-                  new Padding(
-                    padding: const EdgeInsets.only(left: 200.0, top: 60.0),
-                    child: new Row(
-                      children: <Widget>[
-                        new Icon(
-                          Icons.school,
-                          color: Colors.white,
-                        ),
-                        new SizedBox(
-                          width: 3.0,
-                        ),
-                        new Text(
-                          profile.username,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ),
-                  new Padding(
-                    padding: const EdgeInsets.only(left: 200.0, top: 20.0),
-                    child: new Row(
-                      children: <Widget>[
-                        new Icon(
-                          Icons.location_on,
-                          color: Colors.white,
-                        ),
-                        new SizedBox(
-                          width: 3.0,
-                        ),
-                        new Text(
-                          'khorasan razavi,mashhad',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12.0,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            new SizedBox(height: 15.0),
-            new Row(
+    return new Row(
+      children: [
+        Expanded(
+          flex: 1,
+          child: Container(
+            color: Color(0xff44143E),
+            height: MediaQuery.of(context).size.height * 0.28,
+            width: MediaQuery.of(context).size.width * 0.5,
+            child: new Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                // new IconButton(
-                //     icon: Icon(
-                //       Icons.bookmark,
-                //       color: Colors.white,
-                //     ),
-                //     onPressed: () {
-                //       print('pressed save');
-                //     }),
-//                 new GestureDetector(
-//                   onTap: () {
-//                     print('pressed ');
-//                   },
-//                   child: new Container(
-//                       alignment: Alignment.center,
-// //                            height: 20.0,
-//                       width: 60.0,
-//                       decoration: BoxDecoration(
-//                           color: Colors.white,
-//                           borderRadius: BorderRadius.circular(15.0)),
-//                       child: new Padding(
-//                         padding: const EdgeInsets.only(top: 0.5, bottom: 0.5),
-//                         child: new Text(
-//                           'پیام',
-//                           style: TextStyle(
-//                               color: Color(0xff2C003E), fontSize: 12.0),
-//                         ),
-//                       )),
-//                 ),
-                new SizedBox(
-                  width: 3.0,
+                Expanded(
+                  flex: 2,
+                  child: new Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Directionality(
+                        textDirection: TextDirection.ltr,
+                        child: new Padding(
+                          padding:  EdgeInsets.only(left: SizeConfig.imageSizeMultiplier,top: SizeConfig.heightMultiplier ),
+                          child: new Row(
+                            children: <Widget>[
+                              new Icon(
+                                Icons.school,
+                                color: Colors.white,
+                                size: SizeConfig.heightMultiplier *3.3,
+                              ),
+                              new SizedBox(
+                                width: SizeConfig.imageSizeMultiplier *1.5,
+                              ),
+                              new Text(
+                                profile.username,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: SizeConfig.textMultiplier *3.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      // Directionality(
+                      //   textDirection: TextDirection.rtl,
+                      //   child: new Padding(
+                      //     padding: const EdgeInsets.only(left: 0.0, top: 0.0),
+                      //     child: new Row(
+                      //       children: <Widget>[
+                      //         new Icon(
+                      //           Icons.location_on,
+                      //           color: Colors.white,
+                      //         ),
+                      //         new SizedBox(
+                      //           width: 3.0,
+                      //         ),
+                      //         new Text(
+                      //           'khorasan razavi,mashhad',
+                      //           style: TextStyle(
+                      //               color: Colors.white,
+                      //               fontSize: 12.0,
+                      //               fontWeight: FontWeight.bold),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
+                    ],
+                  ),
                 ),
-                new GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(new MaterialPageRoute(
-                        builder: (context) => new EditData(
+
+                Expanded(
+                  flex: 1,
+                  child: Padding(
+                    padding:  EdgeInsets.symmetric(vertical:SizeConfig.heightMultiplier * 2.5,horizontal: SizeConfig.imageSizeMultiplier*4),
+                    child: new GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(new MaterialPageRoute(
+                            builder: (context) => new EditData(
                               profile: profile,
                             )));
-                    print(profile.phoneNumber);
-                    print(" : Phone number");
-                  },
-                  child: new Container(
-                      alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width*.4,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15.0)),
-                      child: new Padding(
-                        padding: const EdgeInsets.only(top: 2.5, bottom: 2.5),
-                        child: new Text(
-                          'تغییر پروفایل',
-                          style: TextStyle(
-                              color: Color(0xff2C003E), fontSize: 15.0),
-                        ),
-                      )),
+
+                      },
+                      child: new Container(
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15.0)),
+                          child: new Padding(
+                            padding: const EdgeInsets.only(top: 2.5, bottom: 2.5),
+                            child: new Text(
+                              'تغییر پروفایل',
+                              style: TextStyle(
+                                  color: Color(0xff2C003E), fontSize: 15.0),
+                            ),
+                          )),
+                    ),
+                  ),
                 ),
+//                       new Row(
+//                         children: <Widget>[
+//                           // new IconButton(
+//                           //     icon: Icon(
+//                           //       Icons.bookmark,
+//                           //       color: Colors.white,
+//                           //     ),
+//                           //     onPressed: () {
+//                           //       print('pressed save');
+//                           //     }),
+// //                 new GestureDetector(
+// //                   onTap: () {
+// //                     print('pressed ');
+// //                   },
+// //                   child: new Container(
+// //                       alignment: Alignment.center,
+// // //                            height: 20.0,
+// //                       width: 60.0,
+// //                       decoration: BoxDecoration(
+// //                           color: Colors.white,
+// //                           borderRadius: BorderRadius.circular(15.0)),
+// //                       child: new Padding(
+// //                         padding: const EdgeInsets.only(top: 0.5, bottom: 0.5),
+// //                         child: new Text(
+// //                           'پیام',
+// //                           style: TextStyle(
+// //                               color: Color(0xff2C003E), fontSize: 12.0),
+// //                         ),
+// //                       )),
+// //                 ),
+//
+//
+//                         ],
+//                       )
               ],
-            )
-          ],
-        ),
-        new Align(
-          alignment: Alignment.centerLeft,
-          child: new ClipPath(
-            child: Container(
-                height: MediaQuery.of(context).size.height * 0.28,
-                width: MediaQuery.of(context).size.width * 0.5,
-                color: Color(0xff2D0827),
-                child: new Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    profile.image=="" || profile.image==null
-                        ?new CircleAvatar(
-                          child: new Icon(Icons.person,color: Colors.grey,size: MediaQuery.of(context).size.width*0.1,),
-                          backgroundColor: Colors.white,
-                          minRadius: 40.0,
-                        )
-                        : new CircleAvatar(
-                      backgroundImage: new NetworkImage('http://stube.ir/image/${profile.image}'),
-                      maxRadius: 40.0,
-                    ),
-                    new SizedBox(
-                      height: 5.0,
-                    ),
-                    new Text(
-                      profile.name,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.bold),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    new Text(
-                      'مهندسی برق',
-                      style: TextStyle(
-                        color: Color(0xff44143E),
-                        fontWeight: FontWeight.bold,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                )),
+            ),
           ),
-        )
+        ),
+        Expanded(
+          flex: 1,
+          child: Container(
+              height: SizeConfig.heightMultiplier *28,
+              color: Color(0xff2D0827),
+              child: new Column(
+
+                children: <Widget>[
+                  Expanded(
+                    flex: 6,
+                    child: Padding(
+                      padding:  EdgeInsets.only(top: SizeConfig.heightMultiplier*4,bottom: SizeConfig.heightMultiplier),
+                      child: new CircleAvatar(
+                        child: new Image.asset('assets/image/download (4).png'),
+                        backgroundColor: Colors.white,
+                        maxRadius: SizeConfig.imageSizeMultiplier * 10,
+                      ),
+                    ),
+                  ),
+                  new Expanded(
+                      flex: 5,
+                      child: new Container(
+                        margin: EdgeInsets.only(top: SizeConfig.heightMultiplier*1),
+                        child: Column(
+                          children: [
+
+                            new Text(
+                              profile.name,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: SizeConfig.heightMultiplier*2.5,
+                                  fontWeight: FontWeight.bold),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+
+                            new Text(
+                              'مهندسی برق',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: SizeConfig.heightMultiplier*1.8
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+
+                          ],
+                        ),
+                      ))
+                ],
+              )),
+        ),
+
       ],
     );
   }
@@ -342,10 +357,10 @@ class _ListOneState extends State<ListOne> {
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           new Padding(
-            padding: const EdgeInsets.only(right: 15.0, left: 15.0, top: 10.0),
+            padding: EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*3.5,  top: SizeConfig.heightMultiplier*1.5),
             child: new Text(
               'معرفی نامه',
-              style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: SizeConfig.heightMultiplier*3, fontWeight: FontWeight.bold),
             ),
           ),
           new Padding(
@@ -380,12 +395,13 @@ class _ListOneState extends State<ListOne> {
           //           tags: 'back end',
           //         ),
           //       ],
-          //     )),
+          //     )),          Divider(),
+          Divider(),
           new Padding(
-            padding: const EdgeInsets.only(right: 15.0, left: 15.0, top: 0.0),
+            padding: EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*3.5,  top: SizeConfig.heightMultiplier*1.5),
             child: new Text(
               'سوابق کاری',
-              style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: SizeConfig.heightMultiplier*3, fontWeight: FontWeight.bold),
             ),
           ),
           new Padding(
@@ -398,7 +414,7 @@ class _ListOneState extends State<ListOne> {
           ),
           Divider(),
           new Padding(
-            padding: const EdgeInsets.only(right: 15.0, left: 15.0, top: 10.0),
+            padding: EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*3.5,  top: SizeConfig.heightMultiplier*1.5),
             child: new Text(
               'سوابق تحصیلی',
               style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
@@ -415,7 +431,7 @@ class _ListOneState extends State<ListOne> {
           ),
           Divider(),
           new Padding(
-            padding: const EdgeInsets.only(right: 15.0, left: 15.0, top: 10.0),
+            padding: EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*3.5,  top: SizeConfig.heightMultiplier*1.5),
             child: new Text(
               'مدارک و یا گواهینامه های معتبر',
               style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
@@ -431,10 +447,10 @@ class _ListOneState extends State<ListOne> {
           ),
           Divider(),
           new Padding(
-            padding: const EdgeInsets.only(right: 15.0, left: 15.0, top: 10.0),
+            padding:  EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*3.5,  top: SizeConfig.heightMultiplier*1.5),
             child: new Text(
               'زبان های مسلط',
-              style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: SizeConfig.heightMultiplier*3, fontWeight: FontWeight.bold),
             ),
           ),
           new Padding(
@@ -518,7 +534,7 @@ class _ListTwoState extends State<ListTwo> with AutomaticKeepAliveClientMixin<Li
                             onRefresh: onRefreshMethod,
                             child: Center(
                                 child:
-                                    new Text("نظری برای این صفحه وجود ندارد"))),
+                                    new Text("نظری برای شما ثبت نشده است"))),
                       ),
                       // Column(
                       //   mainAxisAlignment: MainAxisAlignment.end,
@@ -854,6 +870,20 @@ class _ListImagesState extends State<ListImages> with AutomaticKeepAliveClientMi
     }
   }
 
+  deleteImage(String image)async{
+    String url="http://stube.ir/DeleteImage.php";
+    var response = await http.post(url,body: {"image":image});
+    var responseBody = json.decode(response.body);
+    if(responseBody['status']=="yes deleted"){
+      setState(() {
+        imglist.clear();
+        _getImages();
+      });
+    }else{
+      print('error');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return isLoading
@@ -867,86 +897,130 @@ class _ListImagesState extends State<ListImages> with AutomaticKeepAliveClientMi
                     onTap: () {
                       _showSecondPage(context, imglist[index]);
                     },
+
+                  onLongPress: (){
+
+                        showDialog(context: context,builder: (ctx)=> new AlertDialog(
+                          title: Text("آیا میخواهید عکس را حذف کنید ؟"),
+                          actions: [
+                            new FlatButton(
+                                onPressed: (){
+                                  deleteImage(imglist[index]);
+                                },
+                                child: Text("بله")),
+                            new FlatButton(onPressed: (){
+                              Navigator.of(context).pop(false);
+                            },
+                                child: Text("خیر")),
+                          ],
+                       ));
+
+
+                  },
                     child: new Container(
                       margin: const EdgeInsets.fromLTRB(2, 0, 2, 4),
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                              image: AssetImage(imglist[index]),
+                              image: NetworkImage("http://stube.ir/image/${imglist[index]}"),
                               fit: BoxFit.cover)),
                     ))
                 : index == imglist.length
-                    ? Container(
-                        padding: EdgeInsets.only(bottom: 10.0, right: 15.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            new IconButton(
-                              icon: Icon(
-                                Icons.add_circle_outline,
-                                size: 65.0,
-                              ),
-                              onPressed: () async {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => new AlertDialog(
-                                    title: new Text(
-                                      "انتخاب فایل از",
-                                      style: TextStyle(fontSize: 16.0),
-                                      textDirection: TextDirection.rtl,
-                                    ),
-                                    actions: [
-                                      Column(
-                                        children: [
-                                          Container(
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            child: new MaterialButton(
-                                              elevation: 0,
-                                              color: Colors.white,
-                                              child: new Text("گالری"),
-                                              onPressed: () async {
-                                                Navigator.of(context).pop();
-                                                await pickImage(
-                                                    ImageSource.gallery);
-                                              },
-                                            ),
-                                          ),
-                                          new Container(
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            child: new MaterialButton(
-                                              elevation: 0,
-                                              color: Colors.white,
-                                              child: new Text("دوربین گوشی"),
-                                              onPressed: () async {
-                                                await pickImage(
-                                                    ImageSource.camera);
-                                                Navigator.of(context).pop();
-                                              },
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
+                    ? new GestureDetector(
+                      onTap: () async {
+                        showDialog(
+                          context: context,
+                          builder: (context) => new AlertDialog(
+                            title: new Text(
+                              "انتخاب فایل از",
+                              style: TextStyle(fontSize: 16.0),
+                              textDirection: TextDirection.rtl,
                             ),
-                            new Text(
-                              "اضافه کردن عکس",
-                              style: TextStyle(fontSize: 12.0),
-                            )
-                          ],
-                        ),
-                      )
+                            actions: [
+                              Column(
+                                children: [
+                                  Container(
+                                    width: MediaQuery.of(context)
+                                        .size
+                                        .width,
+                                    child: new MaterialButton(
+                                      elevation: 0,
+                                      color: Colors.white,
+                                      child: new Text("گالری"),
+                                      onPressed: () async {
+                                        Navigator.of(context).pop();
+                                        await pickImage(
+                                            ImageSource.gallery);
+                                      },
+                                    ),
+                                  ),
+                                  new Container(
+                                    width: MediaQuery.of(context)
+                                        .size
+                                        .width,
+                                    child: new MaterialButton(
+                                      elevation: 0,
+                                      color: Colors.white,
+                                      child: new Text("دوربین گوشی"),
+                                      onPressed: () async {
+                                        await pickImage(
+                                            ImageSource.camera);
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                      child: new Card(
+                        elevation: 0,
+                        color: Colors.white54,
+                        child: Container(
+                            padding: EdgeInsets.only(bottom: 10.0, right: 15.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                new Icon(
+                                    Icons.add_circle_outline,
+                                    size: 65.0,
+                                ),
+                                new Text(
+                                  "اضافه کردن عکس",
+                                  style: TextStyle(fontSize: 12.0),
+                                )
+                              ],
+                            ),
+                          ),
+                      ),
+                    )
                     : new GestureDetector(
                         onTap: () {
                           _showSecondPage(context,
                               "http://stube.ir/image/${imglist[index]}");
                         },
+                      onLongPress: (){
+                          return showDialog(context: context,builder: (ctx)=> new AlertDialog(
+                            title: Text("آیا میخواهید عکس را حذف کنید ؟"),
+                            actions: [
+                              new FlatButton(
+                                onPressed: (){
+                                      deleteImage(imglist[index]);
+                                      Navigator.of(context).pop(false);
+                                  },
+                                child: Text("بله")),
+                              new FlatButton(
+                                  onPressed: (){
+                                  Navigator.of(context).pop(false);
+                                  },
+                                  child: Text("خیر")),
+                            ],
+                          ));
+
+
+                      },
                         child: new Container(
                           margin: const EdgeInsets.fromLTRB(2, 0, 2, 4),
                           decoration: BoxDecoration(
