@@ -205,7 +205,7 @@ Text textoneKaramouziScreen(String title) {
   return new Text(
     title,
     style: TextStyle(
-        fontSize: 16.0, fontWeight: FontWeight.bold),
+        fontSize: SizeConfig.textMultiplier *2.5, fontWeight: FontWeight.bold),
     maxLines: 1,
     overflow: TextOverflow.ellipsis,
   );
@@ -216,6 +216,7 @@ Text textTwoKaramouziScreen(String description) {
     description,
     maxLines: 1,
     overflow: TextOverflow.ellipsis,
+    style: TextStyle(fontSize: SizeConfig.textMultiplier*1.8),
   );
 }
 
@@ -228,7 +229,7 @@ Text textthreeKaramouziScreen(String company) {
     overflow: TextOverflow.ellipsis,
     maxLines: 1,
     style: TextStyle(
-      fontSize: 12.0,
+      fontSize: SizeConfig.textMultiplier*1.7,
     ),
   );
 }
@@ -237,7 +238,7 @@ Text textlineBetween() {
   return new Text(
     '|',
     style: TextStyle(
-        fontSize: 18.0, fontWeight: FontWeight.bold),
+        fontSize: SizeConfig.textMultiplier*1.7, fontWeight: FontWeight.bold),
   );
 }
 
@@ -255,7 +256,7 @@ Text textType(String type) {
     overflow: TextOverflow.ellipsis,
     maxLines: 1,
     style: TextStyle(
-      fontSize: 12.0,
+      fontSize: SizeConfig.textMultiplier*1.7,
     ),
   );
 }
@@ -476,12 +477,12 @@ CircleAvatar circleAvatarKaramouziScreen() {
 AppBar appBarHomePage(BuildContext context, MyData profile) {
   return new AppBar(actions: <Widget>[
     new Padding(
-        padding: EdgeInsets.only(left: 15.0),
+        padding: EdgeInsets.only(left: SizeConfig.heightMultiplier*2,top: SizeConfig.heightMultiplier*0.5),
         child: new Stack(
           children: [
             new IconButton(
 
-                icon: Icon(Icons.person, color: Colors.white, size: SizeConfig.heightMultiplier *5,),
+                icon: Icon(Icons.person, color: Colors.white, size: SizeConfig.heightMultiplier *4.0,),
                 onPressed: () {
                   Navigator.push(
                       context, new MaterialPageRoute(builder: (context) =>
@@ -496,8 +497,8 @@ AppBar appBarHomePage(BuildContext context, MyData profile) {
                 || profile.certificates == null || profile.fieldUni == null ||
                 profile.languages == null || profile.resumes == null
                 || profile.educational == null ?
-            new Positioned(bottom: SizeConfig.heightMultiplier * 3.2,
-                right: SizeConfig.imageSizeMultiplier *3,
+            new Positioned(bottom: SizeConfig.heightMultiplier*2.4,
+                right:SizeConfig.heightMultiplier*1.3,
                 child: new CircleAvatar(
                   backgroundColor: Colors.red, maxRadius: 4,))
                 : new SizedBox()
@@ -572,42 +573,56 @@ AppBar appBarKaramouziScreen() {
               onPressed: () {}))
     ],
     backgroundColor: Colors.white,
+    elevation: 5.0,
+    bottomOpacity: 25.0,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(
+        bottom: Radius.circular(30),
+      ),
+    ),
   );
 }
 
-AppBar appBarAgahiScreen(TabController tabController) {
+AppBar appBarAgahiScreen(/*TabController tabController*/) {
   return AppBar(
-      actions: <Widget>[
-        new Padding(
-            padding: const EdgeInsets.only(left: 5.0),
-            child: new IconButton(
-                icon: Icon(
-                  Icons.filter_list,
-                  color: Color(0xff2C003E),
-                ),
-                onPressed: () {}))
-      ],
-      backgroundColor: Colors.white,
-      bottom: TabBar(
-        controller: tabController,
-        tabs: [
-          Tab(
-              icon: new Text(
-                'پروژه ها',
-                style: TextStyle(color: Colors.black),
-              )),
-          Tab(
-              icon: new Text(
-                'فروش کتاب',
-                style: TextStyle(color: Colors.black),
-              )),
-          // Tab(
-          //     icon: new Text(
-          //       'کارفرکا',
-          //       style: TextStyle(color: Colors.black),
-          //     )),
-        ],
-      ));
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          bottom: Radius.circular(30),
+        ),
+      ),
+      elevation: 5.0,
+      bottomOpacity: 25.0,
+      // actions: <Widget>[
+      //   new Padding(
+      //       padding: const EdgeInsets.only(left: 5.0),
+      //       child: new IconButton(
+      //           icon: Icon(
+      //             Icons.filter_list,
+      //             color: Color(0xff2C003E),
+      //           ),
+      //           onPressed: () {}))
+      // ],
+      backgroundColor: Colors.white);
+      // bottom: TabBar(
+      //   controller: tabController,
+      //   tabs: [
+      //     Tab(
+      //         icon: new Text(
+      //           'پروژه ها',
+      //           style: TextStyle(color: Colors.black),
+      //         )),
+      //     Tab(
+      //         icon: new Text(
+      //           'فروش کتاب',
+      //           style: TextStyle(color: Colors.black),
+      //         )),
+      //     // Tab(
+      //     //     icon: new Text(
+      //     //       'کارفرکا',
+      //     //       style: TextStyle(color: Colors.black),
+      //     //     )),
+      //   ],
+      // ));
 }
 
 AppBar appBarProfileScreen() {
@@ -1132,8 +1147,8 @@ class Headers extends StatelessWidget {
                 )
                     : new Container(
                     margin: EdgeInsets.only(left: SizeConfig.heightMultiplier *1, top: SizeConfig.heightMultiplier * 1.3),
-                    height: SizeConfig.imageSizeMultiplier *14,
-                    width: SizeConfig.imageSizeMultiplier *14,
+                    height: SizeConfig.imageSizeMultiplier *19,
+                    width: SizeConfig.imageSizeMultiplier *19,
                     decoration: decorationImageHomePage(profile.image)
                 ),
                 new SizedBox(width: SizeConfig.imageSizeMultiplier * 2),

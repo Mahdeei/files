@@ -3,6 +3,7 @@ import 'package:stubbbb/KarAmouziPage/AddIntern.dart';
 import 'package:stubbbb/Models/InterShip.dart';
 import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/R.dart';
+import 'package:stubbbb/Other/SizeConfig.dart';
 import 'package:stubbbb/Other/widget.dart';
 import 'package:stubbbb/http/httpInterships.dart';
 import 'package:stubbbb/http/maxID.dart';
@@ -157,18 +158,22 @@ class _KarAmouziListListState extends State<KarAmouziListList> {
                   },
                   child: new Container(
                     margin: const EdgeInsets.only(right: 6.0, bottom: 5.0, top: 10.0, left: 9.0),
-                    height: phonesize.height * 0.13,
+                    height: phonesize.height * 0.14,
                     // width: phonesize.width*0.5,
                     decoration: decorationKaramouziScreen(),
                     child: new Row(
                       children: <Widget>[
-                        new Container(
-                          margin: const EdgeInsets.only(right: 4.0,left: 3.0),
-                          height: phonesize.height * 0.12,
-                          width: phonesize.width * 0.30,
-                          decoration: boxDecorationKaramouziScreen(interShips[index].image),
+                        Expanded(
+                          flex: 3,
+                          child: new Container(
+                            margin: const EdgeInsets.only(right: 4.0,left: 3.0),
+                            height: phonesize.height * 0.13,
+                            width: phonesize.width * 0.30,
+                            decoration: boxDecorationKaramouziScreen(interShips[index].image),
+                          ),
                         ),
                         new Expanded(
+                          flex: 7,
                             child: new Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -177,35 +182,49 @@ class _KarAmouziListListState extends State<KarAmouziListList> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     textoneKaramouziScreen(interShips[index].title),
-                                    Container(
-                                        margin: EdgeInsets.only(right: 5.0),
-                                        width: MediaQuery.of(context).size.width*0.6,
-                                        child: textTwoKaramouziScreen(interShips[index].description)),
                                     new Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: <Widget>[
-                                        new Row(
-                                          children: [
-                                            new Padding(
-                                                padding: const EdgeInsets.only(right: 5.0),
-                                                child: Container(
-                                                    width: MediaQuery.of(context).size.width*0.19,
-                                                    child: textthreeKaramouziScreen(interShips[index].company)
-                                                )
-                                            ),
-                                            textlineBetween(),
-                                            Container(
-                                                margin: EdgeInsets.only(right: 3.0),
-                                                width: MediaQuery.of(context).size.width *0.25,
-                                                child: textType(interShips[index].type)),
-                                          ],
+                                      children: [
+                                        Expanded(
+                                          flex: 5,
+                                          child: new Padding(
+                                            padding: EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*1.3),
+                                            child: new Column(
+                                            children: <Widget>[
+                                              Container(
+                                                  width: MediaQuery.of(context).size.width*0.6,
+                                                  child: textTwoKaramouziScreen(interShips[index].description)),
+                                              new Row(
+                                                children: [
+                                                   Expanded(
+                                                     flex: 4,
+                                                     child: Container(
+                                                            // width: MediaQuery.of(context).size.width*0.17,
+                                                            child: textthreeKaramouziScreen(interShips[index].company)
+                                                        ),
+                                                   ),
+
+                                                  textlineBetween(),
+                                                  Expanded(
+                                                    flex: 6,
+                                                    child: Container(
+                                                        margin: EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*.8),
+                                                        // width: MediaQuery.of(context).size.width *0.25,
+                                                        child: textType(interShips[index].type,)),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),),
                                         ),
-                                        new Padding(
-                                            padding:const EdgeInsets.only(left: 5.0,),
-                                            child: circleAvatarKaramouziScreen()
+                                        Expanded(
+                                          flex: 1,
+                                          child: new Padding(
+                                              padding: EdgeInsets.only(left: SizeConfig.imageSizeMultiplier*1.3,),
+                                              child: circleAvatarKaramouziScreen()
+                                          ),
                                         )
                                       ],
-                                    ),
+                                    )
                                     // new Row(
                                     //   children: <Widget>[
                                     //     new Container(
@@ -245,7 +264,7 @@ class _KarAmouziListListState extends State<KarAmouziListList> {
                                           interShips[index].address,
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(fontSize: phonesize.height*0.01),),
+                                          style: TextStyle(fontSize: SizeConfig.textMultiplier*1.7),),
                                       ),
                                     ],
                                   ),

@@ -180,7 +180,7 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
                             child: new Text(
                               'تغییر پروفایل',
                               style: TextStyle(
-                                  color: Color(0xff2C003E), fontSize: 15.0),
+                                  color: Color(0xff2C003E), fontSize:SizeConfig.textMultiplier*2),
                             ),
                           )),
                     ),
@@ -236,10 +236,12 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
                     flex: 6,
                     child: Padding(
                       padding:  EdgeInsets.only(top: SizeConfig.heightMultiplier*4,bottom: SizeConfig.heightMultiplier),
-                      child: new CircleAvatar(
-                        child: new Image.asset('assets/image/download (4).png'),
-                        backgroundColor: Colors.white,
-                        maxRadius: SizeConfig.imageSizeMultiplier * 10,
+                      child: Center(
+                        child: new CircleAvatar(
+                          backgroundImage: NetworkImage('http://stube.ir/image/${profile.image}'),
+                          backgroundColor: Colors.white,
+                          radius: SizeConfig.imageSizeMultiplier * 10,
+                        ),
                       ),
                     ),
                   ),
@@ -351,8 +353,7 @@ class ListOne extends StatefulWidget {
 class _ListOneState extends State<ListOne> {
   @override
   Widget build(BuildContext context) {
-    return new Padding(
-      padding: const EdgeInsets.only(top: 0),
+    return new Padding(padding: const EdgeInsets.only(top: 0),
       child: new ListView(
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -360,17 +361,19 @@ class _ListOneState extends State<ListOne> {
             padding: EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*3.5,  top: SizeConfig.heightMultiplier*1.5),
             child: new Text(
               'معرفی نامه',
-              style: TextStyle(fontSize: SizeConfig.heightMultiplier*3, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize:SizeConfig.heightMultiplier*3, fontWeight: FontWeight.bold),
             ),
           ),
           new Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-            child: new Text(
-              widget.profile.moarefiNameh,
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
-            ),
+              padding:  EdgeInsets.symmetric(horizontal: SizeConfig.imageSizeMultiplier*5.5, vertical: SizeConfig.heightMultiplier*1.5),
+              child:widget.profile.moarefiNameh ==null || widget.profile.moarefiNameh == ""
+                  ? new Text("وارد نشده",style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.7))
+                  : new Text(
+                widget.profile.moarefiNameh,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontSize:  SizeConfig.heightMultiplier*2.7),
+              )
           ),
           // new Padding(
           //     padding:
@@ -395,54 +398,58 @@ class _ListOneState extends State<ListOne> {
           //           tags: 'back end',
           //         ),
           //       ],
-          //     )),          Divider(),
+          //     )),
           Divider(),
           new Padding(
-            padding: EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*3.5,  top: SizeConfig.heightMultiplier*1.5),
+            padding:  EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*3.5,  top: SizeConfig.heightMultiplier*1.5),
             child: new Text(
               'سوابق کاری',
               style: TextStyle(fontSize: SizeConfig.heightMultiplier*3, fontWeight: FontWeight.bold),
             ),
           ),
           new Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-            child: new Text(
-              FieldText(widget.profile.resumes),
-              style: TextStyle(fontSize: 16.0),
-            ),
+              padding:  EdgeInsets.symmetric(horizontal: SizeConfig.imageSizeMultiplier*5.5, vertical:  SizeConfig.heightMultiplier*1.5),
+              child: widget.profile.moarefiNameh ==null || widget.profile.moarefiNameh == ""
+                  ? new Text("وارد نشده",style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.7))
+                  : new Text(
+                widget.profile.moarefiNameh,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.7),
+              )
           ),
           Divider(),
           new Padding(
-            padding: EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*3.5,  top: SizeConfig.heightMultiplier*1.5),
+            padding: EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*3.5, top: SizeConfig.heightMultiplier*1.5),
             child: new Text(
               'سوابق تحصیلی',
-              style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: SizeConfig.heightMultiplier*3, fontWeight: FontWeight.bold),
             ),
           ),
           new Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-            child: new Text(
-              FieldText(widget.profile.educational),
-              style:
-                  TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
+            padding: EdgeInsets.symmetric(horizontal: SizeConfig.imageSizeMultiplier*5.5, vertical: SizeConfig.heightMultiplier*1.5),
+            child: widget.profile.educational ==null || widget.profile.educational == ""
+                ? new Text("وارد نشده",style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.7))
+                : new Text(
+              widget.profile.educational,
+              style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.7),
             ),
           ),
           Divider(),
           new Padding(
-            padding: EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*3.5,  top: SizeConfig.heightMultiplier*1.5),
+            padding:  EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*3.5,top: SizeConfig.heightMultiplier*1.5),
             child: new Text(
               'مدارک و یا گواهینامه های معتبر',
-              style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize:SizeConfig.heightMultiplier*3, fontWeight: FontWeight.bold),
             ),
           ),
           new Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-            child: new Text(
-              FieldText(widget.profile.certificates),
-              style: TextStyle(fontSize: 16.0),
+            padding: EdgeInsets.symmetric(horizontal: SizeConfig.imageSizeMultiplier*5.5, vertical: SizeConfig.heightMultiplier*1.5),
+            child: widget.profile.certificates ==null || widget.profile.certificates == ""
+                ? new Text("وارد نشده",style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.7))
+                : new Text(
+              widget.profile.certificates,
+              style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.7),
             ),
           ),
           Divider(),
@@ -454,16 +461,16 @@ class _ListOneState extends State<ListOne> {
             ),
           ),
           new Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-            child: new Text(
-              FieldText(widget.profile.languages),
-              style: TextStyle(fontSize: 16.0),
+            padding: EdgeInsets.symmetric(horizontal: SizeConfig.imageSizeMultiplier*5.5, vertical: SizeConfig.heightMultiplier*1.5),
+            child:  widget.profile.languages ==null || widget.profile.languages == ""
+                ? new Text("وارد نشده",style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.7))
+                : new Text(
+              widget.profile.languages,
+              style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.7),
             ),
           ),
         ],
-      ),
-    );
+      ),);
   }
 }
 
@@ -534,7 +541,7 @@ class _ListTwoState extends State<ListTwo> with AutomaticKeepAliveClientMixin<Li
                             onRefresh: onRefreshMethod,
                             child: Center(
                                 child:
-                                    new Text("نظری برای شما ثبت نشده است"))),
+                                    new Text("نظری برای شما ثبت نشده است",style: TextStyle(fontSize: SizeConfig.textMultiplier*2)))),
                       ),
                       // Column(
                       //   mainAxisAlignment: MainAxisAlignment.end,
@@ -590,76 +597,57 @@ class _ListTwoState extends State<ListTwo> with AutomaticKeepAliveClientMixin<Li
                     ],
                   )
                 : Column(
-                    children: [
-                      Expanded(
-                        child: RefreshIndicator(
-                          onRefresh: onRefreshMethod,
-                          child: new ListView.builder(
-                            controller: _scrollController,
-                            itemCount: comments.length,
-                            itemBuilder: (ctx, int index) {
-                              return Container(
-                                  padding: EdgeInsets.only(right: 10),
-                                  margin:
-                                      const EdgeInsets.only(top: 8, bottom: 4),
-                                  child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            new Row(
-                                              children: [
-                                                new CircleAvatar(
-                                                  maxRadius: 20,
-                                                  backgroundColor:
-                                                      R.color.banafshKamRang,
-                                                ),
-                                                new SizedBox(
-                                                  width: 10,
-                                                ),
-                                                new Text(username[index]),
-                                              ],
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 8.0),
-                                              child: new Text(
-                                                textTime(comments[index].date),
-                                                style: TextStyle(
-                                                    fontSize: 10.0,
-                                                    fontWeight:
-                                                        FontWeight.w300),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            new SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.13,
-                                            ),
-                                            Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.8,
-                                                child: new Text(
-                                                  comments[index].comment_text,
-                                                  maxLines: null,
-                                                )),
-                                          ],
-                                        ),
-                                      ]));
-                            },
+          children: [
+            Expanded(
+              child: RefreshIndicator(
+                onRefresh: onRefreshMethod,
+                child: new ListView.builder(
+                  controller: _scrollController,
+                  itemCount: comments.length,
+                  itemBuilder: (ctx , int index) {
+                    return Container(
+                      padding: EdgeInsets.only(right: SizeConfig.imageSizeMultiplier *2.5),
+                      margin:  EdgeInsets.only(top: SizeConfig.heightMultiplier *1.1,bottom: SizeConfig.heightMultiplier *0.7),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    new CircleAvatar(maxRadius: SizeConfig.imageSizeMultiplier *5,backgroundColor: R.color.banafshKamRang,),
+                                    new SizedBox(width: SizeConfig.imageSizeMultiplier *2,),
+                                    new Text(username[index],style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.3),),
+                                  ],
+                                ),
+                                new Row(
+                                  children: [
+                                    new Padding(
+                                      padding: EdgeInsets.only(left: SizeConfig.imageSizeMultiplier*2),
+                                      child: new Text(
+                                        textTime(comments[index].date),
+                                        style: TextStyle(fontSize: SizeConfig.heightMultiplier*1.4),),
+                                    )
+                                  ],
+                                )
+                              ]
                           ),
-                        ),
+                          Row(
+                            children: [
+                              new SizedBox(width: MediaQuery.of(context).size.width*0.13,),
+                              Container(
+                                  width: MediaQuery.of(context).size.width * 0.8,
+                                  child: new Text(comments[index].comment_text,maxLines: null,style: TextStyle(fontSize: SizeConfig.heightMultiplier*1.9))),
+                            ],
+                          ),
+                        ],
                       ),
+                    );
+                  },
+                ),
+              ),
+            ),
                       // Column(
                       //   mainAxisAlignment: MainAxisAlignment.end,
                       //   children: [
@@ -976,20 +964,22 @@ class _ListImagesState extends State<ListImages> with AutomaticKeepAliveClientMi
                       },
                       child: new Card(
                         elevation: 0,
-                        color: Colors.white54,
+                        color: Colors.transparent,
                         child: Container(
                             padding: EdgeInsets.only(bottom: 10.0, right: 15.0),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 new Icon(
                                     Icons.add_circle_outline,
-                                    size: 65.0,
+                                    size: SizeConfig.heightMultiplier*9,
                                 ),
-                                new Text(
-                                  "اضافه کردن عکس",
-                                  style: TextStyle(fontSize: 12.0),
+                                FittedBox(
+                                  child: new Text(
+                                    "اضافه کردن عکس",
+                                    style: TextStyle(fontSize: SizeConfig.textMultiplier*2),
+                                  ),
                                 )
                               ],
                             ),

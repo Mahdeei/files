@@ -3,6 +3,7 @@ import 'package:stubbbb/Models/AgahiModel.dart';
 import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/R.dart';
+import 'package:stubbbb/Other/SizeConfig.dart';
 import 'package:stubbbb/Other/widget.dart';
 import 'package:stubbbb/http/Authenticate.dart';
 import 'package:stubbbb/http/httpAdvertisings.dart';
@@ -20,13 +21,17 @@ class AdvertisingsPage extends StatefulWidget {
 
 
 class _AdvertisingsPageState extends State<AdvertisingsPage> with SingleTickerProviderStateMixin{
+/*
   TabController tabController;
+*/
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+/*
     tabController = new TabController(length: 2,vsync: this,);
+*/
 
   }
 
@@ -50,15 +55,18 @@ class _AdvertisingsPageState extends State<AdvertisingsPage> with SingleTickerPr
                 ),
                 backgroundColor: Color(0xfff2f3f8),
                 drawer: DrawerLists(),
-                appBar: appBarAgahiScreen(tabController),
+                appBar: appBarAgahiScreen(/*tabController*/),
 
-                body:TabBarView(
+                body: ProjectsList(profile: widget.profile,)
+/*
+                TabBarView(
                     controller: tabController,
                     children: [
                       ProjectsList(profile: widget.profile,),
                       new Center(child: Text('salam'),),
                     ]
                 )
+*/
             )));
   }
 
@@ -150,178 +158,198 @@ class _ProjectsListState extends State<ProjectsList> {
     var phoneSize = MediaQuery.of(context).size;
     return isLoading
         ? advertisings.length != 0 ? RefreshIndicator(
-      child: new ListView.builder(
-          controller: scrollController,
-          itemCount: advertisings.length,
-          itemBuilder: (BuildContext context, int index) => new GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AdvertisingScreen(advertising: advertisings[index],profile: widget.profile,)),
-              );
-            },
-            child: new Container(
-              margin: const EdgeInsets.only(
-                  right: 6.0, bottom: 5.0, top: 5.0, left: 9.0),
-              height: phoneSize.height * 0.15,
-              decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.black54,
-                        offset: Offset(0.0, 1.0),
-                        blurRadius: 5.0)
-                  ],
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(65.0),
-                    topRight: Radius.circular(65.0),
-                    topLeft: Radius.circular(15.0),
-                    bottomLeft: Radius.circular(15.0),
-                  )),
-              child: new Row(
-                children: <Widget>[
-                  new Container(
+            child: new ListView.builder(
+                controller: scrollController,
+                itemCount: advertisings.length,
+                itemBuilder: (BuildContext context, int index) => new GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) =>
+                          AdvertisingScreen(advertising: advertisings[index],profile: widget.profile,)),
+                    );
+                  },
+                  child: new Container(
                     margin: const EdgeInsets.only(
-                      right: 4.0,
-                    ),
-                    height: phoneSize.height * 0.14,
-                    width: phoneSize.width * 0.32,
+                        right: 6.0, bottom: 5.0, top: 5.0, left: 9.0),
+                    height: SizeConfig.heightMultiplier * 15 ,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(65.0),
-                            bottomRight: Radius.circular(65.0)),
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: advertisings[index].image==""
-                                ? AssetImage('assets/image/download.jfif')
-                                : NetworkImage("http://stube.ir/image/${advertisings[index].image}")
-                        )),
-                  ),
-                  new Expanded(
-                      child: new Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(right:5.0),
-                            child: new Text(
-                              advertisings[index].title,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  fontSize: 20.0, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          new Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              new Padding(
-                                padding:
-                                const EdgeInsets.symmetric(horizontal: 10.0),
-                                child: Container(
-                                  height: MediaQuery.of(context).size.height*0.07,
-                                  width: MediaQuery.of(context).size.width * 0.45,
-                                  child: new Text(
-                                    advertisings[index].description,
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 2,
-                                    style: TextStyle(fontSize: phoneSize.height*0.02),
-                                  ),
-                                ),
-                              ),
-                              new Padding(
-                                padding:
-                                const EdgeInsets.symmetric(horizontal: 7.0),
-                                child: new CircleAvatar(
-                                  maxRadius: 11.0,
-                                  child: new Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: Colors.white,
-                                    size: 9.0,
-                                  ),
-                                  backgroundColor: Color(0xff2C003E),
-                                ),
-                              )
-                            ],
-                          ),
-                          // new Row(
-                          //   children: <Widget>[
-                          //     new Container(
-                          //         margin: const EdgeInsets.only(right: 10.0),
-                          //         decoration: BoxDecoration(
-                          //             color: Color(0xffD2FAFB),
-                          //             shape: BoxShape.rectangle,
-                          //             borderRadius: BorderRadius.circular(15.0)),
-                          //         child: new Padding(
-                          //           padding: const EdgeInsets.symmetric(
-                          //               horizontal: 3.0, vertical: 1.0),
-                          //           child: new Text(
-                          //             'گرافیک',
-                          //             maxLines: 1,
-                          //             style: new TextStyle(
-                          //               color: Color(0xff2c003e),
-                          //               fontSize: 11.0,
-                          //             ),
-                          //           ),
-                          //         )),
-                          //     new Container(
-                          //         margin: const EdgeInsets.only(right: 2.0),
-                          //         decoration: BoxDecoration(
-                          //             color: Color(0xffD2FAFB),
-                          //             shape: BoxShape.rectangle,
-                          //             borderRadius: BorderRadius.circular(15.0)),
-                          //         child: new Padding(
-                          //           padding: const EdgeInsets.symmetric(
-                          //               horizontal: 3.0, vertical: 1.0),
-                          //           child: new Text(
-                          //             'ui',
-                          //             style: new TextStyle(
-                          //               color: Color(0xff2c003e),
-                          //               fontSize: 11.0,
-                          //             ),
-                          //           ),
-                          //         )),
-                          //     new Container(
-                          //         margin: const EdgeInsets.only(right: 2.0),
-                          //         decoration: BoxDecoration(
-                          //             color: Color(0xffD2FAFB),
-                          //             shape: BoxShape.rectangle,
-                          //             borderRadius: BorderRadius.circular(15.0)),
-                          //         child: new Padding(
-                          //           padding: const EdgeInsets.symmetric(
-                          //               horizontal: 3.0, vertical: 1.0),
-                          //           child: new Text(
-                          //             'ux',
-                          //             style: new TextStyle(
-                          //               color: Color(0xff2c003e),
-                          //               fontSize: 11.0,
-                          //             ),
-                          //           ),
-                          //         )),
-                          //   ],
-                          // ),
-                          new Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              new Padding(
-                                padding:
-                                const EdgeInsets.only(right: 7.0),
-                                child: new Text('بودجه : ${advertisings[index].price}',style: TextStyle(color: R.color.banafshKamRang),),
-                              ),
-                              new Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 5.0),
-                                child: new Text(
-                                    textTime(advertisings[index].date),
-                                  style: TextStyle(fontSize: phoneSize.height*0.014,color: R.color.banafshKamRang),),
-                                ),
-
-                            ],
-                          )
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black54,
+                              offset: Offset(0.0, 1.0),
+                              blurRadius: 5.0)
                         ],
-                      ))
-                ],
-              ),
-            ),
-          )), onRefresh:
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(SizeConfig.heightMultiplier * 9),
+                          topRight: Radius.circular(SizeConfig.heightMultiplier * 9),
+                          topLeft: Radius.circular(SizeConfig.heightMultiplier * 2),
+                          bottomLeft: Radius.circular(SizeConfig.heightMultiplier * 2),
+                        )),
+                    child: new Row(
+                      children: <Widget>[
+                        Expanded(
+                          flex: 4,
+                          child: new Container(
+                            margin: EdgeInsets.only(
+                              right: SizeConfig.imageSizeMultiplier,
+                            ),
+                            height: phoneSize.height * 0.14,
+                            width: phoneSize.width * 0.32,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(SizeConfig.heightMultiplier * 9),
+                                    bottomRight: Radius.circular(SizeConfig.heightMultiplier * 9)),
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: advertisings[index].image==""
+                                        ? AssetImage('assets/image/download.jfif')
+                                        : NetworkImage("http://stube.ir/image/${advertisings[index].image}")
+                                )),
+                          ),
+                        ),
+                        new Expanded(
+                          flex: 7,
+                            child: new Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Expanded(
+                                  flex: 1,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(right:SizeConfig.imageSizeMultiplier *1.5),
+                                    child: new Text(
+                                      advertisings[index].title,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          fontSize: SizeConfig.heightMultiplier * 2.7, fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 2,
+                                  child: new Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Expanded(
+                                        flex: 5,
+                                        child: new Padding(
+                                          padding:
+                                           EdgeInsets.symmetric(horizontal: SizeConfig.imageSizeMultiplier * 2.5),
+                                          child: Container(
+                                            height: MediaQuery.of(context).size.height*0.07,
+                                            width: MediaQuery.of(context).size.width * 0.45,
+                                            child: new Text(
+                                              advertisings[index].description,
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 2,
+                                              style: TextStyle(fontSize: SizeConfig.heightMultiplier * 2),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 1,
+                                        child: new Padding(
+                                          padding:
+                                           EdgeInsets.symmetric(horizontal: SizeConfig.imageSizeMultiplier *0.0,vertical: 0),
+                                          child: new CircleAvatar(
+                                            maxRadius: SizeConfig.imageSizeMultiplier *2.5,
+                                            child: new Icon(
+                                              Icons.arrow_forward_ios,
+                                              color: Colors.white,
+                                              size: SizeConfig.imageSizeMultiplier *2,
+                                            ),
+                                            backgroundColor: Color(0xff2C003E),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                // new Row(
+                                //   children: <Widget>[
+                                //     new Container(
+                                //         margin: const EdgeInsets.only(right: 10.0),
+                                //         decoration: BoxDecoration(
+                                //             color: Color(0xffD2FAFB),
+                                //             shape: BoxShape.rectangle,
+                                //             borderRadius: BorderRadius.circular(15.0)),
+                                //         child: new Padding(
+                                //           padding: const EdgeInsets.symmetric(
+                                //               horizontal: 3.0, vertical: 1.0),
+                                //           child: new Text(
+                                //             'گرافیک',
+                                //             maxLines: 1,
+                                //             style: new TextStyle(
+                                //               color: Color(0xff2c003e),
+                                //               fontSize: 11.0,
+                                //             ),
+                                //           ),
+                                //         )),
+                                //     new Container(
+                                //         margin: const EdgeInsets.only(right: 2.0),
+                                //         decoration: BoxDecoration(
+                                //             color: Color(0xffD2FAFB),
+                                //             shape: BoxShape.rectangle,
+                                //             borderRadius: BorderRadius.circular(15.0)),
+                                //         child: new Padding(
+                                //           padding: const EdgeInsets.symmetric(
+                                //               horizontal: 3.0, vertical: 1.0),
+                                //           child: new Text(
+                                //             'ui',
+                                //             style: new TextStyle(
+                                //               color: Color(0xff2c003e),
+                                //               fontSize: 11.0,
+                                //             ),
+                                //           ),
+                                //         )),
+                                //     new Container(
+                                //         margin: const EdgeInsets.only(right: 2.0),
+                                //         decoration: BoxDecoration(
+                                //             color: Color(0xffD2FAFB),
+                                //             shape: BoxShape.rectangle,
+                                //             borderRadius: BorderRadius.circular(15.0)),
+                                //         child: new Padding(
+                                //           padding: const EdgeInsets.symmetric(
+                                //               horizontal: 3.0, vertical: 1.0),
+                                //           child: new Text(
+                                //             'ux',
+                                //             style: new TextStyle(
+                                //               color: Color(0xff2c003e),
+                                //               fontSize: 11.0,
+                                //             ),
+                                //           ),
+                                //         )),
+                                //   ],
+                                // ),
+                                Expanded(
+                                  flex: 1,
+                                  child: new Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      new Padding(
+                                        padding:
+                                        const EdgeInsets.only(right: 7.0),
+                                        child: new Text('بودجه : ${advertisings[index].price}',style: TextStyle(fontSize:SizeConfig.textMultiplier *1.7,color: R.color.banafshKamRang),),
+                                      ),
+                                      new Padding(
+                                        padding: EdgeInsets.symmetric(horizontal: 5.0),
+                                        child: new Text(
+                                            textTime(advertisings[index].date),
+                                          style: TextStyle(fontSize: phoneSize.height*0.014,color: R.color.banafshKamRang),),
+                                        ),
+
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ))
+                      ],
+                    ),
+                  ),
+                )), onRefresh:
     refreshList,)
     : new Center(child: Text('در حال حاضر آگهی برای نمایش وجود ندارد.'),)
 

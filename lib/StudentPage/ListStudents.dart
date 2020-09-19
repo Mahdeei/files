@@ -69,7 +69,7 @@ class _ListProfilesState extends State<ListProfiles>
                                 ),
                                 Expanded(
                                   flex: 1,
-                                  child: Container(margin: const EdgeInsets.only(left: 5),
+                                  child: Container(/*margin: const EdgeInsets.only(left: 5)*/
                                     alignment: Alignment.centerLeft,
                                     width: phoneSize.width * .35,
                                     child: new Text(
@@ -201,18 +201,17 @@ class _ListProfilesState extends State<ListProfiles>
                           backgroundColor: R.color.banafshKamRang,
                           // minRadius: 30.0
                       ),
-                    ):new Container(
-                      height: phoneSize.height * 0.10,
-                      width: phoneSize.width * 0.19,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: new NetworkImage("http://stube.ir/image/${widget.model.image}"),
-                            fit: BoxFit.cover),
-                        borderRadius: BorderRadius.all(Radius.circular(45)),
+                    ):Center(
+                      child: new CircleAvatar(radius: 37,
+                          backgroundImage: new NetworkImage("http://stube.ir/image/${widget.model.image}",),
+                  backgroundColor: R.color.banafshKamRang,
+                  // minRadius: 30.0
+                ),
+                    ),
                       ),
                     ),
-                  ),
-                ),
+
+
               ],
             ),
           ),
