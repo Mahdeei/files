@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/SizeConfig.dart';
 import 'package:stubbbb/Other/widget.dart';
 
 class MyMessagePage extends StatelessWidget {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
-  MyMessagePage({this.data});
+  MyData profile;
+  MyMessagePage({this.profile,this.data});
   Map data;
 
 
@@ -15,7 +16,7 @@ class MyMessagePage extends StatelessWidget {
         textDirection: TextDirection.rtl,
         child: new Scaffold(
           key: _scaffoldKey,
-          drawer: DrawerLists(),
+          drawer: DrawerLists(profile: profile,),
           drawerEnableOpenDragGesture: true,
           appBar: appBarMessagePage(_scaffoldKey),
           body: /*bodyMessage()*/

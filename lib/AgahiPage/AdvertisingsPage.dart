@@ -54,7 +54,7 @@ class _AdvertisingsPageState extends State<AdvertisingsPage> with SingleTickerPr
                   backgroundColor: R.color.banafshmain,
                 ),
                 backgroundColor: Color(0xfff2f3f8),
-                drawer: DrawerLists(),
+                drawer: DrawerLists(profile: widget.profile,),
                 appBar: appBarAgahiScreen(/*tabController*/),
 
                 body: ProjectsList(profile: widget.profile,)

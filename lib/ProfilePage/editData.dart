@@ -111,10 +111,6 @@ class _EditDataState extends State<EditData> {
     request.files.add(multiPartFile);
     var response = await request.send();
 
-//    print(stream);
-//    print(length);
-//    print(uri);
-//    print(request);
     print(response.statusCode);
 
 
@@ -306,7 +302,11 @@ class _EditDataState extends State<EditData> {
                                       actions: [
                                         new FlatButton(
                                             onPressed: (){
-                                              deleteImage(widget.profile.image);
+                                              // deleteImage(widget.profile.image);
+                                              setState(() {
+                                                fileName="";
+                                                // _image=new File();
+                                              });
                                               Navigator.of(context).pop(false);
                                             },
                                             child: Text("بله")),

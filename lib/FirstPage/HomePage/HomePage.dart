@@ -24,7 +24,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           appBar: appBarHomePage(context, widget.profile),
-          drawer: DrawerLists(),
+          drawer: DrawerLists(profile: widget.profile,),
           drawerEnableOpenDragGesture: true,
           backgroundColor: R.color.backGround1,
           body: new Column(

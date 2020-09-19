@@ -13,6 +13,8 @@ import 'package:stubbbb/http/httpComments.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:stubbbb/http/httpRequest.dart';
 
+import 'SendRequestForUser.dart';
+
 class ProPage extends StatefulWidget {
   User user;
   MyData profile;
@@ -119,7 +121,7 @@ class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
                         horizontal: SizeConfig.imageSizeMultiplier * 4),
                     child: new GestureDetector(
                       onTap: () {
-                        print('pressed ');
+                        Navigator.of(context).push(new MaterialPageRoute(builder: (context) => SendRequestForUser(user: widget.user,profile: widget.profile,)));
                       },
                       child: new Container(
                           alignment: Alignment.center,

@@ -8,11 +8,15 @@ import 'package:stubbbb/FirstPage/RequestPage/MyRequests.dart';
 import 'package:stubbbb/KarAmouziPage/KarAmouziPage.dart';
 import 'package:stubbbb/LoginPage/SignIn.dart';
 import 'package:stubbbb/Models/Request.dart';
+import 'package:stubbbb/Models/RequestProfile.dart';
 import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/SizeConfig.dart';
+import 'package:stubbbb/Poshtibani/ErtebatBaMa.dart';
 import 'package:stubbbb/ProfilePage/MyProfileScreen.dart';
 import 'package:stubbbb/ProfilePage/MyProfileUserNormalScreen.dart';
 import 'package:stubbbb/StudentPage/StudentScreen.dart';
+import 'package:stubbbb/StudentPerfect/StudentPerfectScreen.dart';
+import 'package:stubbbb/http/httpRequest.dart';
 import 'R.dart';
 import 'package:animations/animations.dart';
 
@@ -584,7 +588,33 @@ AppBar appBarKaramouziScreen() {
 }
 
 AppBar appBarAgahiScreen(/*TabController tabController*/) {
-  return AppBar(
+  return /*AppBar(
+      actions: <Widget>[
+        new Padding(
+            padding: const EdgeInsets.only(left: 5.0),
+            child: new IconButton(
+                icon: Icon(
+                  Icons.filter_list,
+                  color: Color(0xff2C003E),
+                ),
+                onPressed: () {}))
+      ],
+      backgroundColor: Colors.white,
+      bottom: TabBar(
+        controller: tabController,
+        tabs: [
+          Tab(
+              icon: new Text(
+                'پروژه ها',
+                style: TextStyle(color: Colors.black),
+              )),
+          Tab(
+              icon: new Text(
+                'فروش کتاب',
+                style: TextStyle(color: Colors.black),
+              )),
+        ],
+      ));*/AppBar(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
           bottom: Radius.circular(30),
@@ -978,20 +1008,22 @@ Container ContainerImageLoginPage(var phonesize) {
 
 
 class DrawerLists extends StatelessWidget {
+  MyData profile;
+  DrawerLists({this.profile});
   @override
   Widget build(BuildContext context) {
     List<ListTile> listdrawer = [
-      ListTile(
-        leading: new Icon(Icons.person),
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => MyProfileStudentScreen()),
-          );
-        },
-        title: Text('پروفایل'),
-        trailing: Icon(Icons.arrow_forward),
-      ),
+      // ListTile(
+      //   leading: new Icon(Icons.person),
+      //   onTap: () {
+      //     Navigator.push(
+      //       context,
+      //       MaterialPageRoute(builder: (context) => MyProfileStudentScreen()),
+      //     );
+      //   },
+      //   title: Text('پروفایل'),
+      //   trailing: Icon(Icons.arrow_forward),
+      // ),
       ListTile(
         leading: new Icon(Icons.school),
         onTap: () {
@@ -1000,7 +1032,7 @@ class DrawerLists extends StatelessWidget {
             MaterialPageRoute(builder: (context) => ProfilesPages()),
           );
         },
-        title: Text('دانشجوهخا'),
+        title: Text('دانشجوها'),
         trailing: Icon(Icons.arrow_forward),
       ),
       ListTile(
@@ -1012,7 +1044,7 @@ class DrawerLists extends StatelessWidget {
                 builder: (context) => AdvertisingsPage(),
               ));
         },
-        title: Text('آگهیا'),
+        title: Text('آگهی ها'),
         trailing: Icon(Icons.arrow_forward),
       ),
       ListTile(
@@ -1028,7 +1060,9 @@ class DrawerLists extends StatelessWidget {
       ),
       ListTile(
         leading: new Icon(Icons.block),
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new StudentPerfectScreen()));
+        },
         title: Text('دانشجوی حرفه ای'),
         trailing: Icon(Icons.arrow_forward),
       ),
@@ -1037,7 +1071,7 @@ class DrawerLists extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => MyProfileStudentScreen()),
+            MaterialPageRoute(builder: (context) => new ErtebatBaMa()),
           );
         },
         title: Text('پشتیبانی'),
@@ -1052,51 +1086,55 @@ class DrawerLists extends StatelessWidget {
       ListTile(
         leading: new Icon(Icons.exit_to_app),
         onTap: () async {
-          showDialog(context: context, builder: (context) =>
-              Directionality(
-                textDirection: TextDirection.rtl,
-                child: new AlertDialog(
-                  title: new Text("آیا برای خروج از حساب کاربری مطمئن هستید ؟ ",
-                    style: TextStyle(fontSize: 16.0),),
-                  actions: [
-                    new FlatButton(
-                      child: new Text("خیر"),
-                      onPressed: () {
-                        Navigator.of(context).pop(false);
-                      },
-                    ),
-                    new FlatButton(
-                      child: new Text("بله"),
-                      onPressed: () async {
-                        SharedPreferences perfs = await SharedPreferences
-                            .getInstance();
-                        await perfs.remove('user_apiToken');
-                        await perfs.remove('user_username');
-                        await perfs.remove('user_password');
-                        Navigator.of(context).pushReplacement(
-                            new MaterialPageRoute(builder: (
-                                context) => new SignIn())
-                        );
-                      },
-                    ),
-                  ],
+          showDialog(
+            context: context,
+            builder: (context) => Directionality(
+              textDirection: TextDirection.rtl,
+              child: new AlertDialog(
+                title: new Text(
+                  "آیا برای خروج از حساب کاربری مطمئن هستید ؟ ",
+                  style: TextStyle(fontSize: 16.0),
                 ),
+                actions: [
+                  new FlatButton(
+                    child: new Text("خیر"),
+                    onPressed: () {
+                      Navigator.of(context).pop(false);
+                    },
+                  ),
+                  new FlatButton(
+                    child: new Text("بله"),
+                    onPressed: () async {
+                      SharedPreferences perfs =
+                      await SharedPreferences.getInstance();
+                      await perfs.remove('user_apiToken');
+                      await perfs.remove('user_username');
+                      await perfs.remove('user_password');
+                      Navigator.of(context).pushReplacement(
+                          new MaterialPageRoute(
+                              builder: (context) => new SignIn()));
+                    },
+                  ),
+                ],
               ),
+            ),
           );
         },
-        title: Text('خروج'),
+        title: Text('خروج از حساب کاربری'),
         trailing: Icon(Icons.arrow_forward),
       ),
     ];
     return Drawer(
-
       child: new ListView(
         children: <Widget>[
           new Container(
             color: Colors.white,
             child: new DrawerHeader(
-                child: new CircleAvatar(
-                  child: Image.asset('assets/image/download (4).png'),
+                child: Column(
+                  children: [
+                    new CircleAvatar(),
+                    new Text(profile.username)
+                  ],
                 )),
           ),
           new Column(
@@ -1304,10 +1342,8 @@ class bodyRequest extends StatefulWidget {
 
   MyData profile;
   var phoneSize;
-  List<RequestAd> requests;
-  List usernames;
 
-  bodyRequest({this.phoneSize, this.profile, this.requests, this.usernames});
+  bodyRequest({this.phoneSize, this.profile});
 
   @override
   _bodyRequestState createState() => _bodyRequestState();
@@ -1320,20 +1356,54 @@ String FieldText(String text) {
 }
 
 
+
 class _bodyRequestState extends State<bodyRequest> {
+
+  bool isLoading = false;
+
+  List<RequestAd> requestsAd =[];
+  List<RequestProfile> requestProfile=[];
+
+
+  @override
+  void initState() {
+    super.initState();
+    _getRequestAd();
+  }
+
+
+
+  _getRequestAd() async {
+
+    setState(() {
+
+      isLoading = true;
+    });
+    requestProfile= await RequestHttp.getProfileReqAd(widget.profile.id);
+    var response = await RequestHttp.getAd(widget.profile.id);
+    print(response);
+
+    requestsAd.addAll(response['requests']);
+    setState(() {
+      isLoading=false;
+    });
+
+  }
 
 
   @override
   Widget build(BuildContext context) {
-    return widget.requests.length == 0
+    return isLoading
+        ? new Center(child: new CircularProgressIndicator(),)
+        :requestsAd.length == 0
         ? new Center(
         child: new Text(
-          'در حال حاضر هیچ درخواستی برای شما وجود ندارد (:',
+          'در حال حاضر هیچ درخواستی برای آگهی های شما وجود ندارد (:',
           style: TextStyle(color: Colors.black),
         ))
         : new ListView.builder(
         padding: const EdgeInsets.only(top: 5.0),
-        itemCount: widget.requests.length,
+        itemCount: requestsAd.length,
         itemBuilder: (BuildContext context, int index) =>
         new Column(
           children: <Widget>[
@@ -1341,9 +1411,9 @@ class _bodyRequestState extends State<bodyRequest> {
               onTap: () {
                 Navigator.of(context).push(new MaterialPageRoute(
                     builder: (ctx) =>
-                    new MyRequests(userName: widget.usernames[index],
-                        date: widget.requests[index].date,
-                        text: widget.requests[index].req_text)));
+                    new MyRequests(userName: requestProfile[index],
+                        date: requestsAd[index].date,
+                        text: requestsAd[index].req_text)));
               },
               child: new Container(
                 margin: const EdgeInsets.only(top: 5.0),
@@ -1352,24 +1422,25 @@ class _bodyRequestState extends State<bodyRequest> {
                   children: <Widget>[
                     new Row(
                       children: <Widget>[
-                        //TODO inja az comment dar biad
-                        // new Container(
-                        //     margin: const EdgeInsets.symmetric(horizontal: 8.0),
-                        //     height: widget.phoneSize.height * 0.10,
-                        //     width: widget.phoneSize.width * 0.19,
-                        //     decoration: decorationImageHomePage()
-                        // ),
+                        requestProfile[index].image=="" || requestProfile[index].image==null
+                            ? new CircleAvatar(
+                          child: new Text(requestProfile[index].username.toString().substring(0,1)),
+                          backgroundColor: R.color.banafshKamRang,
+                        )
+                            :new CircleAvatar(
+                          backgroundImage: NetworkImage("http://stube.ir/image/${requestProfile[index].image}"),
+                        ),
                         new Column(
                           crossAxisAlignment:
                           CrossAxisAlignment.start,
                           children: <Widget>[
-                            new Text(widget.usernames[index]),
+                            new Text(requestProfile[index].username),
                             new Row(
                               children: <Widget>[
                                 new SizedBox(
                                   width: 250.0,
                                   child: new Text(
-                                    widget.requests[index].req_text,
+                                    requestsAd[index].req_text,
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -1388,7 +1459,7 @@ class _bodyRequestState extends State<bodyRequest> {
                         new Padding(
                           padding: const EdgeInsets.only(right: 80.0),
                           child: new Text(
-                            textTime(widget.requests[index].date),
+                            textTime(requestsAd[index].date),
                             style: TextStyle(fontSize: 12.0),
                           ),
                         ),

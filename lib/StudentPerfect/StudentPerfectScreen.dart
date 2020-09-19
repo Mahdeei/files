@@ -1,16 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/widget.dart';
 
 
-class StudentPerfectScreen extends StatelessWidget {
-  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+class StudentPerfectScreen extends StatefulWidget {
+  MyData profile;
+  StudentPerfectScreen({this.profile});
   @override
+  _StudentPerfectScreenState createState() => _StudentPerfectScreenState();
+}
+
+class _StudentPerfectScreenState extends State<StudentPerfectScreen> {
+
+  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  @override
+
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
         key: _scaffoldKey,
-        drawer: DrawerLists(),
+        drawer: DrawerLists(profile: widget.profile,),
         appBar: appBarMessagePage(_scaffoldKey),
         body: new Center(
           child: new Column(

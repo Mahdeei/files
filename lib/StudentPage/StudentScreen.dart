@@ -101,7 +101,7 @@ class _ProfilesPagesState extends State<ProfilesPages> {
           child: new Directionality(
             textDirection: TextDirection.rtl,
             child: new Scaffold(
-                drawer: DrawerLists(),
+                drawer: DrawerLists(profile: widget.profile,),
                 appBar: appBarProfilePage(),
                 body: isLoading
                     ? RefreshIndicator(

@@ -43,7 +43,7 @@ class _KarAmouziPageState extends State<KarAmouziPage> {
                   ),
                 ),
                 backgroundColor: Color(0xfff2f3f8),
-                drawer: DrawerLists(),
+                drawer: DrawerLists(profile: widget.profile,),
                 appBar: appBarKaramouziScreen(),
                 body: KarAmouziListList(profile: widget.profile),
               ),

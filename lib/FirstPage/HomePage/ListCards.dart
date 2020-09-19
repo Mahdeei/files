@@ -96,7 +96,7 @@ class _ListCardsState extends State<ListCards> {
   }
 
   void goToStudentPerfectScreen(){
-    Navigator.push(context,MaterialPageRoute(builder: (context) => StudentPerfectScreen()));
+    Navigator.push(context,MaterialPageRoute(builder: (context) => StudentPerfectScreen(profile: widget.profile,)));
   }
 
 

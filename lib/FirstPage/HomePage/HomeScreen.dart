@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage>{
               items: [
                 FFNavigationBarItem(
                   iconData: Icons.mail,
-                  label: 'جعبه',
+                  label: 'جعبه درخواست',
                 ),
                 FFNavigationBarItem(
                   iconData: Icons.home,
@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage>{
                     ? MyRequestPage(
                         profile: profile,
                       )
-                    : MyMessagePage(),
+                    : MyMessagePage(profile: profile,),
           );
   }
 }
