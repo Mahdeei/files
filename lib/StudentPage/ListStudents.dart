@@ -33,7 +33,7 @@ class _ListProfilesState extends State<ListProfiles>
               MaterialPageRoute(
                   builder: (context) => widget.profile.id != widget.model.id
                       ? ProPage(user: widget.model, profile: widget.profile)
-                      : MyProfileStudentScreen(id: widget.profile.id,)),
+                      : MyProfileStudentScreen(profile: widget.profile,)),
             );
           },
           child: Card(

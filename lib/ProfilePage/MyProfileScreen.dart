@@ -277,9 +277,10 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
-
-                            new Text(
-                              'مهندسی برق',
+                            widget.profile.fieldUni == '' ||  widget.profile.fieldUni ==null
+                                ? new SizedBox()
+                                :new Text(
+                              widget.profile.fieldUni,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,

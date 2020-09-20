@@ -29,7 +29,7 @@ class EditData extends StatefulWidget {
 class _EditDataState extends State<EditData> {
 
   TextEditingController usernameCont ,nameCont,moarefiCont,resumCont,educCont,certCont,langCont,skillCont,uniCont;
-  GlobalKey _formKeyOne = GlobalKey<FormState>();
+  final _formKeyOne = GlobalKey<FormState>();
   Map res;
   bool showImage=true;
   File _image;
@@ -233,20 +233,23 @@ class _EditDataState extends State<EditData> {
                       children: [
                         new FlatButton(
                             onPressed: ()async{
-
+                            if(_formKeyOne.currentState.validate()){
                               await upload(_image);
                               await _getMyData();
                               /*isSaveData
                                 ? showDia(context)
 
                                 :*/
-                              Navigator.pop(context,widget.profile);
+                              Navigator.pop(context,widget.profile);}
                             },
                             child: new Text('ذخیره',style: TextStyle(fontSize: 20.0,color: R.color.banafshKamRang),)
                         ),
                         new IconButton(
                             icon: Icon(Icons.arrow_forward,size: 30.0,),
-                            onPressed: (){Navigator.of(context).pop();}
+                            onPressed: (){
+
+                              Navigator.of(context).pop();
+                            }
                         ),
                       ],
                     ),
@@ -430,7 +433,11 @@ class _EditDataState extends State<EditData> {
                                         color: Colors.black,
                                         lableColor: Colors.black,
                                         lable: 'نام کاربری',
-                                        // validate: validateSignUp
+                                        validate:(String value){
+                                          if(value==''||value == null || value.isEmpty){
+                                            return 'نباید خالی باشد';
+                                          }
+                                        }
                                       ),
                                       InputTextForm(
                                         controller: nameCont,
@@ -440,7 +447,11 @@ class _EditDataState extends State<EditData> {
                                         lableColor: Colors.black,
                                         lable: 'نام و نام خانوادگی',
                                         obscure: false,
-                                        // validate: validateSignUpPas,
+                                          validate: (String value){
+                                            if(value==''||value == null || value.isEmpty){
+                                              return 'نباید خالی باشد';
+                                            }
+                                          }
                                       ),
                                       InputTextForm(
                                           color: Colors.black,

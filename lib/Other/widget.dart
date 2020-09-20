@@ -1186,7 +1186,7 @@ class DrawerLists extends StatelessWidget {
             color: Colors.white,
             child: new DrawerHeader(
                 child: Column(
-                  children: [Expanded(flex: 3,child: profile.image == "" ||
+                  children: [Expanded(flex: 4,child: profile.image == "" ||
                     profile.image == null
                     ? Container(
                   height: SizeConfig.heightMultiplier * 10,
@@ -1210,7 +1210,7 @@ class DrawerLists extends StatelessWidget {
                   child: new CircleAvatar(
                     radius: SizeConfig
                         .heightMultiplier *
-                        5,
+                        6,
                     backgroundImage:
                     new NetworkImage(
                       "http://stube.ir/image/${profile.image}",
@@ -1260,6 +1260,7 @@ class Headers extends StatelessWidget {
             padding: EdgeInsets.only(
                 right: SizeConfig.heightMultiplier * 3, top: 0.0),
             child: new Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 profile.image == null || profile.image == ""
                     ? new CircleAvatar(
@@ -1274,14 +1275,21 @@ class Headers extends StatelessWidget {
                             )),
                         backgroundColor: Colors.white,
                         minRadius: SizeConfig.heightMultiplier * 5)
-                    : new Container(
-                        margin: EdgeInsets.only(
-                            left: SizeConfig.heightMultiplier * 1,
-                            top: SizeConfig.heightMultiplier * 1.3),
-                        height: SizeConfig.imageSizeMultiplier * 19,
-                        width: SizeConfig.imageSizeMultiplier * 19,
-                        decoration: decorationImageHomePage(profile.image)),
-                new SizedBox(width: SizeConfig.imageSizeMultiplier * 2),
+                    : Center(
+                  child: new CircleAvatar(
+                    radius: SizeConfig
+                        .heightMultiplier *
+                        6,
+                    backgroundImage:
+                    new NetworkImage(
+                      "http://stube.ir/image/${profile.image}",
+                    ),
+                    backgroundColor:
+                    R.color.banafshKamRang,
+                    // minRadius: 30.0
+                  ),
+                )
+                ,new SizedBox(width: SizeConfig.imageSizeMultiplier * 2),
                 new Text(profile.name, style: styleHomePage()),
               ],
             ),

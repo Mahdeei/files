@@ -59,7 +59,7 @@ class _bodyRequestInternState extends State<bodyRequestIntern> {
                 child: new Text(
                 'در حال حاضر هیچ درخواستی برای کارآموزی های شما وجود ندارد (:',
                 
-                style: TextStyle(color: Colors.black,fontSize: SizeConfig.heightMultiplier*2.5),
+                style: TextStyle(color: Colors.black,fontSize: SizeConfig.heightMultiplier*2),
               ))
             : new ListView.builder(
                 padding:  EdgeInsets.only(top: SizeConfig.heightMultiplier*.8),

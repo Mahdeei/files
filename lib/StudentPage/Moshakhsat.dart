@@ -120,7 +120,11 @@ class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
                         horizontal: SizeConfig.imageSizeMultiplier * 4),
                     child: new GestureDetector(
                       onTap: () {
-                        Navigator.of(context).push(new MaterialPageRoute(builder: (context) => SendRequestForUser(user: widget.user,profile: widget.profile,)));
+                        Navigator.of(context).push(new MaterialPageRoute(
+                            builder: (context) => SendRequestForUser(
+                                  user: widget.user,
+                                  profile: widget.profile,
+                                )));
                       },
                       child: new Container(
                           alignment: Alignment.center,
@@ -215,15 +219,19 @@ class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
-                            new Text(
-                              'مهندسی برق',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: SizeConfig.heightMultiplier * 1.8),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
+                            dataUser.fieldUni == '' ||
+                                dataUser.fieldUni == null
+                                ? new SizedBox()
+                                : new Text(
+                                    dataUser.fieldUni,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize:
+                                            SizeConfig.heightMultiplier * 1.8),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                           ],
                         ),
                       ))
@@ -547,7 +555,7 @@ class _ListTwoState extends State<ListTwo> {
     Map body = await HttpComments.getComments(widget.user.id);
     username = await HttpComments.getUsername(widget.user.id);
     comments = body['comments'];
-    if(this.mounted){
+    if (this.mounted) {
       setState(() {
         refresh = false;
       });
@@ -892,14 +900,14 @@ class _ListImagesState extends State<ListImages> {
   }
 
   _getImages() async {
-    if(this.mounted){
+    if (this.mounted) {
       setState(() {
         isLoading = true;
       });
     }
     var response = await RequestHttp.getImages(widget.user.id);
     // print(response);
-    if(this.mounted){
+    if (this.mounted) {
       setState(() {
         imglist.addAll(response);
         isLoading = false;
@@ -911,25 +919,26 @@ class _ListImagesState extends State<ListImages> {
   Widget build(BuildContext context) {
     return isLoading
         ? Center(child: new CircularProgressIndicator())
-        : imglist.length != 0 ?
-    new GridView.builder(
-        gridDelegate:
-        SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-        itemCount: imglist.length,
-        itemBuilder: (context, index) => new GestureDetector(
-            onTap: () {
-              _showSecondPage(context, imglist[index]);
-            },
-            child: new Container(
-              margin: const EdgeInsets.fromLTRB(2, 0, 2, 4),
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          "http://stube.ir/image/${imglist[index]}"),
-                      fit: BoxFit.cover)),
-            )))
-    : new Center(child: new Text('عکسی برای نمایش وجود ندارد'),)
-    ;
+        : imglist.length != 0
+            ? new GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3),
+                itemCount: imglist.length,
+                itemBuilder: (context, index) => new GestureDetector(
+                    onTap: () {
+                      _showSecondPage(context, imglist[index]);
+                    },
+                    child: new Container(
+                      margin: const EdgeInsets.fromLTRB(2, 0, 2, 4),
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: NetworkImage(
+                                  "http://stube.ir/image/${imglist[index]}"),
+                              fit: BoxFit.cover)),
+                    )))
+            : new Center(
+                child: new Text('عکسی برای نمایش وجود ندارد'),
+              );
   }
 }
 

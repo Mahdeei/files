@@ -37,7 +37,7 @@ class InputTextForm extends StatelessWidget {
       style: TextStyle(color: color,fontSize: SizeConfig.heightMultiplier*2.3),
 
       decoration: InputDecoration(
-        errorStyle: TextStyle(color: errColor),
+        errorStyle: TextStyle(color: errColor,fontSize: SizeConfig.textMultiplier*1.7),
 
           // hintText: hint,
           // // prefixIcon: Icon(
@@ -45,7 +45,7 @@ class InputTextForm extends StatelessWidget {
           //   color: Colors.white,
           // ),
           labelText: lable,
-          labelStyle: TextStyle(color: lableColor),
+          labelStyle: TextStyle(color: lableColor,fontSize: SizeConfig.textMultiplier*2.3),
           border:
               UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
           fillColor: color,
