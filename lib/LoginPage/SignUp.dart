@@ -81,7 +81,7 @@ class _SignUpState extends State<SignUp> {
                       child: new Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Expanded(flex: 4,
+                          Expanded(flex: 3,
                             child: Align(
                               alignment: Alignment.centerRight,
                               child: new Padding(
@@ -150,7 +150,7 @@ class _SignUpState extends State<SignUp> {
                                   ),
                                 )),
                           ),
-                          Expanded(flex: 3,
+                          Expanded(flex: 2,
                             child: new Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
@@ -173,7 +173,7 @@ class _SignUpState extends State<SignUp> {
                               ],
                             ),
                           ),
-                          Expanded(flex: 1,
+                          Expanded(flex: 2,
                             child: new Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: <Widget>[
