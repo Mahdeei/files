@@ -11,7 +11,9 @@ class InputTextForm extends StatelessWidget {
   final Color textColor;
   final lableColor;
   final onSaved;
+  var maxLine;
   InputTextForm({
+    this.maxLine,
     this.errColor,
     this.lable,
     this.validate,
@@ -26,7 +28,7 @@ class InputTextForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new TextFormField(
-      maxLines: 4                                       ,
+      maxLines: maxLine,
       controller: controller,
       validator: validate,
       onSaved: onSaved,

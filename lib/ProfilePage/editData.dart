@@ -13,14 +13,16 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
-import 'package:stubbbb/Other/widget.dart';
+import 'package:stubbbb/http/Authenticate.dart';
+
+import 'MyProfileScreen.dart';
 
 
 class EditData extends StatefulWidget {
 
-
+  BuildContext context;
   MyData profile;
-  EditData({this.profile});
+  EditData({this.profile,this.context});
   @override
   _EditDataState createState() => _EditDataState();
 }
@@ -28,16 +30,16 @@ class EditData extends StatefulWidget {
 class _EditDataState extends State<EditData> {
 
   TextEditingController usernameCont ,nameCont,moarefiCont,resumCont,educCont,certCont,langCont,skillCont,uniCont;
-  
   GlobalKey _formKeyOne = GlobalKey<FormState>();
   Map res;
+  bool showImage=true;
   File _image;
   var picker = new ImagePicker();
   var rand;
   var fileName="";
   bool isSaveData=false;
-
-
+  String url ="http://stube.ir/CompleteProfile.php";
+  MyData newProfile;
 @override
   void initState() {
     // TODO: implement initState
@@ -53,65 +55,73 @@ class _EditDataState extends State<EditData> {
     uniCont = new TextEditingController(text: widget.profile.fieldUni);
   }
 
+
   Future pickImage(ImageSource imageSource) async {
     var imageFile = await picker.getImage(source: imageSource);
-    File file = File(imageFile.path);
+   if(imageFile!=null){
+     File file = File(imageFile.path);
 
-    File croppedFile = await ImageCropper.cropImage(
-      sourcePath: file.path,
-      maxWidth : 512,
-      maxHeight: 512,
-      aspectRatio:  CropAspectRatio(ratioX: 1.0,ratioY: 1.0),
-    );
+     File croppedFile = await ImageCropper.cropImage(
+       sourcePath: file.path,
+       maxWidth : 512,
+       maxHeight: 512,
+       aspectRatio:  CropAspectRatio(ratioX: 1.0,ratioY: 1.0),
+     );
 
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Img.Image image = Img.decodeImage(croppedFile.readAsBytesSync());
-    Img.Image smallerImg = Img.copyResize(image,width: 500);
+     final tempDir = await getTemporaryDirectory();
+     final path = tempDir.path;
+     Img.Image image = Img.decodeImage(croppedFile.readAsBytesSync());
+     Img.Image smallerImg = Img.copyResize(image,width: 500);
 
-    this.rand= new Random().nextInt(100000000).toString() + new Random().nextInt(10000000).toString() + new Random().nextInt(10000000).toString();
-    this.fileName = "image_${widget.profile.id}_${widget.profile.username}_Profile_$rand.jpg";
-    var compressImg = new File("$path/$fileName")
-      ..writeAsBytesSync(Img.encodeJpg(smallerImg,quality: 85));
+     this.rand= new Random().nextInt(100000000).toString() + new Random().nextInt(10000000).toString() + new Random().nextInt(10000000).toString();
+     this.fileName = "image_${widget.profile.id}_${widget.profile.username}_Profile_$rand.jpg";
+     var compressImg = new File("$path/$fileName")
+       ..writeAsBytesSync(Img.encodeJpg(smallerImg,quality: 85));
 
-    setState((){
-      this._image = compressImg;
-    });
+     setState((){
+       this._image = compressImg;
+       showImage = true;
+     });
+   }
   }
 
 
 
   Future upload(File imageFile) async{
+  if(imageFile!=null){
     setState(() {
       isSaveData=true;
     });
     var stream = new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
     var length = await imageFile.length();
-    var uri = Uri.parse("http://stube.ir/CompleteProfile.php");
+    var uri = Uri.parse(url);
 
     var request = new http.MultipartRequest("POST", uri);
 
     var multiPartFile = new http.MultipartFile("image", stream, length,filename: basename(imageFile.path));
 
-
-    // String sharayet = shrayet;
-    // if (sharayet == 'شرایط') {
-    //   sharayet = "";
-    // }
     print(widget.profile.phoneNumber);
     print(widget.profile.type);
+    print(widget.profile.address);
     print(usernameCont.text);
     print(nameCont.text);
     print(moarefiCont.text);
     print(fileName);
+    print(langCont.text);
 
     request.fields['phonenumber'] = widget.profile.phoneNumber;
     request.fields['type'] = widget.profile.type;
     request.fields['username'] = usernameCont.text;
     request.fields['name'] = nameCont.text;
+    request.fields['fieldUni'] = uniCont.text;
     request.fields['moarefiName'] = moarefiCont.text;
     request.fields['image'] = fileName;
+    request.fields['resumes'] = resumCont.text;
+    request.fields['educational'] = educCont.text;
+    request.fields['certificates'] = certCont.text;
+    request.fields['languages'] = langCont.text;
     request.fields['address'] = "mashhad";
+
 
 
     request.files.add(multiPartFile);
@@ -132,6 +142,34 @@ class _EditDataState extends State<EditData> {
     }else{
       print('upload failed');
     }
+
+  }else{
+
+    // print(usernameCont.text);
+    // print(nameCont.text);
+    // print(uniCont.text);
+    // print(langCont.text);
+    // print(fileName);
+
+    var response = await http.post(url,body: {
+      "phonenumber": widget.profile.phoneNumber,
+      "type": widget.profile.type,
+      "username": usernameCont.text,
+      "name": nameCont.text,
+      "fieldUni": uniCont.text,
+      "moarefiname": moarefiCont.text,
+      "image": fileName,
+      "resumes": resumCont.text,
+      "educational": educCont.text,
+      "certificates": certCont.text,
+      "languages": langCont.text ,
+    });
+    var responseBody = json.decode(response.body);
+    print(responseBody);
+
+
+  }
+
   }
 
   showDia(context){
@@ -143,6 +181,14 @@ class _EditDataState extends State<EditData> {
 
       ));
   }
+
+  _getMyData() async {
+    MyData body = await AuthenticateService.getMyData(widget.profile.id);
+    setState(() {
+      widget.profile = body;
+    });
+  }
+
 
   deleteImage(String image)async{
     String url="http://stube.ir/DeleteImage.php";
@@ -183,10 +229,12 @@ class _EditDataState extends State<EditData> {
                         new FlatButton(
                             onPressed: ()async{
                               await upload(_image);
-                              isSaveData
+                              await _getMyData();
+                              /*isSaveData
                                 ? showDia(context)
-                                :Navigator.of(context).pop();
 
+                                :*/
+                              Navigator.pop(context,widget.profile);
                             },
                             child: new Text('ذخیره',style: TextStyle(fontSize: 20.0,color: R.color.banafshKamRang),)
                         ),
@@ -201,7 +249,7 @@ class _EditDataState extends State<EditData> {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children :[
-                            widget.profile.image=="" ||widget.profile.image==null
+                            (widget.profile.image=="" ||widget.profile.image==null ) || showImage==false
                               ? new GestureDetector(
                                   onTap: (){
                                     showDialog(
@@ -311,6 +359,8 @@ class _EditDataState extends State<EditData> {
                                               // deleteImage(widget.profile.image);
                                               setState(() {
                                                 fileName="";
+                                                showImage=false;
+                                                print(showImage);
                                                 // _image=new File();
                                               });
                                               Navigator.of(context).pop(false);
@@ -325,25 +375,42 @@ class _EditDataState extends State<EditData> {
                                     ));
 
                                   },
-                                child: Center(
-                                  child: CircleAvatar(
-                                      radius: 60.0,
-                                      backgroundImage: NetworkImage("http://stube.ir/image/${widget.profile.image}"),
-                                      backgroundColor: Colors.transparent,
-                                  ),
-                                ),
+                                child: _image==null
+                                    ? Center(
+                                        child: CircleAvatar(
+                                          radius: 60.0,
+                                          backgroundImage: NetworkImage("http://stube.ir/image/${widget.profile.image}"),
+                                          backgroundColor: Colors.transparent,
+                                        ),
+                                      )
+                                    : showImage
+                                      ? Center(
+                                          child: CircleAvatar(
+                                            radius: 60.0,
+                                            backgroundImage: FileImage(_image),
+                                            backgroundColor: Colors.transparent,
+                                          ),
+                                        )
+                                      : Center(
+                                        child: new CircleAvatar(
+                                          radius: 45.0,
+                                          backgroundColor: R.color.banafshKamRang,
+                                          child: new Text(
+                                            widget.profile.username.toString().substring(0,1),
+                                            style: TextStyle(fontSize: 25.0,color: Colors.white),
+                                          ),
+                                        ),
+                                      )
                               ),
-
-                            widget.profile.image=="" ||widget.profile.image==null
+                           ( widget.profile.image=="" ||widget.profile.image==null) || showImage==false
                                 ?new SizedBox(height: 10.0,)
                                 : new Container(),
-                            widget.profile.image=="" ||widget.profile.image==null
+                            (widget.profile.image=="" ||widget.profile.image==null ) ||showImage==false
                                 ? new  Align(
                               alignment: Alignment.center,
                               child: new Text("بارگذاری تصویر",style: TextStyle(color: R.color.banafshKamRang)),
                             )
                                 : new Container(),
-
                             new Form(
                                 key: _formKeyOne,
                                 child: new Container(
@@ -373,7 +440,8 @@ class _EditDataState extends State<EditData> {
                                           color: Colors.black,
                                           lableColor: Colors.black,
                                           lable: 'رشته دانشگاهی',
-                                          obscure: true,
+                                          obscure: false,
+                                          controller: uniCont,
                                           validate: (String value) {
                                             // if (value != _controller.text) {
                                             //   return 'not true';
@@ -387,6 +455,7 @@ class _EditDataState extends State<EditData> {
                                         color: Colors.black,
                                         lableColor: Colors.black,
                                         lable: 'معرفی نامه',
+                                        maxLine: null,
                                         // validate: validateNameSignUp
                                       ),
                                       new SizedBox(height: 25.0,),
@@ -395,6 +464,7 @@ class _EditDataState extends State<EditData> {
                                         child: new Text('مشخصات',textAlign: TextAlign.center,style: TextStyle(fontSize: 20.0),),
                                       ),
                                       InputTextForm(
+                                        maxLine: null,
                                         controller: resumCont,
                                         obscure: false,
                                         // onSaved: userOnsaved,
@@ -409,7 +479,8 @@ class _EditDataState extends State<EditData> {
                                         color: Colors.black26,
                                         lableColor: Colors.black54,
                                         lable: 'سوابق تحصیلی',
-                                        obscure: true,
+                                        obscure: false,
+                                        maxLine: null,
                                         // validate: validateSignUpPas,
                                         // controller: _controller,
                                       ),
@@ -418,7 +489,8 @@ class _EditDataState extends State<EditData> {
                                           color: Colors.black26,
                                           lableColor: Colors.black54,
                                           lable: 'مدرک یا گواهیناممه های معتبر',
-                                          obscure: true,
+                                          obscure: false,
+                                          maxLine: null,
                                           validate: (String value) {
                                             // if (value != _controller.text) {
                                             //   return 'not true';
@@ -427,6 +499,7 @@ class _EditDataState extends State<EditData> {
                                       InputTextForm(
                                         controller: langCont,
                                         obscure: false,
+                                        maxLine: null,
                                         // onSaved: nameOnsaved,
                                         color: Colors.black26,
                                         lableColor: Colors.black54,

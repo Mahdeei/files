@@ -1401,12 +1401,13 @@ class _bodyRequestState extends State<bodyRequest> {
 
   @override
   Widget build(BuildContext context) {
+    var phoneSize = MediaQuery.of(context).size;
     return isLoading
         ? new Center(child: new CircularProgressIndicator(),)
         :requestsAd.length == 0
         ? new Center(
         child: new Text(
-          'در حال حاضر هیچ درخواستی برای آگهی های شما وجود ندارد (:',
+          'در حال حاضر هیچ درخواستی برای کارآموزی های شما وجود ندارد (:',
           style: TextStyle(color: Colors.black),
         ))
         : new ListView.builder(
@@ -1419,7 +1420,7 @@ class _bodyRequestState extends State<bodyRequest> {
               onTap: () {
                 Navigator.of(context).push(new MaterialPageRoute(
                     builder: (ctx) =>
-                    new MyRequests(userName: requestProfile[index],
+                    new MyRequests(userName: requestProfile[index].username,
                         date: requestsAd[index].date,
                         text: requestsAd[index].req_text)));
               },
@@ -1428,66 +1429,94 @@ class _bodyRequestState extends State<bodyRequest> {
                 width: widget.phoneSize.width,
                 child: new Column(
                   children: <Widget>[
-                    new Row(
-                      children: <Widget>[
-                        requestProfile[index].image=="" || requestProfile[index].image==null
-                            ? new CircleAvatar(
-                          child: new Text(requestProfile[index].username.toString().substring(0,1)),
-                          backgroundColor: R.color.banafshKamRang,
-                        )
-                            :new CircleAvatar(
-                          backgroundImage: NetworkImage("http://stube.ir/image/${requestProfile[index].image}"),
-                        ),
-                        new Column(
-                          crossAxisAlignment:
-                          CrossAxisAlignment.start,
-                          children: <Widget>[
-                            new Text(requestProfile[index].username),
-                            new Row(
-                              children: <Widget>[
-                                new SizedBox(
-                                  width: 250.0,
-                                  child: new Text(
-                                    requestsAd[index].req_text,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                                ButtonMore(),
-                              ],
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                    new Row(
-                      mainAxisAlignment:
-                      MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        new Padding(
-                          padding: const EdgeInsets.only(right: 80.0),
-                          child: new Text(
-                            textTime(requestsAd[index].date),
-                            style: TextStyle(fontSize: 12.0),
+                    Padding(
+                      padding: const EdgeInsets.only(right:8.0),
+                      child: new Row(
+                        children: <Widget>[
+                          //TODO inja az comment dar biad
+                          requestProfile[index].image =="" || requestProfile[index].image==null
+                              ? Container(
+                            height: phoneSize.height * 0.10,
+                            width: phoneSize.width * 0.19,
+                            child: new CircleAvatar(
+                              child: new Text(requestProfile[index].username.toString().substring(0,1),style: TextStyle(fontSize: 25.0,color: Colors.white),),
+                              backgroundColor: R.color.banafshKamRang,
+                              // minRadius: 30.0
+                            ),
+                          )
+                              : Center(
+                            child: new CircleAvatar(radius: 37,
+                              backgroundImage: new NetworkImage("http://stube.ir/image/${requestProfile[index].image}",),
+                              backgroundColor: R.color.banafshKamRang,
+                              // minRadius: 30.0
+                            ),
                           ),
-                        ),
-                        new Padding(
-                          padding: const EdgeInsets.only(left: 27.0),
-                          child: new Row(
+                          new Column(
+                            crossAxisAlignment:
+                            CrossAxisAlignment.start,
                             children: <Widget>[
-                              new Text(
-                                'khorasan,mashhad',
-                                style: TextStyle(fontSize: 8.0),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(top:12.0,right:8.0),
+                                    child: new Text(requestProfile[index].username,style: TextStyle(fontSize: 16.0,fontWeight: FontWeight.w800),),
+                                  ),
+                                  // new Expanded(),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top:12.0,right: 120.0),
+                                    child: new Row(
+                                      children: <Widget>[
+                                        new Text(
+                                          textTime(requestsAd[index].date),
+                                          style: TextStyle(fontSize: 12.0),
+                                        ),
+
+                                        // new Padding(
+                                        //   padding: const EdgeInsets.only(left: 27.0),
+                                        //   child: new Row(
+                                        //     children: <Widget>[
+                                        //       new Text(
+                                        //         'khorasan,mashhad',
+                                        //         style: TextStyle(fontSize: 8.0),
+                                        //       ),
+                                        //       new Icon(
+                                        //         Icons.location_on,
+                                        //         size: 10.0,
+                                        //       )
+                                        //     ],
+                                        //   ),
+                                        // )
+                                      ],
+                                    ),
+                                  )
+                                ],
                               ),
-                              new Icon(
-                                Icons.location_on,
-                                size: 10.0,
+                              new Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(right:8.0),
+                                    child: new SizedBox(
+                                      width: 250.0,
+                                      child: new Text(
+                                        requestsAd[index].req_text,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  ),
+
+                                  // ButtonMore(),
+                                ],
                               )
                             ],
                           ),
-                        )
-                      ],
-                    )
+                        ],
+                      ),
+                    ),
+
                   ],
                 ),
               ),

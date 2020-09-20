@@ -24,9 +24,10 @@ import 'package:path/path.dart';
 
 class MyProfileStudentScreen extends StatefulWidget {
   String id;
-
+  MyData profile;
   MyProfileStudentScreen({
     this.id,
+    this.profile
   });
 
   @override
@@ -53,7 +54,12 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
   void initState() {
     super.initState();
     // print(widget.profile.id+" id profile");
-    _getMyData();
+    if(profile==null){
+      print("yes is null");
+      _getMyData();
+    }else{
+      print("no null");
+    }
     _scrollController = ScrollController();
     _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(_smoothScrollToTop);
@@ -164,10 +170,19 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
                     padding:  EdgeInsets.symmetric(vertical:SizeConfig.heightMultiplier * 2.5,horizontal: SizeConfig.imageSizeMultiplier*4),
                     child: new GestureDetector(
                       onTap: () {
-                        Navigator.of(context).push(new MaterialPageRoute(
-                            builder: (context) => new EditData(
-                              profile: profile,
-                            )));
+                        Future<MyData> answer =  Navigator.push(context,MaterialPageRoute(builder: (context)=>new EditData(
+                          context :context,
+                          profile: profile,
+                        )));
+                        answer.then((MyData value) {
+                          return value != null? profile=value: 'empty';
+                        }
+                        );
+                        // Navigator.push(context,new MaterialPageRoute(
+                        //     builder: (context) => new EditData(
+                        //   context :context,
+                        //   profile: profile,
+                        // )));
                       },
                       child: new Container(
                           alignment: Alignment.center,
@@ -414,10 +429,10 @@ class _ListOneState extends State<ListOne> {
           ),
           new Padding(
               padding:  EdgeInsets.symmetric(horizontal: SizeConfig.imageSizeMultiplier*5.5, vertical:  SizeConfig.heightMultiplier*1.5),
-              child: widget.profile.moarefiNameh ==null || widget.profile.moarefiNameh == ""
+              child: widget.profile.resumes ==null || widget.profile.resumes == ""
                   ? new Text("وارد نشده",style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.7))
                   : new Text(
-                widget.profile.moarefiNameh,
+                widget.profile.resumes,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.7),
@@ -830,8 +845,8 @@ class _ListImagesState extends State<ListImages> with AutomaticKeepAliveClientMi
     var multiPartFile = new http.MultipartFile("image", stream, length,
         filename: basename(imageFile.path));
 
-    print(widget.profile.id is int);
-    print(this.fileName);
+    // print(widget.profile.id is int);
+    // print(this.fileName);
     request.fields['user_id'] = widget.profile.id;
     request.fields['image'] = this.fileName;
 
@@ -845,7 +860,7 @@ class _ListImagesState extends State<ListImages> with AutomaticKeepAliveClientMi
 //    print(length);
 //    print(uri);
 //    print(request);
-    print(response.statusCode);
+//     print(response.statusCode);
 
     await response.stream.transform(utf8.decoder).listen((value) {
       res = json.decode(value);
