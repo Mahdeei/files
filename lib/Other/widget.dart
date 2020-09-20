@@ -447,7 +447,9 @@ CircleAvatar circleAvatarKaramouziScreen() {
 }
 
 AppBar appBarHomePage(BuildContext context, MyData profile) {
+  print(profile.type);
   return new AppBar(actions: <Widget>[
+
     new Padding(
         padding: EdgeInsets.only(
             left: SizeConfig.heightMultiplier * 2,
@@ -465,7 +467,7 @@ AppBar appBarHomePage(BuildContext context, MyData profile) {
                       context,
                       new MaterialPageRoute(
                           builder: (context) => profile.type == "2"
-                              ? new MyProfileUserNormalScreen(id: profile.id)
+                              ? new MyProfileUserNormalScreen(id: profile.id,profile: profile,)
                               : new MyProfileStudentScreen(profile: profile)));
                 }),
             profile.image == null ||

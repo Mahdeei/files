@@ -13,7 +13,7 @@ class AuthenticateService{
   static Future<MyData> getMyData(String id) async {
     var response = await http.post("http://stube.ir/GetMyData.php", body: {'id': id});
     var body = json.decode(response.body);
-    // print(body);
+    print(body);
     MyData body2 = new MyData(
       image: body['image'],
       title: body['title'],

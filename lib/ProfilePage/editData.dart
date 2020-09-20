@@ -15,7 +15,6 @@ import 'package:path/path.dart';
 import 'package:async/async.dart';
 import 'package:stubbbb/http/Authenticate.dart';
 
-import 'MyProfileScreen.dart';
 
 
 class EditData extends StatefulWidget {
@@ -36,10 +35,15 @@ class _EditDataState extends State<EditData> {
   File _image;
   var picker = new ImagePicker();
   var rand;
-  var fileName="";
+  var fileName;
   bool isSaveData=false;
   String url ="http://stube.ir/CompleteProfile.php";
   MyData newProfile;
+
+  getImg(){
+    return widget.profile.image;
+  }
+
 @override
   void initState() {
     // TODO: implement initState
@@ -53,6 +57,7 @@ class _EditDataState extends State<EditData> {
     certCont = new TextEditingController(text: widget.profile.certificates);
     certCont = new TextEditingController(text: widget.profile.skills);
     uniCont = new TextEditingController(text: widget.profile.fieldUni);
+    fileName=getImg();
   }
 
 
@@ -228,6 +233,7 @@ class _EditDataState extends State<EditData> {
                       children: [
                         new FlatButton(
                             onPressed: ()async{
+
                               await upload(_image);
                               await _getMyData();
                               /*isSaveData
@@ -249,7 +255,7 @@ class _EditDataState extends State<EditData> {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children :[
-                            (widget.profile.image=="" ||widget.profile.image==null ) || showImage==false
+                            (fileName=="" || fileName==null ) || showImage==false
                               ? new GestureDetector(
                                   onTap: (){
                                     showDialog(
