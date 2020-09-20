@@ -835,30 +835,7 @@ Row rowOneKaramouziScreen() {
   );
 }
 
-Row rowTwoKaramouziScreen(String pp) {
-  new Row(
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: <Widget>[
-      new Icon(
-        Icons.people,
-        color: Colors.black54,
-        size: SizeConfig.heightMultiplier * 3,
-      ),
-      new SizedBox(
-        width: SizeConfig.imageSizeMultiplier,
-      ),
-      new Padding(
-          padding: EdgeInsets.only(
-              top: SizeConfig.heightMultiplier * 0.5,
-              left: SizeConfig.imageSizeMultiplier),
-          child: new Text(
-            pp,
-            style: TextStyle(
-                color: Colors.black54, fontSize: SizeConfig.textMultiplier * 2),
-          ))
-    ],
-  );
-}
+
 
 Padding rowKaramouziScreenOne(String phonenumber) {
   return Padding(
@@ -1271,7 +1248,7 @@ class Headers extends StatelessWidget {
                               profile.username.toString().substring(0, 1),
                               style: TextStyle(
                                   color: R.color.banafshtire,
-                                  fontSize: SizeConfig.textMultiplier * 6.5),
+                                  fontSize: SizeConfig.textMultiplier * 4.5),
                             )),
                         backgroundColor: Colors.white,
                         minRadius: SizeConfig.heightMultiplier * 5)

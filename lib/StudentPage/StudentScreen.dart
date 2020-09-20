@@ -112,7 +112,7 @@ class _ProfilesPagesState extends State<ProfilesPages> {
                             controller: scrollController,
                             itemCount: _profiles.length,
                             itemBuilder: (BuildContext context, int index) =>
-                               ListProfiles(model: _profiles[index],
+                               ListProfiles(model: _profiles[index],index: index,
                                 profile: widget.profile,)
 
                             ),

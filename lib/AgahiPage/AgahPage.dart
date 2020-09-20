@@ -178,9 +178,7 @@ class HeadersItemsPage extends StatelessWidget {
                         colorFilter:
                             ColorFilter.mode(Colors.black45, BlendMode.darken),
                         fit: BoxFit.cover,
-                        image: AssetImage(
-                          'assets/image/dev.jpg',
-                        ))),
+                        image:NetworkImage("http://stube.ir/image/${advertising.image}"))),
               ),
             ),
             Expanded(

@@ -35,7 +35,8 @@ class _MyRequestPageState extends State<MyRequestPage>
     // _getRequestAd();
     // _getRequestIntern();
     tabController = new TabController(
-      length: 3,
+      length: widget.profile.type == 1
+          ? 3 : 2,
       vsync: this,
     );
   }
@@ -80,22 +81,35 @@ class _MyRequestPageState extends State<MyRequestPage>
               labelColor: Theme.of(context).accentColor,
               indicatorColor: R.color.banafshmain,
               controller: tabController,
-              tabs: [
+              tabs: widget.profile.type == 1
+                ?  [
                 Tab(
                     icon: new Text(
-                  'آگهی ها',
-                  style: TextStyle(color: Colors.black),
-                )),
+                      'آگهی ها',
+                      style: TextStyle(color: Colors.black),
+                    )),
                 Tab(
                     icon: new Text(
-                  'شخصی',
-                  style: TextStyle(color: Colors.black),
-                )),
+                      'شخصی',
+                      style: TextStyle(color: Colors.black),
+                    )),
                 Tab(
                     icon: new Text(
-                  'کارآموزی',
-                  style: TextStyle(color: Colors.black),
-                )),
+                      'کارآموزی',
+                      style: TextStyle(color: Colors.black),
+                    )),
+              ]
+                  :  [
+                Tab(
+                    icon: new Text(
+                      'آگهی ها',
+                      style: TextStyle(color: Colors.black),
+                    )),
+                Tab(
+                    icon: new Text(
+                      'کارآموزی',
+                      style: TextStyle(color: Colors.black),
+                    )),
               ],
             ),
             leading: IconButton(
@@ -115,14 +129,23 @@ class _MyRequestPageState extends State<MyRequestPage>
             //   ),
             // ),
           ),
-          body: TabBarView(controller: tabController, children: [
+          body: TabBarView(controller: tabController, children: widget.profile.type == 1
+              ?  [
             new bodyRequest(
               phoneSize: phoneSize,
               profile: widget.profile,
             ),
             new bodyRequestUser(phoneSize: phoneSize, profile: widget.profile),
             new bodyRequestIntern(phoneSize: phoneSize, profile: widget.profile)
-          ])),
+          ]
+              :  [
+            new bodyRequest(
+              phoneSize: phoneSize,
+              profile: widget.profile,
+            ),
+            new bodyRequestIntern(phoneSize: phoneSize, profile: widget.profile)
+          ]
+          )),
     );
   }
 }

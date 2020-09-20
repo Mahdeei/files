@@ -9,7 +9,6 @@ import 'package:stubbbb/Component/textformfield.dart';
 import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/R.dart';
 import 'package:stubbbb/Other/SizeConfig.dart';
-import 'package:stubbbb/http/Authenticate.dart';
 import 'package:image/image.dart'as Img;
 
 
@@ -26,6 +25,7 @@ class MyProfileUserNormalScreen extends StatefulWidget {
 
 class _MyProfileUserNormalScreenState extends State<MyProfileUserNormalScreen> {
   GlobalKey _formKeyOne = GlobalKey<FormState>();
+  TextEditingController userCont,nameCont,moarefiCont;
   // MyData profile;
   Map res;
   bool showImage=true;
@@ -40,6 +40,9 @@ class _MyProfileUserNormalScreenState extends State<MyProfileUserNormalScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    moarefiCont = new TextEditingController(text: widget.profile.moarefiNameh);
+    userCont = new TextEditingController(text: widget.profile.username);
+    nameCont = new TextEditingController(text: widget.profile.name);
     // _getMyData();
     // print(widget.profile.username);
     // print(widget.profile.username);
@@ -106,16 +109,16 @@ class _MyProfileUserNormalScreenState extends State<MyProfileUserNormalScreen> {
                             onPressed: (){
                               Navigator.of(context).pop();
                             },
-                            child: new Text('ذخیره',style: TextStyle(fontSize: 20.0,color: R.color.banafshKamRang),)
+                            child: new Text('ذخیره',style: TextStyle(fontSize: SizeConfig.textMultiplier*3,color: R.color.banafshKamRang),)
                         ),
                         new IconButton(
-                            icon: Icon(Icons.arrow_forward,size: 30.0,),
+                            icon: Icon(Icons.arrow_forward,size: SizeConfig.heightMultiplier*4,),
                             onPressed: (){Navigator.of(context).pop();}
                         ),
                       ],
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 30.0,vertical: 10.0),
+                      padding:  EdgeInsets.symmetric(horizontal: SizeConfig.imageSizeMultiplier*7.5,vertical: SizeConfig.heightMultiplier*1.5),
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children :[
@@ -128,7 +131,7 @@ class _MyProfileUserNormalScreenState extends State<MyProfileUserNormalScreen> {
                                     new AlertDialog(
                                       title: new Text(
                                         "انتخاب عکس از",
-                                        style: TextStyle(fontSize: 16.0),
+                                        style: TextStyle(fontSize: SizeConfig.textMultiplier*2.4),
                                         textDirection: TextDirection.rtl,
                                       ),
                                       actions: [
@@ -184,7 +187,7 @@ class _MyProfileUserNormalScreenState extends State<MyProfileUserNormalScreen> {
                                     new AlertDialog(
                                       title: new Text(
                                         "ویرایش عکس",
-                                        style: TextStyle(fontSize: 16.0),
+                                        style: TextStyle(fontSize: SizeConfig.textMultiplier*2.4),
                                         textDirection: TextDirection.rtl,
                                       ),
                                       actions: [
@@ -267,13 +270,13 @@ class _MyProfileUserNormalScreenState extends State<MyProfileUserNormalScreen> {
                                             backgroundColor: R.color.banafshKamRang,
                                             child: new Text(
                                               widget.profile.username.toString().substring(0,1),
-                                              style: TextStyle(fontSize: 25.0,color: Colors.white),
+                                              style: TextStyle(fontSize: SizeConfig.textMultiplier*3,color: Colors.white),
                                             ),
                                           ),
                                         )
                             ),
 
-                            new SizedBox(height: 10.0,),
+                            new SizedBox(height: SizeConfig.heightMultiplier*1.5,),
                             new Align(
                               alignment: Alignment.center,
                               child: new Text(widget.profile.username,style: TextStyle(fontSize:SizeConfig.textMultiplier*3,color: R.color.banafshKamRang)),
@@ -287,23 +290,54 @@ class _MyProfileUserNormalScreenState extends State<MyProfileUserNormalScreen> {
                                       InputTextForm(
                                         obscure: false,
                                         // onSaved: userOnsaved,
-                                        color: Colors.black26,
-                                        lableColor: Colors.black54,
+                                        color: Colors.black,
+                                        controller: userCont,
+                                        lableColor: Colors.black,
+                                        lable: 'نام کاربری',
+                                          maxLine: null,
+                                          validate:(String value){
+                                            if(value==''||value == null || value.isEmpty){
+                                              return 'نباید خالی باشد';
+                                            }
+                                          }
+                                      ),
+                                      InputTextForm(
+                                        controller: nameCont,
+                                        obscure: false,
+                                        maxLine: null,
+                                        // onSaved: userOnsaved,
+                                        color: Colors.black,
+                                        lableColor: Colors.black,
+                                        lable: 'نام و نام خانوادگی',
+                                          validate:(String value){
+                                            if(value==''||value == null || value.isEmpty){
+                                              return 'نباید خالی باشد';
+                                            }
+                                          }
+                                      ),
+                                      InputTextForm(
+                                        controller: moarefiCont,
+                                        maxLine: null,
+                                        obscure: false,
+                                        // onSaved: userOnsaved,
+                                        color: Colors.black,
+                                        lableColor: Colors.black,
                                         lable: 'معرفی نامه',
                                         // validate: validateSignUp
                                       ),
-                                      new SizedBox(height: 35.0,),
-                                      new Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          new Text('تعداد پروژه های ب اشتراک گذاشته شده : ',style: TextStyle(fontSize: 16.0),),
-                                          new Text('5',style: TextStyle(fontSize: 16.0),),
+                                      // new SizedBox(height: SizeConfig.heightMultiplier*5,),
+                                      // new Row(
+                                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      //   children: [
+                                      //     new Text('تعداد پروژه های ب اشتراک گذاشته شده : ',style: TextStyle(fontSize: S.0),),
+                                      //     new Text('5',style: TextStyle(fontSize: 16.0),),
+
                                         ],
                                       )
-                                    ],
+
 
                                   ),
-                                )),
+                                ),
                           ]
                       ),
                     ),

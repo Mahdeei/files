@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Models/profileModels.dart';
@@ -9,8 +11,9 @@ import 'Moshakhsat.dart';
 class ListProfiles extends StatefulWidget {
   User model;
   MyData profile;
+  int index;
 
-  ListProfiles({this.profile, this.model});
+  ListProfiles({this.profile, this.model,this.index});
 
   final controller = new PageController();
 
@@ -20,6 +23,23 @@ class ListProfiles extends StatefulWidget {
 
 class _ListProfilesState extends State<ListProfiles>
     with AutomaticKeepAliveClientMixin<ListProfiles> {
+  List<Color> colors = [
+    Colors.blue,
+    Colors.teal,
+    Colors.tealAccent,
+    Colors.green,
+    Colors.amberAccent,
+    Colors.deepPurple,
+    Colors.pinkAccent,
+    R.color.banafshKamRang,
+    R.color.red
+  ];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+       colors.shuffle();
+  }
   @override
   Widget build(BuildContext context) {
     var phoneSize = MediaQuery.of(context).size;
@@ -194,15 +214,15 @@ class _ListProfilesState extends State<ListProfiles>
                     padding: const EdgeInsets.only(top: 5.0, left: 7.0),
                     child: widget.model.image=="" || widget.model.image==null
                     ?Container(
-                      height: phoneSize.height * 0.10,
-                      width: phoneSize.width * 0.19,
+
                       child: new CircleAvatar(
                           child: new Text(widget.model.username.toString().substring(0,1),style: TextStyle(fontSize: 25.0,color: Colors.white),),
-                          backgroundColor: R.color.banafshKamRang,
+                          backgroundColor: colors[widget.index%colors.length],
+                          radius: SizeConfig.heightMultiplier*4.7
                           // minRadius: 30.0
                       ),
                     ):Center(
-                      child: new CircleAvatar(radius: 37,
+                      child: new CircleAvatar(radius: SizeConfig.heightMultiplier*4.7,
                           backgroundImage: new NetworkImage("http://stube.ir/image/${widget.model.image}",),
                   backgroundColor: R.color.banafshKamRang,
                   // minRadius: 30.0
