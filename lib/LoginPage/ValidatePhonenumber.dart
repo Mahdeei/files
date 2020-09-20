@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:stubbbb/Other/R.dart';
+import 'package:stubbbb/Other/SizeConfig.dart';
 
 import 'SignUp.dart';
 
@@ -136,7 +137,7 @@ class _ValidatePhoneNumberState extends State<ValidatePhoneNumber> {
                                       'دریافت کد',
                                       style: new TextStyle(
                                           color: R.color.banafshmain,
-                                          fontSize: 17,
+                                          fontSize: SizeConfig.textMultiplier*2.4,
                                           fontWeight: FontWeight.w600),
                                     ),
                                   )
@@ -146,7 +147,7 @@ class _ValidatePhoneNumberState extends State<ValidatePhoneNumber> {
                           )
                         : new Padding(
                             padding:
-                                const EdgeInsets.only(top: 15.0, bottom: 10.0),
+                                 EdgeInsets.only(top:SizeConfig.heightMultiplier *2, bottom: SizeConfig.heightMultiplier *1.5),
                             child: new Column(
                               children: <Widget>[
                                 new TextField(
@@ -157,20 +158,21 @@ class _ValidatePhoneNumberState extends State<ValidatePhoneNumber> {
                                           ? null
                                           : 'کد را به درستی وارد نمایید',
                                       labelText: 'کد تایید',
+
                                       border: UnderlineInputBorder()),
                                 ),
                                 new SizedBox(
-                                  height: 10,
+                                  height: SizeConfig.heightMultiplier*1.5,
                                 ),
                                 new Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: <Widget>[
-                                    Text('زمان باقیمانده : $_counter ثانیه'),
+                                    Text('زمان باقیمانده : $_counter ثانیه',style: TextStyle(fontSize: SizeConfig.textMultiplier*2),),
                                   ],
                                 ),
                                 ListTile(
                                   title: Text(
-                                    'دانشجو هستم',
+                                    'دانشجو هستم',style: TextStyle(fontSize: SizeConfig.textMultiplier*2)
                                   ),
                                   leading: Radio(
                                     activeColor: R.color.banafshmain,
@@ -188,7 +190,7 @@ class _ValidatePhoneNumberState extends State<ValidatePhoneNumber> {
                                 ),
                                 ListTile(
                                     title: Text(
-                                      'دانشجو نیستم',
+                                      'دانشجو نیستم',style: TextStyle(fontSize: SizeConfig.textMultiplier*2)
                                     ),
                                     leading: Radio(
                                         activeColor: R.color.banafshmain,
@@ -230,7 +232,7 @@ class _ValidatePhoneNumberState extends State<ValidatePhoneNumber> {
                                         'تایید',
                                         style: new TextStyle(
                                             color: R.color.banafshmain,
-                                            fontSize: 17,
+                                            fontSize: SizeConfig.textMultiplier*2.4,
                                             fontWeight: FontWeight.w600),
                                       ),
                                     ),

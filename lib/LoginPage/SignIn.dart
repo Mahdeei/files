@@ -123,6 +123,7 @@ class _SignInState extends State<SignIn> {
                                                 child: new Column(
                                                   children: <Widget>[
                                                     InputTextForm(
+                                                      maxLine: 1,
                                                       onSaved: usernameOnSaved,
                                                       lableColor: Colors.black,
                                                       color: Colors.black,
@@ -131,6 +132,7 @@ class _SignInState extends State<SignIn> {
                                                       obscure: false,
                                                     ),
                                                     InputTextForm(
+                                                      maxLine: 1,
                                                       onSaved: passwordOnSaved,
                                                       lableColor: Colors.black,
                                                       color: Colors.black,

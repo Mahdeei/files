@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stubbbb/Component/textformfield.dart';
 import 'package:stubbbb/FirstPage/HomePage/HomeScreen.dart';
 import 'package:stubbbb/Models/Profile.dart';
+import 'package:stubbbb/Other/SizeConfig.dart';
 import 'package:stubbbb/Other/widget.dart';
 import 'package:stubbbb/http/Authenticate.dart';
 
@@ -80,84 +81,82 @@ class _SignUpState extends State<SignUp> {
                       child: new Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          new SizedBox(height: phoneSize.height * 0.09),
-                          new Padding(
-                              padding:
-                              const EdgeInsets.symmetric(horizontal: 18.0),
-                              child: textSignUp()),
-                          new SizedBox(height: phoneSize.height * 0.09),
-                          new Form(
-                              key: _formKey,
-                              child: new Container(
-                                padding:
-                                const EdgeInsets.symmetric(horizontal: 35),
-                                child: new Column(
-                                  children: <Widget>[
-                                    InputTextForm(
-                                        errColor: Colors.white,
-                                        obscure: false,
-                                        onSaved: userOnsaved,
-                                        color: Colors.white,
-                                        lableColor: Colors.white,
-                                        lable: 'نام کاربری',
-                                        validate: (String value) {
-                                          String vlidte;
-                                          if (check) {
-                                            return 'نام کاربری قبلا ثبت شده';
-                                          } else {
-                                            if (!value.contains(new RegExp(
-                                                r"^(?=.{3,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$"))) {
-                                              return 'درست نیست';
+                          Expanded(flex: 4,
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: new Padding(
+                                  padding:
+                                  const EdgeInsets.symmetric(horizontal: 18.0),
+                                  child: textSignUp()),
+                            ),
+                          ),
+                          Expanded(flex: 7,
+                            child: new Form(
+                                key: _formKey,
+                                child: new Container(
+                                  padding:
+                                   EdgeInsets.symmetric(horizontal: SizeConfig.imageSizeMultiplier * 9),
+                                  child: new Column(
+                                    children: <Widget>[
+                                      InputTextForm(maxLine: 1,
+                                          errColor: Colors.white,
+                                          obscure: false,
+                                          onSaved: userOnsaved,
+                                          color: Colors.white,
+                                          lableColor: Colors.white,
+                                          lable: 'نام کاربری',
+                                          validate: (String value) {
+                                            String vlidte;
+                                            if (check) {
+                                              return 'نام کاربری قبلا ثبت شده';
+                                            } else {
+                                              if (!value.contains(new RegExp(
+                                                  r"^(?=.{3,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$"))) {
+                                                return 'نام کاربری وارد شده درست نمی باشد';
+                                              }
                                             }
-                                          }
-                                        }),
-                                    InputTextForm(
-                                      errColor: Colors.white,
-                                      onSaved: passOnsaved,
-                                      color: Colors.white,
-                                      lableColor: Colors.white,
-                                      lable: 'کلمه عبور',
-                                      // iconData: Icons.lock,
-                                      obscure: true,
-                                      validate: validateSignUpPas,
-                                      controller: _controller,
-                                    ),
-                                    InputTextForm(
+                                          }),
+                                      InputTextForm(maxLine: 1,
                                         errColor: Colors.white,
+                                        onSaved: passOnsaved,
                                         color: Colors.white,
                                         lableColor: Colors.white,
-                                        lable: 'تایید کلمه عبور',
+                                        lable: 'کلمه عبور',
+                                        // iconData: Icons.lock,
                                         obscure: true,
-                                        validate: (String value) {
-                                          if (value != _controller.text) {
-                                            return 'not true';
-                                          }
-                                        }),
-                                    InputTextForm(
-                                        errColor: Colors.white,
-                                        obscure: false,
-                                        onSaved: nameOnsaved,
-                                        color: Colors.white,
-                                        lableColor: Colors.white,
-                                        lable: 'نام و نام خانوادگی',
-                                        validate: validateNameSignUp),
-                                  ],
-                                ),
-                              )),
-                        ],
-                      ),
-                    ),
-                    new Positioned(
-                        top: phoneSize.height * 0.75,
-                        child: new Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            new Row(
+                                        validate: validateSignUpPas,
+                                        controller: _controller,
+                                      ),
+                                      InputTextForm(maxLine: 1,
+                                          errColor: Colors.white,
+                                          color: Colors.white,
+                                          lableColor: Colors.white,
+                                          lable: 'تایید کلمه عبور',
+                                          obscure: true,
+                                          validate: (String value) {
+                                            if (value != _controller.text) {
+                                              return 'با کلمه عبور مطابقت ندارد';
+                                            }
+                                          }),
+                                      InputTextForm(maxLine: 1,
+                                          errColor: Colors.white,
+                                          obscure: false,
+                                          onSaved: nameOnsaved,
+                                          color: Colors.white,
+                                          lableColor: Colors.white,
+                                          lable: 'نام و نام خانوادگی',
+                                          validate: validateNameSignUp),
+                                    ],
+                                  ),
+                                )),
+                          ),
+                          Expanded(flex: 3,
+                            child: new Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 new Padding(
-                                    padding: const EdgeInsets.only(
-                                        right: 35, bottom: 10),
+                                    padding:  EdgeInsets.only(
+                                        right: SizeConfig.imageSizeMultiplier *8.5, bottom: SizeConfig.heightMultiplier*1.5),
                                     child: textSignUpS()),
                                 new SizedBox(width: phoneSize.width * .4),
                                 new GestureDetector(
@@ -173,12 +172,13 @@ class _SignUpState extends State<SignUp> {
                                 )
                               ],
                             ),
-                            new SizedBox(height: phoneSize.height * 0.01),
-                            new Row(
+                          ),
+                          Expanded(flex: 1,
+                            child: new Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: <Widget>[
                                 new Padding(
-                                  padding: const EdgeInsets.only(right: 0),
+                                  padding:  EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*7,bottom: SizeConfig.heightMultiplier*2),
                                   child: new GestureDetector(
                                     onTap: () {
                                       print('pressed1');
@@ -188,9 +188,14 @@ class _SignUpState extends State<SignUp> {
                                 ),
                                 new SizedBox(width: phoneSize.width * .6)
                               ],
-                            )
-                          ],
-                        ))
+                            ),
+                          )
+
+
+                        ],
+                      ),
+                    ),
+
                   ],
                 ))));
   }

@@ -4,6 +4,7 @@ import 'package:stubbbb/Models/RequestProfile.dart';
 import 'package:stubbbb/Models/RequestUser.dart';
 import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/R.dart';
+import 'package:stubbbb/Other/SizeConfig.dart';
 import 'package:stubbbb/Other/widget.dart';
 import 'package:stubbbb/http/httpRequest.dart';
 import 'MyRequests.dart';
@@ -66,7 +67,7 @@ class _bodyRequestUserState extends State<bodyRequestUser> {
                 style: TextStyle(color: Colors.black),
             ))
         : new ListView.builder(
-            padding: const EdgeInsets.only(top: 5.0),
+            padding:  EdgeInsets.only(top: SizeConfig.heightMultiplier*.8),
             itemCount: requestsUser.length,
             itemBuilder: (BuildContext context, int index) =>
             new Column(
@@ -80,93 +81,135 @@ class _bodyRequestUserState extends State<bodyRequestUser> {
                             text: requestsUser[index].req_text)));
                   },
                   child: new Container(
-                    margin: const EdgeInsets.only(top: 5.0),
+                    margin:  EdgeInsets.only(top: SizeConfig.heightMultiplier*.8),
                     width: widget.phoneSize.width,
                     child: new Column(
                       children: <Widget>[
                         Padding(
-                          padding: const EdgeInsets.only(right:8.0),
+                          padding:  EdgeInsets.only(right:SizeConfig.imageSizeMultiplier * 2),
                           child: new Row(
                             children: <Widget>[
                               //TODO inja az comment dar biad
-                              requestProfile[index].image =="" || requestProfile[index].image==null
-                                  ? Container(
-                                      height: phoneSize.height * 0.10,
-                                          width: phoneSize.width * 0.19,
-                                          child: new CircleAvatar(
-                                      child: new Text(requestProfile[index].username.toString().substring(0,1),style: TextStyle(fontSize: 25.0,color: Colors.white),),
-                                      backgroundColor: R.color.banafshKamRang,
-                                      // minRadius: 30.0
-                                      ),
-                                      )
-                                  : Center(
-                                      child: new CircleAvatar(radius: 37,
-                                        backgroundImage: new NetworkImage("http://stube.ir/image/${requestProfile[index].image}",),
-                                        backgroundColor: R.color.banafshKamRang,
-                                        // minRadius: 30.0
-                                      ),
-                                    ),
-                              new Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(top:12.0,right:8.0),
-                                        child: new Text(requestProfile[index].username,style: TextStyle(fontSize: 16.0,fontWeight: FontWeight.w800),),
-                                      ),
-                                      // new Expanded(),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top:12.0,right: 120.0),
-                                        child: new Row(
-                                          children: <Widget>[
-                                            new Text(
-                                                textTime(requestsUser[index].date),
-                                                style: TextStyle(fontSize: 12.0),
-                                              ),
-
-                                            // new Padding(
-                                            //   padding: const EdgeInsets.only(left: 27.0),
-                                            //   child: new Row(
-                                            //     children: <Widget>[
-                                            //       new Text(
-                                            //         'khorasan,mashhad',
-                                            //         style: TextStyle(fontSize: 8.0),
-                                            //       ),
-                                            //       new Icon(
-                                            //         Icons.location_on,
-                                            //         size: 10.0,
-                                            //       )
-                                            //     ],
-                                            //   ),
-                                            // )
-                                          ],
-                                        ),
-                                      )
-                                    ],
+                              Expanded(
+                                flex: 1,
+                                child:   requestProfile[index].image =="" || requestProfile[index].image==null
+                                    ? Container(
+                                  height: phoneSize.height * 0.10,
+                                  width: phoneSize.width * 0.19,
+                                  child: new CircleAvatar(
+                                    child: new Text(requestProfile[index].username.toString().substring(0,1),style: TextStyle(fontSize: 25.0,color: Colors.white),),
+                                    backgroundColor: R.color.banafshKamRang,
+                                    // minRadius: 30.0
                                   ),
-                                  new Row(
-                                    children: <Widget>[
-                                      Padding(
-                                        padding: const EdgeInsets.only(right:8.0),
-                                        child: new SizedBox(
-                                          width: 250.0,
-                                          child: new Text(
-                                            requestsUser[index].req_text,
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
+                                )
+                                    : Center(
+                                  child: new CircleAvatar(radius: 37,
+                                    backgroundImage: new NetworkImage("http://stube.ir/image/${requestProfile[index].image}",),
+                                    backgroundColor: R.color.banafshKamRang,
+                                    // minRadius: 30.0
+                                  ),
+                                ),
+                              ),
+
+
+
+
+                              Expanded(
+                                flex: 4,
+                                child: new Column(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    Row(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                      MainAxisAlignment
+                                          .spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          flex: 4,
+                                          child: Padding(
+                                            padding:
+                                            EdgeInsets.only(
+                                                top: SizeConfig.heightMultiplier*1.8,
+                                                right: SizeConfig.imageSizeMultiplier*2),
+                                            child: new Text(
+                                              requestProfile[index].username,
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                  fontSize: SizeConfig.textMultiplier*2.5,
+                                                  fontWeight:
+                                                  FontWeight.w800),
+                                            ),
                                           ),
                                         ),
-                                      ),
+                                        // new Expanded(),
+                                        Expanded(
+                                          flex: 1,
+                                          child: Padding(
+                                            padding:
+                                            EdgeInsets.only(
+                                              top: SizeConfig.heightMultiplier*1.8,
+                                            ),
+                                            child: new Row(
+                                              children: <Widget>[
+                                                new Text(
+                                                  textTime(requestsUser[
+                                                  index]
+                                                      .date),
+                                                  style: TextStyle(
+                                                      fontSize: SizeConfig.textMultiplier*1.9),
+                                                ),
 
-                                      // ButtonMore(),
-                                    ],
-                                  )
-                                ],
+                                                // new Padding(
+                                                //   padding: const EdgeInsets.only(left: 27.0),
+                                                //   child: new Row(
+                                                //     children: <Widget>[
+                                                //       new Text(
+                                                //         'khorasan,mashhad',
+                                                //         style: TextStyle(fontSize: 8.0),
+                                                //       ),
+                                                //       new Icon(
+                                                //         Icons.location_on,
+                                                //         size: 10.0,
+                                                //       )
+                                                //     ],
+                                                //   ),
+                                                // )
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    new Row(
+                                      children: <Widget>[
+                                        Expanded(
+                                          child: Padding(
+                                            padding: EdgeInsets.only(
+                                                right: SizeConfig.imageSizeMultiplier*2
+                                                ,left: SizeConfig.imageSizeMultiplier*3
+                                            ),
+                                            child: new Text(
+                                              requestsUser[index]
+                                                  .req_text,
+                                              maxLines: 2,
+                                              overflow:
+                                              TextOverflow.ellipsis,
+                                              style: TextStyle(fontSize: SizeConfig.textMultiplier*2.1),
+                                            ),
+                                          ),
+                                        ),
+
+
+                                        // ButtonMore(),
+                                      ],
+                                    )
+                                  ],
+                                ),
                               ),
                             ],
                           ),

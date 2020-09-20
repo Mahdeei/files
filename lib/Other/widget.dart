@@ -20,7 +20,6 @@ import 'package:stubbbb/http/httpRequest.dart';
 import 'R.dart';
 import 'package:animations/animations.dart';
 
-
 class ModelMenu {
   String titr;
   String image;
@@ -30,25 +29,16 @@ class ModelMenu {
 }
 
 BoxDecoration decorationLoginPagee() {
-  return BoxDecoration(
-      boxShadow: [
-        BoxShadow(
-            color: Colors.black,
-            offset: Offset(2, 2),
-            blurRadius: 7)
-      ],
-      color: Color(0xffFE346E),
-      borderRadius: BorderRadius.circular(30.0));
+  return BoxDecoration(boxShadow: [
+    BoxShadow(color: Colors.black, offset: Offset(2, 2), blurRadius: 7)
+  ], color: Color(0xffFE346E), borderRadius: BorderRadius.circular(30.0));
 }
 
 BoxDecoration deorationLoginPage() {
   return BoxDecoration(
       color: Colors.white,
       boxShadow: [
-        BoxShadow(
-            color: Colors.black,
-            offset: Offset(2, 2),
-            blurRadius: 7)
+        BoxShadow(color: Colors.black, offset: Offset(2, 2), blurRadius: 7)
       ],
       borderRadius: BorderRadius.circular(30.0));
 }
@@ -56,7 +46,8 @@ BoxDecoration deorationLoginPage() {
 BoxDecoration decorationHomePage() {
   return BoxDecoration(
       color: R.color.banafshmain,
-      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(SizeConfig.heightMultiplier * 6.5)));
+      borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(SizeConfig.heightMultiplier * 6.5)));
 }
 
 BoxDecoration decorationImageHomePage(String image) {
@@ -64,10 +55,8 @@ BoxDecoration decorationImageHomePage(String image) {
       shape: BoxShape.circle,
       image: DecorationImage(
           fit: BoxFit.cover,
-          image: NetworkImage('http://stube.ir/image/$image'))
-  );
+          image: NetworkImage('http://stube.ir/image/$image')));
 }
-
 
 BoxDecoration decorationImageSignin() {
   return new BoxDecoration(
@@ -81,8 +70,7 @@ BoxDecoration decorationImageSignin() {
 BoxDecoration decorationSignin() {
   return new BoxDecoration(
       borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(40),
-          bottomRight: Radius.circular(40)));
+          bottomLeft: Radius.circular(40), bottomRight: Radius.circular(40)));
 }
 
 BoxDecoration decorationSignUp() {
@@ -97,19 +85,14 @@ BoxDecoration decorationSignUp() {
 BoxDecoration decorationWelcomePage() {
   return new BoxDecoration(
       image: DecorationImage(
-          image: AssetImage('assets/image/back.jpg'),
-          fit: BoxFit.cover
-      )
-  );
+          image: AssetImage('assets/image/back.jpg'), fit: BoxFit.cover));
 }
 
 BoxDecoration decorationKaramouziScreen() {
   return BoxDecoration(
       boxShadow: [
         BoxShadow(
-            color: Colors.black54,
-            offset: Offset(0.0, 1.0),
-            blurRadius: 5.0)
+            color: Colors.black54, offset: Offset(0.0, 1.0), blurRadius: 5.0)
       ],
       color: Colors.white,
       borderRadius: BorderRadius.only(
@@ -123,14 +106,12 @@ BoxDecoration decorationKaramouziScreen() {
 BoxDecoration boxDecorationKaramouziScreen(String image) {
   return BoxDecoration(
       borderRadius: BorderRadius.only(
-          topRight: Radius.circular(65.0),
-          bottomRight: Radius.circular(65.0)),
+          topRight: Radius.circular(65.0), bottomRight: Radius.circular(65.0)),
       image: DecorationImage(
           fit: BoxFit.cover,
           image: image == null
               ? AssetImage('assets/image/download.jfif')
-              : NetworkImage("http://stube.ir/image/$image")
-      ));
+              : NetworkImage("http://stube.ir/image/$image")));
 }
 
 BoxDecoration boxDecorationKaramouziScrenn() {
@@ -140,21 +121,20 @@ BoxDecoration boxDecorationKaramouziScrenn() {
       borderRadius: BorderRadius.circular(15.0));
 }
 
-
 InputDecoration inputDecorationLoginPage(String labelText, IconData icon) {
   return InputDecoration(
-      prefixIcon: Icon(icon, color: Colors.white,),
+      prefixIcon: Icon(
+        icon,
+        color: Colors.white,
+      ),
       labelText: labelText,
       labelStyle: TextStyle(color: Colors.white),
-      border: UnderlineInputBorder(
-          borderSide:
-          BorderSide(color: Colors.white)),
+      border: UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
       fillColor: Colors.white,
       focusColor: Colors.white,
       hoverColor: Colors.white,
-      enabledBorder: UnderlineInputBorder(
-          borderSide:
-          BorderSide(color: Colors.white)));
+      enabledBorder:
+          UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)));
 }
 
 Icon iconKarAmouziScreen() {
@@ -164,7 +144,6 @@ Icon iconKarAmouziScreen() {
     color: R.color.banafshmain,
   );
 }
-
 
 Text texKarAmouziScreen(String address) {
   return new Text(
@@ -209,7 +188,7 @@ Text textoneKaramouziScreen(String title) {
   return new Text(
     title,
     style: TextStyle(
-        fontSize: SizeConfig.textMultiplier *2.5, fontWeight: FontWeight.bold),
+        fontSize: SizeConfig.textMultiplier * 2.5, fontWeight: FontWeight.bold),
     maxLines: 1,
     overflow: TextOverflow.ellipsis,
   );
@@ -220,20 +199,17 @@ Text textTwoKaramouziScreen(String description) {
     description,
     maxLines: 1,
     overflow: TextOverflow.ellipsis,
-    style: TextStyle(fontSize: SizeConfig.textMultiplier*1.8),
+    style: TextStyle(fontSize: SizeConfig.textMultiplier * 1.8),
   );
 }
 
 Text textthreeKaramouziScreen(String company) {
   return new Text(
-    company == '+نام شرکت'
-        ? "مستقل"
-        : company
-    ,
+    company == '+نام شرکت' ? "مستقل" : company,
     overflow: TextOverflow.ellipsis,
     maxLines: 1,
     style: TextStyle(
-      fontSize: SizeConfig.textMultiplier*1.7,
+      fontSize: SizeConfig.textMultiplier * 1.7,
     ),
   );
 }
@@ -242,7 +218,7 @@ Text textlineBetween() {
   return new Text(
     '|',
     style: TextStyle(
-        fontSize: SizeConfig.textMultiplier*1.4, fontWeight: FontWeight.bold),
+        fontSize: SizeConfig.textMultiplier * 1.4, fontWeight: FontWeight.bold),
   );
 }
 
@@ -260,46 +236,46 @@ Text textType(String type) {
     overflow: TextOverflow.ellipsis,
     maxLines: 1,
     style: TextStyle(
-      fontSize: SizeConfig.textMultiplier*1.7,
+      fontSize: SizeConfig.textMultiplier * 1.7,
     ),
   );
 }
 
-
 Text textSignUp() {
   return new Text('خوش اومدی',
       style: TextStyle(
-          fontSize: 35.0,
-          fontWeight: FontWeight.bold,
-          color: Colors.white));
+          fontSize: SizeConfig.textMultiplier*5, fontWeight: FontWeight.bold, color: Colors.white));
 }
 
 Text textWelcomePage() {
-  return new Text('Stub',
+  return new Text(
+    'Stub',
     style: TextStyle(
         color: Colors.white,
         fontSize: 38,
         fontWeight: FontWeight.bold,
-        fontStyle: FontStyle.italic),);
+        fontStyle: FontStyle.italic),
+  );
 }
 
 Text textWelcomePagehint(String text, double fontsize, FontWeight fontWeight) {
-  return new Text(text,
+  return new Text(
+    text,
     style: TextStyle(
         color: Colors.white,
         fontSize: fontsize,
         fontWeight: fontWeight,
-        fontStyle: FontStyle.normal),);
+        fontStyle: FontStyle.normal),
+  );
 }
 
-
-Text textSignUpS() {
-  return new Text(
-    'ثبت نام',
-    style: new TextStyle(
-        color: Colors.white,
-        fontSize: 30,
-        fontWeight: FontWeight.w700),
+FittedBox textSignUpS() {
+  return FittedBox(
+    child: new Text(
+      'ثبت نام',
+      style: new TextStyle(
+          color: Colors.white, fontSize: SizeConfig.textMultiplier*4, fontWeight: FontWeight.w700),
+    ),
   );
 }
 
@@ -308,24 +284,22 @@ Text textSignUpLogin() {
     'ورود',
     style: TextStyle(
         color: Colors.white,
-        decoration:
-        TextDecoration.underline,
-        fontSize: 18),
+        decoration: TextDecoration.underline,
+        fontSize: SizeConfig.textMultiplier*2.9),
   );
 }
 
 String validateSignUpPas(String value) {
   if (value.length < 6) {
-    return 'not true';
+    return 'باید بیشتر از 6 کاراکتر باشد';
   }
 }
 
 String validateNameSignUp(String value) {
   if (value.contains(new RegExp(
       r"^(?=.{3,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$"))) {
-    return 'not true';
-  } else if (value.isEmpty)
-    return 'not';
+    return 'از حروف فارسی استفاده کنید';
+  } else if (value.isEmpty) return 'نباید خالی باشد';
 }
 
 String validateSignUp(String value) {
@@ -345,7 +319,7 @@ Text textSplashScreen() {
 Text textSignIn() {
   return new Text('منتظرت بودیم !',
       style: TextStyle(
-          fontSize: SizeConfig.textMultiplier * 4.6 ,
+          fontSize: SizeConfig.textMultiplier * 4.6,
           fontWeight: FontWeight.bold,
           color: Colors.white));
 }
@@ -354,8 +328,7 @@ Text textSignInLogin() {
   return new Text(
     'ورود',
     style: new TextStyle(
-        fontSize: SizeConfig.heightMultiplier*5,
-        fontWeight: FontWeight.w700),
+        fontSize: SizeConfig.heightMultiplier * 5, fontWeight: FontWeight.w700),
   );
 }
 
@@ -371,22 +344,22 @@ Text textSignInPage() {
 Text textSigInForget() {
   return new Text(
     'فراموشی گلمه عبور',
-    style: TextStyle(
-        decoration: TextDecoration.underline,
-        fontSize: 17),
+    style: TextStyle(decoration: TextDecoration.underline, fontSize: 17),
   );
 }
 
 Text textLoginPage() {
-  return new Text('ورود', style: TextStyle(
-      fontSize: 35.0, fontWeight: FontWeight.bold, color: Colors.white),);
+  return new Text(
+    'ورود',
+    style: TextStyle(
+        fontSize: 35.0, fontWeight: FontWeight.bold, color: Colors.white),
+  );
 }
 
 Text textLoginPageLogin() {
   return new Text(
     'ورود',
-    style: TextStyle(
-        fontSize: 25, color: Colors.white),
+    style: TextStyle(fontSize: 25, color: Colors.white),
     textAlign: TextAlign.center,
   );
 }
@@ -396,20 +369,16 @@ String textTime(String date) {
     if (date.substring(11, 13) == DateTime.now().toString().substring(11, 13)) {
       return "لحظاتی پیش";
     } else {
-      return "${int.parse(DateTime.now().toString().substring(11, 13)) -
-          int.parse(date.substring(11, 13))} ساعت قبل";
+      return "${int.parse(DateTime.now().toString().substring(11, 13)) - int.parse(date.substring(11, 13))} ساعت قبل";
     }
-  } else
-  if (date.substring(0, 7) == DateTime.now().toString().substring(0, 7)) {
-    return "${int.parse(DateTime.now().toString().substring(8, 10)) -
-        int.parse(date.substring(8, 10))} روز قبل";
-  } else
-  if (date.substring(0, 4) == DateTime.now().toString().substring(0, 4)) {
-    return "${int.parse(DateTime.now().toString().substring(5, 7)) -
-        int.parse(date.substring(5, 7))} ماه قبل";
+  } else if (date.substring(0, 7) ==
+      DateTime.now().toString().substring(0, 7)) {
+    return "${int.parse(DateTime.now().toString().substring(8, 10)) - int.parse(date.substring(8, 10))} روز قبل";
+  } else if (date.substring(0, 4) ==
+      DateTime.now().toString().substring(0, 4)) {
+    return "${int.parse(DateTime.now().toString().substring(5, 7)) - int.parse(date.substring(5, 7))} ماه قبل";
   } else {
-    return "${int.parse(DateTime.now().toString().substring(0, 4)) -
-        int.parse(date.substring(0, 4))} سال قبل";
+    return "${int.parse(DateTime.now().toString().substring(0, 4)) - int.parse(date.substring(0, 4))} سال قبل";
   }
 
   //
@@ -424,23 +393,20 @@ String textTime(String date) {
   //       : "${int.parse(DateTime.now().toString().substring(0,4)) - int.parse(date.substring(0,4))} سال قبل";
 }
 
-
 Padding textLoginPageSignup() {
   return new Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 0),
       child: new Text(
         'ثبت نام',
-        style: TextStyle(
-            fontSize: 25, color: Color(0xff2C003E)),
+        style: TextStyle(fontSize: 25, color: Color(0xff2C003E)),
         textAlign: TextAlign.center,
-      )
-  );
+      ));
 }
 
 TextStyle styleHomePage() {
   return TextStyle(
       color: Colors.white,
-      fontSize: SizeConfig.textMultiplier *3.3,
+      fontSize: SizeConfig.textMultiplier * 3.3,
       fontWeight: FontWeight.bold);
 }
 
@@ -450,29 +416,31 @@ CircleAvatar circleAvatarSignIn() {
     backgroundColor: R.color.banafshmain,
     child: new Icon(
       Icons.arrow_forward,
-      size: SizeConfig.heightMultiplier*7,
+      size: SizeConfig.heightMultiplier * 5,
+      color: Colors.white,
     ),
   );
 }
 
 CircleAvatar circleSignUp() {
   return new CircleAvatar(
-    radius: 40,
+    radius: SizeConfig.heightMultiplier *6,
     backgroundColor: R.color.banafshmain,
     child: new Icon(
       Icons.arrow_forward,
-      size: 40,
+      size: SizeConfig.heightMultiplier*5,
+      color: Colors.white,
     ),
   );
 }
 
 CircleAvatar circleAvatarKaramouziScreen() {
   return new CircleAvatar(
-    maxRadius: 11.0,
+    maxRadius: SizeConfig.heightMultiplier*2,
     child: new Icon(
       Icons.arrow_forward_ios,
       color: Colors.white,
-      size: 10.0,
+      size: SizeConfig.heightMultiplier*1.5
     ),
     backgroundColor: Color(0xff2C003E),
   );
@@ -481,35 +449,46 @@ CircleAvatar circleAvatarKaramouziScreen() {
 AppBar appBarHomePage(BuildContext context, MyData profile) {
   return new AppBar(actions: <Widget>[
     new Padding(
-        padding: EdgeInsets.only(left: SizeConfig.heightMultiplier*2,top: SizeConfig.heightMultiplier*0.5),
+        padding: EdgeInsets.only(
+            left: SizeConfig.heightMultiplier * 2,
+            top: SizeConfig.heightMultiplier * 0.5),
         child: new Stack(
           children: [
             new IconButton(
-
-                icon: Icon(Icons.person, color: Colors.white, size: SizeConfig.heightMultiplier *4.0,),
+                icon: Icon(
+                  Icons.person,
+                  color: Colors.white,
+                  size: SizeConfig.heightMultiplier * 4.0,
+                ),
                 onPressed: () {
                   Navigator.push(
-                      context, new MaterialPageRoute(builder: (context) =>
-                  profile.type == "2"
-                      ? new MyProfileUserNormalScreen(id: profile.id)
-                      : new MyProfileStudentScreen(id: profile.id)
-                  ));
-                }
-            ),
-            profile.image == null || profile.title == null ||
-                profile.moarefiNameh == null || profile.skills == null
-                || profile.certificates == null || profile.fieldUni == null ||
-                profile.languages == null || profile.resumes == null
-                || profile.educational == null ?
-            new Positioned(bottom: SizeConfig.heightMultiplier*2.4,
-                right:SizeConfig.heightMultiplier*1.3,
-                child: new CircleAvatar(
-                  backgroundColor: Colors.red, maxRadius: 4,))
+                      context,
+                      new MaterialPageRoute(
+                          builder: (context) => profile.type == "2"
+                              ? new MyProfileUserNormalScreen(id: profile.id)
+                              : new MyProfileStudentScreen(id: profile.id)));
+                }),
+            profile.image == null ||
+                    profile.title == null ||
+                    profile.moarefiNameh == null ||
+                    profile.skills == null ||
+                    profile.certificates == null ||
+                    profile.fieldUni == null ||
+                    profile.languages == null ||
+                    profile.resumes == null ||
+                    profile.educational == null ||
+                    profile.image == null ||
+                    profile.image == ''
+                ? new Positioned(
+                    bottom: SizeConfig.heightMultiplier * 2.4,
+                    right: SizeConfig.heightMultiplier * 1.3,
+                    child: new CircleAvatar(
+                      backgroundColor: Colors.red,
+                      maxRadius: 4,
+                    ))
                 : new SizedBox()
-
           ],
-        )
-    )
+        ))
   ], elevation: 0.0, backgroundColor: R.color.banafshmain);
 }
 
@@ -614,45 +593,46 @@ AppBar appBarAgahiScreen(/*TabController tabController*/) {
                 style: TextStyle(color: Colors.black),
               )),
         ],
-      ));*/AppBar(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          bottom: Radius.circular(30),
-        ),
-      ),
-      elevation: 5.0,
-      bottomOpacity: 25.0,
-      // actions: <Widget>[
-      //   new Padding(
-      //       padding: const EdgeInsets.only(left: 5.0),
-      //       child: new IconButton(
-      //           icon: Icon(
-      //             Icons.filter_list,
-      //             color: Color(0xff2C003E),
-      //           ),
-      //           onPressed: () {}))
-      // ],
-      backgroundColor: Colors.white);
-      // bottom: TabBar(
-      //   controller: tabController,
-      //   tabs: [
-      //     Tab(
-      //         icon: new Text(
-      //           'پروژه ها',
-      //           style: TextStyle(color: Colors.black),
-      //         )),
-      //     Tab(
-      //         icon: new Text(
-      //           'فروش کتاب',
-      //           style: TextStyle(color: Colors.black),
-      //         )),
-      //     // Tab(
-      //     //     icon: new Text(
-      //     //       'کارفرکا',
-      //     //       style: TextStyle(color: Colors.black),
-      //     //     )),
-      //   ],
-      // ));
+      ));*/
+      AppBar(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(30),
+            ),
+          ),
+          elevation: 5.0,
+          bottomOpacity: 25.0,
+          // actions: <Widget>[
+          //   new Padding(
+          //       padding: const EdgeInsets.only(left: 5.0),
+          //       child: new IconButton(
+          //           icon: Icon(
+          //             Icons.filter_list,
+          //             color: Color(0xff2C003E),
+          //           ),
+          //           onPressed: () {}))
+          // ],
+          backgroundColor: Colors.white);
+  // bottom: TabBar(
+  //   controller: tabController,
+  //   tabs: [
+  //     Tab(
+  //         icon: new Text(
+  //           'پروژه ها',
+  //           style: TextStyle(color: Colors.black),
+  //         )),
+  //     Tab(
+  //         icon: new Text(
+  //           'فروش کتاب',
+  //           style: TextStyle(color: Colors.black),
+  //         )),
+  //     // Tab(
+  //     //     icon: new Text(
+  //     //       'کارفرکا',
+  //     //       style: TextStyle(color: Colors.black),
+  //     //     )),
+  //   ],
+  // ));
 }
 
 AppBar appBarProfileScreen() {
@@ -833,18 +813,22 @@ AppBar appBarProfileScreen() {
 //   }
 // }
 
-
 Row rowOneKaramouziScreen() {
   return new Row(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: <Widget>[
-      new Icon(Icons.timer, color: Colors.black54, size: 20.0,),
-      new SizedBox(width: 3.0,),
+      new Icon(
+        Icons.timer,
+        color: Colors.black54,
+        size: 20.0,
+      ),
+      new SizedBox(
+        width: 3.0,
+      ),
       new Padding(
           padding: const EdgeInsets.only(top: 3.0),
           child: new Text('4 ساعت در روز',
-              style: TextStyle(color: Colors.black54, fontSize: 15.0))
-      )
+              style: TextStyle(color: Colors.black54, fontSize: 15.0)))
     ],
   );
 }
@@ -853,13 +837,23 @@ Row rowTwoKaramouziScreen(String pp) {
   new Row(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: <Widget>[
-      new Icon(Icons.people, color: Colors.black54, size: SizeConfig.heightMultiplier*3,),
-      new SizedBox(width: SizeConfig.imageSizeMultiplier,),
+      new Icon(
+        Icons.people,
+        color: Colors.black54,
+        size: SizeConfig.heightMultiplier * 3,
+      ),
+      new SizedBox(
+        width: SizeConfig.imageSizeMultiplier,
+      ),
       new Padding(
-          padding:  EdgeInsets.only(top: SizeConfig.heightMultiplier*0.5, left: SizeConfig.imageSizeMultiplier),
+          padding: EdgeInsets.only(
+              top: SizeConfig.heightMultiplier * 0.5,
+              left: SizeConfig.imageSizeMultiplier),
           child: new Text(
-            pp, style: TextStyle(color: Colors.black54, fontSize: SizeConfig.textMultiplier*2),)
-      )
+            pp,
+            style: TextStyle(
+                color: Colors.black54, fontSize: SizeConfig.textMultiplier * 2),
+          ))
     ],
   );
 }
@@ -871,14 +865,19 @@ Padding rowKaramouziScreenOne(String phonenumber) {
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         new GestureDetector(
-          child: new Text(phonenumber, style: TextStyle(fontSize: 17.0),),
+          child: new Text(
+            phonenumber,
+            style: TextStyle(fontSize: 17.0),
+          ),
           // onLongPress: () {
           //   Clipboard.setData(new ClipboardData(text: phonenumber));
           //   // key.currentState.showSnackBar(
           //   //     new SnackBar(content: new Text("Copied to Clipboard"),));
           // },
         ),
-        new SizedBox(width: 5.0,),
+        new SizedBox(
+          width: 5.0,
+        ),
         new Icon(Icons.call),
       ],
     ),
@@ -889,75 +888,103 @@ Row rowKaramouziScreenTwo() {
   return new Row(
     children: <Widget>[
       new Icon(Icons.mail),
-      new Text(' iranserver@gmail.com', style: TextStyle(fontSize: 17.0),)
+      new Text(
+        ' iranserver@gmail.com',
+        style: TextStyle(fontSize: 17.0),
+      )
     ],
   );
 }
-
 
 Row rowKaramouziScreenThree() {
   return new Row(
     children: <Widget>[
       new Icon(Icons.check_circle),
-      new Text(' iran_server', style: TextStyle(fontSize: 17.0),)
+      new Text(
+        ' iran_server',
+        style: TextStyle(fontSize: 17.0),
+      )
     ],
   );
 }
 
-
 Padding paddingOneKaramouziScreen() {
   return new Padding(
-    padding: EdgeInsets.symmetric(horizontal: SizeConfig.imageSizeMultiplier * 5.5, vertical: SizeConfig.heightMultiplier * 1.5),
-    child: new Text('کارآموزی منجر به استخدام ',
-      style: TextStyle(fontSize: SizeConfig.textMultiplier*2.8, fontWeight: FontWeight.bold),),);
-}
-
-
-Padding paddingTwoKaramouziScreen(String description) {
-  return new Padding(
-    padding:  EdgeInsets.symmetric(horizontal: SizeConfig.imageSizeMultiplier * 5.5,
-        vertical: SizeConfig.heightMultiplier * 1.5),
-    child: new Text(description,
-      style: TextStyle(fontSize: SizeConfig.textMultiplier*2.5),),);
-}
-
-
-Padding paddingThreeKaramouziScreen() {
-  return new Padding(
-    padding:  EdgeInsets.only(right: SizeConfig.imageSizeMultiplier * 3.5,
-        top: SizeConfig.heightMultiplier * 1.5),
-    child: new Text('شرایط',
-      style: TextStyle(fontSize:SizeConfig.heightMultiplier * 3, fontWeight: FontWeight.bold),),);
-}
-
-
-Padding paddingFourKaramouziScreen(String conditions) {
-  return new Padding(
-    padding:  EdgeInsets.symmetric( horizontal: SizeConfig.imageSizeMultiplier * 5.5,
+    padding: EdgeInsets.symmetric(
+        horizontal: SizeConfig.imageSizeMultiplier * 5.5,
         vertical: SizeConfig.heightMultiplier * 1.5),
     child: new Text(
-      conditions,
-      style: TextStyle(fontSize: SizeConfig.heightMultiplier * 2.7),),
+      'کارآموزی منجر به استخدام ',
+      style: TextStyle(
+          fontSize: SizeConfig.textMultiplier * 2.8,
+          fontWeight: FontWeight.bold),
+    ),
   );
 }
 
+Padding paddingTwoKaramouziScreen(String description) {
+  return new Padding(
+    padding: EdgeInsets.symmetric(
+        horizontal: SizeConfig.imageSizeMultiplier * 5.5,
+        vertical: SizeConfig.heightMultiplier * 1.5),
+    child: new Text(
+      description,
+      style: TextStyle(fontSize: SizeConfig.textMultiplier * 2.5),
+    ),
+  );
+}
+
+Padding paddingThreeKaramouziScreen() {
+  return new Padding(
+    padding: EdgeInsets.only(
+        right: SizeConfig.imageSizeMultiplier * 3.5,
+        top: SizeConfig.heightMultiplier * 1.5),
+    child: new Text(
+      'شرایط',
+      style: TextStyle(
+          fontSize: SizeConfig.heightMultiplier * 3,
+          fontWeight: FontWeight.bold),
+    ),
+  );
+}
+
+Padding paddingFourKaramouziScreen(String conditions) {
+  return new Padding(
+    padding: EdgeInsets.symmetric(
+        horizontal: SizeConfig.imageSizeMultiplier * 5.5,
+        vertical: SizeConfig.heightMultiplier * 1.5),
+    child: new Text(
+      conditions,
+      style: TextStyle(fontSize: SizeConfig.heightMultiplier * 2.7),
+    ),
+  );
+}
 
 Padding paddingFiveKaramouziScreen() {
   return new Padding(
-    padding:  EdgeInsets.only(right: SizeConfig.imageSizeMultiplier * 3.5,
+    padding: EdgeInsets.only(
+        right: SizeConfig.imageSizeMultiplier * 3.5,
         top: SizeConfig.heightMultiplier * 1.5),
-    child: new Text('آدرس',
-      style: TextStyle(fontSize: SizeConfig.heightMultiplier * 3, fontWeight: FontWeight.bold),),);
+    child: new Text(
+      'آدرس',
+      style: TextStyle(
+          fontSize: SizeConfig.heightMultiplier * 3,
+          fontWeight: FontWeight.bold),
+    ),
+  );
 }
-
 
 Padding paddingSixKaramouziScreen(String address) {
   return new Padding(
-    padding:  EdgeInsets.symmetric(horizontal: SizeConfig.imageSizeMultiplier * 5.5,
+    padding: EdgeInsets.symmetric(
+        horizontal: SizeConfig.imageSizeMultiplier * 5.5,
         vertical: SizeConfig.heightMultiplier * 1.5),
-    child: new Text(address, style: TextStyle(fontSize: SizeConfig.heightMultiplier * 2.7),),);
+    child: new Text(
+      address,
+      style: TextStyle(fontSize: SizeConfig.heightMultiplier * 2.7),
+    ),
+  );
 }
-
 
 Padding paddingSevenKaramouziScreen() {
   return new Padding(
@@ -966,56 +993,75 @@ Padding paddingSevenKaramouziScreen() {
       runSpacing: 8.0,
       spacing: 7.0,
       children: <Widget>[
-        ObjectTag(tags: 'ios  برنامه نویسی',),
-        ObjectTag(tags: 'فرانت اند',),
-        ObjectTag(tags: 'بک اند',),
-        ObjectTag(tags: 'ui',),
+        ObjectTag(
+          tags: 'ios  برنامه نویسی',
+        ),
+        ObjectTag(
+          tags: 'فرانت اند',
+        ),
+        ObjectTag(
+          tags: 'بک اند',
+        ),
+        ObjectTag(
+          tags: 'ui',
+        ),
       ],
-    ),);
+    ),
+  );
 }
 
 Padding paddingEightKaramouziScreen() {
   return new Padding(
-    padding:  EdgeInsets.only(right: SizeConfig.imageSizeMultiplier * 3.5,
+    padding: EdgeInsets.only(
+        right: SizeConfig.imageSizeMultiplier * 3.5,
         top: SizeConfig.heightMultiplier * 1.5),
-    child: new Text('ارتباط',
-      style: TextStyle(fontSize: SizeConfig.textMultiplier*3, fontWeight: FontWeight.bold),),);
+    child: new Text(
+      'ارتباط',
+      style: TextStyle(
+          fontSize: SizeConfig.textMultiplier * 3, fontWeight: FontWeight.bold),
+    ),
+  );
 }
-
 
 Container containerError() {
   return new Container(
       child: new Text(
-        "کاربر یافت نشد",
-        style: TextStyle(
-            color: Colors.red,
-            fontSize: SizeConfig.heightMultiplier*2.3
-        ),
-      ));
+    "کاربر یافت نشد",
+    style: TextStyle(
+        color: Colors.red, fontSize: SizeConfig.heightMultiplier * 2.3),
+  ));
 }
 
 Container containerSplash() {
   return new Container(
     decoration: new BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage('assets/image/drawing.png'))),
+        image: DecorationImage(image: AssetImage('assets/image/drawing.png'))),
   );
 }
 
 Container ContainerImageLoginPage(var phonesize) {
-  return new Container(color: Colors.white,
+  return new Container(
+    color: Colors.white,
     height: phonesize.height,
     width: phonesize.width,
-    child: new Align(alignment: Alignment.bottomLeft,
-        child: new Opacity(opacity: 0.25,
-            child: new Image(image: AssetImage('assets/image/hom.png',),
-              height: phonesize.height * 0.4,))),);
+    child: new Align(
+        alignment: Alignment.bottomLeft,
+        child: new Opacity(
+            opacity: 0.25,
+            child: new Image(
+              image: AssetImage(
+                'assets/image/hom.png',
+              ),
+              height: phonesize.height * 0.4,
+            ))),
+  );
 }
-
 
 class DrawerLists extends StatelessWidget {
   MyData profile;
+
   DrawerLists({this.profile});
+
   @override
   Widget build(BuildContext context) {
     List<ListTile> listdrawer = [
@@ -1067,7 +1113,8 @@ class DrawerLists extends StatelessWidget {
       ListTile(
         leading: new Icon(Icons.block),
         onTap: () {
-          Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new StudentPerfectScreen()));
+          Navigator.of(context).push(new MaterialPageRoute(
+              builder: (context) => new StudentPerfectScreen()));
         },
         title: Text('دانشجوی حرفه ای'),
         trailing: Icon(Icons.arrow_forward),
@@ -1112,7 +1159,7 @@ class DrawerLists extends StatelessWidget {
                     child: new Text("بله"),
                     onPressed: () async {
                       SharedPreferences perfs =
-                      await SharedPreferences.getInstance();
+                          await SharedPreferences.getInstance();
                       await perfs.remove('user_apiToken');
                       await perfs.remove('user_username');
                       await perfs.remove('user_password');
@@ -1137,11 +1184,46 @@ class DrawerLists extends StatelessWidget {
             color: Colors.white,
             child: new DrawerHeader(
                 child: Column(
-                  children: [
-                    new CircleAvatar(),
-                    new Text(profile.username)
-                  ],
+                  children: [Expanded(flex: 3,child: profile.image == "" ||
+                    profile.image == null
+                    ? Container(
+                  height: SizeConfig.heightMultiplier * 10,
+                  width: SizeConfig.heightMultiplier * 19,
+                  child: new CircleAvatar(
+                    child: new Text(
+                      profile
+                          .username
+                          .toString()
+                          .substring(0, 1),
+                      style: TextStyle(
+                          fontSize: SizeConfig.heightMultiplier*4,
+                          color: Colors.white),
+                    ),
+                    backgroundColor:
+                    R.color.banafshKamRang,
+                    // minRadius: 30.0
+                  ),
+                )
+                    : Center(
+                  child: new CircleAvatar(
+                    radius: SizeConfig
+                        .heightMultiplier *
+                        5,
+                    backgroundImage:
+                    new NetworkImage(
+                      "http://stube.ir/image/${profile.image}",
+                    ),
+                    backgroundColor:
+                    R.color.banafshKamRang,
+                    // minRadius: 30.0
+                  ),
                 )),
+                    Expanded(flex:2,child: Padding(
+                        padding:  EdgeInsets.only(top: SizeConfig.heightMultiplier*2),
+                        child: new Text(profile.username , style: TextStyle(fontSize: SizeConfig.textMultiplier*3),maxLines:1,overflow: TextOverflow.ellipsis,),
+                      ),
+                    )],
+            )),
           ),
           new Column(
             children: <Widget>[
@@ -1158,9 +1240,7 @@ class DrawerLists extends StatelessWidget {
   }
 }
 
-
 class Headers extends StatelessWidget {
-
   MyData profile;
 
   Headers({this.profile});
@@ -1175,30 +1255,32 @@ class Headers extends StatelessWidget {
       child: new Column(
         children: <Widget>[
           new Padding(
-            padding: EdgeInsets.only(right: SizeConfig.heightMultiplier * 3, top: 0.0),
+            padding: EdgeInsets.only(
+                right: SizeConfig.heightMultiplier * 3, top: 0.0),
             child: new Row(
               children: <Widget>[
                 profile.image == null || profile.image == ""
                     ? new CircleAvatar(
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: SizeConfig.heightMultiplier*0.7),
-                        child: new Text(profile.username.toString().substring(0,1),
-                          style: TextStyle(
-                              color: R.color.banafshtire,
-                              fontSize: SizeConfig.textMultiplier * 6.5),)),
-                    backgroundColor: Colors.white,
-                    minRadius: SizeConfig.heightMultiplier * 5
-                )
+                        child: Padding(
+                            padding: EdgeInsets.only(
+                                bottom: SizeConfig.heightMultiplier * 0.7),
+                            child: new Text(
+                              profile.username.toString().substring(0, 1),
+                              style: TextStyle(
+                                  color: R.color.banafshtire,
+                                  fontSize: SizeConfig.textMultiplier * 6.5),
+                            )),
+                        backgroundColor: Colors.white,
+                        minRadius: SizeConfig.heightMultiplier * 5)
                     : new Container(
-                    margin: EdgeInsets.only(left: SizeConfig.heightMultiplier *1, top: SizeConfig.heightMultiplier * 1.3),
-                    height: SizeConfig.imageSizeMultiplier *19,
-                    width: SizeConfig.imageSizeMultiplier *19,
-                    decoration: decorationImageHomePage(profile.image)
-                ),
+                        margin: EdgeInsets.only(
+                            left: SizeConfig.heightMultiplier * 1,
+                            top: SizeConfig.heightMultiplier * 1.3),
+                        height: SizeConfig.imageSizeMultiplier * 19,
+                        width: SizeConfig.imageSizeMultiplier * 19,
+                        decoration: decorationImageHomePage(profile.image)),
                 new SizedBox(width: SizeConfig.imageSizeMultiplier * 2),
-
-                    new Text(profile.name, style: styleHomePage()),
-
+                new Text(profile.name, style: styleHomePage()),
               ],
             ),
           )
@@ -1208,7 +1290,6 @@ class Headers extends StatelessWidget {
   }
 }
 
-
 class Constants {
   static String first = 'ایجاد درخواست';
   static String second = 'پیام';
@@ -1217,65 +1298,68 @@ class Constants {
   static List<String> textMorebutton = ['ایجاد درخواست', 'پیام', 'ذخیره'];
 }
 
-
 class MenuItemWidget extends StatelessWidget {
-
   ModelMenu model;
   var listener;
 
-  MenuItemWidget({@required this.model,  this.listener});
+  MenuItemWidget({@required this.model, this.listener});
 
   @override
   Widget build(BuildContext context) {
     return new Container(
         child: new GestureDetector(
-          onTap: () {
-            listener();
-          },
-          child: new Card(
-            shadowColor: Colors.black,
-            elevation: 10.0,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(SizeConfig.heightMultiplier * 2)),
-            margin: EdgeInsets.only(left: SizeConfig.imageSizeMultiplier * 2,
-                right: SizeConfig.imageSizeMultiplier * 2, top: SizeConfig.heightMultiplier * 1 ,bottom: SizeConfig.heightMultiplier * 1),
-            color: Colors.white,
-            child: new Container(
-
-              child: new Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    flex: 3,
-                    child: new Align(
-                      alignment: Alignment.topCenter,
-                      child: new Image(
-                        image: AssetImage(model.image),
-                        width: SizeConfig.imageSizeMultiplier * 40,
-                      ),
-                    ),
+      onTap: () {
+        listener();
+      },
+      child: new Card(
+        shadowColor: Colors.black,
+        elevation: 10.0,
+        shape: RoundedRectangleBorder(
+            borderRadius:
+                BorderRadius.circular(SizeConfig.heightMultiplier * 2)),
+        margin: EdgeInsets.only(
+            left: SizeConfig.imageSizeMultiplier * 2,
+            right: SizeConfig.imageSizeMultiplier * 2,
+            top: SizeConfig.heightMultiplier * 1,
+            bottom: SizeConfig.heightMultiplier * 1),
+        color: Colors.white,
+        child: new Container(
+          child: new Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                flex: 3,
+                child: new Align(
+                  alignment: Alignment.topCenter,
+                  child: new Image(
+                    image: AssetImage(model.image),
+                    width: SizeConfig.imageSizeMultiplier * 40,
                   ),
-                  Expanded(
-                    flex: 1,
-                    child: Padding(
-                      padding:  EdgeInsets.only(bottom: SizeConfig.heightMultiplier * 1,),
-                      child: new Align(
-                        alignment: Alignment.bottomCenter,
-                        child: new Text(
-                          model.titr,
-                          style: TextStyle(
-                              color: model.color,
-                              fontSize: SizeConfig.textMultiplier * 2.8,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
+              Expanded(
+                flex: 1,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    bottom: SizeConfig.heightMultiplier * 1,
+                  ),
+                  child: new Align(
+                    alignment: Alignment.bottomCenter,
+                    child: new Text(
+                      model.titr,
+                      style: TextStyle(
+                          color: model.color,
+                          fontSize: SizeConfig.textMultiplier * 2.8,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ));
+        ),
+      ),
+    ));
   }
 }
 
@@ -1306,46 +1390,40 @@ class bodyMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     return new ListView.builder(
         itemCount: 20,
-        itemBuilder: (BuildContext context, int index) =>
-        new Column(
-          children: <Widget>[
-            new GestureDetector(
-              child: new Container(
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width,
-                child: new ListTile(
-                  title: new Text('Omeadr'),
-                  subtitle: new Text(
-                    'سلام',
-                    style: TextStyle(fontSize: 16.0),
-
-                  ),
-                  trailing: new Text(
-                    '8.14 ب.ظ',
-                    style: TextStyle(fontSize: 11.0),
-                  ),
-                  leading: new CircleAvatar(
-                    backgroundImage: AssetImage(
-                      'assets/image/dev.jpg',
+        itemBuilder: (BuildContext context, int index) => new Column(
+              children: <Widget>[
+                new GestureDetector(
+                  child: new Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: new ListTile(
+                      title: new Text('Omeadr'),
+                      subtitle: new Text(
+                        'سلام',
+                        style: TextStyle(fontSize: 16.0),
+                      ),
+                      trailing: new Text(
+                        '8.14 ب.ظ',
+                        style: TextStyle(fontSize: 11.0),
+                      ),
+                      leading: new CircleAvatar(
+                        backgroundImage: AssetImage(
+                          'assets/image/dev.jpg',
+                        ),
+                        maxRadius: 30.0,
+                      ),
                     ),
-                    maxRadius: 30.0,
                   ),
+                  onTap: () {
+                    print('pressed chat ');
+                  },
                 ),
-              ),
-              onTap: () {
-                print('pressed chat ');
-              },
-            ),
-            Line(),
-          ],
-        ));
+                Line(),
+              ],
+            ));
   }
 }
 
 class bodyRequest extends StatefulWidget {
-
   MyData profile;
   var phoneSize;
 
@@ -1356,20 +1434,14 @@ class bodyRequest extends StatefulWidget {
 }
 
 String FieldText(String text) {
-  return text == "" || text == null
-      ? 'وارد نشده'
-      : text;
+  return text == "" || text == null ? 'وارد نشده' : text;
 }
 
-
-
 class _bodyRequestState extends State<bodyRequest> {
-
   bool isLoading = false;
 
-  List<RequestAd> requestsAd =[];
-  List<RequestProfile> requestProfile=[];
-
+  List<RequestAd> requestsAd = [];
+  List<RequestProfile> requestProfile = [];
 
   @override
   void initState() {
@@ -1377,185 +1449,261 @@ class _bodyRequestState extends State<bodyRequest> {
     _getRequestAd();
   }
 
-
-
   _getRequestAd() async {
-
-   if(this.mounted){
-     setState(() {
-       isLoading = true;
-     });
-   }
-    requestProfile= await RequestHttp.getProfileReqAd(widget.profile.id);
+    if (this.mounted) {
+      setState(() {
+        isLoading = true;
+      });
+    }
+    requestProfile = await RequestHttp.getProfileReqAd(widget.profile.id);
     var response = await RequestHttp.getAd(widget.profile.id);
     print(response);
 
     requestsAd.addAll(response['requests']);
-    if(this.mounted){
+    if (this.mounted) {
       setState(() {
-        isLoading=false;
+        isLoading = false;
       });
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
     var phoneSize = MediaQuery.of(context).size;
     return isLoading
-        ? new Center(child: new CircularProgressIndicator(),)
-        :requestsAd.length == 0
         ? new Center(
-        child: new Text(
-          'در حال حاضر هیچ درخواستی برای کارآموزی های شما وجود ندارد (:',
-          style: TextStyle(color: Colors.black),
-        ))
-        : new ListView.builder(
-        padding: const EdgeInsets.only(top: 5.0),
-        itemCount: requestsAd.length,
-        itemBuilder: (BuildContext context, int index) =>
-        new Column(
-          children: <Widget>[
-            new GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(new MaterialPageRoute(
-                    builder: (ctx) =>
-                    new MyRequests(userName: requestProfile[index].username,
-                        date: requestsAd[index].date,
-                        text: requestsAd[index].req_text)));
-              },
-              child: new Container(
-                margin: const EdgeInsets.only(top: 5.0),
-                width: widget.phoneSize.width,
-                child: new Column(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(right:8.0),
-                      child: new Row(
-                        children: <Widget>[
-                          //TODO inja az comment dar biad
-                          requestProfile[index].image =="" || requestProfile[index].image==null
-                              ? Container(
-                            height: phoneSize.height * 0.10,
-                            width: phoneSize.width * 0.19,
-                            child: new CircleAvatar(
-                              child: new Text(requestProfile[index].username.toString().substring(0,1),style: TextStyle(fontSize: 25.0,color: Colors.white),),
-                              backgroundColor: R.color.banafshKamRang,
-                              // minRadius: 30.0
-                            ),
-                          )
-                              : Center(
-                            child: new CircleAvatar(radius: 37,
-                              backgroundImage: new NetworkImage("http://stube.ir/image/${requestProfile[index].image}",),
-                              backgroundColor: R.color.banafshKamRang,
-                              // minRadius: 30.0
-                            ),
-                          ),
-                          new Column(
-                            crossAxisAlignment:
-                            CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(top:12.0,right:8.0),
-                                    child: new Text(requestProfile[index].username,style: TextStyle(fontSize: 16.0,fontWeight: FontWeight.w800),),
-                                  ),
-                                  // new Expanded(),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top:12.0,right: 120.0),
-                                    child: new Row(
-                                      children: <Widget>[
-                                        new Text(
-                                          textTime(requestsAd[index].date),
-                                          style: TextStyle(fontSize: 12.0),
-                                        ),
+            child: new CircularProgressIndicator(),
+          )
+        : requestsAd.length == 0
+            ? new Center(
+                child: new Text(
+                'در حال حاضر هیچ درخواستی برای کارآموزی های شما وجود ندارد (:',
+                style: TextStyle(color: Colors.black),
+              ))
+            : new ListView.builder(
+                padding: EdgeInsets.only(top: SizeConfig.heightMultiplier * .8),
+                itemCount: requestsAd.length,
+                itemBuilder: (BuildContext context, int index) => new Column(
+                      children: <Widget>[
+                        new GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(new MaterialPageRoute(
+                                builder: (ctx) => new MyRequests(
+                                    userName: requestProfile[index].username,
+                                    date: requestsAd[index].date,
+                                    text: requestsAd[index].req_text)));
+                          },
+                          child: new Container(
+                            margin: EdgeInsets.only(
+                                top: SizeConfig.heightMultiplier * .8),
+                            width: widget.phoneSize.width,
+                            child: new Column(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      right:
+                                          SizeConfig.imageSizeMultiplier * 2),
+                                  child: new Row(
+                                    children: <Widget>[
+                                      //TODO inja az comment dar biad
 
-                                        // new Padding(
-                                        //   padding: const EdgeInsets.only(left: 27.0),
-                                        //   child: new Row(
-                                        //     children: <Widget>[
-                                        //       new Text(
-                                        //         'khorasan,mashhad',
-                                        //         style: TextStyle(fontSize: 8.0),
-                                        //       ),
-                                        //       new Icon(
-                                        //         Icons.location_on,
-                                        //         size: 10.0,
-                                        //       )
-                                        //     ],
-                                        //   ),
-                                        // )
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                              new Row(
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.only(right:8.0),
-                                    child: new SizedBox(
-                                      width: 250.0,
-                                      child: new Text(
-                                        requestsAd[index].req_text,
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
+                                      Expanded(
+                                        flex: 1,
+                                        child: requestProfile[index].image ==
+                                                    "" ||
+                                                requestProfile[index].image ==
+                                                    null
+                                            ? Container(
+                                                height: phoneSize.height * 0.10,
+                                                width: phoneSize.width * 0.19,
+                                                child: new CircleAvatar(
+                                                  child: new Text(
+                                                    requestProfile[index]
+                                                        .username
+                                                        .toString()
+                                                        .substring(0, 1),
+                                                    style: TextStyle(
+                                                        fontSize: 25.0,
+                                                        color: Colors.white),
+                                                  ),
+                                                  backgroundColor:
+                                                      R.color.banafshKamRang,
+                                                  // minRadius: 30.0
+                                                ),
+                                              )
+                                            : Center(
+                                                child: new CircleAvatar(
+                                                  radius: 37,
+                                                  backgroundImage:
+                                                      new NetworkImage(
+                                                    "http://stube.ir/image/${requestProfile[index].image}",
+                                                  ),
+                                                  backgroundColor:
+                                                      R.color.banafshKamRang,
+                                                  // minRadius: 30.0
+                                                ),
+                                              ),
                                       ),
-                                    ),
+
+                                      Expanded(
+                                        flex: 4,
+                                        child: new Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: <Widget>[
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Expanded(
+                                                  flex: 4,
+                                                  child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                        top: SizeConfig
+                                                                .heightMultiplier *
+                                                            1.8,
+                                                        right: SizeConfig
+                                                                .imageSizeMultiplier *
+                                                            2),
+                                                    child: new Text(
+                                                      requestProfile[index]
+                                                          .username,
+                                                      maxLines: 1,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: TextStyle(
+                                                          fontSize: SizeConfig
+                                                                  .textMultiplier *
+                                                              2.5,
+                                                          fontWeight:
+                                                              FontWeight.w800),
+                                                    ),
+                                                  ),
+                                                ),
+                                                // new Expanded(),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                      top: SizeConfig
+                                                              .heightMultiplier *
+                                                          1.8,
+                                                    ),
+                                                    child: new Row(
+                                                      children: <Widget>[
+                                                        new Text(
+                                                          textTime(
+                                                              requestsAd[index]
+                                                                  .date),
+                                                          style: TextStyle(
+                                                              fontSize: SizeConfig
+                                                                      .textMultiplier *
+                                                                  1.9),
+                                                        ),
+
+                                                        // new Padding(
+                                                        //   padding: const EdgeInsets.only(left: 27.0),
+                                                        //   child: new Row(
+                                                        //     children: <Widget>[
+                                                        //       new Text(
+                                                        //         'khorasan,mashhad',
+                                                        //         style: TextStyle(fontSize: 8.0),
+                                                        //       ),
+                                                        //       new Icon(
+                                                        //         Icons.location_on,
+                                                        //         size: 10.0,
+                                                        //       )
+                                                        //     ],
+                                                        //   ),
+                                                        // )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                            new Row(
+                                              children: <Widget>[
+                                                Expanded(
+                                                  child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                        right: SizeConfig
+                                                                .imageSizeMultiplier *
+                                                            2,
+                                                        left: SizeConfig
+                                                                .imageSizeMultiplier *
+                                                            3),
+                                                    child: new Text(
+                                                      requestsAd[index]
+                                                          .req_text,
+                                                      maxLines: 2,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: TextStyle(
+                                                          fontSize: SizeConfig
+                                                                  .textMultiplier *
+                                                              2.1),
+                                                    ),
+                                                  ),
+                                                ),
+
+                                                // ButtonMore(),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
                                   ),
-
-                                  // ButtonMore(),
-                                ],
-                              )
-                            ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ],
-                      ),
-                    ),
-
-                  ],
-                ),
-              ),
-            ),
-            Line()
-          ],
-        )
-    );
+                        ),
+                        Line()
+                      ],
+                    ));
   }
 }
-
 
 class HeadersItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var phoneSize = MediaQuery
-        .of(context)
-        .size;
+    var phoneSize = MediaQuery.of(context).size;
     return new Column(
       children: <Widget>[
         new Row(
           children: <Widget>[
-            new Container(height: phoneSize.height * 0.25,
+            new Container(
+              height: phoneSize.height * 0.25,
               width: phoneSize.width * 0.45,
               decoration: BoxDecoration(
-                  image: DecorationImage(colorFilter: ColorFilter.mode(
-                      Colors.black45, BlendMode.darken),
+                  image: DecorationImage(
+                      colorFilter:
+                          ColorFilter.mode(Colors.black45, BlendMode.darken),
                       fit: BoxFit.cover,
-                      image: AssetImage('assets/image/dev.jpg',)
-                  )
-              ),
-              child: new Align(alignment: Alignment.topRight,
+                      image: AssetImage(
+                        'assets/image/dev.jpg',
+                      ))),
+              child: new Align(
+                alignment: Alignment.topRight,
                 child: new IconButton(
-                    icon: Icon(Icons.share, color: Colors.white,),
+                    icon: Icon(
+                      Icons.share,
+                      color: Colors.white,
+                    ),
                     onPressed: () {
                       print('pressed');
-                    }),),
+                    }),
+              ),
             ),
-            new Container(height: phoneSize.height * 0.25,
+            new Container(
+              height: phoneSize.height * 0.25,
               width: phoneSize.width * 0.55,
               color: Color(0xff2D0827),
               child: new Column(
@@ -1567,89 +1715,119 @@ class HeadersItems extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 2.0, right: 5.0),
                         child: new CircleAvatar(
                           backgroundImage: AssetImage('assets/image/avt.jpg'),
-                          maxRadius: 16.0,)
-                        ,),
+                          maxRadius: 16.0,
+                        ),
+                      ),
                       new IconButton(
-                          icon: Icon(Icons.arrow_forward, color: Colors.white,),
+                          icon: Icon(
+                            Icons.arrow_forward,
+                            color: Colors.white,
+                          ),
                           onPressed: () {})
-
                     ],
                   ),
-                  new Align(alignment: Alignment.topRight,
+                  new Align(
+                    alignment: Alignment.topRight,
                     child: new Padding(
                       padding: const EdgeInsets.only(right: 5.0),
                       child: new Text(
-                        'برنامه نویس اپلیکیشن', overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: TextStyle(fontSize: 21.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),),),),
-                  new Align(alignment: Alignment.topRight,
-                    child: new Padding(
-                      padding: const EdgeInsets.only(right: 5.0),
-                      child: new Text(
-                        'ایران سرور', overflow: TextOverflow.ellipsis,
+                        'برنامه نویس اپلیکیشن',
+                        overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         style: TextStyle(
-                            fontSize: 18.0, color: Colors.white),),),),
-                  new Align(alignment: Alignment.topRight,
+                            fontSize: 21.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                    ),
+                  ),
+                  new Align(
+                    alignment: Alignment.topRight,
+                    child: new Padding(
+                      padding: const EdgeInsets.only(right: 5.0),
+                      child: new Text(
+                        'ایران سرور',
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: TextStyle(fontSize: 18.0, color: Colors.white),
+                      ),
+                    ),
+                  ),
+                  new Align(
+                      alignment: Alignment.topRight,
                       child: new Padding(
                         padding: const EdgeInsets.only(right: 8.0),
-                        child: new Text('رایانه و فناوری اطلاعات',
-                          overflow: TextOverflow.ellipsis, maxLines: 1,
-                          style: TextStyle(fontSize: 16.0,
+                        child: new Text(
+                          'رایانه و فناوری اطلاعات',
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: TextStyle(
+                            fontSize: 16.0,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xff44143E),),),)),
-                  new SizedBox(height: phoneSize.height * 0.02,),
-                  new Align(alignment: Alignment.bottomCenter,
+                            color: Color(0xff44143E),
+                          ),
+                        ),
+                      )),
+                  new SizedBox(
+                    height: phoneSize.height * 0.02,
+                  ),
+                  new Align(
+                    alignment: Alignment.bottomCenter,
                     child: new Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         new GestureDetector(
-                          child: new Container(decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(20.0))),
+                          child: new Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.0))),
                             width: phoneSize.width * 0.17,
-                            child: new Text('پیام',
+                            child: new Text(
+                              'پیام',
                               style: TextStyle(
                                   color: Color(0xff2D0827),
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14.0),
-                              textAlign: TextAlign.center,),
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                         ),
                         new GestureDetector(
-                          child: new Container(decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(20.0))),
+                          child: new Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.0))),
                             width: phoneSize.width * 0.17,
-                            child: new Text('شروع کار',
+                            child: new Text(
+                              'شروع کار',
                               style: TextStyle(
                                   color: Color(0xff2D0827),
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14.0),
-                              textAlign: TextAlign.center,),
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                         ),
                         new GestureDetector(
                           child: Icon(
-                            Icons.bookmark_border, color: Colors.white,),
+                            Icons.bookmark_border,
+                            color: Colors.white,
+                          ),
                         )
-
-
                       ],
-                    ),)
-                ],),)
+                    ),
+                  )
+                ],
+              ),
+            )
           ],
         )
       ],
-    )
-    ;
+    );
   }
 }
-
 
 class ButtonMore extends StatefulWidget {
   @override
@@ -1666,13 +1844,12 @@ class _ButtonMoreState extends State<ButtonMore> {
           itemBuilder: (BuildContext context) {
             return Constants.textMorebutton
                 .map((String text) =>
-                PopupMenuItem<String>(value: text, child: Text(text)))
+                    PopupMenuItem<String>(value: text, child: Text(text)))
                 .toList();
           }),
     );
   }
 }
-
 
 class ObjectTag extends StatelessWidget {
   final String tags;
@@ -1683,7 +1860,6 @@ class ObjectTag extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Container(
         height: 20.0,
-
         decoration: BoxDecoration(
             color: Color(0xff2D0827),
             shape: BoxShape.rectangle,
@@ -1691,11 +1867,15 @@ class ObjectTag extends StatelessWidget {
         child: new Padding(
           padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 3.0),
           child: new Text(
-            tags, style: new TextStyle(color: Colors.white, fontSize: 10.0,),),
+            tags,
+            style: new TextStyle(
+              color: Colors.white,
+              fontSize: 10.0,
+            ),
+          ),
         ));
   }
 }
-
 
 void choiceAction(String choice) {
   if (choice == 'ایجاد درخواست') {
@@ -1706,7 +1886,6 @@ void choiceAction(String choice) {
     print('Press 3');
   }
 }
-
 
 // FloatingActionButton floatingKaramouziScreen(){
 //   return ;
@@ -1720,13 +1899,9 @@ FloatingActionButton floatingActionButtonAgahiScreen(context) {
     backgroundColor: R.color.banafshmain,
     child: OpenContainer(
       transitionDuration: Duration(milliseconds: 500),
-      closedBuilder: (ctx, action) =>
-      new Container(
+      closedBuilder: (ctx, action) => new Container(
         color: R.color.banafshmain,
-        width: MediaQuery
-            .of(context)
-            .size
-            .width,
+        width: MediaQuery.of(context).size.width,
         child: new Icon(
           Icons.add,
           color: R.color.red,

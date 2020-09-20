@@ -7,24 +7,26 @@ import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/R.dart';
 import 'package:stubbbb/Other/widget.dart';
 
-
 class MyRequestPage extends StatefulWidget {
-
   MyData profile;
+
   MyRequestPage({this.profile});
+
   @override
   _MyRequestPageState createState() => _MyRequestPageState();
 }
 
-class _MyRequestPageState extends State<MyRequestPage> with SingleTickerProviderStateMixin{
-
+class _MyRequestPageState extends State<MyRequestPage>
+    with SingleTickerProviderStateMixin {
   bool isLoading = false;
-  List<RequestAd> requestsAd =[];
-  List<RequestIntern> requestsIntern =[];
+  List<RequestAd> requestsAd = [];
+  List<RequestIntern> requestsIntern = [];
+
   // List usernamesAd=[];
 
   // List<dynamic> requests=[];
-  TabController tabController ;
+  TabController tabController;
+
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
@@ -32,9 +34,11 @@ class _MyRequestPageState extends State<MyRequestPage> with SingleTickerProvider
     super.initState();
     // _getRequestAd();
     // _getRequestIntern();
-    tabController =new TabController(length: 3,vsync: this,);
+    tabController = new TabController(
+      length: 3,
+      vsync: this,
+    );
   }
-
 
   // _getRequestAd() async {
   //
@@ -59,9 +63,6 @@ class _MyRequestPageState extends State<MyRequestPage> with SingleTickerProvider
   //
   // }
 
-
-
-
   @override
   Widget build(BuildContext context) {
     var phoneSize = MediaQuery.of(context).size;
@@ -71,28 +72,30 @@ class _MyRequestPageState extends State<MyRequestPage> with SingleTickerProvider
       child: new Scaffold(
           key: _scaffoldKey,
           drawerEnableOpenDragGesture: true,
-          drawer: DrawerLists(profile: widget.profile,),
+          drawer: DrawerLists(
+            profile: widget.profile,
+          ),
           appBar: new AppBar(
-            bottom:  TabBar(
+            bottom: TabBar(
               labelColor: Theme.of(context).accentColor,
               indicatorColor: R.color.banafshmain,
               controller: tabController,
               tabs: [
                 Tab(
                     icon: new Text(
-                      'آگهی ها',
-                      style: TextStyle(color: Colors.black),
-                    )),
+                  'آگهی ها',
+                  style: TextStyle(color: Colors.black),
+                )),
                 Tab(
                     icon: new Text(
-                      'شخصی',
-                      style: TextStyle(color: Colors.black),
-                    )),
+                  'شخصی',
+                  style: TextStyle(color: Colors.black),
+                )),
                 Tab(
                     icon: new Text(
-                      'کارآموزی',
-                      style: TextStyle(color: Colors.black),
-                    )),
+                  'کارآموزی',
+                  style: TextStyle(color: Colors.black),
+                )),
               ],
             ),
             leading: IconButton(
@@ -112,19 +115,14 @@ class _MyRequestPageState extends State<MyRequestPage> with SingleTickerProvider
             //   ),
             // ),
           ),
-
-          body: TabBarView(
-              controller: tabController,
-              children: [
-                new bodyRequest(phoneSize: phoneSize,profile: widget.profile,),
-                new bodyRequestUser(phoneSize: phoneSize,profile: widget.profile),
-                new bodyRequestIntern(phoneSize: phoneSize,profile: widget.profile)
-              ])
-
-      ),
-
+          body: TabBarView(controller: tabController, children: [
+            new bodyRequest(
+              phoneSize: phoneSize,
+              profile: widget.profile,
+            ),
+            new bodyRequestUser(phoneSize: phoneSize, profile: widget.profile),
+            new bodyRequestIntern(phoneSize: phoneSize, profile: widget.profile)
+          ])),
     );
   }
 }
-
-
