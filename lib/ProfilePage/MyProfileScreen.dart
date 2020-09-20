@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:stubbbb/FirstPage/HomePage/HomeScreen.dart';
 import 'package:stubbbb/Models/Comment.dart';
 import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Models/myData.dart';
@@ -27,7 +28,7 @@ class MyProfileStudentScreen extends StatefulWidget {
   MyData profile;
   MyProfileStudentScreen({
     this.id,
-    this.profile
+    this.profile,
   });
 
   @override
@@ -47,19 +48,14 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
 
   TabController _tabController;
   ScrollController _scrollController;
-  MyData profile;
   bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
     // print(widget.profile.id+" id profile");
-    if(profile==null){
-      print("yes is null");
-      _getMyData();
-    }else{
-      print("no null");
-    }
+
+
     _scrollController = ScrollController();
     _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(_smoothScrollToTop);
@@ -69,14 +65,14 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
 
   }
 
-  _getMyData() async {
-    MyData body = await AuthenticateService.getMyData(widget.id);
-    setState(() {
-      profile = body;
-      // print(profile.phoneNumber+" : Phone number");
-      isLoading = false;
-    });
-  }
+  // _getMyData() async {
+  //   MyData body = await AuthenticateService.getMyData(widget.id);
+  //   setState(() {
+  //     profile = body;
+  //     // print(profile.phoneNumber+" : Phone number");
+  //     isLoading = false;
+  //   });
+  // }
 
   @override
   void dispose() {
@@ -125,7 +121,7 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
                                 width: SizeConfig.imageSizeMultiplier *1.5,
                               ),
                               new Text(
-                                profile.username,
+                                widget.profile.username,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.white,
@@ -172,10 +168,10 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
                       onTap: () {
                         Future<MyData> answer =  Navigator.push(context,MaterialPageRoute(builder: (context)=>new EditData(
                           context :context,
-                          profile: profile,
+                          profile: widget.profile,
                         )));
                         answer.then((MyData value) {
-                          return value != null? profile=value: 'empty';
+                          return value != null? widget.profile= value: 'empty';
                         }
                         );
                         // Navigator.push(context,new MaterialPageRoute(
@@ -251,14 +247,14 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
                     child: Padding(
                       padding:  EdgeInsets.only(top: SizeConfig.heightMultiplier*4,bottom: SizeConfig.heightMultiplier),
                       child: Center(
-                        child: profile.image == null || profile.image == '' ?
+                        child: widget.profile.image == null || widget.profile.image == '' ?
                         new CircleAvatar(
-                          child: new Text(profile.username.toString().substring(0,1),style: TextStyle(fontSize: SizeConfig.textMultiplier*5,color: R.color.banafshtire),),
+                          child: new Text(widget.profile.username.toString().substring(0,1),style: TextStyle(fontSize: SizeConfig.textMultiplier*5,color: R.color.banafshtire),),
                           backgroundColor: Colors.white,
                           radius: SizeConfig.imageSizeMultiplier * 10,
                         )
                         :new CircleAvatar(
-                          backgroundImage: NetworkImage('http://stube.ir/image/${profile.image}'),
+                          backgroundImage: NetworkImage('http://stube.ir/image/${widget.profile.image}'),
                           backgroundColor: Colors.white,
                           radius: SizeConfig.imageSizeMultiplier * 10,
                         ),
@@ -273,7 +269,7 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
                           children: [
 
                             new Text(
-                              profile.name,
+                              widget.profile.name,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: SizeConfig.heightMultiplier*2.5,
@@ -306,58 +302,65 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
 
   @override
   Widget build(BuildContext context) {
-    return new Directionality(
-        textDirection: TextDirection.rtl,
-        child: new SafeArea(
-            top: true,
-            bottom: true,
-            child: isLoading
-                ? new Scaffold(
-                    body: Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  )
-                : Scaffold(
-                    // resizeToAvoidBottomInset: false,
-                    body: NestedScrollView(
-                      floatHeaderSlivers: true,
-                      controller: _scrollController,
-                      headerSliverBuilder: (context, value) {
-                        return [
-                          SliverToBoxAdapter(child: _head(context)),
-                          SliverToBoxAdapter(
-                            child: TabBar(
-                              indicatorColor: R.color.banafshtire,
-                              labelStyle: TextStyle(color: R.color.backGround1),
-                              unselectedLabelColor: R.color.banafshKamRang,
-                              labelColor: R.color.banafshtire,
-                              unselectedLabelStyle:
-                                  TextStyle(color: Colors.white),
-                              controller: _tabController,
-                              // isScrollable: true,
-                              tabs: myTabs,
+    return WillPopScope(
+      onWillPop: (){
+        print(profile);
+        Navigator.of(context).pushReplacement(new MaterialPageRoute(builder: (context)=> new HomePage(
+          id: widget.profile.id,will: false, profile: widget.profile,)));
+      },
+      child: new Directionality(
+          textDirection: TextDirection.rtl,
+          child: new SafeArea(
+              top: true,
+              bottom: true,
+              child:/* isLoading
+                  ? new Scaffold(
+                      body: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    )
+                  : */Scaffold(
+                      // resizeToAvoidBottomInset: false,
+                      body: NestedScrollView(
+                        floatHeaderSlivers: true,
+                        controller: _scrollController,
+                        headerSliverBuilder: (context, value) {
+                          return [
+                            SliverToBoxAdapter(child: _head(context)),
+                            SliverToBoxAdapter(
+                              child: TabBar(
+                                indicatorColor: R.color.banafshtire,
+                                labelStyle: TextStyle(color: R.color.backGround1),
+                                unselectedLabelColor: R.color.banafshKamRang,
+                                labelColor: R.color.banafshtire,
+                                unselectedLabelStyle:
+                                    TextStyle(color: Colors.white),
+                                controller: _tabController,
+                                // isScrollable: true,
+                                tabs: myTabs,
+                              ),
                             ),
+                          ];
+                        },
+                        body: Container(
+                          child: TabBarView(
+                            controller: _tabController,
+                            children: [
+                              ListOne(
+                                profile: widget.profile,
+                              ),
+                              ListImages(
+                                profile: widget.profile,
+                              ),
+                              ListTwo(
+                                profile: widget.profile,
+                              )
+                            ],
                           ),
-                        ];
-                      },
-                      body: Container(
-                        child: TabBarView(
-                          controller: _tabController,
-                          children: [
-                            ListOne(
-                              profile: profile,
-                            ),
-                            ListImages(
-                              profile: profile,
-                            ),
-                            ListTwo(
-                              profile: profile,
-                            )
-                          ],
                         ),
                       ),
-                    ),
-                  )));
+                    ))),
+    );
   }
 }
 

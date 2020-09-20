@@ -85,7 +85,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
       if(boody['status'] == 'Defined'){
         Navigator.of(context).pushReplacement(
-            new MaterialPageRoute(builder: (context) => new HomePage(id:boody['id'] ))
+            new MaterialPageRoute(builder: (context) => new HomePage(id:boody['id'],will: true, ))
         );
 
 

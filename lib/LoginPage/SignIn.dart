@@ -54,7 +54,7 @@ class _SignInState extends State<SignIn> {
       _userSaveToken(boody);
       Navigator.of(context).pushReplacement(new MaterialPageRoute(
           builder: (context) =>
-          new HomePage(id: boody['id'],)));
+          new HomePage(id: boody['id'],will: true,)));
       if (error == false) {
         setState(() {
           error = true;

@@ -461,12 +461,12 @@ AppBar appBarHomePage(BuildContext context, MyData profile) {
                   size: SizeConfig.heightMultiplier * 4.0,
                 ),
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                       context,
                       new MaterialPageRoute(
                           builder: (context) => profile.type == "2"
                               ? new MyProfileUserNormalScreen(id: profile.id)
-                              : new MyProfileStudentScreen(id: profile.id)));
+                              : new MyProfileStudentScreen(profile: profile)));
                 }),
             profile.image == null ||
                     profile.title == null ||

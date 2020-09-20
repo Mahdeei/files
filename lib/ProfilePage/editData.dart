@@ -468,16 +468,16 @@ class _EditDataState extends State<EditData> {
                                         controller: resumCont,
                                         obscure: false,
                                         // onSaved: userOnsaved,
-                                        color: Colors.black26,
-                                        lableColor: Colors.black54,
+                                        color: Colors.black,
+                                        lableColor: Colors.black,
                                         lable: 'سوابق کاری',
                                         // validate: validateSignUp
                                       ),
                                       InputTextForm(
                                         controller: educCont,
                                         // onSaved: passOnsaved,
-                                        color: Colors.black26,
-                                        lableColor: Colors.black54,
+                                        color: Colors.black,
+                                        lableColor: Colors.black,
                                         lable: 'سوابق تحصیلی',
                                         obscure: false,
                                         maxLine: null,
@@ -486,8 +486,8 @@ class _EditDataState extends State<EditData> {
                                       ),
                                       InputTextForm(
                                         controller: certCont,
-                                          color: Colors.black26,
-                                          lableColor: Colors.black54,
+                                          color: Colors.black,
+                                          lableColor: Colors.black,
                                           lable: 'مدرک یا گواهیناممه های معتبر',
                                           obscure: false,
                                           maxLine: null,
@@ -497,12 +497,13 @@ class _EditDataState extends State<EditData> {
                                             // }
                                           }),
                                       InputTextForm(
+
                                         controller: langCont,
                                         obscure: false,
                                         maxLine: null,
                                         // onSaved: nameOnsaved,
-                                        color: Colors.black26,
-                                        lableColor: Colors.black54,
+                                        color: Colors.black,
+                                        lableColor: Colors.black,
                                         lable: 'زبان های مسلط',
                                         // validate: validateNameSignUp
                                       ),

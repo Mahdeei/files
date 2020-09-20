@@ -39,7 +39,7 @@ class _SignUpState extends State<SignUp> {
       Navigator.of(context).pushReplacement(
           new MaterialPageRoute(
               builder: (context) =>
-              new HomePage(id: bodi['id'],)));
+              new HomePage(id: bodi['id'],will: true,)));
     }else if(_body['status'] == 'exist'){
       setState(() {
         check = true;

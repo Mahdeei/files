@@ -12,14 +12,16 @@ import 'HomePage.dart';
 
 class HomePage extends StatefulWidget {
   String id;
-  HomePage({this.id});
+  bool will;
+  MyData profile;
+
+  HomePage({this.id, this.will, this.profile});
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>{
-
+class _HomePageState extends State<HomePage> {
   MyData profile;
   bool isLoading = true;
 
@@ -27,7 +29,9 @@ class _HomePageState extends State<HomePage>{
   void initState() {
     // TODO: implement initState
     super.initState();
-    _getMyData();
+    if (widget.will) {
+      _getMyData();
+    }
   }
 
   int currentindex = 1;
@@ -48,18 +52,64 @@ class _HomePageState extends State<HomePage>{
 
   @override
   Widget build(BuildContext context) {
-    return isLoading
-        ? new Scaffold(
-            body: new Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  new Text('استیوب',style: TextStyle(fontSize: 30),),
-                  CircularProgressIndicator(),
-                ],
-              ),
-            ),
-          )
+    return widget.will
+        ? isLoading
+            ? new Scaffold(
+                body: new Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      new Text(
+                        'استیوب',
+                        style: TextStyle(fontSize: 30),
+                      ),
+                      CircularProgressIndicator(),
+                    ],
+                  ),
+                ),
+              )
+            : new Scaffold(
+                resizeToAvoidBottomInset: false,
+                bottomNavigationBar: FFNavigationBar(
+                  theme: FFNavigationBarTheme(
+                    barBackgroundColor: Colors.white,
+                    selectedItemBackgroundColor: R.color.red,
+                    selectedItemIconColor: Colors.white,
+                    selectedItemLabelColor: R.color.banafshtire,
+                  ),
+                  selectedIndex: currentindex,
+                  onSelectTab: (index) {
+                    setState(() {
+                      currentindex = index;
+                    });
+                  },
+                  items: [
+                    FFNavigationBarItem(
+                      iconData: Icons.mail,
+                      label: 'جعبه درخواست',
+                    ),
+                    FFNavigationBarItem(
+                      iconData: Icons.home,
+                      label: 'خانه',
+                    ),
+                    FFNavigationBarItem(
+                      iconData: Icons.chat,
+                      label: 'پیام ها',
+                    ),
+                  ],
+                ),
+                body: currentindex == 1
+                    ? MyHomePage(
+                        profile: profile,
+                      )
+                    : currentindex == 0
+                        ? MyRequestPage(
+                            profile: profile,
+                          )
+                        : MyMessagePage(
+                            profile: profile,
+                          ),
+              )
         : new Scaffold(
             resizeToAvoidBottomInset: false,
             bottomNavigationBar: FFNavigationBar(
@@ -92,13 +142,15 @@ class _HomePageState extends State<HomePage>{
             ),
             body: currentindex == 1
                 ? MyHomePage(
-                    profile: profile,
+                    profile: widget.profile,
                   )
                 : currentindex == 0
                     ? MyRequestPage(
-                        profile: profile,
+                        profile: widget.profile,
                       )
-                    : MyMessagePage(profile: profile,),
+                    : MyMessagePage(
+                        profile: widget.profile,
+                      ),
           );
   }
 }
