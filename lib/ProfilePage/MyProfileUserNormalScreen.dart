@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,6 +9,13 @@ import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/R.dart';
 import 'package:stubbbb/Other/SizeConfig.dart';
 import 'package:image/image.dart'as Img;
+import 'package:http/http.dart' as http;
+import 'package:path/path.dart';
+import 'dart:async';
+import 'dart:convert';
+import 'package:async/async.dart';
+import 'package:stubbbb/http/Authenticate.dart';
+
 
 
 
@@ -26,7 +32,7 @@ class MyProfileUserNormalScreen extends StatefulWidget {
 class _MyProfileUserNormalScreenState extends State<MyProfileUserNormalScreen> {
   GlobalKey _formKeyOne = GlobalKey<FormState>();
   TextEditingController userCont,nameCont,moarefiCont;
-  // MyData profile;
+
   Map res;
   bool showImage=true;
   File _image;
@@ -35,7 +41,7 @@ class _MyProfileUserNormalScreenState extends State<MyProfileUserNormalScreen> {
   var fileName;
   bool isSaveData=false;
   String url ="http://stube.ir/CompleteProfile.php";
-  // MyData newProfile;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -43,21 +49,15 @@ class _MyProfileUserNormalScreenState extends State<MyProfileUserNormalScreen> {
     moarefiCont = new TextEditingController(text: widget.profile.moarefiNameh);
     userCont = new TextEditingController(text: widget.profile.username);
     nameCont = new TextEditingController(text: widget.profile.name);
-    // _getMyData();
-    // print(widget.profile.username);
-    // print(widget.profile.username);
-    // print(widget.profile.username);
-    // print(widget.profile.username);
     fileName=getImg();
+    setState(() {
+
+    });
   }
 
   getImg(){
     return widget.profile.image;
   }
-  // _getMyData()async{
-  //   MyData body = await AuthenticateService.getMyData(widget.id);
-  //   profile = body;
-  // }
 
 
   Future pickImage(ImageSource imageSource) async {
@@ -89,6 +89,91 @@ class _MyProfileUserNormalScreenState extends State<MyProfileUserNormalScreen> {
     }
   }
 
+
+  Future upload(File imageFile) async{
+    if(imageFile!=null){
+      print("yes is if");
+      setState(() {
+        isSaveData=true;
+      });
+      var stream = new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+      var length = await imageFile.length();
+      var uri = Uri.parse(url);
+
+      var request = new http.MultipartRequest("POST", uri);
+
+      var multiPartFile = new http.MultipartFile("image", stream, length,filename: basename(imageFile.path));
+
+      print(widget.profile.phoneNumber);
+      print(widget.profile.type);
+      print(widget.profile.address);
+      print(userCont.text);
+      print(nameCont.text);
+      print(moarefiCont.text);
+      print(fileName);
+
+      request.fields['phonenumber'] = widget.profile.phoneNumber;
+      request.fields['type'] = widget.profile.type;
+      request.fields['username'] = userCont.text;
+      request.fields['name'] = nameCont.text;
+      request.fields['moarefiName'] = moarefiCont.text;
+      request.fields['image'] = fileName;
+
+      request.files.add(multiPartFile);
+      var response = await request.send();
+
+      print(response.statusCode);
+
+
+      await response.stream.transform(utf8.decoder).listen((value) {
+        res = json.decode(value);
+        print(res);
+      });
+      setState(() {
+        isSaveData=false;
+      });
+      if(response.statusCode == 200) {
+        print('upload seccess');
+      }else{
+        print('upload failed');
+      }
+
+    }else{
+
+      print(userCont.text);
+      print(nameCont.text);
+      print(fileName);
+      print(widget.profile.phoneNumber);
+      print(widget.profile.type);
+      print(moarefiCont.text);
+      if(fileName==null){
+        fileName="";
+        print("Yes");
+      }
+
+      var response = await http.post(url
+      ,body: {
+            "phonenumber":widget.profile.phoneNumber,
+            "type":widget.profile.type,
+            "username": userCont.text,
+            "name":nameCont.text,
+            "moarefiname": moarefiCont.text,
+            "image": fileName,
+      });
+      var responseBody = json.decode(response.body);
+      print(responseBody);
+    }
+  }
+
+
+  _getMyData() async {
+    MyData body = await AuthenticateService.getDataNormal(widget.profile.id);
+    setState(() {
+      widget.profile = body;
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -106,9 +191,12 @@ class _MyProfileUserNormalScreenState extends State<MyProfileUserNormalScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         new FlatButton(
-                            onPressed: (){
-                              Navigator.of(context).pop();
+                            onPressed: ()async{
+                              await upload(_image);
+                              await _getMyData();
+                              Navigator.pop(context,widget.profile);
                             },
+
                             child: new Text('ذخیره',style: TextStyle(fontSize: SizeConfig.textMultiplier*3,color: R.color.banafshKamRang),)
                         ),
                         new IconButton(
@@ -331,11 +419,8 @@ class _MyProfileUserNormalScreenState extends State<MyProfileUserNormalScreen> {
                                       //   children: [
                                       //     new Text('تعداد پروژه های ب اشتراک گذاشته شده : ',style: TextStyle(fontSize: S.0),),
                                       //     new Text('5',style: TextStyle(fontSize: 16.0),),
-
                                         ],
                                       )
-
-
                                   ),
                                 ),
                           ]

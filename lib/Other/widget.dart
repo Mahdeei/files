@@ -463,12 +463,16 @@ AppBar appBarHomePage(BuildContext context, MyData profile) {
                   size: SizeConfig.heightMultiplier * 4.0,
                 ),
                 onPressed: () {
-                  Navigator.pushReplacement(
+                  Future<MyData> answer = Navigator.push(
                       context,
                       new MaterialPageRoute(
                           builder: (context) => profile.type == "2"
                               ? new MyProfileUserNormalScreen(id: profile.id,profile: profile,)
                               : new MyProfileStudentScreen(profile: profile)));
+                  answer.then((MyData value) {
+                    return value != null? profile= value: 'empty';
+                  });
+
                 }),
             profile.image == null ||
                     profile.title == null ||
@@ -1267,7 +1271,9 @@ class Headers extends StatelessWidget {
                   ),
                 )
                 ,new SizedBox(width: SizeConfig.imageSizeMultiplier * 2),
-                new Text(profile.name, style: styleHomePage()),
+                Expanded(
+                    flex: 1,
+                    child: new Text(profile.name, style: styleHomePage(),maxLines: 1,overflow: TextOverflow.ellipsis,)),
               ],
             ),
           )
@@ -1548,7 +1554,7 @@ class _bodyRequestState extends State<bodyRequest> {
                                                       .spaceBetween,
                                               children: [
                                                 Expanded(
-                                                  flex: 4,
+                                                  flex: 3,
                                                   child: Padding(
                                                     padding: EdgeInsets.only(
                                                         top: SizeConfig
@@ -1583,14 +1589,16 @@ class _bodyRequestState extends State<bodyRequest> {
                                                     ),
                                                     child: new Row(
                                                       children: <Widget>[
-                                                        new Text(
-                                                          textTime(
-                                                              requestsAd[index]
-                                                                  .date),
-                                                          style: TextStyle(
-                                                              fontSize: SizeConfig
-                                                                      .textMultiplier *
-                                                                  1.9),
+                                                        FittedBox(
+                                                          child: new Text(
+                                                            textTime(
+                                                                requestsAd[index]
+                                                                    .date),
+                                                            style: TextStyle(
+                                                                fontSize: SizeConfig
+                                                                        .textMultiplier *
+                                                                    1.8),
+                                                          ),
                                                         ),
 
                                                         // new Padding(

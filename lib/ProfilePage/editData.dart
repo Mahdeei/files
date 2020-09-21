@@ -155,7 +155,10 @@ class _EditDataState extends State<EditData> {
     // print(uniCont.text);
     // print(langCont.text);
     // print(fileName);
-
+    if(fileName==null){
+      fileName="";
+      print("Yes");
+    }
     var response = await http.post(url,body: {
       "phonenumber": widget.profile.phoneNumber,
       "type": widget.profile.type,

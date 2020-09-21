@@ -926,7 +926,8 @@ class _ListImagesState extends State<ListImages> {
                 itemCount: imglist.length,
                 itemBuilder: (context, index) => new GestureDetector(
                     onTap: () {
-                      _showSecondPage(context, imglist[index]);
+                      _showSecondPage(context,
+                          "http://stube.ir/image/${imglist[index]}");
                     },
                     child: new Container(
                       margin: const EdgeInsets.fromLTRB(2, 0, 2, 4),
@@ -948,7 +949,7 @@ void _showSecondPage(BuildContext context, imageAddres) {
             body: new Center(
               child: new Hero(
                 tag: 'my-hero-animation-tag',
-                child: Image.asset(imageAddres),
+                child: Image.network(imageAddres),
               ),
             ),
           )));

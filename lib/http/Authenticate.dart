@@ -37,6 +37,28 @@ class AuthenticateService{
   }
 
 
+
+  static Future<MyData> getDataNormal(String id) async {
+    var response = await http.post("http://stube.ir/getDataNormal.php", body: {'id': id});
+    var body = json.decode(response.body);
+    print(body);
+    MyData body2 = new MyData(
+      image: body['image'],
+      title: body['title'],
+      username: body['username'],
+      apiToken: body['apiToken'],
+      id: body['id'],
+      moarefiNameh: body['moarefiname'],
+      name: body['name'],
+      password: body['password'],
+      phoneNumber: body['phonenumber'],
+      address: body['address'],
+      type: body['type'],
+    );
+    return body2;
+  }
+
+
   static Future<DataUser> getDataUser(String id) async {
     var response = await http.post("http://stube.ir/GetMyData.php", body: {'id': id});
     final  body = json.decode(response.body);
