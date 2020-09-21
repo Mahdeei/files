@@ -5,6 +5,7 @@ import 'package:stubbbb/FirstPage/HomePage/HomeScreen.dart';
 import 'package:stubbbb/LoginPage/SignIn.dart';
 import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Models/myData.dart';
+import 'package:stubbbb/Other/SizeConfig.dart';
 import 'package:stubbbb/Other/widget.dart';
 import 'package:stubbbb/http/Authenticate.dart';
 
@@ -31,10 +32,15 @@ class _SplashScreenState extends State<SplashScreen> {
         fit: StackFit.expand,
         children: <Widget>[
           new Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              containerSplash(),
-              textSplashScreen()
+              Expanded(
+                flex: 9,
+                  child: Center(child: textSplashScreen())),
+              Expanded(
+                  flex: 1,
+                  child: new Text("از ایزاپ",style: TextStyle(fontSize: SizeConfig.textMultiplier*2.5,fontWeight: FontWeight.w300),))
             ],
           )
         ],

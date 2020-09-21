@@ -1,4 +1,4 @@
-package com.example.stubbbb
+package ir.stube.stubbbb
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -312,7 +312,7 @@ String validateSignUp(String value) {
 Text textSplashScreen() {
   return new Text(
     'استیوب',
-    style: new TextStyle(fontSize: 30.0),
+    style: new TextStyle(fontSize: SizeConfig.textMultiplier*4),
   );
 }
 
@@ -1015,12 +1015,6 @@ Container containerError() {
   ));
 }
 
-Container containerSplash() {
-  return new Container(
-    decoration: new BoxDecoration(
-        image: DecorationImage(image: AssetImage('assets/image/drawing.png'))),
-  );
-}
 
 Container ContainerImageLoginPage(var phonesize) {
   return new Container(

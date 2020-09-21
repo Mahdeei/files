@@ -189,7 +189,7 @@ class _SignInState extends State<SignIn> {
                                                         padding: EdgeInsets.only(right: 35),
                                                         child: new GestureDetector(
                                                           onTap: () {
-                                                            Navigator.of(context).push(
+                                                            Navigator.of(context).pushReplacement(
                                                                 new MaterialPageRoute(
                                                                     builder: (context) =>
                                                                     new ValidatePhoneNumber()));

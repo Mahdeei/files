@@ -42,7 +42,14 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.8.0
 
+
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/image/drawing.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -56,17 +63,11 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/image/download.jfif
     - assets/image/In progress-amico (1).png
-    - assets/image/download (4).png
     - assets/image/Startup life-rafiki (2).png
     - assets/image/undraw_folder_files_nweq.png
-    - assets/image/dev.jpg
-    - assets/image/avt.jpg
-    - assets/image/back.jpg
-    - assets/image/hom.png
     - assets/image/drawing.png
-    - assets/image/hom.png
+    - assets/image/download (4).png
     - assets/image/backreg.png
     - assets/image/backlog.png
     - assets/image/backnum.png
