@@ -21,20 +21,20 @@ class _MyRequestsState extends State<MyRequests> {
         appBar: new AppBar(
           backgroundColor: R.color.banafshmain,
           title: new Text(widget.userName),
-          actions: [
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                new Container(
-                  decoration: BoxDecoration(
-                    // color: Colors.red,
-                    // shape: BoxShape.circle,
-                    image: DecorationImage(image: AssetImage(R.images.axeProfile))
-                  ),
-                )
-              ],
-            )
-          ],
+          // actions: [
+          //   new Row(
+          //     mainAxisAlignment: MainAxisAlignment.end,
+          //     children: [
+          //       new Container(
+          //         decoration: BoxDecoration(
+          //           // color: Colors.red,
+          //           // shape: BoxShape.circle,
+          //           image: DecorationImage(image: AssetImage(R.images.axeProfile))
+          //         ),
+          //       )
+          //     ],
+          //   )
+          // ],
         ),
         body: new Stack(
           alignment: Alignment.bottomLeft,
@@ -59,33 +59,33 @@ class _MyRequestsState extends State<MyRequests> {
                             child: new Text(widget.text,maxLines: 10,style: TextStyle(fontSize: 20.0),),
                           ),
                           new SizedBox(height: 10.0,),
-                          accept
-                              ? new Container()
-                              : new Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  new MaterialButton(
-                                      color: Colors.green,
-                                      child: new Text("تایید در خواست",style: TextStyle(fontSize: 15.0),),
-                                      onPressed: (){
-                                        setState(() {
-                                          accept = true;
-                                        });
-                                        print("Pressed confirm");
-                                      }),
-                                  new SizedBox(width: 10.0,),
-                                  new MaterialButton(
-                                      color: Colors.red,
-                                      child: new Text("رد درخواست",style: TextStyle(fontSize: 15.0),),
-                                      onPressed: (){
-                                        setState(() {
-                                          accept = true;
-                                        });
-                                        print("Pressed no accept");
-                                      }
-                              )
-                            ],
-                          )
+                          // accept
+                          //     ? new Container()
+                          //     : new Row(
+                          //   mainAxisAlignment: MainAxisAlignment.center,
+                          //       children: [
+                          //         new MaterialButton(
+                          //             color: Colors.green,
+                          //             child: new Text("تایید در خواست",style: TextStyle(fontSize: 15.0),),
+                          //             onPressed: (){
+                          //               setState(() {
+                          //                 accept = true;
+                          //               });
+                          //               print("Pressed confirm");
+                          //             }),
+                          //         new SizedBox(width: 10.0,),
+                          //         new MaterialButton(
+                          //             color: Colors.red,
+                          //             child: new Text("رد درخواست",style: TextStyle(fontSize: 15.0),),
+                          //             onPressed: (){
+                          //               setState(() {
+                          //                 accept = true;
+                          //               });
+                          //               print("Pressed no accept");
+                          //             }
+                          //     )
+                          //   ],
+                          // )
                         ],
                       ),
                     ))

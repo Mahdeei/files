@@ -109,8 +109,8 @@ BoxDecoration boxDecorationKaramouziScreen(String image) {
           topRight: Radius.circular(65.0), bottomRight: Radius.circular(65.0)),
       image: DecorationImage(
           fit: BoxFit.cover,
-          image: image == null
-              ? AssetImage('assets/image/download.jfif')
+          image: image=="" || image == null
+              ? AssetImage('assets/image/drawing.png')
               : NetworkImage("http://stube.ir/image/$image")));
 }
 
@@ -436,7 +436,7 @@ CircleAvatar circleSignUp() {
 
 CircleAvatar circleAvatarKaramouziScreen() {
   return new CircleAvatar(
-    maxRadius: SizeConfig.heightMultiplier*2,
+    maxRadius: SizeConfig.heightMultiplier*1.8,
     child: new Icon(
       Icons.arrow_forward_ios,
       color: Colors.white,
@@ -1660,163 +1660,163 @@ class _bodyRequestState extends State<bodyRequest> {
   }
 }
 
-class HeadersItems extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    var phoneSize = MediaQuery.of(context).size;
-    return new Column(
-      children: <Widget>[
-        new Row(
-          children: <Widget>[
-            new Container(
-              height: phoneSize.height * 0.25,
-              width: phoneSize.width * 0.45,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      colorFilter:
-                          ColorFilter.mode(Colors.black45, BlendMode.darken),
-                      fit: BoxFit.cover,
-                      image: AssetImage(
-                        'assets/image/dev.jpg',
-                      ))),
-              child: new Align(
-                alignment: Alignment.topRight,
-                child: new IconButton(
-                    icon: Icon(
-                      Icons.share,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {
-                      print('pressed');
-                    }),
-              ),
-            ),
-            new Container(
-              height: phoneSize.height * 0.25,
-              width: phoneSize.width * 0.55,
-              color: Color(0xff2D0827),
-              child: new Column(
-                children: <Widget>[
-                  new Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      new Padding(
-                        padding: const EdgeInsets.only(top: 2.0, right: 5.0),
-                        child: new CircleAvatar(
-                          backgroundImage: AssetImage('assets/image/avt.jpg'),
-                          maxRadius: 16.0,
-                        ),
-                      ),
-                      new IconButton(
-                          icon: Icon(
-                            Icons.arrow_forward,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {})
-                    ],
-                  ),
-                  new Align(
-                    alignment: Alignment.topRight,
-                    child: new Padding(
-                      padding: const EdgeInsets.only(right: 5.0),
-                      child: new Text(
-                        'برنامه نویس اپلیکیشن',
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: TextStyle(
-                            fontSize: 21.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  new Align(
-                    alignment: Alignment.topRight,
-                    child: new Padding(
-                      padding: const EdgeInsets.only(right: 5.0),
-                      child: new Text(
-                        'ایران سرور',
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: TextStyle(fontSize: 18.0, color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  new Align(
-                      alignment: Alignment.topRight,
-                      child: new Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: new Text(
-                          'رایانه و فناوری اطلاعات',
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xff44143E),
-                          ),
-                        ),
-                      )),
-                  new SizedBox(
-                    height: phoneSize.height * 0.02,
-                  ),
-                  new Align(
-                    alignment: Alignment.bottomCenter,
-                    child: new Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        new GestureDetector(
-                          child: new Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20.0))),
-                            width: phoneSize.width * 0.17,
-                            child: new Text(
-                              'پیام',
-                              style: TextStyle(
-                                  color: Color(0xff2D0827),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14.0),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                        new GestureDetector(
-                          child: new Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20.0))),
-                            width: phoneSize.width * 0.17,
-                            child: new Text(
-                              'شروع کار',
-                              style: TextStyle(
-                                  color: Color(0xff2D0827),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14.0),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                        new GestureDetector(
-                          child: Icon(
-                            Icons.bookmark_border,
-                            color: Colors.white,
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            )
-          ],
-        )
-      ],
-    );
-  }
-}
+// class HeadersItems extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     var phoneSize = MediaQuery.of(context).size;
+//     return new Column(
+//       children: <Widget>[
+//         new Row(
+//           children: <Widget>[
+//             new Container(
+//               height: phoneSize.height * 0.25,
+//               width: phoneSize.width * 0.45,
+//               decoration: BoxDecoration(
+//                   image: DecorationImage(
+//                       colorFilter:
+//                           ColorFilter.mode(Colors.black45, BlendMode.darken),
+//                       fit: BoxFit.cover,
+//                       image: AssetImage(
+//                         'assets/image/dev.jpg',
+//                       ))),
+//               child: new Align(
+//                 alignment: Alignment.topRight,
+//                 child: new IconButton(
+//                     icon: Icon(
+//                       Icons.share,
+//                       color: Colors.white,
+//                     ),
+//                     onPressed: () {
+//                       print('pressed');
+//                     }),
+//               ),
+//             ),
+//             new Container(
+//               height: phoneSize.height * 0.25,
+//               width: phoneSize.width * 0.55,
+//               color: Color(0xff2D0827),
+//               child: new Column(
+//                 children: <Widget>[
+//                   new Row(
+//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                     children: <Widget>[
+//                       new Padding(
+//                         padding: const EdgeInsets.only(top: 2.0, right: 5.0),
+//                         child: new CircleAvatar(
+//                           backgroundImage: AssetImage('assets/image/avt.jpg'),
+//                           maxRadius: 16.0,
+//                         ),
+//                       ),
+//                       new IconButton(
+//                           icon: Icon(
+//                             Icons.arrow_forward,
+//                             color: Colors.white,
+//                           ),
+//                           onPressed: () {})
+//                     ],
+//                   ),
+//                   new Align(
+//                     alignment: Alignment.topRight,
+//                     child: new Padding(
+//                       padding: const EdgeInsets.only(right: 5.0),
+//                       child: new Text(
+//                         'برنامه نویس اپلیکیشن',
+//                         overflow: TextOverflow.ellipsis,
+//                         maxLines: 1,
+//                         style: TextStyle(
+//                             fontSize: 21.0,
+//                             fontWeight: FontWeight.bold,
+//                             color: Colors.white),
+//                       ),
+//                     ),
+//                   ),
+//                   new Align(
+//                     alignment: Alignment.topRight,
+//                     child: new Padding(
+//                       padding: const EdgeInsets.only(right: 5.0),
+//                       child: new Text(
+//                         'ایران سرور',
+//                         overflow: TextOverflow.ellipsis,
+//                         maxLines: 1,
+//                         style: TextStyle(fontSize: 18.0, color: Colors.white),
+//                       ),
+//                     ),
+//                   ),
+//                   new Align(
+//                       alignment: Alignment.topRight,
+//                       child: new Padding(
+//                         padding: const EdgeInsets.only(right: 8.0),
+//                         child: new Text(
+//                           'رایانه و فناوری اطلاعات',
+//                           overflow: TextOverflow.ellipsis,
+//                           maxLines: 1,
+//                           style: TextStyle(
+//                             fontSize: 16.0,
+//                             fontWeight: FontWeight.bold,
+//                             color: Color(0xff44143E),
+//                           ),
+//                         ),
+//                       )),
+//                   new SizedBox(
+//                     height: phoneSize.height * 0.02,
+//                   ),
+//                   new Align(
+//                     alignment: Alignment.bottomCenter,
+//                     child: new Row(
+//                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                       children: <Widget>[
+//                         new GestureDetector(
+//                           child: new Container(
+//                             decoration: BoxDecoration(
+//                                 color: Colors.white,
+//                                 borderRadius:
+//                                     BorderRadius.all(Radius.circular(20.0))),
+//                             width: phoneSize.width * 0.17,
+//                             child: new Text(
+//                               'پیام',
+//                               style: TextStyle(
+//                                   color: Color(0xff2D0827),
+//                                   fontWeight: FontWeight.bold,
+//                                   fontSize: 14.0),
+//                               textAlign: TextAlign.center,
+//                             ),
+//                           ),
+//                         ),
+//                         new GestureDetector(
+//                           child: new Container(
+//                             decoration: BoxDecoration(
+//                                 color: Colors.white,
+//                                 borderRadius:
+//                                     BorderRadius.all(Radius.circular(20.0))),
+//                             width: phoneSize.width * 0.17,
+//                             child: new Text(
+//                               'شروع کار',
+//                               style: TextStyle(
+//                                   color: Color(0xff2D0827),
+//                                   fontWeight: FontWeight.bold,
+//                                   fontSize: 14.0),
+//                               textAlign: TextAlign.center,
+//                             ),
+//                           ),
+//                         ),
+//                         new GestureDetector(
+//                           child: Icon(
+//                             Icons.bookmark_border,
+//                             color: Colors.white,
+//                           ),
+//                         )
+//                       ],
+//                     ),
+//                   )
+//                 ],
+//               ),
+//             )
+//           ],
+//         )
+//       ],
+//     );
+//   }
+// }
 
 class ButtonMore extends StatefulWidget {
   @override

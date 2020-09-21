@@ -184,8 +184,11 @@ class HeadersItemsPage extends StatelessWidget {
                     colorFilter:
                         ColorFilter.mode(Colors.black45, BlendMode.darken),
                     fit: BoxFit.cover,
-                    image: NetworkImage(
-                        'http://stube.ir/image/${interShip.image}'))),
+                    image: interShip.image=="" || interShip.image==null
+                      ? AssetImage("assets/image/drawing.png")
+                      : NetworkImage(
+                        'http://stube.ir/image/${interShip.image}')
+                )),
           ),
         ),
         Expanded(
@@ -195,31 +198,31 @@ class HeadersItemsPage extends StatelessWidget {
             color: Color(0xff2D0827),
             child: new Column(
               children: <Widget>[
+                // Expanded(
+                //   flex: 2,
+                //   child: new Row(
+                //     mainAxisAlignment: MainAxisAlignment.end,
+                //     children: <Widget>[
+                //       // new Padding(
+                //       //   padding: const EdgeInsets.only(top: 2.0, right: 5.0),
+                //       //   child: new CircleAvatar(
+                //       //     backgroundImage: AssetImage('assets/image/avt.jpg'),
+                //       //     maxRadius: 16.0,
+                //       //   ),
+                //       // ),
+                //       new IconButton(
+                //           icon: Icon(
+                //             Icons.arrow_forward,
+                //             color: Colors.white,
+                //           ),
+                //           onPressed: () {
+                //             // Navigator.of(context).pop(false);
+                //           })
+                //     ],
+                //   ),
+                // ),
                 Expanded(
-                  flex: 2,
-                  child: new Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      // new Padding(
-                      //   padding: const EdgeInsets.only(top: 2.0, right: 5.0),
-                      //   child: new CircleAvatar(
-                      //     backgroundImage: AssetImage('assets/image/avt.jpg'),
-                      //     maxRadius: 16.0,
-                      //   ),
-                      // ),
-                      new IconButton(
-                          icon: Icon(
-                            Icons.arrow_forward,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {
-                            // Navigator.of(context).pop(false);
-                          })
-                    ],
-                  ),
-                ),
-                Expanded(
-                  flex: 3,
+                  flex: 4,
                   child: new Align(
                     alignment: Alignment.bottomRight,
                     child: new Padding(

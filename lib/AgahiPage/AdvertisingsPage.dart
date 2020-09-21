@@ -210,7 +210,7 @@ class _ProjectsListState extends State<ProjectsList> {
                                 image: DecorationImage(
                                     fit: BoxFit.cover,
                                     image: advertisings[index].image==""
-                                        ? AssetImage('assets/image/download.jfif')
+                                        ? AssetImage('assets/image/drawing.png')
                                         : NetworkImage("http://stube.ir/image/${advertisings[index].image}")
                                 )),
                           ),

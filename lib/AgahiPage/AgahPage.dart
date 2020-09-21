@@ -3,6 +3,7 @@ import 'package:stubbbb/AgahiPage/Send_Req.dart';
 import 'package:stubbbb/Models/AgahiModel.dart';
 import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/SizeConfig.dart';
+import 'package:stubbbb/Other/widget.dart';
 
 class AdvertisingScreen extends StatefulWidget {
   Advertising advertising;
@@ -48,7 +49,7 @@ class _AdvertisingScreenState extends State<AdvertisingScreen> {
                                 new Padding(
                                   padding: const EdgeInsets.only(top: 3.0),
                                   child: new Text(
-                                    widget.advertising.date,
+                                    textTime(widget.advertising.date),
                                     style: TextStyle(
                                         color: Colors.black54, fontSize: SizeConfig.textMultiplier*2),
                                   ),
@@ -70,7 +71,7 @@ class _AdvertisingScreenState extends State<AdvertisingScreen> {
                                   padding:
                                        EdgeInsets.only(top: SizeConfig.heightMultiplier*0.5, left: SizeConfig.imageSizeMultiplier),
                                   child: new Text(
-                                    'تا 2,000,000 تومان',
+                                    widget.advertising.price,
                                     style: TextStyle(
                                         color: Colors.black54, fontSize: SizeConfig.textMultiplier*2),
                                   ),
@@ -178,7 +179,9 @@ class HeadersItemsPage extends StatelessWidget {
                         colorFilter:
                             ColorFilter.mode(Colors.black45, BlendMode.darken),
                         fit: BoxFit.cover,
-                        image:NetworkImage("http://stube.ir/image/${advertising.image}"))),
+                        image: advertising.image==""||advertising.image==null
+                          ? AssetImage("assets/image/drawing.png")
+                          : NetworkImage("http://stube.ir/image/${advertising.image}"))),
               ),
             ),
             Expanded(
@@ -188,31 +191,31 @@ class HeadersItemsPage extends StatelessWidget {
                 color: Color(0xff2D0827),
                 child: new Column(
                   children: <Widget>[
+                    // Expanded(
+                    //   flex: 2,
+                    //   child: new Row(
+                    //     mainAxisAlignment: MainAxisAlignment.end,
+                    //     children: <Widget>[
+                    //       // new Padding(
+                    //       //   padding: const EdgeInsets.only(top: 2.0, right: 5.0),
+                    //       //   child: new CircleAvatar(
+                    //       //     backgroundImage: AssetImage('assets/image/avt.jpg'),
+                    //       //     maxRadius: 16.0,
+                    //       //   ),
+                    //       // ),
+                    //       // new IconButton(
+                    //       //     icon: Icon(
+                    //       //       Icons.arrow_forward,
+                    //       //       color: Colors.white,
+                    //       //     ),
+                    //       //     onPressed: () {
+                    //       //       // Navigator.of(context).pop(false);
+                    //       //     })
+                    //     ],
+                    //   ),
+                    // ),
                     Expanded(
-                      flex: 2,
-                      child: new Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          // new Padding(
-                          //   padding: const EdgeInsets.only(top: 2.0, right: 5.0),
-                          //   child: new CircleAvatar(
-                          //     backgroundImage: AssetImage('assets/image/avt.jpg'),
-                          //     maxRadius: 16.0,
-                          //   ),
-                          // ),
-                          new IconButton(
-                              icon: Icon(
-                                Icons.arrow_forward,
-                                color: Colors.white,
-                              ),
-                              onPressed: () {
-                                // Navigator.of(context).pop(false);
-                              })
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 3,
+                      flex: 4,
                       child: new Align(
                         alignment: Alignment.bottomRight,
                         child: new Padding(
@@ -251,7 +254,7 @@ class HeadersItemsPage extends StatelessWidget {
                     //       )),
                     // ),
                     Expanded(
-                      flex: 4,
+                      flex: 3,
                         child: new Row(
                             children: <Widget>[
                               // new GestureDetector(
