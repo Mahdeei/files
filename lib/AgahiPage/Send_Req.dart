@@ -27,8 +27,7 @@ class _SendReqState extends State<SendReq> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print("User Name : ${widget.profile.id}");
-    print("ID : ${widget.advertising.id}");
+
 
   }
 
@@ -109,7 +108,6 @@ class _SendReqState extends State<SendReq> {
   }
 
   Future sendRequestAd() async {
-    print(req_text);
     var response = await http.post(urlSendAd, body: {
       'id_advertising': widget.advertising.id,
       'user_id': widget.profile.id,
@@ -118,7 +116,6 @@ class _SendReqState extends State<SendReq> {
     });
 
     final body = json.decode(response.body);
-    print(body);
     return body;
   }
 

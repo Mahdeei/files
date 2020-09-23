@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:stubbbb/FirstPage/MessagePage/MessagePage.dart';
 import 'package:stubbbb/FirstPage/RequestPage/RequestPage.dart';
-import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/http/Authenticate.dart';
 import '../../Other/R.dart';

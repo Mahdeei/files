@@ -4,7 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stubbbb/FirstPage/HomePage/HomeScreen.dart';
 import 'package:stubbbb/LoginPage/SignIn.dart';
 import 'package:stubbbb/Models/Profile.dart';
-import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/SizeConfig.dart';
 import 'package:stubbbb/Other/widget.dart';
 import 'package:stubbbb/http/Authenticate.dart';
@@ -52,7 +51,6 @@ class _SplashScreenState extends State<SplashScreen> {
     if (await netConnet()) {
       checkLogin();
     } else {
-      print('not connected internet');
       skaffoldKey.currentState.showSnackBar(new SnackBar(
           duration: Duration(hours: 2),
           content: new GestureDetector(

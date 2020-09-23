@@ -13,6 +13,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
+import 'package:stubbbb/Other/SizeConfig.dart';
 import 'package:stubbbb/http/Authenticate.dart';
 
 
@@ -105,14 +106,7 @@ class _EditDataState extends State<EditData> {
 
     var multiPartFile = new http.MultipartFile("image", stream, length,filename: basename(imageFile.path));
 
-    print(widget.profile.phoneNumber);
-    print(widget.profile.type);
-    print(widget.profile.address);
-    print(usernameCont.text);
-    print(nameCont.text);
-    print(moarefiCont.text);
-    print(fileName);
-    print(langCont.text);
+
 
     request.fields['phonenumber'] = widget.profile.phoneNumber;
     request.fields['type'] = widget.profile.type;
@@ -132,21 +126,19 @@ class _EditDataState extends State<EditData> {
     request.files.add(multiPartFile);
     var response = await request.send();
 
-    print(response.statusCode);
 
 
     await response.stream.transform(utf8.decoder).listen((value) {
       res = json.decode(value);
-      print(res);
     });
     setState(() {
       isSaveData=false;
     });
-    if(response.statusCode == 200) {
-      print('upload seccess');
-    }else{
-      print('upload failed');
-    }
+    // if(response.statusCode == 200) {
+    //   print('upload seccess');
+    // }else{
+    //   print('upload failed');
+    // }
 
   }else{
 
@@ -157,7 +149,6 @@ class _EditDataState extends State<EditData> {
     // print(fileName);
     if(fileName==null){
       fileName="";
-      print("Yes");
     }
     var response = await http.post(url,body: {
       "phonenumber": widget.profile.phoneNumber,
@@ -173,7 +164,6 @@ class _EditDataState extends State<EditData> {
       "languages": langCont.text ,
     });
     var responseBody = json.decode(response.body);
-    print(responseBody);
 
 
   }
@@ -182,7 +172,7 @@ class _EditDataState extends State<EditData> {
 
   showDia(context){
       return showDialog(context: context,builder: (ctx)=> new AlertDialog(
-        title: new Center(child: Text("لطفا کمی صبر کنید")),
+        title: new Center(child: Text("لطفا کمی صبر کنید",style: TextStyle(fontFamily: 'Vazir'),)),
         actions: [
           new LinearProgressIndicator()
         ],
@@ -200,21 +190,16 @@ class _EditDataState extends State<EditData> {
 
   deleteImage(String image)async{
     String url="http://stube.ir/DeleteImage.php";
-    print(image);
     var response = await http.post(url,body: {"imagePro":image});
     var responseBody = await json.decode(response.body);
-    print(responseBody);
     if(responseBody['status']=="yes deleted"){
      widget.profile.image="";
       setState(() {
 
-        print(widget.profile.image);
       });
       setState(() {
 
       });
-    }else{
-      print('error');
     }
   }
 
@@ -245,7 +230,7 @@ class _EditDataState extends State<EditData> {
                                 :*/
                               Navigator.pop(context,widget.profile);}
                             },
-                            child: new Text('ذخیره',style: TextStyle(fontSize: 20.0,color: R.color.banafshKamRang),)
+                            child: new Text('ذخیره',style: TextStyle(fontFamily:"Vazir",fontSize: 20.0,color: R.color.banafshKamRang),)
                         ),
                         new IconButton(
                             icon: Icon(Icons.arrow_forward,size: 30.0,),
@@ -313,7 +298,7 @@ class _EditDataState extends State<EditData> {
                                   backgroundColor: R.color.banafshKamRang,
                                   child: new Text(
                                     widget.profile.username.toString().substring(0,1),
-                                    style: TextStyle(fontSize: 25.0,color: Colors.white),
+                                    style: TextStyle(fontSize: 25.0,color: Colors.white,fontFamily: 'Vazir'),
                                   ),
                                 ),
                               )
@@ -372,7 +357,6 @@ class _EditDataState extends State<EditData> {
                                               setState(() {
                                                 fileName="";
                                                 showImage=false;
-                                                print(showImage);
                                                 // _image=new File();
                                               });
                                               Navigator.of(context).pop(false);
@@ -409,7 +393,7 @@ class _EditDataState extends State<EditData> {
                                           backgroundColor: R.color.banafshKamRang,
                                           child: new Text(
                                             widget.profile.username.toString().substring(0,1),
-                                            style: TextStyle(fontSize: 25.0,color: Colors.white),
+                                            style: TextStyle(fontSize: SizeConfig.textMultiplier*3,color: Colors.white,fontFamily: 'Vazir'),
                                           ),
                                         ),
                                       )
@@ -420,7 +404,7 @@ class _EditDataState extends State<EditData> {
                             (widget.profile.image=="" ||widget.profile.image==null ) ||showImage==false
                                 ? new  Align(
                               alignment: Alignment.center,
-                              child: new Text("بارگذاری تصویر",style: TextStyle(color: R.color.banafshKamRang)),
+                              child: new Text("بارگذاری تصویر",style: TextStyle(color: R.color.banafshKamRang,fontFamily: 'Vazir')),
                             )
                                 : new Container(),
                             new Form(

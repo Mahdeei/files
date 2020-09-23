@@ -117,14 +117,7 @@ class _FieldsListState extends State<FieldsList> {
       sharayet = "";
     }
 
-    print(widget.profile.id);
-    print(onvan);
-    print(tozihat);
-    print("${DateTime.now()}");
-    print(boodje);
-    print(sharayet);
-    print(adress);
-    print(this.fileName);
+
 
     request.fields['user_id'] = widget.profile.id;
     request.fields['title'] = onvan;
@@ -137,27 +130,18 @@ class _FieldsListState extends State<FieldsList> {
 
     request.files.add(multiPartFile);
     var response = await request.send();
-    // print(response);
-    // print(json.decode(response.stream.toString()));
     // var responseBody = json.decode(response.headers);
 
-//    print(stream);
-//    print(length);
-//    print(uri);
-//    print(request);
-    print(response.statusCode);
 
 
      await response.stream.transform(utf8.decoder).listen((value) {
       res = json.decode(value);
-      print(res);
-      print(res['status']);
     });
-    if(response.statusCode == 200) {
-      print('upload seccess');
-    }else{
-      print('upload failed');
-    }
+    // if(response.statusCode == 200) {
+    //   print('upload seccess');
+    // }else{
+    //   print('upload failed');
+    // }
   }
 
   // addAd() async {
@@ -187,6 +171,7 @@ class _FieldsListState extends State<FieldsList> {
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
         fontSize: size,
+        fontFamily: 'Vazir'
       ),
     );
   }
@@ -218,7 +203,7 @@ class _FieldsListState extends State<FieldsList> {
                                      builder: (context) => new AlertDialog(
                                        title: new Text(
                                          "انتخاب فایل از",
-                                         style: TextStyle(fontSize: 16.0),
+                                         style: TextStyle(fontSize: 16.0,fontFamily: 'Vazir'),
                                          textDirection: TextDirection.rtl,
                                        ),
                                        actions: [
@@ -229,7 +214,7 @@ class _FieldsListState extends State<FieldsList> {
                                                child: new RaisedButton(
                                                  elevation: 0,
                                                  color: Colors.white,
-                                                 child: new Text("گالری"),
+                                                 child: new Text("گالری",style: TextStyle(fontFamily: 'Vazir'),),
                                                  onPressed: () async{
                                                    Navigator.of(context).pop();
                                                    await pickImage(ImageSource.gallery);
@@ -242,7 +227,7 @@ class _FieldsListState extends State<FieldsList> {
                                                child: new MaterialButton(
                                                  elevation: 0,
                                                  color: Colors.white,
-                                                 child: new Text("دوربین گوشی",textDirection: TextDirection.rtl,),
+                                                 child: new Text("دوربین گوشی",textDirection: TextDirection.rtl,style: TextStyle(fontFamily: 'Vazir'),),
                                                  onPressed: () async {
                                                    await pickImage(ImageSource.camera);
                                                    Navigator.of(context).pop();
@@ -270,7 +255,7 @@ class _FieldsListState extends State<FieldsList> {
                                            ),
                                            new Text(
                                              'اضافه کردن عکس',
-                                             style: TextStyle(fontSize: 22.0),
+                                             style: TextStyle(fontSize: 22.0,fontFamily: 'Vazir'),
                                            )
                                          ],
                                        ),
@@ -321,9 +306,11 @@ class _FieldsListState extends State<FieldsList> {
                                                 overflow: TextOverflow.ellipsis,
                                                 maxLines: 1,
                                                 style: TextStyle(
-                                                    fontSize: 25.0,
+                                                    fontSize: SizeConfig.textMultiplier*3,
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors.white),
+                                                    color: Colors.white,
+                                                    fontFamily: 'Vazir'
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -424,7 +411,9 @@ class _FieldsListState extends State<FieldsList> {
                                   style: TextStyle(fontSize: SizeConfig.textMultiplier*2,
                                       color: tozihat == 'توضیحات'
                                           ? _color()
-                                          : Colors.black),
+                                          : Colors.black,
+                                      fontFamily: 'Vazir'
+                                  ),
                                 ),
                               )
                             ],
@@ -449,7 +438,7 @@ class _FieldsListState extends State<FieldsList> {
                                         width: phoneSize.width * .78,
                                         child: _text(SizeConfig.textMultiplier*2.5, shrayet))),
                               ),
-                              Expanded(flex: 1,child: new Text(shrayet == 'شرایط' ? 'وارد نشده' : 'شرایط',style: TextStyle(fontSize: SizeConfig.textMultiplier*2),))
+                              Expanded(flex: 1,child: new Text(shrayet == 'شرایط' ? 'وارد نشده' : 'شرایط',style: TextStyle(fontSize: SizeConfig.textMultiplier*2,fontFamily: 'Vazir'),))
                             ],
                           ),
                         ),
@@ -538,7 +527,9 @@ class _FieldsListState extends State<FieldsList> {
                                     style: TextStyle(fontSize: SizeConfig.textMultiplier*2,
                                         color: adress == 'آدرس'
                                             ? _color()
-                                            : Colors.black)),
+                                            : Colors.black,
+                                        fontFamily: 'Vazir'
+                                    )),
                               )
                             ],
                           ),
@@ -549,7 +540,7 @@ class _FieldsListState extends State<FieldsList> {
                                     children: [
                                       new Divider(),
                                       new Text('عنوان آگهی را سربرگ وارد کنید',
-                                          style: TextStyle(color: Colors.red,fontSize: SizeConfig.textMultiplier*2))
+                                          style: TextStyle(color: Colors.red,fontSize: SizeConfig.textMultiplier*2,fontFamily: 'Vazir'))
                                     ],
                                   )
                                 : new SizedBox()
@@ -586,7 +577,7 @@ class _FieldsListState extends State<FieldsList> {
                     await upload(_image);
                     if (res['status'] == "added") {
                       key.currentState.showSnackBar(new SnackBar(
-                          content: new Text("آگهی شما با موفقیت ارسال شد")));
+                          content: new Text("آگهی شما با موفقیت ارسال شد",style: TextStyle(fontFamily: 'Vazir'),)));
                     }
                   }
                 },

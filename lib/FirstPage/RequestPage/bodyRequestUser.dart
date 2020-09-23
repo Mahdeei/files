@@ -93,22 +93,30 @@ class _bodyRequestUserState extends State<bodyRequestUser> {
                               Expanded(
                                 flex: 1,
                                 child:   requestProfile[index].image =="" || requestProfile[index].image==null
-                                    ? Container(
-                                  height: phoneSize.height * 0.10,
-                                  width: phoneSize.width * 0.19,
-                                  child: new CircleAvatar(
-                                    child: new Text(requestProfile[index].username.toString().substring(0,1),style: TextStyle(fontSize: 25.0,color: Colors.white),),
-                                    backgroundColor: R.color.banafshKamRang,
-                                    // minRadius: 30.0
-                                  ),
+                                    ?
+                                  Center(
+                                    child: new CircleAvatar(
+                                      radius: SizeConfig.heightMultiplier*5,
+                                      child: new Text(requestProfile[index].username.toString().substring(0,1),style: TextStyle(fontSize: 25.0,color: Colors.white),),
+                                      backgroundColor: R.color.banafshKamRang,
+                                      // minRadius: 30.0
+                                    ),
+
                                 )
-                                    : Center(
-                                  child: new CircleAvatar(radius: 37,
-                                    backgroundImage: new NetworkImage("http://stube.ir/image/${requestProfile[index].image}",),
-                                    backgroundColor: R.color.banafshKamRang,
-                                    // minRadius: 30.0
+                                    : Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Center(
+                                  child: new CircleAvatar(
+                                radius: SizeConfig.heightMultiplier*5,
+                                        backgroundImage: new NetworkImage("http://stube.ir/image/${requestProfile[index].image}",),
+                                        backgroundColor: R.color.banafshKamRang,
+                                        // minRadius: 30.0
                                   ),
                                 ),
+                                      ],
+                                    ),
                               ),
 
 
@@ -129,7 +137,7 @@ class _bodyRequestUserState extends State<bodyRequestUser> {
                                           .spaceBetween,
                                       children: [
                                         Expanded(
-                                          flex: 4,
+                                          flex: 3,
                                           child: Padding(
                                             padding:
                                             EdgeInsets.only(

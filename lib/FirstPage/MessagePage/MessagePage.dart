@@ -24,8 +24,8 @@ class MyMessagePage extends StatelessWidget {
             child: new Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                FittedBox(child: new Text('نسخه فعلی ازمایشی است',style: TextStyle(fontSize: SizeConfig.textMultiplier*3),)),
-                FittedBox(child: new Text('این قسمت در نسخه اصلی تکمیل می شود',style: TextStyle(fontSize: SizeConfig.textMultiplier*3),)),
+                FittedBox(child: new Text('نسخه فعلی ازمایشی است',style: TextStyle(fontSize: SizeConfig.textMultiplier*2),)),
+                FittedBox(child: new Text('این قسمت در نسخه اصلی تکمیل می شود',style: TextStyle(fontSize: SizeConfig.textMultiplier*2),)),
               ],
             )
           ))

@@ -91,38 +91,47 @@ class _bodyRequestInternState extends State<bodyRequestIntern> {
                                         flex: 1,
                                         child: profiles[index].image == "" ||
                                                 profiles[index].image == null
-                                            ? Container(
-                                                height: phoneSize.height * 0.10,
-                                                width: phoneSize.width * 0.19,
-                                                child: new CircleAvatar(
-                                                  child: new Text(
-                                                    profiles[index]
-                                                        .username
-                                                        .toString()
-                                                        .substring(0, 1),
-                                                    style: TextStyle(
-                                                        fontSize: SizeConfig.heightMultiplier*4,
-                                                        color: Colors.white),
-                                                  ),
-                                                  backgroundColor:
-                                                      R.color.banafshKamRang,
-                                                  // minRadius: 30.0
+                                            ?  Column(
+                                              children: [
+                                                Center(
+                                                  child: new CircleAvatar(
+                                                        child: new Text(
+                                                          profiles[index]
+                                                              .username
+                                                              .toString()
+                                                              .substring(0, 1),
+                                                          style: TextStyle(
+                                                              fontSize: SizeConfig.heightMultiplier*4,
+                                                              color: Colors.white),
+                                                        ),
+                                                        radius: SizeConfig.heightMultiplier*5,
+                                                        backgroundColor:
+                                                            R.color.banafshKamRang,
+                                                        // minRadius: 30.0
+
+                                                    ),
                                                 ),
-                                              )
-                                            : Center(
-                                                child: new CircleAvatar(
-                                                  radius: SizeConfig
-                                                          .heightMultiplier *
-                                                      5,
-                                                  backgroundImage:
-                                                      new NetworkImage(
-                                                    "http://stube.ir/image/${profiles[index].image}",
+                                              ],
+                                            )
+                                            : Column(
+                                              children: [
+                                                Center(
+                                                    child: new CircleAvatar(
+                                                      radius: SizeConfig
+                                                              .heightMultiplier *
+                                                          5,
+                                                      backgroundImage:
+                                                          new NetworkImage(
+                                                        "http://stube.ir/image/${profiles[index].image}",
+                                                      ),
+                                                      backgroundColor:
+                                                          R.color.banafshKamRang,
+
+                                                      // minRadius: 30.0
+                                                    ),
                                                   ),
-                                                  backgroundColor:
-                                                      R.color.banafshKamRang,
-                                                  // minRadius: 30.0
-                                                ),
-                                              ),
+                                              ],
+                                            ),
                                       ),
                                       Expanded(
                                         flex: 4,
@@ -139,7 +148,7 @@ class _bodyRequestInternState extends State<bodyRequestIntern> {
                                                       .spaceBetween,
                                               children: [
                                                 Expanded(
-                                                  flex: 4,
+                                                  flex: 3,
                                                   child: Padding(
                                                     padding:
                                                          EdgeInsets.only(

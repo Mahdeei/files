@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:stubbbb/Models/AgahiModel.dart';
-import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/R.dart';
 import 'package:stubbbb/Other/SizeConfig.dart';
 import 'package:stubbbb/Other/widget.dart';
-import 'package:stubbbb/http/Authenticate.dart';
 import 'package:stubbbb/http/httpAdvertisings.dart';
 import 'package:stubbbb/http/maxID.dart';
 import 'AddPostAgahi.dart';

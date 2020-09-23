@@ -11,7 +11,6 @@ import 'package:stubbbb/http/Authenticate.dart';
 import 'package:stubbbb/http/httpComments.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:stubbbb/http/httpRequest.dart';
-
 import 'SendRequestForUser.dart';
 
 class ProPage extends StatefulWidget {
@@ -196,11 +195,28 @@ class _ProPageState extends State<ProPage> with SingleTickerProviderStateMixin {
                       padding: EdgeInsets.only(
                           top: SizeConfig.heightMultiplier * 4,
                           bottom: SizeConfig.heightMultiplier),
-                      child: new CircleAvatar(
-                        child: new Image.asset('assets/image/download (4).png'),
-                        backgroundColor: Colors.white,
-                        maxRadius: SizeConfig.imageSizeMultiplier * 10,
+                      child: widget.user.image=="" || widget.user.image==null
+                        ? Center(
+                          child: new CircleAvatar(
+                          child: new Text(
+                              widget.user.username.toString().substring(0, 1),
+                              style: TextStyle(
+                                  color: R.color.banafshtire,
+                                  fontSize: SizeConfig.textMultiplier * 2),
+                            ),
+
+                          backgroundColor: Colors.white,
+                          maxRadius: SizeConfig
+                              .imageSizeMultiplier *
+                              10,),
+                        )
+                        : Center(
+                          child: new CircleAvatar(
+                          backgroundImage: NetworkImage('http://stube.ir/image/${widget.user.image}'),
+                          backgroundColor: Colors.white,
+                          maxRadius: SizeConfig.imageSizeMultiplier * 10,
                       ),
+                        ),
                     ),
                   ),
                   new Expanded(
@@ -538,7 +554,7 @@ class ListTwo extends StatefulWidget {
 class _ListTwoState extends State<ListTwo> {
   Map body;
   bool refresh = true;
-  List username = [];
+  List profile = [];
   ScrollController _scrollController = new ScrollController();
   List<Comment> comments = [];
   TextEditingController _controller;
@@ -553,7 +569,7 @@ class _ListTwoState extends State<ListTwo> {
   Future<void> getComments({bool refresh2: false}) async {
     if (refresh2) comments.clear();
     Map body = await HttpComments.getComments(widget.user.id);
-    username = await HttpComments.getUsername(widget.user.id);
+    profile = await HttpComments.getProfile(widget.user.id);
     comments = body['comments'];
     if (this.mounted) {
       setState(() {
@@ -695,8 +711,7 @@ class _ListTwoState extends State<ListTwo> {
                                               maxRadius: SizeConfig
                                                       .imageSizeMultiplier *
                                                   5,
-                                              backgroundColor:
-                                                  R.color.banafshKamRang,
+                                              backgroundImage: NetworkImage('http://stube.ir/image/${profile[index]['image']}'),
                                             ),
                                             new SizedBox(
                                               width: SizeConfig
@@ -704,7 +719,7 @@ class _ListTwoState extends State<ListTwo> {
                                                   2,
                                             ),
                                             new Text(
-                                              username[index],
+                                              profile[index]['username'],
                                               style: TextStyle(
                                                   fontSize: SizeConfig
                                                           .heightMultiplier *

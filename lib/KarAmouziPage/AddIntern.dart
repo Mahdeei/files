@@ -72,7 +72,6 @@ class _FieldsListInternState extends State<FieldsListIntern> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print(type);
   }
 
 
@@ -136,23 +135,15 @@ class _FieldsListInternState extends State<FieldsListIntern> {
     // print(json.decode(response.stream.toString()));
     // var responseBody = json.decode(response.headers);
 
-//    print(stream);
-//    print(length);
-//    print(uri);
-//    print(request);
-    print(response.statusCode);
-
 
     await response.stream.transform(utf8.decoder).listen((value) {
       res = json.decode(value);
-      print(res);
-      print(res['status']);
     });
-    if(response.statusCode == 200) {
-      print('upload seccess');
-    }else{
-      print('upload failed');
-    }
+    // if(response.statusCode == 200) {
+    //   print('upload seccess');
+    // }else{
+    //   print('upload failed');
+    // }
   }
 
 
@@ -184,6 +175,7 @@ class _FieldsListInternState extends State<FieldsListIntern> {
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
         fontSize: size,
+          fontFamily: 'Vazir'
       ),
     );
   }
@@ -288,7 +280,7 @@ class _FieldsListInternState extends State<FieldsListIntern> {
                                 builder: (context) => new AlertDialog(
                                   title: new Text(
                                     "انتخاب فایل از",
-                                    style: TextStyle(fontSize: 16.0),
+                                    style: TextStyle(fontSize: 16.0,fontFamily: 'Vazir'),
                                     textDirection: TextDirection.rtl,
                                   ),
                                   actions: [
@@ -299,7 +291,7 @@ class _FieldsListInternState extends State<FieldsListIntern> {
                                           child: new RaisedButton(
                                             elevation: 0,
                                             color: Colors.white,
-                                            child: new Text("گالری"),
+                                            child: new Text("گالری",style: TextStyle(fontFamily: 'Vazir'),),
                                             onPressed: () async{
                                               Navigator.of(context).pop();
                                               await pickImage(ImageSource.gallery);
@@ -312,7 +304,7 @@ class _FieldsListInternState extends State<FieldsListIntern> {
                                           child: new MaterialButton(
                                             elevation: 0,
                                             color: Colors.white,
-                                            child: new Text("دوربین گوشی",textDirection: TextDirection.rtl,),
+                                            child: new Text("دوربین گوشی",textDirection: TextDirection.rtl,style: TextStyle(fontFamily: 'Vazir'),),
                                             onPressed: () async {
                                               await pickImage(ImageSource.camera);
                                               Navigator.of(context).pop();
@@ -340,7 +332,7 @@ class _FieldsListInternState extends State<FieldsListIntern> {
                                       ),
                                       new Text(
                                         'اضافه کردن عکس',
-                                        style: TextStyle(fontSize: SizeConfig.textMultiplier*3),
+                                        style: TextStyle(fontSize: SizeConfig.textMultiplier*3,fontFamily: 'Vazir'),
                                       )
                                     ],
                                   ),
@@ -393,7 +385,9 @@ class _FieldsListInternState extends State<FieldsListIntern> {
                                             style: TextStyle(
                                                 fontSize: SizeConfig.textMultiplier*3.3,
                                                 fontWeight: FontWeight.bold,
-                                                color: Colors.white),
+                                                color: Colors.white,
+                                                fontFamily: 'Vazir'
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -420,6 +414,7 @@ class _FieldsListInternState extends State<FieldsListIntern> {
                                                 fontSize: SizeConfig.textMultiplier*2.5,
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.white,
+                                                  fontFamily: 'Vazir'
                                               ),
                                             ),
                                           ),
@@ -478,14 +473,14 @@ class _FieldsListInternState extends State<FieldsListIntern> {
                             Container(
                               padding: EdgeInsets.only(right:SizeConfig.imageSizeMultiplier*2.5,top: SizeConfig.heightMultiplier*1.3),
                               child: DropdownButton<String>(
-                                hint: Container(width: phoneSize.width*0.85,child: new Text(showType,style: TextStyle(fontSize: SizeConfig.textMultiplier*2.3),)),
+                                hint: Container(width: phoneSize.width*0.85,child: new Text(showType,style: TextStyle(fontSize: SizeConfig.textMultiplier*2.3,fontFamily: 'Vazir'),)),
                                 items: _listdrop.map((String dropdownStringItem){
                                   return DropdownMenuItem<String>(
                                     value: dropdownStringItem,
                                     onTap: (){
 
                                     },
-                                    child: Align(alignment: Alignment.centerRight,child: Text(dropdownStringItem,textAlign: TextAlign.right,)),
+                                    child: Align(alignment: Alignment.centerRight,child: Text(dropdownStringItem,textAlign: TextAlign.right,style: TextStyle(fontFamily: 'Vazir'),)),
                                   );
                                 }).toList(),
                                 onChanged: (value){
@@ -498,7 +493,6 @@ class _FieldsListInternState extends State<FieldsListIntern> {
                                     }else if(value=="کارآموزی"){
                                       type=1;
                                     }
-                                    print(type);
                                   });
                                 },
                               ),
@@ -530,7 +524,10 @@ class _FieldsListInternState extends State<FieldsListIntern> {
                                   style: TextStyle(fontSize: SizeConfig.textMultiplier*2,
                                       color: tozihat == 'توضیحات'
                                           ? _color()
-                                          : Colors.black),
+                                          : Colors.black,
+                                      fontFamily: 'Vazir'
+
+                                  ),
                                 ),
                               )
                             ],
@@ -556,7 +553,7 @@ class _FieldsListInternState extends State<FieldsListIntern> {
                                         child: _text(SizeConfig.textMultiplier*2.5, shrayet))),
                               ),
                               Expanded(
-                                  flex: 1,child: new Text(shrayet == 'شرایط' ? 'وارد نشده' : 'شرایط',style:TextStyle(fontSize: SizeConfig.textMultiplier*2)))
+                                  flex: 1,child: new Text(shrayet == 'شرایط' ? 'وارد نشده' : 'شرایط',style:TextStyle(fontSize: SizeConfig.textMultiplier*2,fontFamily: 'Vazir')))
                             ],
                           ),
                         ),
@@ -584,7 +581,7 @@ class _FieldsListInternState extends State<FieldsListIntern> {
                                 child: new Text(numberPeople == 'تعداد افراد' ? 'وارد نشده' : 'تعداد افراد',
                                     style: TextStyle(fontSize: SizeConfig.textMultiplier*2,
                                         color:
-                                        numberPeople == 'تعداد افراد' ? _color() : Colors.black)),
+                                        numberPeople == 'تعداد افراد' ? _color() : Colors.black,fontFamily: 'Vazir')),
                               )
                             ],
                           ),
@@ -614,7 +611,9 @@ class _FieldsListInternState extends State<FieldsListIntern> {
                                     style: TextStyle(fontSize: SizeConfig.textMultiplier*2,
                                         color: timeWork == 'ساعت کاری'
                                             ? _color()
-                                            : Colors.black)),
+                                            : Colors.black,
+                                        fontFamily: 'Vazir'
+                                    )),
                               )
                             ],
                           ),
@@ -644,7 +643,9 @@ class _FieldsListInternState extends State<FieldsListIntern> {
                                     style: TextStyle(fontSize: SizeConfig.textMultiplier*2,
                                         color: phone == 'شماره تلفن'
                                             ? _color()
-                                            : Colors.black)),
+                                            : Colors.black,
+                                        fontFamily: 'Vazir'
+                                    )),
                               )
                             ],
                           ),
@@ -673,7 +674,7 @@ class _FieldsListInternState extends State<FieldsListIntern> {
                                 child: new Text(address == 'آدرس' ? 'وارد نشده' : 'آدرس',
                                     style: TextStyle(fontSize: SizeConfig.textMultiplier*2,
                                         color:
-                                        address == 'آدرس' ? _color() : Colors.black)),
+                                        address == 'آدرس' ? _color() : Colors.black,fontFamily: 'Vazir')),
                               )
                             ],
                           ),
@@ -684,7 +685,7 @@ class _FieldsListInternState extends State<FieldsListIntern> {
                           children: [
                             new Divider(),
                             new Text('عنوان آگهی را سربرگ وارد کنید',
-                                style: TextStyle(color: Colors.red))
+                                style: TextStyle(color: Colors.red,fontFamily: 'Vazir'))
                           ],
                         )
                             : new SizedBox()
@@ -720,7 +721,7 @@ class _FieldsListInternState extends State<FieldsListIntern> {
                     await upload(_image);
                     if(res['status']=="added"){
                       key.currentState.showSnackBar(
-                          new SnackBar(content: new Text("آگهی شما با موفقیت ارسال شد"))
+                          new SnackBar(content: new Text("آگهی شما با موفقیت ارسال شد",style: TextStyle(fontFamily: 'Vazir'),))
                       );
                     }
                   }
@@ -739,7 +740,7 @@ class _FieldsListInternState extends State<FieldsListIntern> {
                       borderRadius: BorderRadius.circular(SizeConfig.heightMultiplier*3.5)),
                   child: new Text(
                     'آگهی کن',
-                    style: TextStyle(color: Colors.white, fontSize: SizeConfig.heightMultiplier*2.5),
+                    style: TextStyle(color: Colors.white, fontSize: SizeConfig.heightMultiplier*2.5,fontFamily: 'Vazir'),
                   ),
                 ),
               ),

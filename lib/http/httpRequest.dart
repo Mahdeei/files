@@ -16,7 +16,6 @@ class RequestHttp {
     var responseBody = json.decode(response.body);
     responseBody.forEach((item) {
       profiles.add(new RequestProfile.fromjson(item));
-      // print(item);
     });
     return profiles;
   }
@@ -30,7 +29,6 @@ class RequestHttp {
     var responseBody = json.decode(response.body);
     responseBody.forEach((item) {
       profiles.add(new RequestProfile.fromjson(item));
-      print(item);
     });
     return profiles;
   }
@@ -76,7 +74,6 @@ class RequestHttp {
     var responseBody = json.decode(response.body);
     responseBody.forEach((item) {
       requests.add(new RequestIntern.fromjson(item));
-      print(item);
     });
 
     return {
@@ -92,7 +89,6 @@ class RequestHttp {
     var responseBody = json.decode(response.body);
     responseBody.forEach((item) {
       requests.add(new RequestUser.fromjson(item));
-      print(item);
     });
 
     return requests;

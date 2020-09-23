@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
                 builder: (context,orientation){
                   SizeConfig().init(constraints, orientation);
                   return new SafeArea(
-                      top: true,
+                      top: false,
                       bottom: true,
                       child: new Directionality(textDirection: TextDirection.rtl, child: new SplashScreen()));
                 }

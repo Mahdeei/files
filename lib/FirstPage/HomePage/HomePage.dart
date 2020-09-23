@@ -49,7 +49,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                       : new MyProfileStudentScreen(profile: widget.profile)));
                           answer.then((MyData value) {
                             setState(() {
-                              print(widget.profile.name);
                             });
                             return value != null? widget.profile= value: 'empty';
                           });

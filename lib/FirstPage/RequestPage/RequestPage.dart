@@ -35,7 +35,7 @@ class _MyRequestPageState extends State<MyRequestPage>
     // _getRequestAd();
     // _getRequestIntern();
     tabController = new TabController(
-      length: widget.profile.type == 1
+      length: widget.profile.type == '1'
           ? 3 : 2,
       vsync: this,
     );
@@ -81,7 +81,7 @@ class _MyRequestPageState extends State<MyRequestPage>
               labelColor: Theme.of(context).accentColor,
               indicatorColor: R.color.banafshmain,
               controller: tabController,
-              tabs: widget.profile.type == 1
+              tabs: widget.profile.type == '1'
                 ?  [
                 Tab(
                     icon: new Text(
@@ -129,7 +129,7 @@ class _MyRequestPageState extends State<MyRequestPage>
             //   ),
             // ),
           ),
-          body: TabBarView(controller: tabController, children: widget.profile.type == 1
+          body: TabBarView(controller: tabController, children: widget.profile.type == '1'
               ?  [
             new bodyRequest(
               phoneSize: phoneSize,

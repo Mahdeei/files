@@ -146,7 +146,7 @@ class _KarAmouziListListState extends State<KarAmouziListList> {
     var phonesize = MediaQuery.of(context).size;
     return isLoading
         ? interShips.length==0
-          ? new Center(child: new Text('در حال حاضر آگهی برای نمایش وجود ندارد.'),)
+          ? new Center(child: new Text('در حال حاضر آگهی برای نمایش وجود ندارد.',style: TextStyle(fontFamily: 'Vazir'),),)
           : RefreshIndicator(
             onRefresh: refreshList,
             child: new ListView.builder(
@@ -249,7 +249,7 @@ class _KarAmouziListListState extends State<KarAmouziListList> {
                                                 interShips[index].address,
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(fontSize: SizeConfig.textMultiplier*1.7),),
+                                                style: TextStyle(fontSize: SizeConfig.textMultiplier*1.7,fontFamily: 'Vazir'),),
                                             ),
                                           ],
                                         ),

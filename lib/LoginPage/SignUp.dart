@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stubbbb/Component/textformfield.dart';
 import 'package:stubbbb/FirstPage/HomePage/HomeScreen.dart';
+import 'package:stubbbb/LoginPage/SignIn.dart';
 import 'package:stubbbb/Models/Profile.dart';
 import 'package:stubbbb/Other/SizeConfig.dart';
 import 'package:stubbbb/Other/widget.dart';
@@ -181,7 +182,10 @@ class _SignUpState extends State<SignUp> {
                                   padding:  EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*7,bottom: SizeConfig.heightMultiplier*2),
                                   child: new GestureDetector(
                                     onTap: () {
-                                      print('pressed1');
+                                      Navigator.of(context).pushReplacement(
+                                        new MaterialPageRoute(builder: (context)=>
+                                        new SignIn())
+                                      );
                                     },
                                     child: textSignUpLogin(),
                                   ),
@@ -210,7 +214,6 @@ class _SignUpState extends State<SignUp> {
     });
 
     final body = json.decode(response.body);
-    print(body);
     return body;
   }
 

@@ -25,14 +25,14 @@ class HttpComments{
     return {'comments':comments};
   }
   
-  static Future<List> getUsername(var user_id) async {
-    List usrnames = [];
+  static Future<List> getProfile(var user_id) async {
+    List profile = [];
     var response = await http.post(url_getUsername,body: {"user_id":user_id});
     var responsebody = json.decode(response.body);
     responsebody.forEach((item){
-      usrnames.add(item );
+      profile.add(item );
     });
-    return usrnames;
+    return profile;
 
   }
 

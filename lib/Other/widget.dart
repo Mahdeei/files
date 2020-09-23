@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:stubbbb/AgahiPage/AddPostAgahi.dart';
 import 'package:stubbbb/AgahiPage/AdvertisingsPage.dart';
 import 'package:stubbbb/AgahiPage/AgahPage.dart';
 import 'package:stubbbb/FirstPage/RequestPage/MyRequests.dart';
@@ -18,7 +16,6 @@ import 'package:stubbbb/StudentPage/StudentScreen.dart';
 import 'package:stubbbb/StudentPerfect/StudentPerfectScreen.dart';
 import 'package:stubbbb/http/httpRequest.dart';
 import 'R.dart';
-import 'package:animations/animations.dart';
 
 class ModelMenu {
   String titr;
@@ -406,8 +403,10 @@ Padding textLoginPageSignup() {
 TextStyle styleHomePage() {
   return TextStyle(
       color: Colors.white,
-      fontSize: SizeConfig.textMultiplier * 3.3,
-      fontWeight: FontWeight.bold);
+      fontSize: SizeConfig.textMultiplier * 2.8,
+      fontWeight: FontWeight.bold,
+      fontFamily: "Vazir"
+  );
 }
 
 CircleAvatar circleAvatarSignIn() {
@@ -447,7 +446,6 @@ CircleAvatar circleAvatarKaramouziScreen() {
 }
 
 AppBar appBarHomePage(BuildContext context, MyData profile) {
-  print(profile.type);
   return new AppBar(actions: <Widget>[
 
     new Padding(
@@ -1239,22 +1237,23 @@ class Headers extends StatelessWidget {
               children: <Widget>[
                 profile.image == null || profile.image == ""
                     ? new CircleAvatar(
-                        child: Padding(
-                            padding: EdgeInsets.only(
-                                bottom: SizeConfig.heightMultiplier * 0.7),
-                            child: new Text(
-                              profile.username.toString().substring(0, 1),
-                              style: TextStyle(
-                                  color: R.color.banafshtire,
-                                  fontSize: SizeConfig.textMultiplier * 4.5),
-                            )),
+                            child: Center(
+                              child: new Text(
+                                profile.username.toString().substring(0, 1),
+                                style: TextStyle(
+                                    color: R.color.banafshtire,
+                                    fontSize: SizeConfig.textMultiplier * 4.5),
+                              ),
+                            ),
                         backgroundColor: Colors.white,
-                        minRadius: SizeConfig.heightMultiplier * 5)
+                  radius: SizeConfig
+                      .heightMultiplier *
+                      5.5,)
                     : Center(
                   child: new CircleAvatar(
                     radius: SizeConfig
                         .heightMultiplier *
-                        6,
+                        5.5,
                     backgroundImage:
                     new NetworkImage(
                       "http://stube.ir/image/${profile.image}",
@@ -1265,9 +1264,12 @@ class Headers extends StatelessWidget {
                   ),
                 )
                 ,new SizedBox(width: SizeConfig.imageSizeMultiplier * 2),
-                Expanded(
-                    flex: 1,
-                    child: new Text(profile.name, style: styleHomePage(),maxLines: 1,overflow: TextOverflow.ellipsis,)),
+                Padding(
+                  padding: EdgeInsets.only(left:SizeConfig.imageSizeMultiplier*2),
+                  child: Expanded(
+                      flex: 1,
+                      child: new Text(profile.name, style: styleHomePage(),maxLines: 1,overflow: TextOverflow.ellipsis,)),
+                ),
               ],
             ),
           )
@@ -1327,17 +1329,22 @@ class MenuItemWidget extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: Padding(
-                  padding: EdgeInsets.only(
-                    bottom: SizeConfig.heightMultiplier * 1,
+                  padding: EdgeInsets.symmetric(
+                    vertical: SizeConfig.heightMultiplier * 1.2,
+                    horizontal: SizeConfig.imageSizeMultiplier * 2
                   ),
                   child: new Align(
                     alignment: Alignment.bottomCenter,
-                    child: new Text(
-                      model.titr,
-                      style: TextStyle(
-                          color: model.color,
-                          fontSize: SizeConfig.textMultiplier * 2.8,
-                          fontWeight: FontWeight.bold),
+                    child: FittedBox(
+                      child: new Text(
+                        model.titr,
+                        style: TextStyle(
+                            color: model.color,
+                            fontSize: SizeConfig.textMultiplier * 4,
+                            fontWeight: FontWeight.normal,
+                            fontFamily: "Vazir"
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -1371,44 +1378,44 @@ class ClippLogin extends CustomClipper<Path> {
     throw false;
   }
 }
-
-class bodyMessage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new ListView.builder(
-        itemCount: 20,
-        itemBuilder: (BuildContext context, int index) => new Column(
-              children: <Widget>[
-                new GestureDetector(
-                  child: new Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: new ListTile(
-                      title: new Text('Omeadr'),
-                      subtitle: new Text(
-                        'سلام',
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                      trailing: new Text(
-                        '8.14 ب.ظ',
-                        style: TextStyle(fontSize: 11.0),
-                      ),
-                      leading: new CircleAvatar(
-                        backgroundImage: AssetImage(
-                          'assets/image/dev.jpg',
-                        ),
-                        maxRadius: 30.0,
-                      ),
-                    ),
-                  ),
-                  onTap: () {
-                    print('pressed chat ');
-                  },
-                ),
-                Line(),
-              ],
-            ));
-  }
-}
+//
+// class bodyMessage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return new ListView.builder(
+//         itemCount: 20,
+//         itemBuilder: (BuildContext context, int index) => new Column(
+//               children: <Widget>[
+//                 new GestureDetector(
+//                   child: new Container(
+//                     width: MediaQuery.of(context).size.width,
+//                     child: new ListTile(
+//                       title: new Text('Omeadr'),
+//                       subtitle: new Text(
+//                         'سلام',
+//                         style: TextStyle(fontSize: 16.0),
+//                       ),
+//                       trailing: new Text(
+//                         '8.14 ب.ظ',
+//                         style: TextStyle(fontSize: 11.0),
+//                       ),
+//                       leading: new CircleAvatar(
+//                         backgroundImage: AssetImage(
+//                           'assets/image/dev.jpg',
+//                         ),
+//                         maxRadius: SizeConfig.heightMultiplier*4,
+//                       ),
+//                     ),
+//                   ),
+//                   onTap: () {
+//                     print('pressed chat ');
+//                   },
+//                 ),
+//                 Line(),
+//               ],
+//             ));
+//   }
+// }
 
 class bodyRequest extends StatefulWidget {
   MyData profile;
@@ -1444,7 +1451,6 @@ class _bodyRequestState extends State<bodyRequest> {
     }
     requestProfile = await RequestHttp.getProfileReqAd(widget.profile.id);
     var response = await RequestHttp.getAd(widget.profile.id);
-    print(response);
 
     requestsAd.addAll(response['requests']);
     if (this.mounted) {
@@ -1464,8 +1470,8 @@ class _bodyRequestState extends State<bodyRequest> {
         : requestsAd.length == 0
             ? new Center(
                 child: new Text(
-                'در حال حاضر هیچ درخواستی برای کارآموزی های شما وجود ندارد (:',
-                style: TextStyle(color: Colors.black),
+                'در حال حاضر هیچ درخواستی برای آگهی های شما وجود ندارد (:',
+                style: TextStyle(color: Colors.black,fontSize: SizeConfig.heightMultiplier*2,fontFamily: "Vazir"),
               ))
             : new ListView.builder(
                 padding: EdgeInsets.only(top: SizeConfig.heightMultiplier * .8),
@@ -1500,36 +1506,42 @@ class _bodyRequestState extends State<bodyRequest> {
                                                     "" ||
                                                 requestProfile[index].image ==
                                                     null
-                                            ? Container(
-                                                height: phoneSize.height * 0.10,
-                                                width: phoneSize.width * 0.19,
-                                                child: new CircleAvatar(
-                                                  child: new Text(
-                                                    requestProfile[index]
-                                                        .username
-                                                        .toString()
-                                                        .substring(0, 1),
-                                                    style: TextStyle(
-                                                        fontSize: 25.0,
-                                                        color: Colors.white),
+                                            ?  Center(
+                                                  child: new CircleAvatar(
+                                                    child: new Text(
+                                                      requestProfile[index]
+                                                          .username
+                                                          .toString()
+                                                          .substring(0, 1),
+                                                      style: TextStyle(
+                                                          fontSize: 25.0,
+                                                          color: Colors.white),
+                                                    ),
+                                                    radius: SizeConfig.heightMultiplier*5,
+                                                    backgroundColor:
+                                                        R.color.banafshKamRang,
+                                                    // minRadius: 30.0
                                                   ),
-                                                  backgroundColor:
-                                                      R.color.banafshKamRang,
-                                                  // minRadius: 30.0
-                                                ),
+
                                               )
-                                            : Center(
-                                                child: new CircleAvatar(
-                                                  radius: 37,
-                                                  backgroundImage:
-                                                      new NetworkImage(
-                                                    "http://stube.ir/image/${requestProfile[index].image}",
+                                            : Column(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Center(
+                                                    child: new CircleAvatar(
+                                                      radius: SizeConfig.heightMultiplier*5,
+                                                      backgroundImage:
+                                                          new NetworkImage(
+                                                        "http://stube.ir/image/${requestProfile[index].image}",
+                                                      ),
+                                                      backgroundColor:
+                                                          R.color.banafshKamRang,
+                                                      // minRadius: 30.0
+                                                    ),
                                                   ),
-                                                  backgroundColor:
-                                                      R.color.banafshKamRang,
-                                                  // minRadius: 30.0
-                                                ),
-                                              ),
+                                              ],
+                                            ),
                                       ),
 
                                       Expanded(
@@ -1818,27 +1830,27 @@ class _bodyRequestState extends State<bodyRequest> {
 //   }
 // }
 
-class ButtonMore extends StatefulWidget {
-  @override
-  _ButtonMoreState createState() => _ButtonMoreState();
-}
-
-class _ButtonMoreState extends State<ButtonMore> {
-  @override
-  Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: PopupMenuButton<String>(
-          onSelected: choiceAction,
-          itemBuilder: (BuildContext context) {
-            return Constants.textMorebutton
-                .map((String text) =>
-                    PopupMenuItem<String>(value: text, child: Text(text)))
-                .toList();
-          }),
-    );
-  }
-}
+// class ButtonMore extends StatefulWidget {
+//   @override
+//   _ButtonMoreState createState() => _ButtonMoreState();
+// }
+//
+// class _ButtonMoreState extends State<ButtonMore> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Directionality(
+//       textDirection: TextDirection.rtl,
+//       child: PopupMenuButton<String>(
+//           onSelected: choiceAction,
+//           itemBuilder: (BuildContext context) {
+//             return Constants.textMorebutton
+//                 .map((String text) =>
+//                     PopupMenuItem<String>(value: text, child: Text(text)))
+//                 .toList();
+//           }),
+//     );
+//   }
+// }
 
 class ObjectTag extends StatelessWidget {
   final String tags;
@@ -1866,37 +1878,35 @@ class ObjectTag extends StatelessWidget {
   }
 }
 
-void choiceAction(String choice) {
-  if (choice == 'ایجاد درخواست') {
-    print('Press 1');
-  } else if (choice == 'پیام') {
-    print('Press 2');
-  } else if (choice == 'ذخیره') {
-    print('Press 3');
-  }
-}
+//   void choiceAction(String choice) {
+//     if (choice == 'ایجاد درخواست') {
+//     } else if (choice == 'پیام') {
+//     } else if (choice == 'ذخیره') {
+//       print('Press 3');
+//     }
+// }
 
 // FloatingActionButton floatingKaramouziScreen(){
 //   return ;
 // }
 
-FloatingActionButton floatingActionButtonAgahiScreen(context) {
-  return new FloatingActionButton(
-    onPressed: () {
-      print('Pressed');
-    },
-    backgroundColor: R.color.banafshmain,
-    child: OpenContainer(
-      transitionDuration: Duration(milliseconds: 500),
-      closedBuilder: (ctx, action) => new Container(
-        color: R.color.banafshmain,
-        width: MediaQuery.of(context).size.width,
-        child: new Icon(
-          Icons.add,
-          color: R.color.red,
-        ),
-      ),
-      openBuilder: (ctx, action) => AddPostAgahi(),
-    ),
-  );
-}
+// FloatingActionButton floatingActionButtonAgahiScreen(context) {
+//   return new FloatingActionButton(
+//     onPressed: () {
+//       print('Pressed');
+//     },
+//     backgroundColor: R.color.banafshmain,
+//     child: OpenContainer(
+//       transitionDuration: Duration(milliseconds: 500),
+//       closedBuilder: (ctx, action) => new Container(
+//         color: R.color.banafshmain,
+//         width: MediaQuery.of(context).size.width,
+//         child: new Icon(
+//           Icons.add,
+//           color: R.color.red,
+//         ),
+//       ),
+//       openBuilder: (ctx, action) => AddPostAgahi(),
+//     ),
+//   );
+// }

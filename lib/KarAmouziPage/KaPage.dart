@@ -22,7 +22,7 @@ class _KaPageState extends State<KaPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.interShip.description);
+    // print(widget.interShip.description);
     // DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
     // final DateFormat displayFormater = DateFormat('yyyy-MM-dd HH:mm:ss.SSS');
     // Jalali jNow = Jalali.now();
@@ -30,8 +30,8 @@ class _KaPageState extends State<KaPage> {
     // print(jNow.month);
     // print(jNow.day);
     // print(jNow);
-    print(new DateTime.now().toString().substring(11, 19));
-    print(DateTime.now());
+    // print(new DateTime.now().toString().substring(11, 19));
+    // print(DateTime.now());
     return new Directionality(
         textDirection: TextDirection.rtl,
         child: new SafeArea(

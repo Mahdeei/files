@@ -14,7 +14,6 @@ import 'package:stubbbb/Models/myData.dart';
 import 'package:stubbbb/Other/R.dart';
 import 'package:stubbbb/Other/SizeConfig.dart';
 import 'package:stubbbb/Other/widget.dart';
-import 'package:stubbbb/http/Authenticate.dart';
 import 'package:stubbbb/http/httpComments.dart';
 import 'package:stubbbb/http/httpRequest.dart';
 import 'editData.dart';
@@ -126,7 +125,7 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: SizeConfig.textMultiplier *3.0,
-                                    fontWeight: FontWeight.bold),
+                                    fontWeight: FontWeight.bold,fontFamily: 'Vazir'),
                               ),
                             ],
                           ),
@@ -190,7 +189,7 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
                             child: new Text(
                               'تغییر اطلاعات',
                               style: TextStyle(
-                                  color: Color(0xff2C003E), fontSize:SizeConfig.textMultiplier*2),
+                                  color: Color(0xff2C003E), fontSize:SizeConfig.textMultiplier*2,fontFamily: 'Vazir'),
                             ),
                           )),
                     ),
@@ -240,27 +239,30 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
               height: SizeConfig.heightMultiplier *28,
               color: Color(0xff2D0827),
               child: new Column(
-
                 children: <Widget>[
                   Expanded(
                     flex: 6,
-                    child: Padding(
-                      padding:  EdgeInsets.only(top: SizeConfig.heightMultiplier*4,bottom: SizeConfig.heightMultiplier),
-                      child: Center(
-                        child: widget.profile.image == null || widget.profile.image == '' ?
-                        new CircleAvatar(
-                          child: new Text(widget.profile.username.toString().substring(0,1),style: TextStyle(fontSize: SizeConfig.textMultiplier*5,color: R.color.banafshtire),),
-                          backgroundColor: Colors.white,
-                          radius: SizeConfig.imageSizeMultiplier * 10,
-                        )
-                        :new CircleAvatar(
-                          backgroundImage: NetworkImage('http://stube.ir/image/${widget.profile.image}'),
-                          backgroundColor: Colors.white,
-                          radius: SizeConfig.imageSizeMultiplier * 10,
-                        ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Center(
+                            child: Center(
+                              child: widget.profile.image == null || widget.profile.image == '' ?
+                              new CircleAvatar(
+                                child: new Text(widget.profile.username.toString().substring(0,1),style: TextStyle(fontSize: SizeConfig.textMultiplier*5,color: R.color.banafshtire,fontFamily: 'Vazir'),),
+                                backgroundColor: Colors.white,
+                                radius: SizeConfig.imageSizeMultiplier * 10,
+                              )
+                              :new CircleAvatar(
+                                backgroundImage: NetworkImage('http://stube.ir/image/${widget.profile.image}'),
+                                backgroundColor: Colors.white,
+                                radius: SizeConfig.imageSizeMultiplier * 10,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
                   new Expanded(
                       flex: 5,
                       child: new Container(
@@ -273,7 +275,9 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: SizeConfig.heightMultiplier*2.5,
-                                  fontWeight: FontWeight.bold),
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Vazir'
+                              ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -284,7 +288,8 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: SizeConfig.heightMultiplier*1.8
+                                  fontSize: SizeConfig.heightMultiplier*1.8,
+                                  fontFamily: 'Vazir'
                               ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
@@ -305,7 +310,6 @@ class _MyProfileStudentScreenState extends State<MyProfileStudentScreen>
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: (){
-        print(profile);
         Navigator.of(context).pushReplacement(new MaterialPageRoute(builder: (context)=> new HomePage(
           id: widget.profile.id,will: false, profile: widget.profile,)));
       },
@@ -385,18 +389,18 @@ class _ListOneState extends State<ListOne> {
             padding: EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*3.5,  top: SizeConfig.heightMultiplier*1.5),
             child: new Text(
               'معرفی نامه',
-              style: TextStyle(fontSize:SizeConfig.heightMultiplier*3, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize:SizeConfig.heightMultiplier*3, fontWeight: FontWeight.bold,fontFamily: 'Vazir'),
             ),
           ),
           new Padding(
               padding:  EdgeInsets.symmetric(horizontal: SizeConfig.imageSizeMultiplier*5.5, vertical: SizeConfig.heightMultiplier*1.5),
               child:widget.profile.moarefiNameh ==null || widget.profile.moarefiNameh == ""
-                  ? new Text("وارد نشده",style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.7))
+                  ? new Text("وارد نشده",style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.7,fontFamily: 'Vazir'))
                   : new Text(
                 widget.profile.moarefiNameh,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize:  SizeConfig.heightMultiplier*2.7),
+                style: TextStyle(fontSize:  SizeConfig.heightMultiplier*2.7,fontFamily: 'Vazir'),
               )
           ),
           // new Padding(
@@ -428,18 +432,18 @@ class _ListOneState extends State<ListOne> {
             padding:  EdgeInsets.only(right: SizeConfig.imageSizeMultiplier*3.5,  top: SizeConfig.heightMultiplier*1.5),
             child: new Text(
               'سوابق کاری',
-              style: TextStyle(fontSize: SizeConfig.heightMultiplier*3, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: SizeConfig.heightMultiplier*3, fontWeight: FontWeight.bold,fontFamily: 'Vazir'),
             ),
           ),
           new Padding(
               padding:  EdgeInsets.symmetric(horizontal: SizeConfig.imageSizeMultiplier*5.5, vertical:  SizeConfig.heightMultiplier*1.5),
               child: widget.profile.resumes ==null || widget.profile.resumes == ""
-                  ? new Text("وارد نشده",style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.7))
+                  ? new Text("وارد نشده",style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.7,fontFamily: 'Vazir'))
                   : new Text(
                 widget.profile.resumes,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.7),
+                style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.7,fontFamily: 'Vazir'),
               )
           ),
           Divider(),
@@ -514,7 +518,7 @@ List<Profile> profile;
 class _ListTwoState extends State<ListTwo> with AutomaticKeepAliveClientMixin<ListTwo> {
   Map body;
   bool refresh = true;
-  List username = [];
+  List profile = [];
   ScrollController _scrollController = new ScrollController();
   List<Comment> comments = [];
   TextEditingController _controller;
@@ -530,7 +534,7 @@ class _ListTwoState extends State<ListTwo> with AutomaticKeepAliveClientMixin<Li
   Future<void> getComments({bool refresh2: false}) async {
     if (refresh2) comments.clear();
     Map body = await HttpComments.getComments(widget.profile.id);
-    username = await HttpComments.getUsername(widget.profile.id);
+    profile = await HttpComments.getProfile(widget.profile.id);
     comments = body['comments'];
     setState(() {
       refresh = false;
@@ -640,9 +644,24 @@ class _ListTwoState extends State<ListTwo> with AutomaticKeepAliveClientMixin<Li
                               children: [
                                 Row(
                                   children: [
-                                    new CircleAvatar(maxRadius: SizeConfig.imageSizeMultiplier *5,backgroundColor: R.color.banafshKamRang,),
+                                    profile[index]['image']=="" || profile[index]==null
+                                    ? new CircleAvatar(
+                                      child: Center(
+                                        child: new Text(
+                                          profile[index]['username'].toString().substring(0, 1),
+                                          style: TextStyle(
+                                              color: R.color.banafshtire,
+                                              fontSize: SizeConfig.textMultiplier * 2),
+                                        ),
+                                      ),
+                                      backgroundColor: Colors.white,
+                                      radius: SizeConfig
+                                          .imageSizeMultiplier *
+                                          5,)
+                                    :
+                                    new CircleAvatar(maxRadius: SizeConfig.imageSizeMultiplier *5,backgroundImage: NetworkImage('http://stube.ir/image/${profile[index]['image']}'),),
                                     new SizedBox(width: SizeConfig.imageSizeMultiplier *2,),
-                                    new Text(username[index],style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.3),),
+                                    new Text(profile[index]['username'],style: TextStyle(fontSize: SizeConfig.heightMultiplier*2.3),),
                                   ],
                                 ),
                                 new Row(
@@ -868,17 +887,12 @@ class _ListImagesState extends State<ListImages> with AutomaticKeepAliveClientMi
 
     await response.stream.transform(utf8.decoder).listen((value) {
       res = json.decode(value);
-      print(res);
-      print(res['status']);
     });
     if (response.statusCode == 200) {
-      print('upload seccess');
       setState(() {
         imglist.clear();
       });
       _getImages();
-    } else {
-      print('upload failed');
     }
   }
 
@@ -891,8 +905,6 @@ class _ListImagesState extends State<ListImages> with AutomaticKeepAliveClientMi
         imglist.clear();
         _getImages();
       });
-    }else{
-      print('error');
     }
   }
 

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:stubbbb/Models/InterShip.dart';
 import 'package:stubbbb/Models/myData.dart';
@@ -12,20 +13,33 @@ class SendReqIntern extends StatefulWidget {
 }
 
 class _SendReqInternState extends State<SendReqIntern> {
-  String url = "http://stube.ir/SendRequestAd.php";
+  String url = "http://stube.ir/SendRequestIntern.php";
   bool seccesSend=false;
   String req_text;
+
+  TextEditingController controller = new TextEditingController();
+
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    print("User Name : ${widget.profile.id}");
-    print("ID : ${widget.interShip.id}");
 
   }
 
-  TextEditingController controller = new TextEditingController();
+  Future sendRequestIntern() async {
+    var response = await http.post(url, body: {
+      'id_internship': widget.interShip.id,
+      'user_id': widget.profile.id,
+      'req_text': req_text,
+      'date': "${DateTime.now()}",
+    });
+
+    final body = json.decode(response.body);
+    return body;
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +79,12 @@ class _SendReqInternState extends State<SendReqIntern> {
                 children: [
                   new RaisedButton(
                     onPressed: ()async{
+                      Map recieve=await sendRequestIntern();
+                      if(recieve['status']=='created success'){
+                        setState(() {
+                          seccesSend=true;
+                        });
+                      }
                       // Map recieve=await sendRequestAd();
                       // if(recieve['status']=='created success'){
                       //   setState(() {

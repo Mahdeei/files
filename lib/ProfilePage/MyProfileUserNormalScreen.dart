@@ -92,7 +92,6 @@ class _MyProfileUserNormalScreenState extends State<MyProfileUserNormalScreen> {
 
   Future upload(File imageFile) async{
     if(imageFile!=null){
-      print("yes is if");
       setState(() {
         isSaveData=true;
       });
@@ -104,13 +103,7 @@ class _MyProfileUserNormalScreenState extends State<MyProfileUserNormalScreen> {
 
       var multiPartFile = new http.MultipartFile("image", stream, length,filename: basename(imageFile.path));
 
-      print(widget.profile.phoneNumber);
-      print(widget.profile.type);
-      print(widget.profile.address);
-      print(userCont.text);
-      print(nameCont.text);
-      print(moarefiCont.text);
-      print(fileName);
+
 
       request.fields['phonenumber'] = widget.profile.phoneNumber;
       request.fields['type'] = widget.profile.type;
@@ -122,33 +115,25 @@ class _MyProfileUserNormalScreenState extends State<MyProfileUserNormalScreen> {
       request.files.add(multiPartFile);
       var response = await request.send();
 
-      print(response.statusCode);
 
 
       await response.stream.transform(utf8.decoder).listen((value) {
         res = json.decode(value);
-        print(res);
       });
       setState(() {
         isSaveData=false;
       });
-      if(response.statusCode == 200) {
-        print('upload seccess');
-      }else{
-        print('upload failed');
-      }
+      // if(response.statusCode == 200) {
+      //   print('upload seccess');
+      // }else{
+      //   print('upload failed');
+      // }
 
     }else{
 
-      print(userCont.text);
-      print(nameCont.text);
-      print(fileName);
-      print(widget.profile.phoneNumber);
-      print(widget.profile.type);
-      print(moarefiCont.text);
+
       if(fileName==null){
         fileName="";
-        print("Yes");
       }
 
       var response = await http.post(url
@@ -161,7 +146,6 @@ class _MyProfileUserNormalScreenState extends State<MyProfileUserNormalScreen> {
             "image": fileName,
       });
       var responseBody = json.decode(response.body);
-      print(responseBody);
     }
   }
 
@@ -262,7 +246,7 @@ class _MyProfileUserNormalScreenState extends State<MyProfileUserNormalScreen> {
                                     backgroundColor: R.color.banafshKamRang,
                                     child: new Text(
                                       widget.profile.username.toString().substring(0,1),
-                                      style: TextStyle(fontSize: SizeConfig.textMultiplier*4,color: Colors.white),
+                                      style: TextStyle(fontSize: SizeConfig.textMultiplier*4,color: Colors.white,fontFamily: 'Vazir'),
                                     ),
                                   ),
                                 ),
@@ -275,7 +259,7 @@ class _MyProfileUserNormalScreenState extends State<MyProfileUserNormalScreen> {
                                     new AlertDialog(
                                       title: new Text(
                                         "ویرایش عکس",
-                                        style: TextStyle(fontSize: SizeConfig.textMultiplier*2.4),
+                                        style: TextStyle(fontSize: SizeConfig.textMultiplier*2.4,fontFamily: 'Vazir'),
                                         textDirection: TextDirection.rtl,
                                       ),
                                       actions: [
@@ -321,7 +305,6 @@ class _MyProfileUserNormalScreenState extends State<MyProfileUserNormalScreen> {
                                             setState(() {
                                               fileName="";
                                               showImage=false;
-                                              print(showImage);
                                               // _image=new File();
                                             });
                                             Navigator.of(context).pop(false);
@@ -358,7 +341,7 @@ class _MyProfileUserNormalScreenState extends State<MyProfileUserNormalScreen> {
                                             backgroundColor: R.color.banafshKamRang,
                                             child: new Text(
                                               widget.profile.username.toString().substring(0,1),
-                                              style: TextStyle(fontSize: SizeConfig.textMultiplier*3,color: Colors.white),
+                                              style: TextStyle(fontSize: SizeConfig.textMultiplier*3,color: Colors.white,fontFamily: 'Vazir'),
                                             ),
                                           ),
                                         )

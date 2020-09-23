@@ -24,8 +24,6 @@ class _SendRequestForUserState extends State<SendRequestForUser> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print("User Name : ${widget.profile.id}");
-    print("ID : ${widget.user.id}");
 
 
   }
@@ -107,7 +105,6 @@ class _SendRequestForUserState extends State<SendRequestForUser> {
   }
 
   Future sendRequestUser() async {
-    print(req_text);
     var response = await http.post(url, body: {
       'user_request': widget.user.id,
       'user_id': widget.profile.id,
@@ -116,7 +113,6 @@ class _SendRequestForUserState extends State<SendRequestForUser> {
     });
 
     final body = json.decode(response.body);
-    print(body);
     return body;
   }
 
